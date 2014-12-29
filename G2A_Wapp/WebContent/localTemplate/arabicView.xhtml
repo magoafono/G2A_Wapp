@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<!-- <h:form prependId="false">  -->
+
+	<p:dataTable id="dataTable" var="link"
+		value="#{parallelViewBean.links}" paginator="true"
+		rows="100"
+		paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		rowsPerPageTemplate="5,10,20,50,500">
+
+		<!-- 
+			<f:facet name="header">
+            	<h:commandLink action="greekView.xhtml" value="Order by Greek"></h:commandLink>
+        	</f:facet>
+ 			-->
+		<p:column style="width:7%">
+			<f:facet name="header">
+                	Greek 
+           		</f:facet>
+
+			<h:outputText value="#{link.greekPericopeInfo}"
+				styleClass="latin" />
+
+			<f:facet name="footer">
+                Reference
+            </f:facet>
+		</p:column>
+
+		<p:column headerText="Greek Pericope" style="width: 40%">
+			<h:outputText value="#{link.greekPericopeText}"
+				styleClass="greek" />
+		</p:column>
+
+		<p:column headerText="Arabic Pericope"
+			style="direction:rtl; text-align:right; width:40%">
+			<p:outputPanel layout="block" style="padding-right:3px;">
+				<h:outputText value="#{link.arabicPericopeText}"
+					styleClass="arabic" />
+			</p:outputPanel>
+		</p:column>
+
+		<p:column headerText="Arabic" footerText="Reference" style="width:7%">
+			<h:outputText value="#{link.arabicPericopeInfo}"
+				styleClass="latin" />
+		</p:column>
+
+		<p:column style="width:1%">
+			<h:panelGrid columns="1" styleClass="nestedUnit" cellpadding="0">
+				<p:commandButton id="selectButton" partialSubmit="true" process="@this"
+					icon="ui-icon ui-icon-circle-arrow-w" title="select">
+					<f:setPropertyActionListener value="#{link}"
+						target="#{commentViewBean.selectedViewLink}" />
+				</p:commandButton>
+			</h:panelGrid>
+		</p:column>
+
+		<f:facet name="footer">
+			<!-- <h:commandLink value="view linguistic analysis" action="analysis.xhtml" /> -->
+		</f:facet>
+
+	</p:dataTable>
+
+	<!-- </h:form>  -->
+</ui:composition>

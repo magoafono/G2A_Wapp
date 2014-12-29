@@ -1,0 +1,162 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:outputScript name="jquery.scrollTo.js" library="js" />
+
+	<style type="text/css">
+.nestedUnit {
+	border: 0px none !important;
+}
+
+.nestedUnit * tr, .nestedUnit * td {
+	border: 0px none !important;
+	vertical-align: top;
+}
+
+.borderUnit * tr, .borderUnit * td {
+	border: 1px solid #A8A8A8 !important;
+}
+</style>
+	<p:growl id="onDebug" for="onDebug" life="1000" />
+
+	<h:form id="parallelViewFormId"  >
+
+		<p:dataTable id="dataTableId" var="link" scrollable="true"
+			scrollHeight="600" value="#{parallelViewBean.getLinks(lang)}"
+			paginator="true" resizableColumns="true"
+			rows="#{parallelViewBean.rowsPerPage}" widgetVar="dataTable"
+			pageLinks="20"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,20,50,100,500"
+			rowKey="chiave_#{link.greekPericopeId}"
+			selection="#{parallelViewBean.selectedViewLink}"
+			selectionMode="single">
+
+			<p:ajax event="page" listener="#{parallelViewBean.setPaginatorPage}" />
+			<!--
+				<p:dataTable id="dataTableId" var="link" scrollable="true"
+					scrollHeight="800" liveScroll="true" scrollRows="20"
+					value="#{parallelViewBean.getLinks(lang)}"
+					filteredValue="#{parallelViewBean.filteredPericopes}"
+					widgetVar="dataTable" rowKey="chiave_#{link.greekPericopeId}"
+					selection="#{parallelViewBean.selectedViewLink}"
+					selectionMode="single">
+
+ -->
+			<p:ajax event="rowSelect" update=":menuForm" immediate="true"/>
+			
+
+			<!-- 
+					<p:column width="6%" headerText="Greek Ref" filterBy="#{link.greekPericopeInfo}" filterMatchMode="startsWith">
+	-->
+			<p:column width="6%" headerText="Greek Ref">
+				<h:outputText value="#{link.greekPericopeInfo}" styleClass=""
+					rendered="#{link.greekPericopeHidden == 'false'}" />
+			</p:column>
+
+			<p:column width="35%" style="white-space:pre">
+				<f:facet name="header">
+					<h:outputText value="Greek Pericope" style="margin-right:20px" />
+					<p:commandButton type="submit" immediate="true"
+						update=":parallelViewFormId :parallelViewFormId:dataTableId"
+						icon="ui-icon-circle-plus"
+						actionListener="#{loginBean.increaseGreekSize}" />
+					<p:commandButton type="submit" immediate="true"
+						update=":parallelViewFormId :parallelViewFormId:dataTableId"
+						icon="ui-icon-circle-minus"
+						actionListener="#{loginBean.decreaseGreekSize}" />
+					<p:commandButton type="submit" immediate="true"
+						update=":parallelViewFormId :parallelViewFormId:dataTableId"
+						icon="ui-icon-circle-check"
+						actionListener="#{loginBean.resetGreekSize}" />
+				</f:facet>
+
+				<p:outputPanel layout="block" styleClass="greek"
+					style="padding-right:3px;">
+					<h:outputText value="#{link.greekPericopeText}" styleClass="greek"
+						rendered="#{link.greekPericopeHidden == 'false'}"
+						style="font-size:#{loginBean.greekFontSize}" />
+				</p:outputPanel>
+			</p:column>
+
+			<p:column width="47%" headerText="Arabic Pericope"
+				style="white-space:pre">
+				<f:facet name="header">
+					<h:outputText value="Arabic Pericope" style="margin-right:20px" />
+					<p:commandButton type="submit" immediate="true"
+						update=":parallelViewFormId :parallelViewFormId:dataTableId"
+						icon="ui-icon-circle-plus"
+						actionListener="#{loginBean.increaseArabicSize}" />
+					<p:commandButton type="submit" immediate="true"
+						update=":parallelViewFormId :parallelViewFormId:dataTableId"
+						icon="ui-icon-circle-minus"
+						actionListener="#{loginBean.decreaseArabicSize}" />
+					<p:commandButton type="submit" immediate="true"
+						update=":parallelViewFormId :parallelViewFormId:dataTableId"
+						icon="ui-icon-circle-check"
+						actionListener="#{loginBean.resetArabicSize}" />
+				</f:facet>
+				<p:outputPanel layout="block" styleClass="arabic"
+					style="padding-right:3px;">
+					<h:outputText value="#{link.arabicPericopeText}"
+						rendered="#{link.arabicPericopeHidden == 'false'}"
+						style="font-size:#{loginBean.arabicFontSize}" />
+				</p:outputPanel>
+			</p:column>
+			<!--p:column headerText="Arabic Ref" width="6%" filterBy="#{link.arabicPericopeInfo}" filterMatchMode="contains"-->
+			<p:column headerText="Arabic Ref" width="6%">
+				<h:outputText value="#{link.arabicPericopeInfo}" styleClass=""
+					rendered="#{link.arabicPericopeHidden == 'false'}" />
+			</p:column>
+
+			<p:column headerText="Comments" width="6%">
+				<h:outputText value="#{link.noOfComments}" styleClass="" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+	<!--
+	<script type="text/javascript">
+      $ = jQuery;
+ 
+           function saveScrollPos() {
+                        scrollPos = $(".ui-datatable-scrollable-body").scrollTop();
+                        alert(scrollPos);
+                        document.getElementById('scrollPos').value=scrollPos;
+                        #{parallelViewBean.setRowOffset(scrollPos)};
+          }
+           function getScrollPos() {
+                 $(".ui-datatable-scrollable-body").scrollTop(#{parallelViewBean.rowOffset});
+           }
+           
+           window.onload = function() {
+                  //   alert("Button clicked");
+                     getScrollPos();
+           }
+</script>  -->
+	<script type="text/javascript">
+	
+		//<![CDATA[
+	$(document).ready(function() {
+         	//$('#dataTableId').getPaginator().setPage(#{parallelViewBean.paginatorPage});
+ 			//scroll to selected row
+           	dataTable.getPaginator().setPage(#{parallelViewBean.paginatorPage});
+   			setTimeout(function() { 
+ 				//workaround per chrome che non sempre riesce a posizionarsi sulla riga evidenziata
+           	$('.ui-datatable-scrollable-body').scrollTo(".ui-state-highlight", 200, {over:{top:-0.5}});
+//  		      	var row = $("#parallelViewFormId tr.ui-state-highlight");
+//  	 			if (row.length != 0) {
+//   	       			$('#parallelViewFormId').parent().scrollTo(row, 1, {over:{top:-0.5}});
+//  	 			}
+  			}, 500);
+		}); 
+      //]]>
+	</script>
+
+</ui:composition>
+

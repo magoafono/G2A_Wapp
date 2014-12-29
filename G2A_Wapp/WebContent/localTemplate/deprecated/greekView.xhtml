@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<!-- <h:form prependId="false">  -->
+
+	<p:dataTable id="dataTable" var="pericope"
+		value="#{parallelViewBean.pericopesByGreek}" paginator="true"
+		rows="10"
+		paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		rowsPerPageTemplate="5,10,20,50,500">
+
+		<!-- 
+			<f:facet name="header">
+            	<h:commandLink action="arabicView.xhtml" value="Order by Arabic"></h:commandLink> 
+            </f:facet>
+			-->
+		<p:column style="width:7%">
+			<f:facet name="header">
+                	Greek ID
+	           		</f:facet>
+			<h:outputText value="#{pericope.greekText.id}" />
+			<f:facet name="footer">
+	                digit code
+	            </f:facet>
+		</p:column>
+
+		<p:column headerText="Greek Pericope" style="width:40%">
+			<h:outputText value="#{pericope.greekText.content}"
+				styleClass="greek" />
+		</p:column>
+
+		<p:column headerText="Arabic Pericope"
+			style="direction:rtl; text-align:right; width:40%">
+			<h:outputText value="#{pericope.arabicText.content}"
+				styleClass="arabic" />
+		</p:column>
+
+		<p:column headerText="Arabic ID" footerText=" digit code" style="width:7%">
+			<h:outputText value="#{pericope.arabicText.id}" />
+		</p:column>
+
+		<p:column style="width:1%">
+			<h:panelGrid styleClass="nestedUnit" columns="1" cellpadding="2">
+				<p:commandButton id="selectButton"
+					icon="ui-icon ui-icon-circle-arrow-w" title="select">
+					<!-- PROVA PROPRIETA' Dovrebbe essere passata la pericope al textBean -->
+					<f:setPropertyActionListener value="#{pericope}"
+						target="#{commentBean.selectedPericope}" />
+				</p:commandButton>
+			</h:panelGrid>
+		</p:column>
+
+		<f:facet name="footer">
+			<!-- <h:commandLink value="view linguistic analysis" action="analysis.xhtml" /> -->
+		</f:facet>
+
+	</p:dataTable>
+
+	<!-- </h:form>  -->
+
+</ui:composition>

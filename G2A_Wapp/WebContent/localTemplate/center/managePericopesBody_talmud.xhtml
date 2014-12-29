@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<body>
+	<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
+
+		<link rel="stylesheet" type="text/css" href="jquery.cleditor.css" />
+		<script type="text/javascript" src="js/base64v1_0.js" />
+		<script type="text/javascript" src="js/jquery.ilc.editor.js" />
+		<script type="text/javascript" src="js/resource.js" />
+
+		<h:form id="pericopesTextForm">
+			<h:outputScript name="selection.js" library="js"></h:outputScript>
+			<div align="center">
+				<h:panelGrid columnClasses="greek,arabic" columns="2">
+					<h:outputText
+						value="#{commentViewBean.selectedViewLink.greekPericopeInfo}"></h:outputText>
+					<h:outputText
+						value="#{commentViewBean.selectedViewLink.arabicPericopeInfo}"></h:outputText>
+					<!-- pericopatore greco -->
+					<p:inplace id="greek_teInplace" effectSpeed="fast" editor="true">
+						<p:ajax event="save" partialSubmit="true" update="@this"
+							onstart="blockUI.show()"
+							oncomplete="blockUI.hide(); onEditorComplete($(document.getElementById('#{p:component('greek_teInplace')}')), #{p:widgetVar('greek_teEditor')}, doAsYouType); flashNew();"></p:ajax>
+						<p:ajax event="cancel" partialSubmit="true" update="@this"
+							onstart="return confirm('Vuoi veramente scartare le modifiche?')"
+							oncomplete="onEditorComplete($(document.getElementById('#{p:component('greek_teInplace')}')), #{p:widgetVar('greek_teEditor')}, doAsYouType)"></p:ajax>
+						<p:editor id="greek_teEditor"
+							controls="add"
+							value="#{pericopeEditorController.greekText}">
+						</p:editor>
+						<script>	
+				$(document).ready(function() {
+				onEditorReady('#{p:component('greek_teInplace')}', #{p:widgetVar('greek_teEditor')}, null);
+				});
+					</script>
+					</p:inplace>
+					
+					<!-- pericopatore arabo -->
+					<p:inplace id="arabic_teInplace" effectSpeed="fast" editor="true">
+						<p:ajax event="save" partialSubmit="true" update="@this"
+							onstart="blockUI.show()"
+							oncomplete="blockUI.hide(); onEditorComplete($(document.getElementById('#{p:component('arabic_teInplace')}')), #{p:widgetVar('arabic_teEditor')}, doAsYouType); flashNew();"></p:ajax>
+						<p:ajax event="cancel" partialSubmit="true" update="@this"
+							onstart="return confirm('Vuoi veramente scartare le modifiche?')"
+							oncomplete="onEditorComplete($(document.getElementById('#{p:component('arabic_teInplace')}')), #{p:widgetVar('arabic_teEditor')}, doAsYouType)"></p:ajax>
+						<p:editor id="arabic_teEditor"
+							controls="add"
+							value="#{pericopeEditorController.arabicText}">
+						</p:editor>
+						<script>
+				$(document).ready(function() {
+				onEditorReady('#{p:component('arabic_teInplace')}', #{p:widgetVar('arabic_teEditor')}, null);
+				});
+					</script>
+					</p:inplace>
+
+
+					<h:inputHidden id="greektext" value="#{commentViewBean.greekText}"></h:inputHidden>
+					<h:inputHidden id="arabictext"
+						value="#{commentViewBean.arabicText}"
+						style="direction:rtl; text-align:right"></h:inputHidden>
+					<!-- <h:panelGroup><hr /></h:panelGroup><h:panelGroup><hr /></h:panelGroup>  -->
+					<h:outputText id="greekselectedText"
+						value="#{commentViewBean.greekSelectedText}"></h:outputText>
+					<h:outputText id="arabicselectedText"
+						value="#{commentViewBean.arabicSelectedText}"></h:outputText>
+					<h:panelGroup>
+						<hr />
+					</h:panelGroup>
+					<h:panelGroup>
+						<hr />
+					</h:panelGroup>
+
+					<p:commandButton id="greekClick" value="greek selection"
+						styleClass="latinText" partialSubmit="true"
+						process="@this :pericopesTextForm:greektext"
+						actionListener="#{commentViewBean.greekClick}"
+						update=":pericopesTextForm:greekselectedText"
+						disabled="#{commentViewBean.selectedComment.commentId ne null or commentViewBean.selectedComment eq null}" />
+					<p:commandButton id="arabicClick" value="arabic selection"
+						styleClass="latinText" partialSubmit="true"
+						process="@this :pericopesTextForm:arabictext"
+						actionListener="#{commentViewBean.arabicClick}"
+						update=":pericopesTextForm:arabicselectedText"
+						disabled="#{commentViewBean.selectedComment.commentId ne null or commentViewBean.selectedComment eq null}" />
+
+				</h:panelGrid>
+
+
+				<h:panelGrid>
+
+				</h:panelGrid>
+
+
+			</div>
+		</h:form>
+
+
+
+	</ui:composition>
+</body>
+</html>

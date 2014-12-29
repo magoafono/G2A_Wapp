@@ -1,0 +1,178 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	<div align="center">
+		<p:panelGrid id="analyses_pg" style="width:100%;">
+			<f:facet name="header">
+				<p:row>
+					<p:column colspan="2">Greek Analysis</p:column>
+					<p:column colspan="2">Arabic Analysis</p:column>
+				</p:row>
+			</f:facet>
+			<!-- columnClasses="greek,arabic" -->
+			<p:row>
+				<p:column colspan="1">
+					<h:outputText
+						value="#{analysisViewBean.selectedViewLink.greekPericopeHidden == 'false'?analysisViewBean.selectedViewLink.greekPericopeInfo:''}" />
+				</p:column>
+
+				<p:column colspan="1">
+					<h:outputText styleClass="greek"
+						style="display:block;white-space:pre"
+						value="#{analysisViewBean.selectedViewLink.greekPericopeHidden == 'false'?analysisViewBean.formattedGreekPericopeText:''}" />
+				</p:column>
+				<p:column colspan="1">
+					<h:outputText styleClass="arabic"
+						style="display:block;white-space:pre"
+						value="#{analysisViewBean.selectedViewLink.arabicPericopeHidden == 'false'?analysisViewBean.formattedArabicPericopeText:''}" />
+				</p:column>
+				<p:column colspan="1">
+					<h:outputText style="display:block; text-align:center"
+						value="#{analysisViewBean.selectedViewLink.arabicPericopeHidden == 'false'?analysisViewBean.selectedViewLink.arabicPericopeInfo:''}" />
+				</p:column>
+			</p:row>
+			<p:row id="rowResult">
+				<c:if test="#{sharedBean.loadNewAnalysis}">
+					<p:column colspan="4"
+						style="text-align: center; vertical-align: top;">
+						<h:graphicImage value="#{resource['images/load.gif']}" />
+					</p:column>
+				</c:if>
+				<c:if test="#{!sharedBean.loadNewAnalysis}">
+					<p:column colspan="2" style="vertical-align: top;">
+						<p:dataTable var="greekAnalysis" scrollable="true"
+							scrollHeight="600" rendered="#{!sharedBean.loadNewAnalysis}"
+							value="#{analysisViewBean.retrieveGreekAnalysis}">
+							<p:column headerText="Form" width="40%">
+								<h:outputText value="#{greekAnalysis.forma}" styleClass="greek" />
+							</p:column>
+							<p:column headerText="PoS" width="20%">
+								<h:outputText value="#{greekAnalysis.pos}" styleClass="latin" />
+							</p:column>
+							<p:column headerText="Lemma" width="40%">
+								<h:outputText value="#{greekAnalysis.lemma}" styleClass="greek" />
+							</p:column>
+						</p:dataTable>
+					</p:column>
+				</c:if>
+				<c:if test="#{!sharedBean.loadNewAnalysis}">
+					<p:column colspan="2" style="vertical-align: top;"
+						id="analysisResult">
+						<p:dataTable var="arabicAnalysis" scrollable="true"
+							id="arabicAnalysis_dt" scrollHeight="600"
+							rendered="#{!sharedBean.loadNewAnalysis}"
+							value="#{analysisViewBean.retrieveArabicAnalysis}">
+							<c:if test="#{analysisViewBean.viewArabic}">
+								<p:column headerText="جِذْر" width="10%" styleClass="arabic"
+									style="text-align:right">
+									<h:outputText value="#{arabicAnalysis.radice}"
+										styleClass="arabic" />
+								</p:column>
+							</c:if>
+							<c:if test="#{!analysisViewBean.viewArabic}">
+								<p:column headerText="Root" width="10%">
+									<h:outputText value="#{arabicAnalysis.radicet}"
+										styleClass="latin" />
+								</p:column>
+							</c:if>
+							<c:if test="#{analysisViewBean.viewArabic}">
+								<p:column headerText="وَحْدَة مُعْجَمِيّة" width="10%"
+									styleClass="arabic" style="text-align:right">
+									<h:outputText value="#{arabicAnalysis.lemma}"
+										styleClass="arabic" />
+								</p:column>
+							</c:if>
+							<c:if test="#{!analysisViewBean.viewArabic}">
+								<p:column headerText="Lemma" width="10%">
+									<h:outputText value="#{arabicAnalysis.lemmat}"
+										styleClass="latin" />
+								</p:column>
+							</c:if>
+
+							<c:if test="#{analysisViewBean.viewArabic}">
+								<p:column headerText="إِعْرَاب" styleClass="arabic">
+									<p:dataTable var="arabicSubAnalysis"
+										styleClass="hide-column-names"
+										value="#{arabicAnalysis.subanalysis}">
+
+										<p:column
+											style="text-align:right;white-space:normal;width:70%">
+											<h:outputText value="#{arabicSubAnalysis.pos}"
+												styleClass="arabic" />
+										</p:column>
+										<p:column style="text-align:right">
+											<h:outputText value="#{arabicSubAnalysis.word}"
+												styleClass="arabic" />
+										</p:column>
+									</p:dataTable>
+								</p:column>
+							</c:if>
+							<c:if test="#{!analysisViewBean.viewArabic}">
+								<p:column headerText="Analysis">
+									<p:dataTable var="arabicSubAnalysis"
+										styleClass="hide-column-names"
+										value="#{arabicAnalysis.subanalysis}">
+
+										<p:column>
+											<h:outputText value="#{arabicSubAnalysis.wordt}"
+												styleClass="latin" />
+										</p:column>
+										<p:column style="white-space:normal;width:60%">
+											<h:outputText value="#{arabicSubAnalysis.post}"
+												styleClass="latin" />
+										</p:column>
+
+									</p:dataTable>
+								</p:column>
+							</c:if>
+							<c:if test="#{analysisViewBean.viewArabic}">
+								<p:column headerText="كَلِمَة" width="20%" styleClass="arabic"
+									style="text-align: right;">
+									<h:outputText value="#{arabicAnalysis.forma}"
+										styleClass="arabic" />
+								</p:column>
+							</c:if>
+							<c:if test="#{!analysisViewBean.viewArabic}">
+								<p:column headerText="Form" width="20%">
+									<h:outputText value="#{arabicAnalysis.format}"
+										styleClass="latin" />
+								</p:column>
+							</c:if>
+						</p:dataTable>
+					</p:column>
+				</c:if>
+			</p:row>
+			<c:if test="#{!sharedBean.loadNewAnalysis}">
+				<p:row>
+					<p:column colspan="2" style="text-align:center;">
+					</p:column>
+					<p:column colspan="2" style="text-align:center;">
+						<c:if test="#{analysisViewBean.viewArabic}">
+							<p:commandButton id="switchview_btn" icon="ui-icon-search"
+								ajax="true" update=":arabicAnalysis_dt @this"
+								value="Switch to Buckwalter" type="submit"
+								action="#{analysisViewBean.switchViewArabic}">
+							</p:commandButton>
+						</c:if>
+						<c:if test="#{!analysisViewBean.viewArabic}">
+							<p:commandButton id="switchview_btn" icon="ui-icon-search"
+								ajax="true" update=":arabicAnalysis_dt @this"
+								value="Switch to Arabic" type="submit"
+								action="#{analysisViewBean.switchViewArabic}">
+							</p:commandButton>
+						</c:if>
+					</p:column>
+				</p:row>
+			</c:if>
+		</p:panelGrid>
+	</div>
+	<h:form>
+		<p:remoteCommand autoRun="true"
+			actionListener="#{analysisViewBean.loadAnalyses}"
+			update=":analyses_pg" />
+	</h:form>
+</ui:composition>

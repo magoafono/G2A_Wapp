@@ -1,0 +1,202 @@
+/* Overwrite primefaces css */
+.ui-widget, .ui-widget .ui-widget {
+	font-size: 0.96em; /* !important;*/
+}
+
+.ui-growl {
+	top: 100px;
+	left: 50%;
+}
+
+.ui-datatable td, .ui-datatable th {
+	white-space: normal;
+}
+
+.ui-datatable tbody td.column1 {
+	white-space: normal;
+	width: 7%;
+}
+
+.ui-datatable tbody td.column2 {
+	white-space: normal;
+	width: 41%;
+}
+
+.ui-datatable tbody td.column3 {
+	white-space: normal;
+	width: 41%;
+}
+
+.ui-datatable tbody td.column4 {
+	white-space: normal;
+	width: 7%;
+}
+
+.ui-datatable tbody td.column5 {
+	white-space: normal;
+	width: 4%;
+}
+
+/* Dimensione del testo dei Selectmenu delle POS */
+.ui-selectonemenu-panel .ui-selectonemenu-list-item {
+	font-size: 0.9em;
+}
+
+.ui-selectonemenu-panel .ui-selectonemenu-item-group {
+	font-size: 0.9em;
+}
+
+/* Per togliere l'header dalla tabella delle sottoanalisi dell'arabo, 
+altrimenti visualizza una striscia colorata nonostante non ti specifichi lo headerText */
+.hide-column-names table thead tr {
+	display: none;
+}
+/* End of overwrite primefaces css */
+.normal {
+	text-align: inherit;
+}
+
+.tableNoBorder tr, .tableNoBorder td {
+	border-width: 0px !important;
+}
+
+tr.couple td {
+	border-bottom: 1px dotted #BBBBBB !important;
+}
+
+.couple td.arabic {
+	border-left: 1px dotted #BBBBBB !important;
+}
+
+.couple td.greek {
+	border-right: 1px dotted #BBBBBB !important;
+}
+
+div.perica {
+	direction: rtl;
+	text-align: right;
+	font-size: 2em;
+}
+
+.arabic {
+	direction: rtl;
+	text-align: right;
+/*	font-size: 1.3em; */
+	font-family: "KacstOne", "Times new roman", Arial !important;
+} 
+
+.greek {
+	direction: ltr;
+	text-align: left;
+/*	font-size: 1.2em;*/
+	font-family: Arial, "Times new roman" !important;
+}
+
+.latin {
+	direction: ltr;
+	text-align: left;
+	font-size: 1.1em !important;
+}
+
+.latinText {
+	direction: ltr;
+	text-align: left;
+	font-size: 12px !important;
+}
+
+/* per il pericopatore */
+.bk_0 {
+	background-color: Lavender; /* #E1F5C4; */
+	padding: 0 3px;
+	margin: 2px 0px;
+}
+
+.bk_2 {
+	background-color: #E9FFE1;
+	padding: 0 3px;
+	margin: 2px 0px;
+}
+
+.bk_1 {
+	background-color: lightyellow;
+	padding: 0 3px;
+	margin: 2px 0px;
+}
+
+.bk_3 {
+	background-color: lightblue;
+	padding: 0 3px;
+	margin: 2px 0px;
+}
+
+.bk_7 {
+	background-color: cyan;
+	padding: 0 3px;
+	margin: 2px 0px;
+}
+
+.bk_9 {
+	background-color: white;
+	padding: 0 3px;
+	margin: 2px 0px;
+}
+
+.bk_grfocused, .bk_arfocused {
+	background-color: orange;
+	border-bottom: 2px solid red;
+	padding: 0 3px;
+	margin: 2px 0px;
+}
+
+.no-overflow {
+	overflow: hidden !important;
+}
+
+.login-font {
+	font-weight: bold;
+	font-size: 1em;
+}
+
+.panelGridCenter {
+	margin: 50px auto;
+}
+
+a:hover.link_nodecor {
+	background-color: #555555;
+	color: white;
+}
+
+.link_nodecor {
+	text-decoration: none;
+}
+
+.greekpanel {
+	width: 48%;
+}
+
+.arabicpanel {
+	width: 48%;
+	direction: rtl;
+}
+
+.selectOneRadioColumn td {
+	border: none !important;
+}
+
+.highlight {
+	background-color: lime;
+	color: black;
+}
+
+html.progress, html.progress * {
+	cursor: progress !important;
+}
+
+.centerImage {
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+
+.ui-selectonemenu-panel .ui-selectonemenu-filter-container .ui-icon {
+	right: -5px !important;
+}

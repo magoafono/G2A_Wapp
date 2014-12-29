@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="content">
+            <br/>
+            <div class="messageTitle">Utilizzo dell'interfaccia</div>
+            <br/>
+            <div class="message">
+                <ul>
+                    <li><b>Demo v0.1</b> (con grafica estremamente minimale, da rivedere)</li>
+                    <li><b>L'icona della lente</b> che produce una tabella, per ogni entrata del lessico, 
+                        con tutte le sue proprietà ed i relativi target.</li>
+                    <ul><li>Si sceglie un entry del lessico dal menù e si preme il bottone ricerca.</li>
+                        <li>La tabella è ordinabile cliccando sulla colonna di riferimento.</li>
+                        <li>Funzione di drag and drop di ogni riga della tabella all'interno della stessa 
+                            per creare un ordinamento a piacere delle triple di ogni termine del lessico.</li>
+                        <li>Funzione di eliminazione righe dalla tabella.</li>
+                        <li>Funzione di rinomina dei valori della colonna proprietà.</li>
+                        <li>Il bottone esporta pdf crea il file pdf con le informazioni del termine, nell'ordine che è stato creato dall'utente nella tabella.</li>
+                        <li>Il bottone esporta excel crea il file excel con le informazioni del termine, nell'ordine che è stato creato dall'utente nella tabella.</li>
+                    </ul>
+                    <li><b>L'icona del fumetto</b> permette, per ogni entrata del lessico, di visualizzare le sue relazioni con i relativi target.</li>
+                </ul>
+            </div>
+            <br/>
+            <br/>
+            <div class="messageTitle">Aggiornamenti</div>
+            <br/>
+            <div class="message">
+                <ul>
+                    <li>09/10/2014 - visualizzazione grafica delle relazioni di ogni istanza del lessico</li>
+                    <li>17/09/2014 - creata la funzionalità di export excel</li>
+                    <li>11/09/2014 - creata la funzionalità di export pdf del report</li>
+                    <li>09/09/2014 - creata la funzionalità di report di tutte le triple di ogni entry del lessico</li>
+                </ul>
+            </div>
+        </ui:define>
+    </ui:composition>
+
+</html>

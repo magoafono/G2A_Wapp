@@ -1,0 +1,66 @@
+2014-09-17 14:42:56.459 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:42:56.630 [main] DEBUG ExistDBConnector - getNewCollection() xmldb:exist://localhost:8085/exist/xmlrpc/db/ga/new_GA/doc/bada
+2014-09-17 14:42:56.630 [main] DEBUG ExistDBConnector - Get new collection /db/ga/new_GA/doc/bada
+2014-09-17 14:42:56.640 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 179.0ms
+2014-09-17 14:42:56.640 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:42:56.645 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 5.0ms
+2014-09-17 14:42:56.645 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:42:56.649 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 4.0ms
+2014-09-17 14:42:56.649 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:42:56.654 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 5.0ms
+2014-09-17 14:42:56.654 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:42:56.658 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 4.0ms
+2014-09-17 14:42:56.658 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:42:56.664 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 5.0ms
+2014-09-17 14:42:56.664 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:42:56.669 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 5.0ms
+2014-09-17 14:42:56.670 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:42:56.674 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 4.0ms
+2014-09-17 14:42:56.675 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:42:56.680 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 5.0ms
+2014-09-17 14:42:56.680 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:42:56.688 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 8.0ms
+2014-09-17 14:44:47.220 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:44:47.391 [main] DEBUG ExistDBConnector - getNewCollection() xmldb:exist://localhost:8085/exist/xmlrpc/db/ga/new_GA/doc/bada
+2014-09-17 14:44:47.391 [main] DEBUG ExistDBConnector - Get new collection /db/ga/new_GA/doc/bada
+2014-09-17 14:44:47.401 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 180.0ms
+2014-09-17 14:44:47.401 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:44:47.406 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 5.0ms
+2014-09-17 14:44:47.406 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:44:47.410 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 4.0ms
+2014-09-17 14:44:47.410 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:44:47.415 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 4.0ms
+2014-09-17 14:44:47.415 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:44:47.421 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 6.0ms
+2014-09-17 14:44:47.421 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:44:47.427 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 5.0ms
+2014-09-17 14:44:47.427 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:44:47.433 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 6.0ms
+2014-09-17 14:44:47.433 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:44:47.439 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 6.0ms
+2014-09-17 14:44:47.440 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:44:47.445 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 5.0ms
+2014-09-17 14:44:47.445 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:44:47.450 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 4.0ms
+2014-09-17 14:44:50.089 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:44:50.266 [main] DEBUG ExistDBConnector - getNewCollection() xmldb:exist://localhost:8085/exist/xmlrpc/db/ga/new_GA/doc/bada
+2014-09-17 14:44:50.266 [main] DEBUG ExistDBConnector - Get new collection /db/ga/new_GA/doc/bada
+2014-09-17 14:44:50.284 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 194.0ms
+2014-09-17 14:44:50.284 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:44:50.293 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 9.0ms
+2014-09-17 14:44:50.294 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:44:50.303 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 9.0ms
+2014-09-17 14:44:50.303 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:44:50.312 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 9.0ms
+2014-09-17 14:44:50.313 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:44:50.322 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 9.0ms
+2014-09-17 14:44:50.322 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:44:50.333 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 11.0ms
+2014-09-17 14:44:50.334 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:44:50.343 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 9.0ms
+2014-09-17 14:44:50.343 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:44:50.352 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 9.0ms
+2014-09-17 14:44:50.353 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:44:50.361 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 8.0ms
+2014-09-17 14:44:50.362 [main] DEBUG ExistDBConnector - data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id)
+2014-09-17 14:44:50.368 [main] DEBUG ExistDBConnector - xqExecute data(doc('pericopes.xml')//xm:sequence[@classname='pericope']/xm:element[@ref='003.000001']/../@id) in 6.0ms

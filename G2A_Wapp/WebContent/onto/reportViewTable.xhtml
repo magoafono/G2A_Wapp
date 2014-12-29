@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form id="translationTableForm">
+        <p:contextMenu for="tabella">
+            <p:menuitem value="Delete" update="tabella" icon="ui-icon-close" actionListener="#{plotinoReport.deleteRow()}"/>
+        </p:contextMenu>
+        <center>
+            <p:dataTable id="tabella" styleClass="colHeader" var="res" draggableRows="true" selection="#{plotinoReport.selectedTableRow}" selectionMode="single"
+                         value="#{plotinoReport.inferredRes}" style="width:80%" paginator="true" rowKey="#{res.ID}" 
+                         rows="10" rowsPerPageTemplate="5, 10, 50, 100, 500" editable="true" editMode="cell"
+                         paginatorTemplate=" {CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rendered="#{plotinoReport.inferredRes.size() != 0}">
+                <p:column headerText="Termine">
+                    <h:outputText value="#{res.termine}" />
+                </p:column>
+                <p:column headerText="Proprietà" sortBy="#{res.relazione}">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{res.relazione}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="modelInput" value="#{res.relazione}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Valore">
+                    <h:outputText value="#{res.termine_target}" />
+                </p:column>
+                <p:column headerText="Inferita" sortBy="#{res.inferita}">
+                    <h:outputText value="#{res.inferita}" />
+                </p:column>
+            </p:dataTable> 
+        </center>
+
+    </h:form>
+</ui:composition>

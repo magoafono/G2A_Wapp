@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/override.css"/>
+        <h:outputStylesheet name="./css/editor.css"/>
+        <h:outputStylesheet name="./css/vis.css"/>
+        <style type="text/css">
+            <ui:repeat value="#{applicationBean.resourceTypes}" var="resourceType">
+            .#{resourceType.name.replaceAll('\\s', '')} {background-color: #{resourceType.color};}
+            </ui:repeat>
+        </style>
+        <title>Plotino</title>
+    </h:head>
+
+    <h:body >
+
+        <p:growl id="growl" showDetail="true"/>
+
+        <div id="top">
+            <h:form>                
+                <p:toolbar styleClass="topToolbar">
+
+                    <f:facet name="left">
+                        <p:commandLink title="Home" ajax="false" action="#{homeController.homeAction()}">
+                            <p:graphicImage styleClass="topToolbarButton" value="/resources/image/HomeIcon.png" width='26' height='26' />
+                        </p:commandLink>
+                        <p:commandLink title="Report entrate del lessico" ajax="false" action="#{homeController.reportAction()}">
+                            <p:graphicImage styleClass="topToolbarButton" value="/resources/image/ReportIcon.png" width='26' height='26'/>
+                        </p:commandLink>
+                        <p:commandLink title="Navigazione grafica del lessico" ajax="false" action="#{homeController.translationAction()}">
+                            <p:graphicImage styleClass="topToolbarButton" value="/resources/image/NLQueryIcon.png" width='26' height='26' />
+                        </p:commandLink>
+                    </f:facet>
+
+                    <f:facet name="right">
+                        <p:commandLink title="Informazioni" >
+                            <p:graphicImage styleClass="topToolbarButton" value="/resources/image/info.png"/>
+                        </p:commandLink>
+                    </f:facet>
+
+                </p:toolbar>
+            </h:form>
+        </div>
+
+        <div id="content">
+            <ui:insert name="content"/>
+        </div>
+
+    </h:body>
+
+</html>

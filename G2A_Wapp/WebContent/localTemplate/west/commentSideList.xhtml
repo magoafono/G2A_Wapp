@@ -1,0 +1,43 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<p:separator style="width:105px" id="separatorComment"></p:separator>
+
+	<!-- PROVATE CON PARAM e EXTERNAL CONTEXT IL LINK-->
+	<h:form id="commentlistform">
+		<p:dataList id="comments" value="#{commentViewBean.linkComments}"
+			var="comment" paginator="true" rows="10" effectSpeed="fast"
+			paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15,30,50" itemType="none">
+
+			<f:facet name="header">
+           			 Comments
+        			</f:facet>
+
+			<p:column>
+				<p:commandLink
+					update=":commentEditorForm:editor :pericopesTextForm:greekselectedText :pericopesTextForm:greekClick
+							 :pericopesTextForm:arabicClick
+						:pericopesTextForm:arabicselectedText :commentEditorForm:commentType 
+						:commentEditorForm:submitButton :commentEditorForm:clearButton :commentEditorForm:commentType
+						:commentEditorForm:deleteButton"
+					action="#{commentViewBean.loadComment}" title="View Comment">
+					<p:graphicImage value="#{resource['images/search.png']}" />
+					<f:setPropertyActionListener value="#{comment}"
+						target="#{commentViewBean.selectedComment}" />
+				</p:commandLink>
+
+				<h:outputText value="[#{comment.type}]: #{comment.snippet}"
+					style="margin-left:3px" />
+
+			</p:column>
+		</p:dataList>
+		<p:separator></p:separator>
+	</h:form>
+
+</ui:composition>

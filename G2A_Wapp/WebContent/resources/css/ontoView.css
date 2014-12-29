@@ -1,0 +1,24 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 12-set-2014, 14.36.45
+    Author     : andrea
+*/
+#mynetwork {
+	width: 100%;
+	height: 500px;
+	border: 1px solid lightgray;
+	background: #F3F3F3;
+}
+
+div.table_content {
+	width: 80px;
+	text-align: center;
+}
+
+div.table_description {
+	width: 100px;
+}

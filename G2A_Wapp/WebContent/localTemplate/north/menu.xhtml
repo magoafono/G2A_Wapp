@@ -1,0 +1,68 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="menuForm">
+		<h:outputScript name="cophi.js" library="js" />
+		<p:menubar styleClass="no-overflow">
+
+			<!-- ajax false serve!!! -->
+			<p:menuitem value="Home" action="#{sharedBean.goToHomepage}"
+				ajax="false"
+				styleClass="#{selected eq 'home' ? 'ui-state-active':'ui-state-inactive'}" />
+
+			<p:menuitem value="Pericopes by Greek" url="ViewByGreek.xhtml"
+				rendered="#{loginBean.loggedIn}"
+				styleClass="#{selected eq 'orderbygreek' ? 'ui-state-active' : 'ui-state-inactive'}" />
+			<p:menuitem value="Pericopes by Arabic"
+				rendered="#{loginBean.loggedIn}"
+				update="parallelViewFormId"
+				styleClass="#{selected eq 'orderbyarabic' ? 'ui-state-active' : 'ui-state-inactive'}"
+				url="ViewByArabic.xhtml" />
+
+			<p:menuitem value="Search" url="Search.xhtml"
+				styleClass="#{selected eq 'search'? 'ui-state-active':'ui-state-inactive'}"
+				rendered="#{loginBean.loggedIn}" />
+
+			<p:menuitem value="Comments Editor" url="Comment.xhtml"
+				rendered="#{loginBean.loggedIn}"
+				styleClass="#{selected eq 'comment'? 'ui-state-active':'ui-state-inactive'}"
+				disabled="#{sharedBean.selectedLinkViewEntity eq null?true:''}" />
+
+			<p:menuitem value="Linguistic Analysis"
+				url="LinguisticAnalysis.xhtml"
+				rendered="#{loginBean.loggedIn}"
+				styleClass="#{selected eq 'analysis'? 'ui-state-active':'ui-state-inactive'}"
+				disabled="#{sharedBean.selectedLinkViewEntity eq null?true:''}" />
+
+			<p:menuitem value="Pericopes Manager" url="ManagePericopes.xhtml"
+				rendered="#{loginBean.loggedIn}"
+				styleClass="#{selected eq 'managepericopes'? 'ui-state-active':'ui-state-inactive'}"
+				disabled="#{sharedBean.selectedLinkViewEntity eq null or loginBean.role eq 'reader'}" />
+
+			<p:menuitem value="Computational Lexicon"
+				url="ComputationalLexicon.xhtml"
+				rendered="#{loginBean.loggedIn}"
+				styleClass="#{selected eq 'lexicon'? 'ui-state-active':'ui-state-inactive'}" />
+
+			<!--	disabled="true" /> -->
+
+			<f:facet name="options">
+				<p:commandButton type="submit" value="Admin"
+					rendered="#{loginBean.role=='admin'?'true':'false'}"
+					disabled="#{loginBean.loggedIn?'false':'true'}" onclick=""
+					icon="ui-icon-person" />
+				<h:outputText value="Logged in as "
+					rendered="#{loginBean.loggedIn?'true':'false'}" />
+				<h:outputText value="#{loginBean.username}" styleClass="login-font"
+					rendered="#{loginBean.loggedIn?'true':'false'}"  style="margin-right: 20px;"/>
+				<p:commandButton type="submit" value="Logout"
+					rendered="#{loginBean.loggedIn?'true':'false'}"
+					disabled="#{loginBean.loggedIn?'false':'true'}"
+					action="#{loginBean.doLogout}" icon="ui-icon-circle-close" />
+			</f:facet>
+		</p:menubar>
+	</h:form>
+</ui:composition>

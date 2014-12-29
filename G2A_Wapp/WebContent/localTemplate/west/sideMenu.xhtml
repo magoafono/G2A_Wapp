@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form>
+		<p:growl id="messages" showDetail="true" />
+		<!-- p:tree id="docTree" value="#{sideMenuController.root}" var="node"
+			dynamic="true" cache="false" selectionMode="single"
+			selection="#{sideMenuController.selectedNode}">
+			<p:ajax event="select" listener="#{sideMenuController.onNodeSelect}" />
+
+			<p:treeNode expandedIcon="ui-icon ui-icon-folder-open"
+				collapsedIcon="ui-icon ui-icon-folder-collapsed">
+				<h:outputText value="#{node}" />
+			</p:treeNode>
+
+			<p:treeNode type="document" icon="ui-icon ui-icon-document">
+				<h:outputText value="#{node}" />
+			</p:treeNode>
+
+			<p:treeNode type="picture" icon="ui-icon ui-icon-image">
+				<h:outputText value="#{node}" />
+			</p:treeNode>
+
+			<p:treeNode type="mp3" icon="ui-icon ui-icon-video">
+				<h:outputText value="#{node}" />
+			</p:treeNode>
+		</p:tree-->
+
+		<p:menu style="width:350px">
+			<p:submenu label="Collections" icon="ui-icon-refresh">
+				<p:menuitem value="Kitāb Uṯūlūǧiyā" update=":bodyBlock" 
+					action="#{sharedBean.setSelectedMenuItem('teologia')}" title="Theology of Aristotle"
+					icon="ui-icon-document" />
+				<p:menuitem value="Risāla fī l-ʿIlm al-ilāhī" update=":bodyBlock"
+					action="#{sharedBean.setSelectedMenuItem('risala')}" title="Epistle on the Divine Science"
+					icon="ui-icon-document" />
+				<p:menuitem value="al-Šayḫ al-Yūnānī" update=":bodyBlock"
+					action="#{sharedBean.setSelectedMenuItem('detti')}" title="Sayings of the Greek Sage"
+					icon="ui-icon-document" />
+			</p:submenu>
+			<p:submenu label="Help" icon="ui-icon-help">
+				<p:menuitem value="User manual" icon="ui-icon-help"
+					update=":bodyBlock"
+					action="#{sharedBean.setSelectedMenuItem('userManual')}" />
+				<p:menuitem value="Tutorial" update=":bodyBlock"
+					action="#{sharedBean.setSelectedMenuItem('tutorials')}"
+					icon="ui-icon-help" />
+			</p:submenu>
+			<p:submenu label="Code and Publication" icon="ui-icon-newwin">
+				<p:menuitem value="Source Code &amp; Licensing" update=":bodyBlock"
+					action="#{sharedBean.setSelectedMenuItem('sourceCode')}"
+					icon="ui-icon-star" />
+				<p:menuitem value="Copyright and Publication" update=":bodyBlock"
+					action="#{sharedBean.setSelectedMenuItem('copyright')}"
+					icon="ui-icon-star" />
+			</p:submenu>
+			<p:separator />
+		</p:menu>
+
+	</h:form>
+
+</ui:composition>

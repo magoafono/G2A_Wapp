@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form id="reportViewToolbarForm">
+        <p:toolbar styleClass="plotinoToolbar" >
+            <f:facet name="right">
+                <p:commandButton styleClass="plotinoToolbarButton" icon="ui-icon-print" value="PDF Export" ajax="false">  
+                    <p:fileDownload value="#{plotinoReport.exportPDF()}" />  
+                </p:commandButton>  
+                <p:commandButton styleClass="plotinoToolbarButton" icon="ui-icon-print" value="Excel Export" ajax="false">  
+                    <p:fileDownload value="#{plotinoReport.exportExcel()}" />  
+                </p:commandButton>  
+            </f:facet>
+            <f:facet name="left">
+            </f:facet>
+        </p:toolbar>
+    </h:form> 
+
+</ui:composition>

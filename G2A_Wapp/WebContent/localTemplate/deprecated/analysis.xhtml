@@ -1,0 +1,103 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+      
+         <h:form>
+         	<div align="center">
+         	
+         	<p:panelGrid>
+         		<f:facet name="header">
+         			<p:row>
+         				<p:column>Greek Selected Text</p:column>
+         				<p:column>Arabic Selected Text</p:column>
+         			</p:row>
+         		</f:facet>
+         		<p:row>
+         		<p:column><h:outputText value="#{commentBean.selectedPericope.greekText.content}" class="greek"/></p:column>
+         		<p:column style="direction:rtl; text-align:right" ><h:outputText value="#{commentBean.selectedPericope.arabicText.content}" class="arabic"/>
+         		</p:column>
+         		</p:row>
+         	</p:panelGrid>
+         	
+         	<p:panelGrid style="border:0px;" columns="2" >
+				<p:dataTable  var="grlinUnit" value="#{commentBean.selectedPericope.greekText.analysis.analysis}" style="border:0px; width:100%">
+					<f:facet name="header">
+						Greek Text Analysis
+					</f:facet>
+					<p:column id="greekForm">
+						<f:facet name="header">
+						Word Form
+						</f:facet>
+						<h:outputText value="#{grlinUnit.form.value}" class="greek"/>
+					</p:column>
+					<p:column id="greekLemma">
+						<f:facet name="header">
+						Word Lemma
+						</f:facet>
+						<h:outputText value="#{grlinUnit.lemma.uniqueValue}" class="greek"/>
+					</p:column>
+					<p:column id="greekPos">
+						<f:facet name="header">
+						Word Part of Speech
+						</f:facet>
+						<h:outputText value="#{grlinUnit.pos.uniqueValue}" class="greek"/>
+					</p:column>																
+				</p:dataTable>
+				
+				<p:dataTable var="arlinUnit" value="#{commentBean.selectedPericope.arabicText.analysis.analysis}" style="border:0px;width:100%">
+					<f:facet name="header">
+						Arabic Text Analysis
+					</f:facet>
+					
+					<p:column id="arabicExForm" style="direction:rtl; text-align:center">
+						<f:facet name="header">
+						Word Voc
+						</f:facet>
+						<h:outputText value="#{arlinUnit.form.extendedValue}" class="arabic" />
+					</p:column>
+					
+					<p:column id="arabicPos" style="direction:rtl; text-align:center">
+						<f:facet name="header">
+						Word Part of Speech
+						</f:facet>
+						<h:outputText value="#{arlinUnit.pos.value}" class="latin"/>
+					</p:column>
+					
+					<p:column id="arabicRoot" style="direction:rtl; text-align:center">
+						<f:facet name="header">
+						Word Root
+						</f:facet>
+						<h:outputText value="#{arlinUnit.root.value}" class="arabic"/>
+					</p:column>
+					
+					<p:column id="arabicForm" style="direction:rtl; text-align:center; " >
+						<f:facet name="header">
+						Word Form
+						</f:facet>
+						 <h:outputText value=" #{arlinUnit.form.value}" class="arabic" />
+					</p:column>
+				</p:dataTable>
+         	 	<!-- <f:facet name="header"><h:outputText value="#{commentBean.selectedPericope.greekText.content}" /></f:facet>
+         	 	<f:facet name="footer"><h:outputText value="#{commentBean.selectedPericope.arabicText.content}" /></f:facet>	
+         	 	
+         	
+         	
+         	<h:outputText value="#{commentBean.selectedPericope.greekText.content}" />
+         	
+         <p:dataList value="#{commentBean.selectedPericope.greekText.analysis.analysis}" var="linguisticUnit" itemType="disc">  
+    		<h:outputText value="#{linguisticUnit.form.value}" />:
+    		<h:outputText value="#{linguisticUnit.lemma.value}" />
+		</p:dataList>
+          
+          <h:outputText value="#{commentBean.selectedPericope.arabicText.content}" /> 
+          <p:dataList value="#{commentBean.selectedPericope.arabicText.analysis.analysis}" var="linguisticUnit" itemType="disc">  
+    		<h:outputText value="#{linguisticUnit.form.value}" />:
+    		<h:outputText value="#{linguisticUnit.lemma.value}" />
+		</p:dataList>
+		 -->
+		</p:panelGrid>
+		</div>
+	</h:form>
+</ui:composition>

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title><ui:insert name="title">Default title</ui:insert></title>
+	<link rel="stylesheet" type="text/css" href="jquery.cleditor.css" />
+	<script type="text/javascript" src="js/base64v1_0.js" />
+	<script type="text/javascript" src="js/jquery.ilc.editor.js" />
+	<script type="text/javascript" src="js/resource.js" />
+
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	<h:outputStylesheet library="css" name="my-style.css" />
+</h:head>
+
+<h:body id="content">
+	<h:form>
+		<p:growl id="messages" showDetail="true" />
+
+		<p:tieredMenu style="width:200px">
+			<p:submenu label="Collections" icon="ui-icon-refresh">
+				<p:menuitem value="Teologia" actionListener="#{menuView.delete}"
+					update="messages" icon="ui-icon-disk" />
+				<p:menuitem value="Risala" actionListener="#{menuView.delete}"
+					update="messages" icon="ui-icon-disk" />
+				<p:menuitem value="Detti" actionListener="#{menuView.delete}"
+					update="messages" icon="ui-icon-disk" />
+			</p:submenu>
+			<p:submenu label="Non-Ajax Menuitem" icon="ui-icon-newwin">
+				<p:menuitem value="Delete" actionListener="#{menuView.delete}"
+					update="messages" ajax="false" icon="ui-icon-close" />
+			</p:submenu>
+			<p:separator />
+			<p:submenu label="Navigations" icon="ui-icon-extlink">
+				<p:submenu label="Prime Links">
+					<p:menuitem value="Prime" url="http://www.prime.com.tr" title="xxx" />
+					<p:menuitem value="PrimeFaces" url="http://www.primefaces.org" />
+				</p:submenu>
+			</p:submenu>
+		</p:tieredMenu>
+
+	</h:form>
+
+</h:body>
+
+
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+<body>
+	<ui:composition>
+		<p:row id="#{lang}_parameter_row_#{num}">
+			<p:column headerText="Type" style="text-align:center;">(#{bean.types[1]})
+				<p:selectOneMenu effect="none" id="#{lang}_type_#{num}"
+					value="#{bean.types[1]}" style="text-align:left;">
+					<f:selectItem itemLabel="Forma" itemValue="forma" />
+					<f:selectItem itemLabel="Lemma" itemValue="lemma" />
+				</p:selectOneMenu>
+			</p:column>
+			<p:column style="text-align:center;">
+				<p:inputText id="#{lang}_word_#{num}" value="#{word}" />
+				<p:watermark for="#{lang}_word_#{num}" value="#{lang}_word_#{num}"></p:watermark>
+			</p:column>
+			<p:column style="text-align:center;">
+				<p:selectOneMenu id="#{lang}_pos_#{num}" effect="none"
+					value="#{pos}" style="text-align:left;">
+					<f:selectItem itemLabel="Noun" itemValue="noun" />
+					<f:selectItem itemLabel="Verb" itemValue="verb" />
+					<f:selectItem itemLabel="Adjective" itemValue="adj" />
+				</p:selectOneMenu>
+			</p:column>
+			<p:column style="text-align:center;">
+				<p:outputPanel id="#{lang}_operator_pnl_#{num}" style="margin-bottom:10px">
+					<p:selectOneRadio id="#{lang}_operator_#{num}" rendered="#{op != -1}"
+						value="#{op}">
+						<f:selectItem itemLabel="And" itemValue="And" />
+						<f:selectItem itemLabel="Or" itemValue="Or" />
+						<f:selectItem itemLabel="Distance" itemValue="Distance" />
+					</p:selectOneRadio>
+				</p:outputPanel>
+			</p:column>
+
+		</p:row>
+
+	</ui:composition>
+
+</body>
+
+</html>

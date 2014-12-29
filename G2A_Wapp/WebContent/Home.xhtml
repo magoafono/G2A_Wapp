@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:body>
+
+	<ui:composition template="templates/fourRegionsLayout.xhtml">
+		<ui:define name="title">
+			The GA Application
+		</ui:define>
+		<ui:define name="header">
+			<ui:include src="localTemplate/north/menu.xhtml">
+				<ui:param name="selected" value="home" />
+			</ui:include>
+		</ui:define> 
+
+		<ui:define name="leftSide">
+			<ui:include src="localTemplate/west/sideMenu.xhtml" />
+		</ui:define>
+
+		<ui:define name="body">
+			<h:panelGroup id="bodyBlock" layout="block">
+				<ui:include
+					src="localTemplate/center/#{sharedBean.selectedMenuItem}.xhtml" />
+			</h:panelGroup>
+
+
+		</ui:define>
+
+		<ui:define name="footer">
+			<ui:include src="localTemplate/south/genericFooter.xhtml" />
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

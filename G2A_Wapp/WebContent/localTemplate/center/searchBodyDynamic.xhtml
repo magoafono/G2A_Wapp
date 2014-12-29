@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+<body>
+	<ui:composition>
+		<p:layout>
+			<p:layoutUnit id="lu_center" position="center" resizable="true"
+				size="50%">
+				<p:layout id="nested_into_lu_center">
+					<p:layoutUnit id="greek_search_parameters" position="center"
+						resizable="true" size="50%">
+						<h:form>
+							<p:panelGrid id="greek_search_parameters_pg"
+								style="width:80%;margin: 0 auto;">
+								<f:facet name="header">
+									<p:row>
+										<p:column colspan="4" style="text-align: center">Greek Search</p:column>
+									</p:row>
+									<p:row>
+										<p:column style="text-align: center">Type</p:column>
+										<p:column style="text-align: center">Word</p:column>
+										<p:column style="text-align: center">Pos</p:column>
+										<p:column style="text-align: center">Operator</p:column>
+									</p:row>
+
+								</f:facet>
+								<c:set var="arrayLength"
+									value="#{fn:length(searchViewBean.entryFields)-1}" />
+								<c:forEach items="#{searchViewBean.entryFields}" var="entry">
+
+									<p:row id="gr_parameter_row_#{entry.index}">
+										<p:column headerText="Type" style="text-align:center;">
+
+											<p:selectOneMenu effect="none" id="gr_type_#{entry.index}"
+												value="#{searchViewBean.item.type}" style="text-align:left;">
+												<f:selectItem itemLabel="Forma" itemValue="forma" />
+												<f:selectItem itemLabel="Lemma" itemValue="lemma" />
+											</p:selectOneMenu>
+										</p:column>
+										<p:column style="text-align:center;">
+											<p:inputText id="gr_word_#{entry.index}"
+												value="#{searchViewBean.item.word}" />
+											<p:watermark for="gr_word_#{entry.index}"
+												value="#{entry.index}"></p:watermark>
+										</p:column>
+										<p:column style="text-align:center;">
+											<p:selectOneMenu id="gr_pos_#{entry.index}" effect="none"
+												value="#{searchViewBean.item.pos}" style="text-align:left;">
+												<f:selectItem itemLabel="Noun" itemValue="noun" />
+												<f:selectItem itemLabel="Verb" itemValue="verb" />
+												<f:selectItem itemLabel="Adjective" itemValue="adj" />
+											</p:selectOneMenu>
+										</p:column>
+										<p:column style="text-align:center;">
+											<p:outputPanel id="gr_operator_pnl_#{entry.index}"
+												style="margin-bottom:10px">
+												<p:selectOneRadio id="gr_operator_#{entry.index}"
+													value="#{searchViewBean.item.operator}">
+													<f:selectItem itemLabel="And" itemValue="And" />
+													<f:selectItem itemLabel="Or" itemValue="Or" />
+													<f:selectItem itemLabel="Distance" itemValue="Distance" />
+													<p:ajax execute="@form" event="change"
+														listener="#{searchViewBean.onChangeOperator}">
+														<f:setPropertyActionListener
+															target="#{searchViewBean.index}" value="#{entry.index}" />
+													</p:ajax>
+												</p:selectOneRadio>
+											</p:outputPanel>
+										</p:column>
+
+									</p:row>
+								</c:forEach>
+								<f:facet name="footer">
+									<p:row>
+										<p:column style="text-align:center;">
+											<p:commandButton id="gr_clear_btn" icon="ui-icon-close"
+												type="submit" immediate="true" partialSubmit="true"
+												value="Clear" actionListener="#{searchViewBean.addInput}"
+												update="greek_search_parameters_pg"></p:commandButton>
+										</p:column>
+										<p:column colspan="2" style="text-align:center;">
+											<p:commandButton id="gr_search_btn" icon="ui-icon-search"
+												type="submit" immediate="true" partialSubmit="true"
+												value="Search" actionListener="#{searchViewBean.addInput}"
+												update="greek_search_parameters_pg"></p:commandButton>
+										</p:column>
+										<p:column style="text-align:center;">
+											<p:commandButton id="gr_add_word_btn" icon="ui-icon-plus"
+												type="submit" value="Add param"
+												actionListener="#{searchViewBean.addInput}"
+												update="greek_search_parameters_pg"></p:commandButton>
+										</p:column>
+									</p:row>
+								</f:facet>
+							</p:panelGrid>
+						</h:form>
+
+					</p:layoutUnit>
+
+					<p:layoutUnit position="east" resizable="true" size="50%">Arabic Search
+					
+					</p:layoutUnit>
+					<p:layoutUnit position="south" resizable="true" size="50%">Combined Search</p:layoutUnit>
+				</p:layout>
+			</p:layoutUnit>
+			<p:layoutUnit position="south" resizable="true" size="40%"> Result	</p:layoutUnit>
+		</p:layout>
+	</ui:composition>
+</body>
+</html>

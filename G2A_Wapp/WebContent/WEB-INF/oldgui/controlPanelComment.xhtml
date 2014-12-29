@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet library="css" name="my-style.css" />
+	<title>GreekIntoArabic Control Panel</title>
+</h:head>
+
+<h:body>
+	<p:growl id="onSubmitMessage" for="onSubmitMessage" />
+	<p:layout fullPage="true">
+		<p:layoutUnit position="north" size="85"
+			header="Greek into Arabic Web Application v.#{msg['version']}"
+			resizable="false" closable="false" collapsible="false">
+			<!-- <p:graphicImage value="#{resource['images/manoscritto-ara.jpg']}" /> -->
+			<h:form>
+				<p:menubar>
+					<p:menuitem value="Home" url="controlPanel.xhtml" target="" />
+
+					<p:menuitem value="View parallel pericopes"
+						url="controlPanelViewArabic.xhtml" target="" />
+
+					<p:menuitem value="Search" url="controlPanelSearch.xhtml" target="" />
+
+					<p:menuitem value="Manage pericopes" url="." disabled="true" />
+
+					<p:menuitem value="Manage witnesses" url="." disabled="true" />
+
+					<p:menuitem value="Comment" url="controlPanelComment.xhtml"
+						styleClass="ui-state-active" target="" />
+
+					<p:menuitem value="Linguistic Analysis"
+						url="controlPanelAnalysis.xhtml" target="" />
+				</p:menubar>
+			</h:form>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="south" size="75"
+			header="Εἰ δὴ ταῦτα ὀρθῶς λέγεται, λύοιντο ἂν ἤδη αἱ ἀπορίαι"
+			resizable="false" closable="false" collapsible="false">
+			<!-- <h:outputText value="Copyright &copy; - ILC-CNR" />  -->
+			<h:graphicImage height="15px"
+				value="#{resource['images/cc-by-sa_h30.png']}" />
+			<h:graphicImage height="15px"
+				value="#{resource['images/gpl-logo_h20.png']}" />
+			<h:outputText style="font-size:14px; font-style:italic"
+				value="ILC-CNR 2012" />
+		</p:layoutUnit>
+
+		<p:layoutUnit position="west">
+			<p:separator style="width:105px" id="separatorComment"></p:separator>
+
+			<!-- PROVATE CON PARAM e EXTERNAL CONTEXT IL LINK-->
+			<h:form id="commentlistform">
+				<p:dataList id="comments" value="#{commentViewBean.linkComments}"
+					var="comment" paginator="true" rows="50" effectSpeed="fast"
+					paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15" itemType="none">
+
+					<f:facet name="header">
+           			 Comments
+        			</f:facet>
+
+					<p:column>
+						<p:commandLink
+							update=":commentEditorForm:editor :pericopesTextForm:greekselectedText :pericopesTextForm:greekClick
+							 :pericopesTextForm:arabicClick
+						:pericopesTextForm:arabicselectedText :commentEditorForm:commentType 
+						:commentEditorForm:submitButton :commentEditorForm:clearButton :commentEditorForm:commentType
+						:commentEditorForm:deleteButton"
+							action="#{commentViewBean.loadComment}" title="View Comment">
+							<p:graphicImage value="#{resource['images/search.png']}" />
+							<f:setPropertyActionListener value="#{comment}"
+								target="#{commentViewBean.selectedComment}" />
+						</p:commandLink>
+
+						<h:outputText value="[#{comment.type}]: #{comment.snippet}"
+							style="margin-left:3px" />
+
+					</p:column>
+				</p:dataList>
+				<p:separator></p:separator>
+			</h:form>
+
+
+		</p:layoutUnit>
+
+		<p:layoutUnit style="text-align:center;" styleClass="center"
+			position="center" id="centerUnit">
+
+
+			<!-- <ui:include src="templates/navigations.xhtml" />  -->
+			<!-- <ui:include src="templates/_comment.xhtml" /> -->
+
+
+			<h:form id="pericopesTextForm">
+				<h:outputScript name="selection.js" library="js"></h:outputScript>
+				<div align="center">
+					<h:panelGrid columnClasses="greek,arabic" columns="2">
+						<h:outputText
+							value="#{commentViewBean.selectedLink.greekPericopeInfo}"></h:outputText>
+						<h:outputText
+							value="#{commentViewBean.selectedLink.arabicPericopeInfo}"></h:outputText>
+						<h:inputTextarea cols="50" id="greektextarea"
+							onkeypress="alert('ti garberebbe, eh!')"
+							value="#{commentViewBean.selectedLink.greekPericopeText}"
+							onblur="greekselection();return false;"
+							readonly="#{commentViewBean.selectedComment ne null}"></h:inputTextarea>
+						<h:inputTextarea cols="50" id="arabictextarea"
+							onkeypress="alert('ti garberebbe, eh!')"
+							value="#{commentViewBean.selectedLink.arabicPericopeText}"
+							onblur="arabicselection();return false;"
+							readonly="#{commentViewBean.selectedComment ne null}"
+							style="direction:rtl; text-align:right"></h:inputTextarea>
+						<!-- <h:panelGroup><hr /></h:panelGroup><h:panelGroup><hr /></h:panelGroup> -->
+						<h:inputHidden id="greektext" value="#{commentViewBean.greekText}"></h:inputHidden>
+						<h:inputHidden id="arabictext"
+							value="#{commentViewBean.arabicText}"
+							style="direction:rtl; text-align:right"></h:inputHidden>
+						<!-- <h:panelGroup><hr /></h:panelGroup><h:panelGroup><hr /></h:panelGroup>  -->
+						<h:outputText id="greekselectedText"
+							value="#{commentViewBean.greekSelectedText}"></h:outputText>
+						<h:outputText id="arabicselectedText"
+							value="#{commentViewBean.arabicSelectedText}"></h:outputText>
+						<h:panelGroup>
+							<hr />
+						</h:panelGroup>
+						<h:panelGroup>
+							<hr />
+						</h:panelGroup>
+
+						<p:commandButton  id="greekClick" value="greek selection" styleClass="latinText"
+							partialSubmit="true" process="@this :pericopesTextForm:greektext"
+							actionListener="#{commentViewBean.greekClick}"
+							update=":pericopesTextForm:greekselectedText"
+							disabled="#{commentViewBean.selectedComment.commentId ne null or commentViewBean.selectedComment eq null}" />
+						<p:commandButton  id="arabicClick" value="arabic selection" styleClass="latinText"
+							partialSubmit="true"
+							process="@this :pericopesTextForm:arabictext"
+							actionListener="#{commentViewBean.arabicClick}"
+							update=":pericopesTextForm:arabicselectedText"
+							disabled="#{commentViewBean.selectedComment.commentId ne null or commentViewBean.selectedComment eq null}" />
+
+					</h:panelGrid>
+
+
+					<h:panelGrid>
+
+					</h:panelGrid>
+
+
+				</div>
+			</h:form>
+
+			<p:separator id="separator" style="width:350px;height:15px"></p:separator>
+
+			<div align="center">
+				<h:form id="commentEditorForm">
+					<p:editor id="editor" value="#{commentViewBean.commentText}"
+						disabled="#{commentViewBean.selectedComment eq null}" width="600" />
+
+					<h:panelGrid columns="6" style="margin-top:10px">
+						<p:commandButton id="newButton" value="new" ajax="false"
+							action="#{commentViewBean.newComment}" />
+						<p:commandButton id="deleteButton" value="delete" ajax="false"
+							action="#{commentViewBean.deleteComment}"
+							onclick="return confirm('Are you sure?')"
+							disabled="#{commentViewBean.selectedComment eq null}" />
+						<p:selectOneMenu id="commentType"
+							value="#{commentViewBean.commentType}"
+							disabled="#{commentViewBean.selectedComment eq null}">
+
+							<f:selectItem itemLabel="literal translation" itemValue="LT" />
+							<f:selectItem itemLabel="free rendering" itemValue="FR" />
+							<f:selectItem itemLabel="amplification" itemValue="Am" />
+							<f:selectItem itemLabel="misunderstanding" itemValue="Ms" />
+							<f:selectItem itemLabel="interpolation" itemValue="Ip" />
+							<f:selectItem itemLabel="glossary" itemValue="Gs" />
+							<f:selectItem itemLabel="additional note" itemValue="AN" />
+						</p:selectOneMenu>
+						<p:commandButton id="submitButton" value="submit"
+							update=":commentlistform:comments :onSubmitMessage :commentEditorForm :pericopesTextForm" partialSubmit="true"
+							process="@form @this" actionListener="#{commentViewBean.submit}"
+							disabled="#{commentViewBean.selectedComment eq null}" />
+						<p:commandButton id="clearButton" value="clear"
+							update=":commentEditorForm:editor" process="@this"
+							actionListener="#{commentViewBean.clearCommentForm}"
+							disabled="#{commentViewBean.selectedComment eq null}" />
+					</h:panelGrid>
+				</h:form>
+			</div>
+
+
+
+
+
+			<!--<h:outputText value="centro" />-->
+		</p:layoutUnit>
+
+	</p:layout>
+
+</h:body>
+
+</html>
