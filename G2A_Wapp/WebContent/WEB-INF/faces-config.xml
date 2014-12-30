@@ -6,8 +6,12 @@
 	version="2.1">
 	<application>
 		<resource-bundle>
-			<base-name>it.cnr.ilc.cophi.resources.config</base-name>
-			<var>config</var>
+			<base-name>it.cnr.ilc.cophi.resources.configPlotino</base-name>
+			<var>configPlotino</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>it.cnr.ilc.cophi.resources.configAristotele</base-name>
+			<var>configAristotele</var>
 		</resource-bundle>
 		<resource-bundle>
 			<base-name>it.cnr.ilc.cophi.resources.messages</base-name>

@@ -23,6 +23,7 @@ import it.cnr.ilc.cophi.model.view.TokenViewEntity;
 import it.cnr.ilc.cophi.utils.Consts;
 import it.cnr.ilc.cophi.utils.CophiSort;
 import it.cnr.ilc.cophi.utils.GreekCollator;
+import it.cnr.ilc.cophi.utils.MessageProvider;
 import it.cnr.ilc.cophi.utils.GreekCollator.CollatorEnum;
 import it.cnr.ilc.cophi.utils.OntoUtils;
 import it.cnr.ilc.cophi.utils.Utils;
@@ -118,23 +119,16 @@ public class EntityManager {
 	private String query_3_param_1 = "Being";
 	private String query_3_param_2 = "";
 
+	static MessageProvider mp = new MessageProvider();
 
-	//	private String dbName = "new_GA2"; 
-	private String dbName = "new_GA"; 
 
 	/**
 	 * @return the dbName
 	 */
 	public String getDbName() {
-		return dbName;
+		return mp.getValue( Consts.CONFIGNAME , "db_name");
 	}
 
-	/**
-	 * @param dbName the dbName to set
-	 */
-	public void setDbName(String dbName) {
-		this.dbName = dbName;
-	}
 
 	/**
 	 * @return the arabicTokens
@@ -401,14 +395,14 @@ public class EntityManager {
 
 	private void init() {
 
-		String root_path = ((ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext()).getRealPath("/");
+		//String root_path = ((ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext()).getRealPath("/");
 
-		try {
+		/*try {
 			greekCharBuffer = Utils.fromFile (root_path + "resources/greek.txt");
 			arabicCharBuffer = Utils.fromFile (root_path + "resources/arabic.txt");
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
 
 		setArabicCr(createContextResouce(new XMLResourceBehaviour(), getDbName()  + "/doc/bada/"));
 		setGreekCr(createContextResouce(new XMLResourceBehaviour(), getDbName() +  "/doc/plot/"));

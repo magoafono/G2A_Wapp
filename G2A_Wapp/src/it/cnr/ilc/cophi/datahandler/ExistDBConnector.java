@@ -6,6 +6,7 @@ package it.cnr.ilc.cophi.datahandler;
 import it.cnr.ilc.cophi.action.userbean.Pair;
 import it.cnr.ilc.cophi.utils.BuckwalterArabicConverter;
 import it.cnr.ilc.cophi.utils.Consts;
+import it.cnr.ilc.cophi.utils.MessageProvider;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -37,19 +38,21 @@ public class ExistDBConnector {
 
 	// Default values
 
-	/*
-	private String dbDriver = MessageProvider.getValue("config", "db_driver");
-	private String dbServerName = MessageProvider.getValue("config","db_server");
-	private String dbServerPort = MessageProvider.getValue("config","db_port");
-	private String dbServerProtocol = MessageProvider.getValue("config","db_protocol");
-	private String dbRootName = MessageProvider.getValue("config","db_root_name");
-	private String dbLogin = MessageProvider.getValue("config","db_login");
-	private String dbPassword = MessageProvider.getValue("config","db_password");
-	 */
+	MessageProvider mp = new MessageProvider();
+	
+	private String dbDriver = mp.getValue(Consts.CONFIGNAME, "db_driver");
+	private String dbServerName = mp.getValue(Consts.CONFIGNAME,"db_server");
+	private String dbServerPort = mp.getValue(Consts.CONFIGNAME,"db_port");
+	private String dbServerProtocol = mp.getValue(Consts.CONFIGNAME,"db_protocol");
+	private String dbRootName = mp.getValue(Consts.CONFIGNAME,"db_root_name");
+	private String dbLogin = mp.getValue(Consts.CONFIGNAME,"db_login");
+	private String dbPassword = mp.getValue(Consts.CONFIGNAME,"db_password");
+	 
 
 	private static final Logger logger = LogManager.getLogger("ExistDBConnector");
 
 	//the following variables are set in config.properties
+	/*
 	private String dbDriver = "org.exist.xmldb.DatabaseImpl";
 	private String dbServerName = "localhost";
 	private String dbServerPort = "8085";
@@ -57,7 +60,7 @@ public class ExistDBConnector {
 	private String dbRootName = "ga";
 	private String dbLogin = "admin";
 	private String dbPassword = "angelodel80";
-
+*/
 	private HashMap<String, Collection> connectionsCache = new HashMap<String, Collection>();
 	private HashMap<String, CompiledExpression> compiledXPathExprCache = new HashMap<String, CompiledExpression>();
 
