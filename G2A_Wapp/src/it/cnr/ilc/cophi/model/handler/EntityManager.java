@@ -24,11 +24,11 @@ import it.cnr.ilc.cophi.utils.Consts;
 import it.cnr.ilc.cophi.utils.CophiSort;
 import it.cnr.ilc.cophi.utils.GreekCollator;
 import it.cnr.ilc.cophi.utils.GreekCollator.CollatorEnum;
+import it.cnr.ilc.cophi.utils.MessageProvider;
 import it.cnr.ilc.cophi.utils.OntoUtils;
 import it.cnr.ilc.cophi.utils.Utils;
 import it.cnr.ilc.cophi.utils.XPathUtils;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,9 +36,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.faces.context.FacesContext;
-import javax.servlet.ServletContext;
 
 import org.jdom2.Document;
 import org.slf4j.profiler.Profiler;
@@ -118,24 +115,44 @@ public class EntityManager {
 	private String query_3_param_1 = "Being";
 	private String query_3_param_2 = "";
 
+	static MessageProvider mp = new MessageProvider();
 
-	//	private String dbName = "new_GA2"; 
-	private String dbName = "new_GA"; 
 
 	/**
 	 * @return the dbName
 	 */
 	public String getDbName() {
-		return dbName;
+		return mp.getValue( Consts.CONFIGNAME , "db_name");
 	}
 
-	/**
-	 * @param dbName the dbName to set
-	 */
-	public void setDbName(String dbName) {
-		this.dbName = dbName;
+	public String getArabicCollectionPath() {
+		
+		return mp.getValue(Consts.CONFIGNAME, "db_arabic_doc_path");
+	}
+	public String getGreekCollectionPath() {
+		
+		return mp.getValue(Consts.CONFIGNAME, "db_greek_doc_path");
+	}
+	public String getLinkCollectionPath() {
+		
+		return mp.getValue(Consts.CONFIGNAME, "db_link_path");
+	}
+	public String getCommentCollectionPath() {
+		
+		return mp.getValue(Consts.CONFIGNAME, "db_comment_path");
 	}
 
+	public String getArabicWorkName() {
+		
+		return mp.getValue(Consts.CONFIGNAME, "arabic_work_name");
+	}
+	
+	public String getGreekWorkName() {
+		
+		return mp.getValue(Consts.CONFIGNAME, "greek_work_name");
+	}
+
+	
 	/**
 	 * @return the arabicTokens
 	 */
@@ -401,20 +418,20 @@ public class EntityManager {
 
 	private void init() {
 
-		String root_path = ((ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext()).getRealPath("/");
+		//String root_path = ((ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext()).getRealPath("/");
 
-		try {
+		/*try {
 			greekCharBuffer = Utils.fromFile (root_path + "resources/greek.txt");
 			arabicCharBuffer = Utils.fromFile (root_path + "resources/arabic.txt");
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
 
-		setArabicCr(createContextResouce(new XMLResourceBehaviour(), getDbName()  + "/doc/bada/"));
-		setGreekCr(createContextResouce(new XMLResourceBehaviour(), getDbName() +  "/doc/plot/"));
-		setLinkCr(createContextResouce(new XMLResourceBehaviour(), getDbName() +  "/link"));
+		setArabicCr(createContextResouce(new XMLResourceBehaviour(), getDbName()  + getArabicCollectionPath()/*"/doc/bada/"*/));
+		setGreekCr(createContextResouce(new XMLResourceBehaviour(), getDbName() +  getGreekCollectionPath()/*"/doc/plot/"*/));
+		setLinkCr(createContextResouce(new XMLResourceBehaviour(), getDbName() +  getLinkCollectionPath()/*"/link"*/));
 
-		setCommentCr(createContextResouce(new XMLResourceBehaviour(), getDbName() +  "/comment"));
+		setCommentCr(createContextResouce(new XMLResourceBehaviour(), getDbName() +  getCommentCollectionPath()/*"/comment"*/));
 
 		setArabicTokens(retriveAllArabicToken()); 
 		setGreekTokens(retriveAllGreekToken());
@@ -459,7 +476,7 @@ public class EntityManager {
 
 	private void reloadGreekFromDB() {
 
-		setGreekCr(createContextResouce(new XMLResourceBehaviour(), getDbName() + "/doc/plot/"));
+		setGreekCr(createContextResouce(new XMLResourceBehaviour(), getDbName() + getGreekCollectionPath() /*"/doc/plot/"*/));
 		setGreekPericopes(retrieveGreekPericope()); //Forse non serve? Ho tenuto allineato tutto in memoria
 		setGreekTokenToPericope(Utils.createToken2PericopeHM(getGreekPericopes()));
 
@@ -467,7 +484,7 @@ public class EntityManager {
 
 	private void reloadArabicFromDB() {
 
-		setArabicCr(createContextResouce(new XMLResourceBehaviour(), getDbName() + "/doc/bada/"));
+		setArabicCr(createContextResouce(new XMLResourceBehaviour(), getDbName() + getArabicCollectionPath() /*"/doc/bada/"*/));
 		setArabicPericopes(retrieveArabicPericope());
 		setArabicTokenToPericope(Utils.createToken2PericopeHM(getArabicPericopes()));
 	}
@@ -523,8 +540,8 @@ public class EntityManager {
 	@Deprecated
 	public void reloadAfterPericopeModificationOld() {
 
-		setArabicCr(createContextResouce(new XMLResourceBehaviour(), getDbName() + "/doc/bada/"));
-		setGreekCr(createContextResouce(new XMLResourceBehaviour(), getDbName() + "/doc/plot/"));
+		setArabicCr(createContextResouce(new XMLResourceBehaviour(), getDbName() + getArabicCollectionPath() /*"/doc/bada/"*/));
+		setGreekCr(createContextResouce(new XMLResourceBehaviour(), getDbName() + getGreekCollectionPath() /*"/doc/plot/"*/));
 
 		setArabicPericopes(retrieveArabicPericope());
 		setGreekPericopes(retrieveGreekPericope());
@@ -554,24 +571,24 @@ public class EntityManager {
 		//List<PericopeText> lor, String work, ContextResource cr, String collection, String filename
 		//aggiungo la focused pericope alle altre che vanno salvate tramite xquery/xupdate
 		listOfPericopesId.add(focusedPericopeId);
-		updateModifiedPericopes(listOfPericopesId, Utils.getPericopeTextFromIds(listOfPericopesId, getGreekPericopes()), "plotino", getGreekCr(), getDbName() + "/doc/plot/",  "pericopes.xml");
+		updateModifiedPericopes(listOfPericopesId, Utils.getPericopeTextFromIds(listOfPericopesId, getGreekPericopes()), getGreekWorkName(), getGreekCr(), getDbName() + getGreekCollectionPath(),  "pericopes.xml");
 
 	}
 
 	public void saveModifiedArabicPericopes(String focusedPericopeId, List<String> listOfPericopesId) {
 		//TODO 
 		listOfPericopesId.add(focusedPericopeId);
-		updateModifiedPericopes(listOfPericopesId, Utils.getPericopeTextFromIds(listOfPericopesId, getArabicPericopes()), "badaoui", getArabicCr(), getDbName() + "/doc/bada/",  "pericopes.xml");
+		updateModifiedPericopes(listOfPericopesId, Utils.getPericopeTextFromIds(listOfPericopesId, getArabicPericopes()), getArabicWorkName(), getArabicCr(), getDbName() + getArabicCollectionPath(),  "pericopes.xml");
 	}
 
 	public void saveGreekPericopes() {
 
-		savePericopes(new ArrayList<PericopeText>(getGreekPericopes().values()), "plotino", getGreekCr(), getDbName() + "/doc/plot/", "pericopes.xml");
+		savePericopes(new ArrayList<PericopeText>(getGreekPericopes().values()), getGreekWorkName(), getGreekCr(), getDbName() + getGreekCollectionPath() /*"/doc/plot/"*/, "pericopes.xml");
 	}
 
 	public void saveArabicPericopes() {
 
-		savePericopes(new ArrayList<PericopeText>(getArabicPericopes().values()), "badaoui", getArabicCr(), getDbName() + "/doc/bada/", "pericopes.xml");
+		savePericopes(new ArrayList<PericopeText>(getArabicPericopes().values()), getArabicWorkName(), getArabicCr(), getDbName() + getArabicCollectionPath() /*"/doc/bada/"*/, "pericopes.xml");
 	}
 
 
@@ -1061,18 +1078,18 @@ public class EntityManager {
 		cc.setContentType(ccb);
 		cc.contentToJDOM(comment);
 		ContextResource crc = getCommentCr();
-		return crc.store(cc.getDocument(), getDbName() + "/comment", Utils.createFilename(comment));
+		return crc.store(cc.getDocument(), getDbName() + getCommentCollectionPath(), Utils.createFilename(comment));
 	}
 
 	public boolean deleteComment(Comment comment) {
 
 		ContextResource crc = getCommentCr();
-		return crc.remove(getDbName() + "/comment", comment.getXmlFileName());
+		return crc.remove(getDbName() + getCommentCollectionPath(), comment.getXmlFileName());
 	}
 
 
 	public void reloadAllComments() {
-		setCommentCr(createContextResouce(new XMLResourceBehaviour(), getDbName() + "/comment"));
+		setCommentCr(createContextResouce(new XMLResourceBehaviour(), getDbName() + getCommentCollectionPath()));
 		setComments(retrieveAllComments());
 		setCommentsByLink(Utils.commentsGroupByLink(getComments()));
 	}
@@ -1311,13 +1328,13 @@ public class EntityManager {
 
 	public List<AnalysisBean> getGreekAnalysisByPericopeId (String pericopeId) {
 
-		return XPathUtils.getGreekAnalysisByPericopeId(getDbName(), pericopeId);
+		return XPathUtils.getGreekAnalysisByPericopeId(getDbName() + "/" + getGreekCollectionPath(), pericopeId);
 	}
 
 
 	public List<AnalysisBean> getArabicAnalysisByPericopeId (String pericopeId) {
 
-		return XPathUtils.getArabicAnalysisByPericopeId(getDbName(), pericopeId);
+		return XPathUtils.getArabicAnalysisByPericopeId(getDbName() + "/" + getArabicCollectionPath(), pericopeId);
 
 	}
 

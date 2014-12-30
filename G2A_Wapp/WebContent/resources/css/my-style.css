@@ -81,14 +81,14 @@ div.perica {
 .arabic {
 	direction: rtl;
 	text-align: right;
-/*	font-size: 1.3em; */
+	/*	font-size: 1.3em; */
 	font-family: "KacstOne", "Times new roman", Arial !important;
-} 
+}
 
 .greek {
 	direction: ltr;
 	text-align: left;
-/*	font-size: 1.2em;*/
+	/*	font-size: 1.2em;*/
 	font-family: Arial, "Times new roman" !important;
 }
 
@@ -167,6 +167,14 @@ a:hover.link_nodecor {
 }
 
 .link_nodecor {
+	text-decoration: none;
+}
+
+a:hover.sidemenu_link {
+	text-decoration: none;
+}
+
+.sidemenu_link {
 	text-decoration: none;
 }
 

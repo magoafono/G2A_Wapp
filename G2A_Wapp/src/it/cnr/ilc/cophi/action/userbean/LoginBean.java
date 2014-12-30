@@ -6,8 +6,6 @@ import it.cnr.ilc.cophi.utils.Utils;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.net.URL;
-import java.net.URLClassLoader;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;

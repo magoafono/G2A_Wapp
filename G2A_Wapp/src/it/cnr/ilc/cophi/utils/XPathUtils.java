@@ -20,7 +20,38 @@ import org.slf4j.profiler.Profiler;
 public class XPathUtils {
 
 	private static final Logger logger = LogManager.getLogger("ExistDBConnector");
+	private static MessageProvider mp = new MessageProvider();
 
+	public static String getDbName() {
+		return mp.getValue( Consts.CONFIGNAME , "db_name");
+	}
+
+	public static String getArabicCollectionPath() {
+		
+		return mp.getValue(Consts.CONFIGNAME, "db_arabic_doc_path");
+	}
+	public static String getGreekCollectionPath() {
+		
+		return mp.getValue(Consts.CONFIGNAME, "db_greek_doc_path");
+	}
+	public static String getLinkCollectionPath() {
+		
+		return mp.getValue(Consts.CONFIGNAME, "db_link_path");
+	}
+	public static String getCommentCollectionPath() {
+		
+		return mp.getValue(Consts.CONFIGNAME, "db_comment_path");
+	}
+
+	public static String getArabicWorkName() {
+		
+		return mp.getValue(Consts.CONFIGNAME, "arabic_work_name");
+	}
+	
+	public static String getGreekWorkName() {
+		
+		return mp.getValue(Consts.CONFIGNAME, "greek_work_name");
+	}
 
 	// ANALYSIS
 
@@ -28,12 +59,12 @@ public class XPathUtils {
 
 		ExistDBConnector dbconn = ExistDBConnector.getInstance();
 		ArrayList<AnalysisBean> analyses = null;
-		ArrayList<String> tokensId = dbconn.searchTokensInPericopeById(collection + "/doc/plot/", pericopeId);
+		ArrayList<String> tokensId = dbconn.searchTokensInPericopeById(collection , pericopeId);
 		//int i = 0;
 		for (String id : tokensId) {
-			String analysisId = dbconn.searchLinkAnalysisByTokenId(collection + "/doc/plot/", id);
+			String analysisId = dbconn.searchLinkAnalysisByTokenId(collection , id);
 			//String analysisId = "380";
-			ArrayList<String> analysis = dbconn.searchAnalysisById(collection + "/doc/plot/", analysisId);
+			ArrayList<String> analysis = dbconn.searchAnalysisById(collection , analysisId);
 			//System.err.println(i++ + " analysis: " + analysis);
 
 			if (null != analysis) {
@@ -43,7 +74,7 @@ public class XPathUtils {
 				AnalysisBean ab = new AnalysisBean();
 
 				//ab.setForma(analysis.get(0));
-				ab.setForma(dbconn.searchTokenValueByTokenId(collection + "/doc/plot/", id));
+				ab.setForma(dbconn.searchTokenValueByTokenId(collection , id));
 				ab.setPos(analysis.get(1));
 				ab.setLemma(analysis.get(2));
 				analyses.add(ab);
@@ -59,7 +90,7 @@ public class XPathUtils {
 
 		ExistDBConnector dbconn = ExistDBConnector.getInstance();
 		ArrayList<AnalysisBean> analyses = null;
-		ArrayList<String> tokensId = dbconn.searchTokensInPericopeById(collection + "/doc/bada/", pericopeId);
+		ArrayList<String> tokensId = dbconn.searchTokensInPericopeById(collection, pericopeId);
 		System.err.println("pericopeId " + pericopeId);
 
 		Pattern sequencePattern = Pattern.compile("<xm:sequence xmlns:xm=\"(.+?)\" id=\"(?<id>.+?)\" classname=\"(.+?)\">");
@@ -69,10 +100,10 @@ public class XPathUtils {
 		HashMap<String, String> parameters = new HashMap<String, String>();
 		//int i = 0;
 		for (String id : tokensId) {
-			String analysisId = dbconn.searchLinkAnalysisByTokenId(collection + "/doc/bada/", id);
+			String analysisId = dbconn.searchLinkAnalysisByTokenId(collection, id);
 			//String analysisId = "380";
 
-			String analysis = dbconn.searchAnalysisAttibutesById(collection + "/doc/bada/", analysisId);
+			String analysis = dbconn.searchAnalysisAttibutesById(collection, analysisId);
 
 			if (null != analysis) {
 				if (analyses == null) {
@@ -128,82 +159,7 @@ public class XPathUtils {
 		return analyses;
 	}
 
-	/*
-	public static ArrayList<AnalysisBean> getArabicAnalysisByPericopeIdOld(String collection, String pericopeId) {
 
-		ExistDBConnector dbconn = ExistDBConnector.getInstance();
-		ArrayList<AnalysisBean> analyses = null;
-		ArrayList<String> tokensId = dbconn.searchTokensInPericopeById(collection + "/doc/bada/", pericopeId);
-		System.err.println("pericopeId " + pericopeId);
-
-		Pattern sequencePattern = Pattern.compile("<xm:sequence xmlns:xm=\"(.+?)\" id=\"(?<id>.+?)\" classname=\"(.+?)\">");
-		Pattern elementPattern = Pattern.compile("<xm:element id=\"(?<id>.+?)\" classname=\"(.+?)\">(?<params>.+?)</xm:element>");
-		Pattern paramPattern = Pattern.compile("<xm:param name=\"(?<name>.+?)\" value=\"(?<value>.*?)\"/>");
-
-		HashMap<String, String> parameters = new HashMap<String, String>();
-		//int i = 0;
-		for (String id : tokensId) {
-			String analysisId = dbconn.searchLinkAnalysisByTokenId(collection + "/doc/bada/", id);
-			//String analysisId = "380";
-
-			ArrayList<String> analysis = dbconn.searchAnalysisAttibutesById(collection + "/doc/bada/", analysisId);
-
-			if (null != analysis) {
-				if (analyses == null) {
-					analyses = new ArrayList<AnalysisBean>();
-				}
-				AnalysisBean sequenceBean = new AnalysisBean();
-
-				for (String ana : analysis) {
-					//	System.err.println("s("+ana+")");
-					Matcher sequenceMatcher = sequencePattern.matcher(ana);
-					if (sequenceMatcher.find()){
-						//System.err.println("sequence id " + sequenceMatcher.group("id"));
-						sequenceBean.setId(sequenceMatcher.group("id"));
-						Matcher elementMatcher = elementPattern.matcher(ana);
-						ArrayList<SubAnalysisBean> elementBean = new ArrayList<SubAnalysisBean>();
-						while (elementMatcher.find()){
-							//System.err.println("element id" + elementMatcher.group("id"));
-
-							SubAnalysisBean paramBean = new SubAnalysisBean();
-							paramBean.setId(elementMatcher.group("id"));
-
-							Matcher paramMatcher = paramPattern.matcher(elementMatcher.group("params"));
-							parameters.clear();
-							while (paramMatcher.find()){
-								parameters.put(paramMatcher.group("name"), paramMatcher.group("value"));
-							}
-
-							paramBean.setWordt(parameters.get("wordt"));
-							paramBean.setWord(parameters.get("word"));
-							paramBean.setPost(parameters.get("post"));
-							paramBean.setPos(parameters.get("pos"));
-							if (parameters.containsKey("radicet")) {
-								sequenceBean.setRadice(parameters.get("radice"));
-								sequenceBean.setRadicet(parameters.get("radicet"));
-								sequenceBean.setLemma(parameters.get("lemma"));
-								sequenceBean.setLemmat(parameters.get("lemmat"));
-								sequenceBean.setForma(parameters.get("forma"));
-								//	ab.setForma(dbconn.searchTokenValueByTokenId(collection + "/doc/bada/", id));
-								sequenceBean.setFormat(parameters.get("format"));
-
-							}
-							elementBean.add(paramBean);
-						}
-						sequenceBean.setSubanalysis(elementBean);
-						analyses.add(sequenceBean);
-
-					}
-				}
-
-			}
-
-			//		System.err.println("getArabicAnalysisByPericopeId() tokenid " + id + " analysisId " + analysisId);
-		}
-
-		return analyses;
-	}
-*/
 	//SEARCH
 
 
@@ -225,12 +181,12 @@ public class XPathUtils {
 		String collection = null;
 		switch (lang) {
 		case Consts.GREEK:
-			collection = "plot/";
-			analysisIds = dbconn.searchAnalysisIdByParameter(dbName + "/doc/" + collection, itemName, itemValue, Consts.GREEK);
+			collection = getGreekCollectionPath();
+			analysisIds = dbconn.searchAnalysisIdByParameter(dbName + "/" + collection, itemName, itemValue, Consts.GREEK);
 			break;
 		case Consts.ARABIC:
-			collection = "bada/";
-			analysisIds = dbconn.searchAnalysisIdByParameter(dbName + "/doc/" + collection, itemName, itemValue, Consts.ARABIC);
+			collection = getGreekCollectionPath();
+			analysisIds = dbconn.searchAnalysisIdByParameter(dbName + "/" + collection, itemName, itemValue, Consts.ARABIC);
 			break;
 
 		default:
@@ -240,7 +196,7 @@ public class XPathUtils {
 		if (null != analysisIds) {
 
 			for (String analysisId : analysisIds) {
-				tokenIds.addAll(dbconn.searchTokenIdByAnalysisId(dbName + "/doc/"  + collection, analysisId));
+				tokenIds.addAll(dbconn.searchTokenIdByAnalysisId(dbName + "/" + collection, analysisId));
 			}
 		}
 		Set<String> s = new HashSet<String>(tokenIds);
@@ -313,10 +269,10 @@ public class XPathUtils {
 		String collection = null;
 		switch (lang) {
 		case Consts.GREEK:
-			collection = "plot/";
+			collection = getGreekCollectionPath();
 			break;
 		case Consts.ARABIC:
-			collection = "bada/";
+			collection =  getArabicCollectionPath();
 			break;
 
 		default:
@@ -326,7 +282,7 @@ public class XPathUtils {
 		if (null != tokenIds) {
 			pericopeIds = new ArrayList<String>();
 			for (String tokenId : tokenIds) {
-				pericopeIds.add(dbconn.searchPericopeIdByTokenId(dbName + "/doc/"  + collection, tokenId));
+				pericopeIds.add(dbconn.searchPericopeIdByTokenId(dbName + "/"  + collection, tokenId));
 			}
 		}
 		Set<String> s = new HashSet<String>(pericopeIds);
@@ -362,7 +318,7 @@ public class XPathUtils {
 			linkIds = new ArrayList<String>();
 			for (String pericopeId : pericopeIds) {
 				profiler.start(pericopeId);
-				if (null != (res = dbconn.searchLinkIdByPericopeIdAndLang(dbName + "/link/", pericopeId, Utils.lang2String(lang)))){
+				if (null != (res = dbconn.searchLinkIdByPericopeIdAndLang(dbName + "/" + getLinkCollectionPath(), pericopeId, Utils.lang2String(lang)))){
 					linkIds.add(res);
 				}
 			}

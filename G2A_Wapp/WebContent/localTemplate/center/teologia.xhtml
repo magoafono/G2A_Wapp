@@ -167,7 +167,7 @@ e, capitoli 1 e 7; 'Detti del sapiente greco'), ed. C. D'Ancona et al., Il Polig
 	</p:accordionPanel>
 
 	<c:if test="#{!loginBean.loggedIn}">
-		<h:form id="guestLogin">
+		<h:form id="guestLogin" >
 			<p:panelGrid styleClass="tableNoBorder panelGridCenter">
 				<p:row>
 					<p:column style="text-align:center">
@@ -183,8 +183,8 @@ e, capitoli 1 e 7; 'Detti del sapiente greco'), ed. C. D'Ancona et al., Il Polig
 				</p:row>
 				<p:row>
 					<p:column style="text-align:center">
-						<p:commandButton id="freeAccessBtn" value="Free Access"
-							action="#{loginBean.doLogin}">
+						<p:commandButton id="freeAccessBtn" value="Free Access" 
+							action="#{loginBean.doLogin}"> 
 							<f:setPropertyActionListener target="#{loginBean.username}"
 								value="guest" />
 							<f:setPropertyActionListener target="#{loginBean.password}"

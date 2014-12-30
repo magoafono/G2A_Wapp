@@ -3,7 +3,24 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-	<h:form>
+
+	<script>
+jQuery(document).ready(function(){
+    jQuery('.sidemenu_column').mouseover(function(){
+    	//alert("11111");
+    	$(this).addClass("ui-state-hover" );
+    });
+    jQuery('.sidemenu_column').mouseout(function(){
+    	//alert("11111");
+    	$(this).removeClass("ui-state-hover" );
+    });
+
+    
+});
+
+</script>
+	<h:form id="SideMenuForm">
+
 		<p:growl id="messages" showDetail="true" />
 		<!-- p:tree id="docTree" value="#{sideMenuController.root}" var="node"
 			dynamic="true" cache="false" selectionMode="single"
@@ -28,17 +45,123 @@
 			</p:treeNode>
 		</p:tree-->
 
+		<p:panelGrid id="SidePanelGrid" styleClass="tableNoBorder"
+			style="width:220px">
+			<f:facet name="header">
+				<p:row>
+					<p:column
+						styleClass="ui-layout-unit-header ui-widget-header ui-corner-all">Collections</p:column>
+				</p:row>
+			</f:facet>
+
+			<p:row>
+				<p:column styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
+					<h:outputLink id="linkTeologia" value="../G2A_Wapp/Home.xhtml"
+						styleClass="sidemenu_link" title="Theology of Aristotle">
+
+						<f:param name="centerPage" value="Kitāb Uṯūlūǧiyā" />
+						<h:outputText value="Teologia" />
+					</h:outputLink>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
+					<h:outputLink id="linkRisala" value="Home.xhtml"
+						styleClass="sidemenu_link">
+						<f:param name="centerPage" value="risala" />
+						<h:outputText value="Risala" />
+					</h:outputLink>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
+					<h:outputLink id="linkDetti" value="Home.xhtml"
+						styleClass="sidemenu_link">
+						<f:param name="centerPage" value="detti" />
+						<h:outputText value="Detti" />
+					</h:outputLink>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
+					<h:outputLink id="linkMetafisica"
+						value="../Metafisica_Wapp/Home.xhtml" styleClass="sidemenu_link">
+						<f:param name="centerPage" value="metafisica" />
+						<h:outputText value="Metafisica" />
+					</h:outputLink>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+
+		<p:panelGrid styleClass="tableNoBorder"
+			style="width:220px;margin-top:0px;">
+			<f:facet name="header">
+				<p:row>
+					<p:column>Help</p:column>
+				</p:row>
+			</f:facet>
+			<p:row>
+				<p:column styleClass="sidemenu_column ui-corner-all">
+					<h:outputLink id="linkManual" value="Home.xhtml"
+						styleClass="sidemenu_link " >
+						<f:param name="centerPage" value="userManual" />
+						<h:outputText value="User manual" />
+					</h:outputLink>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
+					<h:outputLink id="linkTutorial" value="Home.xhtml"
+						styleClass="sidemenu_link">
+						<f:param name="centerPage" value="tutorials" />
+						<h:outputText value="Tutorial" />
+					</h:outputLink>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+
+		<p:panelGrid styleClass="tableNoBorder"
+			style="width:220px;margin-top:0px">
+			<f:facet name="header">
+				<p:row>
+					<p:column>Code and Publication</p:column>
+				</p:row>
+			</f:facet>
+			<p:row>
+				<p:column styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
+					<h:outputLink id="linkSourceCode" value="Home.xhtml"
+						styleClass="sidemenu_link">
+						<f:param name="centerPage" value="sourceCode" />
+						<h:outputText value="Source Code &amp; Licensing" />
+					</h:outputLink>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
+					<h:outputLink id="linkCopyright" value="Home.xhtml"
+						styleClass="sidemenu_link">
+						<f:param name="centerPage" value="copyright" />
+						<h:outputText value="Copyright and Publication" />
+					</h:outputLink>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+
+		<!--
 		<p:menu style="width:350px">
 			<p:submenu label="Collections" icon="ui-icon-refresh">
-				<p:menuitem value="Kitāb Uṯūlūǧiyā" update=":bodyBlock" 
-					action="#{sharedBean.setSelectedMenuItem('teologia')}" title="Theology of Aristotle"
-					icon="ui-icon-document" />
-				<p:menuitem value="Risāla fī l-ʿIlm al-ilāhī" update=":bodyBlock"
-					action="#{sharedBean.setSelectedMenuItem('risala')}" title="Epistle on the Divine Science"
-					icon="ui-icon-document" />
-				<p:menuitem value="al-Šayḫ al-Yūnānī" update=":bodyBlock"
-					action="#{sharedBean.setSelectedMenuItem('detti')}" title="Sayings of the Greek Sage"
-					icon="ui-icon-document" />
+				<p:menuitem value="Kitāb Uṯūlūǧiyā" ajax="false"
+					action="#{sharedBean.setSelectedMenuItem('teologia')}"
+					title="Theology of Aristotle" icon="ui-icon-document" />
+				<p:menuitem value="Risāla fī l-ʿIlm al-ilāhī" ajax="false"
+					action="#{sharedBean.setSelectedMenuItem('risala')}"
+					title="Epistle on the Divine Science" icon="ui-icon-document" />
+				<p:menuitem value="al-Šayḫ al-Yūnānī" ajax="false"
+					action="#{sharedBean.setSelectedMenuItem('detti')}"
+					title="Sayings of the Greek Sage" icon="ui-icon-document" />
+				<p:menuitem value="Kitab ma ba‘d at-tabi‘at"  ajax="false"
+					action="#{sharedBean.setSelectedMenuItem('metafisica')}"
+					title="Aristotle's Metaphysics" icon="ui-icon-document" />
 			</p:submenu>
 			<p:submenu label="Help" icon="ui-icon-help">
 				<p:menuitem value="User manual" icon="ui-icon-help"
@@ -53,12 +176,92 @@
 					action="#{sharedBean.setSelectedMenuItem('sourceCode')}"
 					icon="ui-icon-star" />
 				<p:menuitem value="Copyright and Publication" update=":bodyBlock"
+					ajax="false"
 					action="#{sharedBean.setSelectedMenuItem('copyright')}"
-					icon="ui-icon-star" />
+					icon="ui-icon-star">
+				</p:menuitem>
 			</p:submenu>
-			<p:separator />
+			
+			-->
+
+		<!-- 
+			<p:submenu label="Collections" icon="ui-icon-refresh">
+				<p:menuitem value="Kitāb Uṯūlūǧiyā" update=":bodyBlock"
+					url="../G2A_Wapp/Home.xhtml?centerPage=teologia&amp;faces-redirect=true"
+					action="#{sharedBean.setSelectedMenuItem('teologia')}"
+					title="Theology of Aristotle" icon="ui-icon-document" />
+				<p:menuitem value="Risāla fī l-ʿIlm al-ilāhī" update=":bodyBlock"
+					url="../G2A_Wapp/Home.xhtml?centerPage=risala"
+					action="#{sharedBean.setSelectedMenuItem('risala')}"
+					title="Epistle on the Divine Science" icon="ui-icon-document" />
+				<p:menuitem value="al-Šayḫ al-Yūnānī" update=":bodyBlock"
+					url="../G2A_Wapp/Home.xhtml?centerPage=detti" 
+					action="#{sharedBean.setSelectedMenuItem('detti')}"
+					title="Sayings of the Greek Sage" icon="ui-icon-document" />
+				<p:menuitem value="Kitab ma ba‘d at-tabi‘at" update=":bodyBlock"
+					url="../Metafisica_Wapp/Home.xhtml?centerPage=metafisica"
+					action="#{sharedBean.setSelectedMenuItem('metafisica')}"
+					title="Aristotle's Metaphysics" icon="ui-icon-document" />
+			</p:submenu>
+			<p:submenu label="Help" icon="ui-icon-help">
+				<p:menuitem value="User manual" icon="ui-icon-help"
+					update=":bodyBlock"
+					url="../G2A_Wapp/Home.xhtml?centerPage=userManual"
+					action="#{sharedBean.setSelectedMenuItem('userManual')}" />
+				<p:menuitem value="Tutorial" update=":bodyBlock"
+					action="#{sharedBean.setSelectedMenuItem('tutorials')}"
+					url="../G2A_Wapp/Home.xhtml?centerPage=tutorials"
+					icon="ui-icon-help" />
+			</p:submenu>
+			<p:submenu label="Code and Publication" icon="ui-icon-newwin">
+				<p:menuitem value="Source Code &amp; Licensing" update=":bodyBlock"
+					action="#{sharedBean.setSelectedMenuItem('sourceCode')}"
+					url="../G2A_Wapp/Home.xhtml?centerPage=sourceCode"
+					icon="ui-icon-star" />
+				<p:menuitem value="Copyright and Publication" update=":bodyBlock"
+					ajax="false"
+					action="#{sharedBean.setSelectedMenuItem('copyright')}"
+					url="../G2A_Wapp/Home.xhtml?centerPage=copyright"
+					icon="ui-icon-star">
+				</p:menuitem>
+			</p:submenu> -->
+
+		<!--
+			<p:submenu label="Collections" icon="ui-icon-refresh">
+				<p:menuitem value="Kitāb Uṯūlūǧiyā" update=":bodyBlock"
+					action="#{sharedBean.setSelectedMenuItem('teologia')}"
+					title="Theology of Aristotle" icon="ui-icon-document" />
+				<p:menuitem value="Risāla fī l-ʿIlm al-ilāhī" update=":bodyBlock"
+					action="#{sharedBean.setSelectedMenuItem('risala')}"
+					title="Epistle on the Divine Science" icon="ui-icon-document" />
+				<p:menuitem value="al-Šayḫ al-Yūnānī" update=":bodyBlock"
+					action="#{sharedBean.setSelectedMenuItem('detti')}"
+					title="Sayings of the Greek Sage" icon="ui-icon-document" />
+				<p:menuitem value="Kitab ma ba‘d at-tabi‘at" update=":bodyBlock"
+					action="#{sharedBean.setSelectedMenuItem('metafisica')}"
+					title="Aristotle's Metaphysics" icon="ui-icon-document" />
+
+			</p:submenu>
+			<p:submenu label="Help" icon="ui-icon-help">
+				<p:menuitem value="User manual" icon="ui-icon-help"
+					update=":bodyBlock"
+					action="#{sharedBean.setSelectedMenuItem('userManual')}" />
+				<p:menuitem value="Tutorial" update=":bodyBlock"
+					action="#{sharedBean.setSelectedMenuItem('tutorials')}"
+					url="../G2A_Wapp/Home.xhtml?centerPage=tutorials"
+					icon="ui-icon-help" />
+			</p:submenu>
+			<p:submenu label="Code and Publication" icon="ui-icon-newwin">
+				<p:menuitem value="Source Code &amp; Licensing" update=":bodyBlock"
+					action="#{sharedBean.setSelectedMenuItem('sourceCode')}"
+					icon="ui-icon-star" />
+				<p:menuitem value="Copyright and Publication" update=":bodyBlock"
+					ajax="false"
+					action="#{sharedBean.setSelectedMenuItem('copyright')}"
+					icon="ui-icon-star">
+				</p:menuitem>
+			</p:submenu> 
 		</p:menu>
-
+			-->
 	</h:form>
-
 </ui:composition>

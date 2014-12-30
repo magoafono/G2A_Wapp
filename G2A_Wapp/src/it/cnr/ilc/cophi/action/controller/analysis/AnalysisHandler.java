@@ -10,6 +10,7 @@ import it.cnr.ilc.cophi.model.analysis.AnalysisDelegate;
 import it.cnr.ilc.cophi.model.analysis.AnalysisSet;
 import it.cnr.ilc.cophi.model.analysis.BaseAnalysis;
 import it.cnr.ilc.cophi.model.xmlmapping.SequenceDocument;
+import it.cnr.ilc.cophi.utils.Consts;
 import it.cnr.ilc.cophi.utils.MessageProvider;
 
 import java.util.HashMap;
@@ -28,16 +29,17 @@ public class AnalysisHandler {
 
 	private void init() {
 
+		MessageProvider mp = new MessageProvider();
 		/*
 		 * Carico i database 
 		 */
 		ContextResource cr = Factory.getInstanceContextResource();
 		cr.setResourceBehaviourType(new XMLResourceBehaviour());
-		cr.loadResources(MessageProvider.getValue("config", "db_tokenToAnalysis_name"));
+		cr.loadResources(mp.getValue(Consts.CONFIGNAME, "db_tokenToAnalysis_name"));
 
-		SequenceDocument refAnalysisSeqDoc = cr.retrieveContent(MessageProvider.getValue("config", "analysis_name")); //analysis.xml
+		SequenceDocument refAnalysisSeqDoc = cr.retrieveContent(mp.getValue(Consts.CONFIGNAME, "analysis_name")); //analysis.xml
 
-		cr.loadResources(MessageProvider.getValue("config", "db_analyses_name"));
+		cr.loadResources(mp.getValue(Consts.CONFIGNAME, "db_analyses_name"));
 		
 		HashMap<String, SequenceDocument> allCollectionContent = cr.retriveAllCollectionContent();
 		//creare gli oggetti AnalysisDelegate

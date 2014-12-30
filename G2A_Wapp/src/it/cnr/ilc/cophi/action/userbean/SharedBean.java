@@ -10,16 +10,16 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class SharedBean {
 
-	
+
 	private LinkViewEntity selectedLinkViewEntity = null;
-	
+
 	@ManagedProperty(value="#{loginBean}")
 	private LoginBean loginBean = null;
-	
+
 	private boolean loadNewAnalysis = true;
-	
+
 	private boolean onSearch = false;
-	
+
 	private String selectedMenuItem = "homeBody";
 	/**
 	 * @return the loginBean
@@ -88,14 +88,59 @@ public class SharedBean {
 	 * @param selectedMenuItem the selectedMenuItem to set
 	 */
 	public void setSelectedMenuItem(String selectedMenuItem) {
-		//System.err.println("setSelectedMenuItem("+ selectedMenuItem+ ")");
 		this.selectedMenuItem = selectedMenuItem;
 	}
 
+	/**
+	 * @param selectedMenuItem the selectedMenuItem to set
+	 */
+	/*
+	public String setSelectedMenuItem(String selectedMenuItem) {
 
+		String retPage;
+		System.err.println("setSelectedMenuItem("+ selectedMenuItem+ ")");
+		this.selectedMenuItem = selectedMenuItem;
+
+		switch (selectedMenuItem) {
+		case "teologia":
+			retPage = "../G2A_Wapp/Home.xhtml?centerPage=teologia&amp;faces-redirect=true";
+			break;
+		case "risala":
+			retPage = "Home.xhtml?centerPage=risala&amp;faces-redirect=true";
+			break;
+		case "detti":
+			retPage = "Home.xhtml?centerPage=detti&amp;faces-redirect=true";
+			break;
+		case "metafisica":
+			//retPage = "../Metafisica_Wapp/Home.xhtml?centerPage=metafisica&amp;faces-redirect=true";
+			retPage = "http://www.google.it&amp;faces-redirect=true";
+			break;
+
+		case "userManual":
+			retPage = "Home.xhtml?centerPage=userManual&amp;faces-redirect=true";
+			break;
+		case "tutorials":
+			retPage = "Home.xhtml?centerPage=tutorials&amp;faces-redirect=true";
+			break;
+		case "sourceCode":
+			retPage = "Home.xhtml?centerPage=sourceCode&amp;faces-redirect=true";
+			break;
+		case "copyright":
+			retPage = "Home.xhtml?centerPage=copyright&amp;faces-redirect=true";
+			break;
+
+		default:
+			retPage = "Home.xhtml";
+			break;
+		}
+		System.err.println("return page: " + retPage);
+		return retPage;
+	}
+
+*/
 	public String goToHomepage() {
 		setSelectedMenuItem("homeBody");
-	    return "Home.xhtml";
+		return "Home.xhtml";
 	}
 
 }

@@ -9,6 +9,9 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:body>
 
+	<f:metadata>
+		<f:viewParam name="centerPage" value="#{sharedBean.selectedMenuItem}" />
+	</f:metadata>
 	<ui:composition template="templates/fourRegionsLayout.xhtml">
 		<ui:define name="title">
 			The GA Application
@@ -17,7 +20,7 @@
 			<ui:include src="localTemplate/north/menu.xhtml">
 				<ui:param name="selected" value="home" />
 			</ui:include>
-		</ui:define> 
+		</ui:define>
 
 		<ui:define name="leftSide">
 			<ui:include src="localTemplate/west/sideMenu.xhtml" />
@@ -27,6 +30,8 @@
 			<h:panelGroup id="bodyBlock" layout="block">
 				<ui:include
 					src="localTemplate/center/#{sharedBean.selectedMenuItem}.xhtml" />
+				<!--ui:include
+					src="localTemplate/center/#{param['centerPage'] != null ?param['centerPage'] :'homeBody' }.xhtml" /-->
 			</h:panelGroup>
 
 
@@ -37,7 +42,6 @@
 		</ui:define>
 
 	</ui:composition>
-
 </h:body>
 
 </html>

@@ -13,7 +13,6 @@ import java.util.Map;
 
 import javax.xml.namespace.QName;
 
-import org.apache.xmlbeans.SchemaType;
 import org.apache.xmlbeans.XmlOptions;
 import org.jdom2.Document;
 import org.jdom2.JDOMException;

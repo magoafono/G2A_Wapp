@@ -226,6 +226,16 @@ public class RepositoryBean {
 
 	/////// RICERCA CON XPATH (SEARCH.XHTML)
 
+	private HashMap<String, ResultViewEntity> simpleSearchLinksByArabicTokens (SearchBean parameters) {
+		
+		return simpleSearchLinksByTokens(parameters, Consts.ARABIC);
+	}
+	
+	private HashMap<String, ResultViewEntity> simpleSearchLinksByGreekTokens (SearchBean parameters) {
+		
+		return simpleSearchLinksByTokens(parameters, Consts.GREEK);
+	}
+
 	private HashMap<String, ResultViewEntity> simpleSearchLinksByTokens (SearchBean parameters, int lang) {
 		//ricerca i link riferenti pericopi che soddisfano i parametri di ricerca  
 		//TODO
@@ -337,7 +347,7 @@ public class RepositoryBean {
 	public List<ResultViewEntity> simpleArabicSearchLinksByTokens (SearchBean parameters) {
 
 		List<ResultViewEntity> ret = null;
-		HashMap<String, ResultViewEntity> resultHM = simpleSearchLinksByTokens(parameters, Consts.ARABIC);
+		HashMap<String, ResultViewEntity> resultHM = simpleSearchLinksByArabicTokens(parameters);
 		if (null != resultHM) {
 			Map<String, ResultViewEntity> map = new TreeMap<String, ResultViewEntity>(resultHM); 
 			ret = new ArrayList(map.values());
@@ -350,7 +360,7 @@ public class RepositoryBean {
 	public List<ResultViewEntity> simpleGreekSearchLinksByTokens (SearchBean parameters) {
 
 		List<ResultViewEntity> ret = null;
-		HashMap<String, ResultViewEntity> resultHM = simpleSearchLinksByTokens(parameters, Consts.GREEK);
+		HashMap<String, ResultViewEntity> resultHM = simpleSearchLinksByGreekTokens(parameters);
 		if (null != resultHM) {
 			Map<String, ResultViewEntity> map = new TreeMap<String, ResultViewEntity>(resultHM); 
 			ret = new ArrayList(map.values());
