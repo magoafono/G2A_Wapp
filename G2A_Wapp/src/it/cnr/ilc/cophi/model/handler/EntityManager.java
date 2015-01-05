@@ -9,6 +9,7 @@ import it.cnr.ilc.cophi.action.controller.resource.ResourceBehaviour;
 import it.cnr.ilc.cophi.action.controller.resource.XMLResourceBehaviour;
 import it.cnr.ilc.cophi.action.userbean.AnalysisBean;
 import it.cnr.ilc.cophi.exception.BugException;
+import it.cnr.ilc.cophi.exception.LanguageUnknownException;
 import it.cnr.ilc.cophi.model.Factory;
 import it.cnr.ilc.cophi.model.Link;
 import it.cnr.ilc.cophi.model.Reference;
@@ -126,33 +127,33 @@ public class EntityManager {
 	}
 
 	public String getArabicCollectionPath() {
-		
+
 		return mp.getValue(Consts.CONFIGNAME, "db_arabic_doc_path");
 	}
 	public String getGreekCollectionPath() {
-		
+
 		return mp.getValue(Consts.CONFIGNAME, "db_greek_doc_path");
 	}
 	public String getLinkCollectionPath() {
-		
+
 		return mp.getValue(Consts.CONFIGNAME, "db_link_path");
 	}
 	public String getCommentCollectionPath() {
-		
+
 		return mp.getValue(Consts.CONFIGNAME, "db_comment_path");
 	}
 
 	public String getArabicWorkName() {
-		
+
 		return mp.getValue(Consts.CONFIGNAME, "arabic_work_name");
 	}
-	
+
 	public String getGreekWorkName() {
-		
+
 		return mp.getValue(Consts.CONFIGNAME, "greek_work_name");
 	}
 
-	
+
 	/**
 	 * @return the arabicTokens
 	 */
@@ -838,42 +839,42 @@ public class EntityManager {
 
 
 	public LinkViewEntity getLinkViewEntityByLinkId(String linkId) {
-		
+
 		Link<RefPericopeText> link = getLinks().get(linkId);
 
 		return getLinkAsLinkViewEntity(link);
-//		LinkViewEntity lve = new LinkViewEntity();
-//		lve.setLink(link);
-//
-//		RefPericopeText grRpt = link.getValue().get(Consts.GREEK);
-//		PericopeText grPericope = (PericopeText) grRpt.getPericope();
-//		if (null != grPericope) {
-//			lve.setGreekPericopeInfo(grPericope.getInfo());
-//			lve.setGreekPericopeText(grPericope.getText());
-//			lve.setGreekPericopeRefId(grRpt.getRef());
-//			lve.setGreekPericopeId(grRpt.getId().substring(4)); //tolgo ref_
-//			lve.setGreekPericopeHidden(Consts.HIDDEN_REF_PERICOPE.equals(grRpt.getClassname()));
-//		} else {
-//			System.err.println("Pericope greca non trovata in links.xml! " + grRpt.getId() + " ref " + grRpt.getRef());
-//		}
-//		RefPericopeText arRpt = link.getValue().get(Consts.ARABIC);
-//		PericopeText arPericope = (PericopeText) arRpt.getPericope();
-//		if (null != arPericope) {
-//			lve.setArabicPericopeInfo(arPericope.getInfo());
-//
-//			lve.setArabicPericopeText(arPericope.getText());
-//			lve.setArabicPericopeRefId(arRpt.getRef());
-//			lve.setArabicPericopeId(arRpt.getId().substring(4));
-//			lve.setArabicPericopeHidden(Consts.HIDDEN_REF_PERICOPE.equals(arRpt.getClassname()));
-//		} else {
-//			System.err.println("Pericope araba non trovata in links.xml! " + arRpt.getId() + " ref " + arRpt.getRef());
-//		}
-//
-//		return lve;
+		//		LinkViewEntity lve = new LinkViewEntity();
+		//		lve.setLink(link);
+		//
+		//		RefPericopeText grRpt = link.getValue().get(Consts.GREEK);
+		//		PericopeText grPericope = (PericopeText) grRpt.getPericope();
+		//		if (null != grPericope) {
+		//			lve.setGreekPericopeInfo(grPericope.getInfo());
+		//			lve.setGreekPericopeText(grPericope.getText());
+		//			lve.setGreekPericopeRefId(grRpt.getRef());
+		//			lve.setGreekPericopeId(grRpt.getId().substring(4)); //tolgo ref_
+		//			lve.setGreekPericopeHidden(Consts.HIDDEN_REF_PERICOPE.equals(grRpt.getClassname()));
+		//		} else {
+		//			System.err.println("Pericope greca non trovata in links.xml! " + grRpt.getId() + " ref " + grRpt.getRef());
+		//		}
+		//		RefPericopeText arRpt = link.getValue().get(Consts.ARABIC);
+		//		PericopeText arPericope = (PericopeText) arRpt.getPericope();
+		//		if (null != arPericope) {
+		//			lve.setArabicPericopeInfo(arPericope.getInfo());
+		//
+		//			lve.setArabicPericopeText(arPericope.getText());
+		//			lve.setArabicPericopeRefId(arRpt.getRef());
+		//			lve.setArabicPericopeId(arRpt.getId().substring(4));
+		//			lve.setArabicPericopeHidden(Consts.HIDDEN_REF_PERICOPE.equals(arRpt.getClassname()));
+		//		} else {
+		//			System.err.println("Pericope araba non trovata in links.xml! " + arRpt.getId() + " ref " + arRpt.getRef());
+		//		}
+		//
+		//		return lve;
 	}
 
 	public LinkViewEntity getLinkAsLinkViewEntity(Link<RefPericopeText> link) {
-		
+
 		LinkViewEntity lve = new LinkViewEntity();
 		lve.setLink(link);
 		if (null != getCommentsByLink().get(link.getId())){
@@ -910,7 +911,7 @@ public class EntityManager {
 
 		List<LinkViewEntity> lvel = new ArrayList<LinkViewEntity>();
 		for (Link<RefPericopeText> link : getLinks().values()) {
-			
+
 			lvel.add(getLinkAsLinkViewEntity(link));
 		}
 
@@ -1328,13 +1329,13 @@ public class EntityManager {
 
 	public List<AnalysisBean> getGreekAnalysisByPericopeId (String pericopeId) {
 
-		return XPathUtils.getGreekAnalysisByPericopeId(getDbName() + "/" + getGreekCollectionPath(), pericopeId);
+		return XPathUtils.getGreekAnalysisByPericopeId(getDbName() + getGreekCollectionPath(), pericopeId);
 	}
 
 
 	public List<AnalysisBean> getArabicAnalysisByPericopeId (String pericopeId) {
 
-		return XPathUtils.getArabicAnalysisByPericopeId(getDbName() + "/" + getArabicCollectionPath(), pericopeId);
+		return XPathUtils.getArabicAnalysisByPericopeId(getDbName() + getArabicCollectionPath(), pericopeId);
 
 	}
 
@@ -1350,77 +1351,82 @@ public class EntityManager {
 	//	public HashMap<String,ResultViewEntity> simpleSearchLinksByTokens (String word, String type, String pos, int lang) throws BugException {
 	public HashMap<String,ResultViewEntity> simpleSearchLinksByTokens (List<String> itemName, List<String> itemValue, int lang) throws BugException {
 
-		Profiler profiler = new Profiler("simpleSearchLinksByTokens");
-
-		profiler.start("XPathUtils.simpleSearchTokenIdsByMopho");
-		List<String> tokenIds = XPathUtils.simpleSearchTokenIdsByMopho(getDbName(), itemName, itemValue, lang);
-
-		profiler.start("XPathUtils.simpleSearchPericopeIdsByTokenIds");
-		List<String> pericopeIds = XPathUtils.simpleSearchPericopeIdsByTokenIds(getDbName(), tokenIds, lang);
-
-		profiler.start("XPathUtils.simpleSearchLinkIdsByPericopeIds");
-		List<String> linkIds = XPathUtils.simpleSearchLinkIdsByPericopeIds(getDbName(), pericopeIds, lang);
 		List<TokenViewEntity> grlotve = null;
 		List<TokenViewEntity> arlotve = null;
-		//List<ResultViewEntity> results = null;
 		HashMap<String,ResultViewEntity> results = null;
 
-		//Per ogni linkIds devo recuperare il testo delle due pericopi e poi il testo
-		//1- recupero le pericopi di linkIds
-		for (String linkId : linkIds) {
-			Link<RefPericopeText> link = getLinks().get(linkId);
-			//Sia per il link alla pericope greca che a quella araba prendo le pericopi
+		try {
+			Profiler profiler = new Profiler("simpleSearchLinksByTokens");
 
-			if (null!= link) {
-				profiler.start("simpleSearchLinksByTokens(): " + linkId);
+			profiler.start("XPathUtils.simpleSearchTokenIdsByMopho");
+			List<String> tokenIds = XPathUtils.simpleSearchTokenIdsByMopho(getDbName(), itemName, itemValue, lang);
 
-				//GREEK
-				String grPericopeId = link.getValue().get(Consts.GREEK).getRef();
-				String grClassname = link.getValue().get(Consts.GREEK).getClassname(); //hiddenRefPericope or refPericope
+			profiler.start("XPathUtils.simpleSearchPericopeIdsByTokenIds");
+			List<String> pericopeIds = XPathUtils.simpleSearchPericopeIdsByTokenIds(getDbName(), tokenIds, lang);
 
-				//PericopeText greekPericope = greekPericopes.get(grPericopeId);
-				//				if ("pericope".equals(greekPericope.getClassname())) {
-				if ("refPericope".equals(grClassname)){
+			profiler.start("XPathUtils.simpleSearchLinkIdsByPericopeIds");
+			List<String> linkIds = XPathUtils.simpleSearchLinkIdsByPericopeIds(getDbName(), pericopeIds, lang);
 
-					grlotve = Utils.createTokenViewListByPericopeId(getGreekTokens(), getGreekPericopes(), grPericopeId, tokenIds);
+			//Per ogni linkIds devo recuperare il testo delle due pericopi e poi il testo
+			//1- recupero le pericopi di linkIds
+			for (String linkId : linkIds) {
+				Link<RefPericopeText> link = getLinks().get(linkId);
+				//Sia per il link alla pericope greca che a quella araba prendo le pericopi
+
+				if (null!= link) {
+					profiler.start("simpleSearchLinksByTokens(): " + linkId);
+
+					//GREEK
+					String grPericopeId = link.getValue().get(Consts.GREEK).getRef();
+					String grClassname = link.getValue().get(Consts.GREEK).getClassname(); //hiddenRefPericope or refPericope
+
+					//PericopeText greekPericope = greekPericopes.get(grPericopeId);
+					//				if ("pericope".equals(greekPericope.getClassname())) {
+					if ("refPericope".equals(grClassname)){
+
+						grlotve = Utils.createTokenViewListByPericopeId(getGreekTokens(), getGreekPericopes(), grPericopeId, tokenIds);
+					} else {
+						grlotve = null;//non va visualizzata
+					}
+					//ARABIC
+					String arPericopeId = link.getValue().get(Consts.ARABIC).getRef();
+					String arClassname = link.getValue().get(Consts.ARABIC).getClassname(); //hiddenRefPericope or refPericope
+					//PericopeText arabicPericope = arabicPericopes.get(arPericopeId);
+					//		if ("pericope".equals(arabicPericope.getClassname())) {
+					if ("refPericope".equals(arClassname)){
+						arlotve = Utils.createTokenViewListByPericopeId(getArabicTokens(), getArabicPericopes(), arPericopeId, tokenIds);
+					} else {
+						arlotve = null;//non va visualizzata
+					}
+					if (null == results) {
+						//		results = new ArrayList<ResultViewEntity>();
+						results = new HashMap<String,ResultViewEntity>();
+					}
+					ResultViewEntity rve = new ResultViewEntity();
+					rve.setLinkId(linkId);
+					if (null != arlotve) {
+						rve.setArabicTVE(arlotve);
+						rve.setArPericopeId(arPericopeId);
+						rve.setArPericopeInfo(getArabicPericopes().get(arPericopeId).getInfo());
+					}
+					if (null != grlotve) {
+						rve.setGreekTVE(grlotve);
+						rve.setGrPericopeId(grPericopeId);
+						rve.setGrPericopeInfo(getGreekPericopes().get(grPericopeId).getInfo());
+					}
+					//results.add(rve);
+					results.put(linkId,rve);
+
 				} else {
-					grlotve = null;//non va visualizzata
+					throw new BugException("link ID is null!");
 				}
-				//ARABIC
-				String arPericopeId = link.getValue().get(Consts.ARABIC).getRef();
-				String arClassname = link.getValue().get(Consts.ARABIC).getClassname(); //hiddenRefPericope or refPericope
-				//PericopeText arabicPericope = arabicPericopes.get(arPericopeId);
-				//		if ("pericope".equals(arabicPericope.getClassname())) {
-				if ("refPericope".equals(arClassname)){
-					arlotve = Utils.createTokenViewListByPericopeId(getArabicTokens(), getArabicPericopes(), arPericopeId, tokenIds);
-				} else {
-					arlotve = null;//non va visualizzata
-				}
-				if (null == results) {
-					//		results = new ArrayList<ResultViewEntity>();
-					results = new HashMap<String,ResultViewEntity>();
-				}
-				ResultViewEntity rve = new ResultViewEntity();
-				rve.setLinkId(linkId);
-				if (null != arlotve) {
-					rve.setArabicTVE(arlotve);
-					rve.setArPericopeId(arPericopeId);
-					rve.setArPericopeInfo(getArabicPericopes().get(arPericopeId).getInfo());
-				}
-				if (null != grlotve) {
-					rve.setGreekTVE(grlotve);
-					rve.setGrPericopeId(grPericopeId);
-					rve.setGrPericopeInfo(getGreekPericopes().get(grPericopeId).getInfo());
-				}
-				//results.add(rve);
-				results.put(linkId,rve);
 
-			} else {
-				throw new BugException("link ID is null!");
 			}
+			profiler.stop().print();
 
+		} catch (LanguageUnknownException e) {
+			e.printStackTrace();
 		}
-		profiler.stop().print();
 
 		return 	results;		
 

@@ -2,6 +2,7 @@ package it.cnr.ilc.cophi.utils;
 
 import it.cnr.ilc.cophi.action.userbean.AnalysisBean;
 import it.cnr.ilc.cophi.datahandler.ExistDBConnector;
+import it.cnr.ilc.cophi.exception.LanguageUnknownException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,29 +28,29 @@ public class XPathUtils {
 	}
 
 	public static String getArabicCollectionPath() {
-		
+
 		return mp.getValue(Consts.CONFIGNAME, "db_arabic_doc_path");
 	}
 	public static String getGreekCollectionPath() {
-		
+
 		return mp.getValue(Consts.CONFIGNAME, "db_greek_doc_path");
 	}
 	public static String getLinkCollectionPath() {
-		
+
 		return mp.getValue(Consts.CONFIGNAME, "db_link_path");
 	}
 	public static String getCommentCollectionPath() {
-		
+
 		return mp.getValue(Consts.CONFIGNAME, "db_comment_path");
 	}
 
 	public static String getArabicWorkName() {
-		
+
 		return mp.getValue(Consts.CONFIGNAME, "arabic_work_name");
 	}
-	
+
 	public static String getGreekWorkName() {
-		
+
 		return mp.getValue(Consts.CONFIGNAME, "greek_work_name");
 	}
 
@@ -145,7 +146,7 @@ public class XPathUtils {
 							sequenceBean.setAnalysis(StringEscapeUtils.unescapeXml(parameters.get("analisi")));
 
 							//elementBean.add(paramBean);
-							
+
 							BuckwalterToViewConverter.convert(sequenceBean);
 							analyses.add(sequenceBean);
 
@@ -173,7 +174,7 @@ public class XPathUtils {
 	}
 	 */
 
-	public static List<String> simpleSearchTokenIdsByMopho (String dbName, List<String> itemName, List<String> itemValue, int lang) {
+	public static List<String> simpleSearchTokenIdsByMopho (String dbName, List<String> itemName, List<String> itemValue, int lang) throws LanguageUnknownException {
 
 		ExistDBConnector dbconn = ExistDBConnector.getInstance();
 		List<String> tokenIds = new ArrayList<String>();
@@ -182,21 +183,21 @@ public class XPathUtils {
 		switch (lang) {
 		case Consts.GREEK:
 			collection = getGreekCollectionPath();
-			analysisIds = dbconn.searchAnalysisIdByParameter(dbName + "/" + collection, itemName, itemValue, Consts.GREEK);
+			analysisIds = dbconn.searchAnalysisIdByParameter(dbName + collection, itemName, itemValue, Consts.GREEK);
 			break;
 		case Consts.ARABIC:
 			collection = getGreekCollectionPath();
-			analysisIds = dbconn.searchAnalysisIdByParameter(dbName + "/" + collection, itemName, itemValue, Consts.ARABIC);
+			analysisIds = dbconn.searchAnalysisIdByParameter(dbName + collection, itemName, itemValue, Consts.ARABIC);
 			break;
 
 		default:
-			break;
+			throw new LanguageUnknownException("Unknonw language " + lang);
 		}
 
 		if (null != analysisIds) {
 
 			for (String analysisId : analysisIds) {
-				tokenIds.addAll(dbconn.searchTokenIdByAnalysisId(dbName + "/" + collection, analysisId));
+				tokenIds.addAll(dbconn.searchTokenIdByAnalysisId(dbName + collection, analysisId));
 			}
 		}
 		Set<String> s = new HashSet<String>(tokenIds);
@@ -282,7 +283,7 @@ public class XPathUtils {
 		if (null != tokenIds) {
 			pericopeIds = new ArrayList<String>();
 			for (String tokenId : tokenIds) {
-				pericopeIds.add(dbconn.searchPericopeIdByTokenId(dbName + "/"  + collection, tokenId));
+				pericopeIds.add(dbconn.searchPericopeIdByTokenId(dbName + collection, tokenId));
 			}
 		}
 		Set<String> s = new HashSet<String>(pericopeIds);
@@ -310,7 +311,7 @@ public class XPathUtils {
 
 
 		Profiler profiler = new Profiler("simpleSearchLinkIdsByPericopeIds");
-				
+
 		ExistDBConnector dbconn = ExistDBConnector.getInstance();
 		List<String> linkIds = null;
 		String res = null;
@@ -318,7 +319,7 @@ public class XPathUtils {
 			linkIds = new ArrayList<String>();
 			for (String pericopeId : pericopeIds) {
 				profiler.start(pericopeId);
-				if (null != (res = dbconn.searchLinkIdByPericopeIdAndLang(dbName + "/" + getLinkCollectionPath(), pericopeId, Utils.lang2String(lang)))){
+				if (null != (res = dbconn.searchLinkIdByPericopeIdAndLang(dbName + getLinkCollectionPath(), pericopeId, Utils.lang2String(lang)))){
 					linkIds.add(res);
 				}
 			}

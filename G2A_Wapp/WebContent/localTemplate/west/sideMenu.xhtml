@@ -56,38 +56,37 @@ jQuery(document).ready(function(){
 
 			<p:row>
 				<p:column styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
-					<h:outputLink id="linkTeologia" value="../G2A_Wapp/Home.xhtml"
+					<h:outputLink id="linkTeologia" value="../G2A_Wapp/Home.xhtml" 
 						styleClass="sidemenu_link" title="Theology of Aristotle">
-
-						<f:param name="centerPage" value="Kitāb Uṯūlūǧiyā" />
-						<h:outputText value="Teologia" />
+					<f:param name="centerPage" value="teologia" />
+						<h:outputText value="Kitāb Uṯūlūǧiyā" />
 					</h:outputLink>
 				</p:column>
 			</p:row>
 			<p:row>
 				<p:column styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
-					<h:outputLink id="linkRisala" value="Home.xhtml"
+					<h:outputLink id="linkRisala" value="Home.xhtml" title="Epistle on the Divine Science"
 						styleClass="sidemenu_link">
 						<f:param name="centerPage" value="risala" />
-						<h:outputText value="Risala" />
+						<h:outputText value="Risāla fī l-ʿIlm al-ilāhī" />
 					</h:outputLink>
 				</p:column>
 			</p:row>
 			<p:row>
 				<p:column styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
-					<h:outputLink id="linkDetti" value="Home.xhtml"
-						styleClass="sidemenu_link">
+					<h:outputLink id="linkDetti" value="Home.xhtml" title="Sayings of the Greek Sage" 
+						styleClass="sidemenu_link" >
 						<f:param name="centerPage" value="detti" />
-						<h:outputText value="Detti" />
+						<h:outputText value="al-Šayḫ al-Yūnānī" />
 					</h:outputLink>
 				</p:column>
 			</p:row>
 			<p:row>
 				<p:column styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
-					<h:outputLink id="linkMetafisica"
+					<h:outputLink id="linkMetafisica" title="Aristotle's Metaphysics"
 						value="../Metafisica_Wapp/Home.xhtml" styleClass="sidemenu_link">
-						<f:param name="centerPage" value="metafisica" />
-						<h:outputText value="Metafisica" />
+						<f:param name="centerPage" value="metafisica"/>
+						<h:outputText value="Kitāb mā ba‘d al-ṭabī‘at"/>
 					</h:outputLink>
 				</p:column>
 			</p:row>
@@ -196,7 +195,7 @@ jQuery(document).ready(function(){
 					title="Epistle on the Divine Science" icon="ui-icon-document" />
 				<p:menuitem value="al-Šayḫ al-Yūnānī" update=":bodyBlock"
 					url="../G2A_Wapp/Home.xhtml?centerPage=detti" 
-					action="#{sharedBean.setSelectedMenuItem('detti')}"
+					action="#{sharedBean.setSelectedMenuItem('detRisalati')}"
 					title="Sayings of the Greek Sage" icon="ui-icon-document" />
 				<p:menuitem value="Kitab ma ba‘d at-tabi‘at" update=":bodyBlock"
 					url="../Metafisica_Wapp/Home.xhtml?centerPage=metafisica"
