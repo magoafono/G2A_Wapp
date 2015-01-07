@@ -20,7 +20,7 @@ import org.slf4j.profiler.Profiler;
 
 public class XPathUtils {
 
-	private static final Logger logger = LogManager.getLogger("ExistDBConnector");
+	private static final Logger logger = LogManager.getLogger("XPathUtils");
 	private static MessageProvider mp = new MessageProvider();
 
 	public static String getDbName() {
@@ -186,7 +186,7 @@ public class XPathUtils {
 			analysisIds = dbconn.searchAnalysisIdByParameter(dbName + collection, itemName, itemValue, Consts.GREEK);
 			break;
 		case Consts.ARABIC:
-			collection = getGreekCollectionPath();
+			collection = getArabicCollectionPath();
 			analysisIds = dbconn.searchAnalysisIdByParameter(dbName + collection, itemName, itemValue, Consts.ARABIC);
 			break;
 
@@ -197,11 +197,47 @@ public class XPathUtils {
 		if (null != analysisIds) {
 
 			for (String analysisId : analysisIds) {
-				tokenIds.addAll(dbconn.searchTokenIdByAnalysisId(dbName + collection, analysisId));
+				if (null != analysisId)
+					tokenIds.addAll(dbconn.searchTokenIdByAnalysisId(dbName + collection, analysisId));
 			}
 		}
+
+		return tokenIds;
+
+	}
+
+
+	public static List<String> simpleSearchTokenIdsByForma (String dbName, List<String> forme, int lang) throws LanguageUnknownException {
+
+		ExistDBConnector dbconn = ExistDBConnector.getInstance();
+		List<String> tokenIds = new ArrayList<String>();
+		String collection = null;
+		switch (lang) {
+		
+		case Consts.GREEK:
+			collection = getGreekCollectionPath();
+			for (String forma : forme) {
+				List<String> ids = dbconn.searchTokenIdByForma(dbName + collection, forma, Consts.GREEK);
+				if (null != ids)
+					tokenIds.addAll(ids);
+			}
+			break;
+			
+		case Consts.ARABIC:
+			collection = getArabicCollectionPath();
+			for (String forma : forme) {
+				List<String> ids = dbconn.searchTokenIdByForma(dbName + collection, forma, Consts.ARABIC);
+				if (null != ids)
+					tokenIds.addAll(ids);
+			}
+			break;
+
+		default:
+			throw new LanguageUnknownException("Unknonw language " + lang);
+		}
+
 		Set<String> s = new HashSet<String>(tokenIds);
-		System.err.println("====> " + 	s.size() + " " + tokenIds.size());
+		System.err.println("====> simpleSearchTokenIdsByForma(): reduction: " + tokenIds.size() + " " + s.size());
 		tokenIds.clear();
 		tokenIds.addAll(s);
 
@@ -265,6 +301,8 @@ public class XPathUtils {
 	 */
 	public static List<String> simpleSearchPericopeIdsByTokenIds (String dbName, List<String> tokenIds, int lang) {
 
+		Profiler profiler = new Profiler("simpleSearchPericopeIdsByTokenIds");
+
 		ExistDBConnector dbconn = ExistDBConnector.getInstance();
 		List<String> pericopeIds = null;
 		String collection = null;
@@ -287,25 +325,16 @@ public class XPathUtils {
 			}
 		}
 		Set<String> s = new HashSet<String>(pericopeIds);
-		System.err.println("====> " + 	s.size() + " " + pericopeIds.size());
+		System.err.println("====> simpleSearchPericopeIdsByTokenIds(): reduction: " + pericopeIds.size() + " " + s.size());
 		pericopeIds.clear();
 		pericopeIds.addAll(s);
+
+		profiler.stop().print();
+
 		return pericopeIds;
 
 	}
 
-	/*
-	public static List<String> simpleGreekSearchLinkIdsByPericopeIds (String dbName, List<String> pericopeIds) {
-
-		return simpleSearchLinkIdsByPericopeIds(dbName, pericopeIds, Consts.GREEKCODE);
-
-	}
-
-	public static List<String> simpleArabicSearchLinkIdsByPericopeIds (String dbName, List<String> pericopeIds) {
-
-		return simpleSearchLinkIdsByPericopeIds(dbName, pericopeIds, Consts.ARABICCODE);
-
-	}*/
 
 	public static List<String> simpleSearchLinkIdsByPericopeIds (String dbName, List<String> pericopeIds, int lang) {
 
@@ -328,5 +357,28 @@ public class XPathUtils {
 		return linkIds;
 
 	}
-}
 
+	public static boolean existsMorphoFile (String dbName, int lang) throws LanguageUnknownException {
+
+		ExistDBConnector dbconn = ExistDBConnector.getInstance();
+		String collection;
+		boolean ret = false;
+
+		switch (lang) {
+		case Consts.GREEK:
+			collection = getGreekCollectionPath();
+			ret = dbconn.exists(dbName + collection, "morphoDB.xml");
+			break;
+		case Consts.ARABIC:
+			collection = getArabicCollectionPath();
+			ret = dbconn.exists(dbName + collection, "morphoDB.xml");
+			break;
+
+		default:
+			throw new LanguageUnknownException("Unknonw language " + lang);
+		}
+		return ret;
+
+	}
+
+}

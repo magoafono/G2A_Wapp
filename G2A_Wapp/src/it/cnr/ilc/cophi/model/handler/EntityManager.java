@@ -1353,14 +1353,20 @@ public class EntityManager {
 
 		List<TokenViewEntity> grlotve = null;
 		List<TokenViewEntity> arlotve = null;
-		HashMap<String,ResultViewEntity> results = null;
+		List<String> tokenIds = null;
+		HashMap<String,ResultViewEntity> results = new HashMap<String,ResultViewEntity>(); //empty result
 
 		try {
 			Profiler profiler = new Profiler("simpleSearchLinksByTokens");
-
-			profiler.start("XPathUtils.simpleSearchTokenIdsByMopho");
-			List<String> tokenIds = XPathUtils.simpleSearchTokenIdsByMopho(getDbName(), itemName, itemValue, lang);
-
+			
+			if (XPathUtils.existsMorphoFile(getDbName(), lang)) {
+				profiler.start("XPathUtils.simpleSearchTokenIdsByMopho");
+				tokenIds = XPathUtils.simpleSearchTokenIdsByMopho(getDbName(), itemName, itemValue, lang);
+			} else {
+				profiler.start("XPathUtils.simpleSearchTokenIdsByMopho");
+				tokenIds = XPathUtils.simpleSearchTokenIdsByForma(getDbName(), itemValue, lang);
+			}
+			
 			profiler.start("XPathUtils.simpleSearchPericopeIdsByTokenIds");
 			List<String> pericopeIds = XPathUtils.simpleSearchPericopeIdsByTokenIds(getDbName(), tokenIds, lang);
 
@@ -1398,10 +1404,9 @@ public class EntityManager {
 					} else {
 						arlotve = null;//non va visualizzata
 					}
-					if (null == results) {
-						//		results = new ArrayList<ResultViewEntity>();
+					/*if (null == results) {
 						results = new HashMap<String,ResultViewEntity>();
-					}
+					}*/
 					ResultViewEntity rve = new ResultViewEntity();
 					rve.setLinkId(linkId);
 					if (null != arlotve) {

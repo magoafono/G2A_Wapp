@@ -227,12 +227,12 @@ public class RepositoryBean {
 	/////// RICERCA CON XPATH (SEARCH.XHTML)
 
 	private HashMap<String, ResultViewEntity> simpleSearchLinksByArabicTokens (SearchBean parameters) {
-		
+
 		return simpleSearchLinksByTokens(parameters, Consts.ARABIC);
 	}
-	
+
 	private HashMap<String, ResultViewEntity> simpleSearchLinksByGreekTokens (SearchBean parameters) {
-		
+
 		return simpleSearchLinksByTokens(parameters, Consts.GREEK);
 	}
 
@@ -314,13 +314,16 @@ public class RepositoryBean {
 					resultHM = (HashMap<String, ResultViewEntity>) lolorve.get(0);
 				}*/
 			for (HashMap<String,ResultViewEntity> partialResult : lolorve) {
-				if (null != partialResult){
+				if (partialResult.size() > 0){
 					if (null == resultHM) {
 						resultHM = new HashMap<String, ResultViewEntity>();
 						resultHM.putAll(partialResult);
 					} else {
 						resultHM = (HashMap<String,ResultViewEntity>) Utils.resultIntersect (resultHM, partialResult);
 					}
+				} else {
+					resultHM = null;
+					break; //forzo l'uscita dal for perche' almeno un risultato e' vuoto
 				}
 			}
 
@@ -480,8 +483,8 @@ public class RepositoryBean {
 	public void runOntoQuery(String selectedLemma, String selectedRelType, String selectedLemmaEN) {
 		em.runOntoQuery( selectedLemma,  selectedRelType, selectedLemmaEN);
 	}
-	
-	
+
+
 	/**
 	 * @return the ontoQueryInstanceMap
 	 */
@@ -495,7 +498,7 @@ public class RepositoryBean {
 	public void setOntoQueryInstanceMap(Map<String, String> ontoQueryInstanceMap) {
 		em.setOntoQueryInstanceMap(ontoQueryInstanceMap);
 	}
-	
+
 	/**
 	 * @return the objRelationMap
 	 */
@@ -607,7 +610,7 @@ public class RepositoryBean {
 	public void setQuery_3_param_2(String query_3_param_2) {
 		em.setQuery_3_param_2(query_3_param_2);
 	}
-	
-	
+
+
 
 }
