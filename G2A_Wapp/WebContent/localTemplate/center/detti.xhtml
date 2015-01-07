@@ -26,13 +26,14 @@ Geoffrey Lewis.) Paris, Bruxelles 1951–73. (Museum Lessianum. Series Philosoph
 			</p>
 			<p>
 				<h:outputText
-					value="The greco-arabic pericopes are taken from the table of correspondences published in: Plotino, La discesa dell’anima nei corpi, Plotiniana Arabica (pseudo-Teologia di Aristote
+					value="The Graeco-Arabic pericopes are taken from the table of correspondences published in: Plotino, La discesa dell’anima nei corpi, Plotiniana Arabica (pseudo-Teologia di Aristote
 e, capitoli 1 e 7; 'Detti del sapiente greco'), ed. C. D’Ancona et al., Il Poligrafo, Padova 2003, p. 214-220 slightly modified." />
 			</p>
 		</p:tab>
 
 		<p:tab title="Structure and composition">
-			<h:outputText value="The text [i.e. the Oxford manuscript, Bodleian, Marsh 539] is incomplete at the beginning and at the 
+			<h:outputText
+				value="The text [i.e. the Oxford manuscript, Bodleian, Marsh 539] is incomplete at the beginning and at the 
 			end, and therefore offers no indication of its title, author or compistion date. … The text is a compliation of philosophical
 			 material taken form various Greek and Arabic authorities quoted either by name or anonymously. The extant sources are 
 			 indicated only in few cases. The subject dealt with are methaphysics, psycology, natural sciences in the guise of physiology, 
@@ -47,7 +48,8 @@ e, capitoli 1 e 7; 'Detti del sapiente greco'), ed. C. D’Ancona et al., Il Pol
 		</p:tab>
 		<p:tab title="Manuscripts">
 			<p>
-				<h:outputLink id="link_marsh" target="_new" value="descr/marsh.xhtml">
+				<h:outputLink id="link_marsh" target="_new"
+					value="descr/marsh.xhtml">
 					<h:outputText value="MS Oxford, Bodleian, Marsh 539" />
 				</h:outputLink>
 
@@ -65,9 +67,35 @@ e, capitoli 1 e 7; 'Detti del sapiente greco'), ed. C. D’Ancona et al., Il Pol
 
 		</p:tab>
 	</p:accordionPanel>
-	<c:if test="false">
 
-		<!--c:if test="#{!loginBean.loggedIn}"-->
+	<c:if test="#{!loginBean.loggedIn}">
+		<h:form id="guestLogin">
+			<p:panelGrid styleClass="tableNoBorder panelGridCenter">
+				<p:row>
+					<p:column style="text-align:center">
+						<h:outputText style="font-weight:bold;font-size:1.2em"
+							value="No account is needed to browse the G2A Web App website and use G2A Web App reading functions." />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column style="text-align:center">
+						<h:outputText style="font-style: italic;"
+							value="ILC and Greek into Arabic provide free access (read only) to G2A Web Application." />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column style="text-align:center">
+						<p:commandButton id="freeAccessBtn" value="Free Access"
+							action="#{loginBean.doLogin}">
+							<f:setPropertyActionListener target="#{loginBean.username}"
+								value="guest" />
+							<f:setPropertyActionListener target="#{loginBean.password}"
+								value="guest" />
+						</p:commandButton>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</h:form>
 		<h:form id="loginForm">
 			<p:growl id="loginMessage" />
 			<p:panelGrid styleClass="panelGridCenter">
@@ -100,38 +128,11 @@ e, capitoli 1 e 7; 'Detti del sapiente greco'), ed. C. D’Ancona et al., Il Pol
 					<p:row>
 						<p:column colspan="2" style="text-align:center">
 							<p:commandButton id="login" value="Login" icon="ui-icon-check"
-								type="submit" action="#{loginBean.doLogin}" ajax="false" />
+								type="submit" action="#{loginBean.doLogin}" />
 						</p:column>
 					</p:row>
 				</f:facet>
 			</p:panelGrid>
-		</h:form>
-		<h5 align="center">Add. Notes: ILC and Greek into Arabic provide
-			free access (read only) to G2A Web Application. No account is needed
-			to browse the G2A Web App website and use G2A Web App reading
-			functions.</h5>
-		<h:form id="guestLogin">
-			<p:panelGrid styleClass="tableNoBorder panelGridCenter">
-				<p:row>
-					<p:column>
-						<h:outputText
-							value="Add. Notes: ILC and Greek into Arabic provide free access (read only) to G2A Web Application. No account is needed to browse the G2A Web App website and use G2A Web App reading
-functions." />
-					</p:column>
-				</p:row>
-				<p:row>
-					<p:column style="text-align:center">
-						<p:commandButton id="freeAccessBtn" value="Free Access"
-							action="#{loginBean.doLogin}">
-							<f:setPropertyActionListener target="#{loginBean.username}"
-								value="guest" />
-							<f:setPropertyActionListener target="#{loginBean.password}"
-								value="guest" />
-						</p:commandButton>
-					</p:column>
-				</p:row>
-			</p:panelGrid>
-
 		</h:form>
 	</c:if>
 

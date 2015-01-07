@@ -889,7 +889,7 @@ public class EntityManager {
 			lve.setGreekPericopeId(grRpt.getId().substring(4)); //tolgo ref_
 			lve.setGreekPericopeHidden(Consts.HIDDEN_REF_PERICOPE.equals(grRpt.getClassname()));
 		} else {
-			System.err.println("Pericope greca non trovata in links.xml! " + grRpt.getId() + " ref " + grRpt.getRef());
+			System.err.println("Pericope greca non trovata in links.xml! Gr Pericope ID: " + grRpt.getId() + " Gr Pericope ref " + grRpt.getRef());
 		}
 		RefPericopeText arRpt = link.getValue().get(Consts.ARABIC);
 		PericopeText arPericope = (PericopeText) arRpt.getPericope();

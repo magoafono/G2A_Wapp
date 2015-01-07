@@ -16,6 +16,7 @@ import it.cnr.ilc.cophi.utils.MessageProvider;
 import java.util.HashMap;
 import java.util.Map;
 
+@Deprecated
 public class AnalysisHandler {
 
 	private static AnalysisHandler instance;
@@ -91,7 +92,7 @@ public class AnalysisHandler {
 	 * 
 	 * @return
 	 */
-	public static AnalysisHandler getInstance() {
+	public static AnalysisHandler getInstanceeee() {
 		if (instance == null) {
 			synchronized(AnalysisHandler.class) {
 				if (instance == null) {

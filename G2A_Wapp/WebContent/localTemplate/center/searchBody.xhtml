@@ -44,7 +44,6 @@
 									</p:column>
 									<p:column style="text-align:center;">
 										<p:selectOneMenu id="gr_pos_1" effect="none"
-											
 											value="#{searchViewBean.grSb.pos[0]}"
 											style="text-align:left;">
 											<f:selectItems value="#{searchViewBean.grItemPos}" var="pos"
@@ -114,7 +113,7 @@
 										<p:column colspan="2" style="text-align:center;">
 											<p:commandButton id="gr_search_btn" icon="ui-icon-search"
 												update=":searchResultFormId" value="Search"
-												onstart="ajaxWaitDialog.show();"
+												onstart="ajaxWaitDialog.show();" partialSubmit="true"
 												oncomplete="ajaxWaitDialog.hide();"
 												action="#{searchViewBean.grSubmit}">
 											</p:commandButton>
@@ -151,7 +150,7 @@
 											icon="ui-icon-search" ajax="true"
 											update=":searchResultFormId" value="Search" type="submit"
 											onstart="ajaxWaitDialog.show();"
-											oncomplete="ajaxWaitDialog.hide();"
+											oncomplete="ajaxWaitDialog.hide();" partialSubmit="true"
 											action="#{searchViewBean.combinedSubmit}">
 										</p:commandButton>
 									</p:column>
@@ -251,10 +250,10 @@
 											value="#{searchViewBean.arSb.word[2]}"></p:watermark>
 									</p:column>
 									<p:column style="text-align:center;">
-										<p:selectOneMenu id="ar_pos_3" effect="none" height="500" 
-											value="#{searchViewBean.arSb.pos[2]}" 
+										<p:selectOneMenu id="ar_pos_3" effect="none" height="500"
+											value="#{searchViewBean.arSb.pos[2]}"
 											panelStyle="width:300px" style="text-align:left;width:180px">
-											<f:selectItems value="#{searchViewBean.arItemPos}" var="pos" 
+											<f:selectItems value="#{searchViewBean.arItemPos}" var="pos"
 												itemLabel="#{pos.left}" itemValue="#{pos.right}" />
 										</p:selectOneMenu>
 									</p:column>
@@ -264,7 +263,7 @@
 										<p:column colspan="2" style="text-align:center;">
 											<p:commandButton id="ar_search_btn" icon="ui-icon-search"
 												ajax="true" update=":searchResultFormId" value="Search"
-												onstart="ajaxWaitDialog.show();"
+												onstart="ajaxWaitDialog.show();" partialSubmit="true"
 												oncomplete="ajaxWaitDialog.hide();" type="submit"
 												action="#{searchViewBean.arSubmit}">
 											</p:commandButton>
@@ -290,21 +289,23 @@
 		<!-- RESULTS -->
 
 		<p:layoutUnit position="south" id="lu_south" size="70%"
-			resizable="true" minSize="300" maxSize="800" header="Search Results">
-			
+			resizable="true" minSize="300" maxSize="800">
 			<h:form id="searchResultFormId">
 				<p:dataTable id="results_dt" var="alink" scrollable="true"
-					scrollHeight="500" scrollRows="10" 
+					scrollHeight="500"  scrollRows="10"
 					selection="#{parallelViewBean.selectedResultViewEntity}"
 					rendered="#{not empty searchViewBean.searchResult}"
 					value="#{searchViewBean.searchResult}" selectionMode="single"
 					rowKey="#{not empty alink.linkId ? alink.linkId : alink.hashCode()}">
-
+					<f:facet name="header">
+						<h:outputText
+							value="Results (#{fn:length(searchViewBean.searchResult)})" />
+					</f:facet>
 					<p:ajax event="rowSelect" update=":menuForm @this" />
 
 					<p:column sortBy="#{alink.grPericopeId}" width="5%"
 						headerText="Greek Pericope Info">
-						<h:outputText value="#{alink.grPericopeInfo}" styleClass="latin"/>
+						<h:outputText value="#{alink.grPericopeInfo}" styleClass="latin" />
 					</p:column>
 
 					<p:column style="white-space:normal" headerText="Greek Pericope"
@@ -339,9 +340,9 @@
 							</ui:repeat>
 						</p:outputPanel>
 					</p:column>
-					<p:column sortBy="#{alink.arPericopeId}" 
+					<p:column sortBy="#{alink.arPericopeId}"
 						headerText="Arabic Pericope Info" width="5%">
-						<h:outputText value="#{alink.arPericopeInfo}"  styleClass="latin"/>
+						<h:outputText value="#{alink.arPericopeInfo}" styleClass="latin" />
 					</p:column>
 
 				</p:dataTable>

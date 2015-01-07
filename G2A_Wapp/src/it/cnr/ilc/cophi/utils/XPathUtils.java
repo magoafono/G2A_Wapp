@@ -311,7 +311,7 @@ public class XPathUtils {
 			collection = getGreekCollectionPath();
 			break;
 		case Consts.ARABIC:
-			collection =  getArabicCollectionPath();
+			collection = getArabicCollectionPath();
 			break;
 
 		default:
@@ -322,6 +322,7 @@ public class XPathUtils {
 			pericopeIds = new ArrayList<String>();
 			for (String tokenId : tokenIds) {
 				pericopeIds.add(dbconn.searchPericopeIdByTokenId(dbName + collection, tokenId));
+				//profiler.stop().print(); //non importa perche' e' veloce
 			}
 		}
 		Set<String> s = new HashSet<String>(pericopeIds);

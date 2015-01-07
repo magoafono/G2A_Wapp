@@ -154,7 +154,7 @@ public class CophiSort {
 		
 		if (v1 == null || v2 == null) {
 			
-			System.err.println("AAAAAAHHHHHHHH " + v1 + " " + v2);
+			System.err.println("ERR: CophiSort.compareId (" + v1 + ", " + v2 + ")");
 			return 0;
 		}
 		String[] components1 = v1.split("\\.");
