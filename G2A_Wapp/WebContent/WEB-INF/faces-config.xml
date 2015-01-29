@@ -10,12 +10,16 @@
 			<var>configPlotino</var>
 		</resource-bundle>
 		<resource-bundle>
-			<base-name>it.cnr.ilc.cophi.resources.configAristotele</base-name>
-			<var>configAristotele</var>
+			<base-name>it.cnr.ilc.cophi.resources.configMetafisica</base-name>
+			<var>configMetafisica</var>
 		</resource-bundle>
 		<resource-bundle>
 			<base-name>it.cnr.ilc.cophi.resources.configDetti</base-name>
 			<var>configDetti</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>it.cnr.ilc.cophi.resources.configRisala</base-name>
+			<var>configRisala</var>
 		</resource-bundle>
 		<resource-bundle>
 			<base-name>it.cnr.ilc.cophi.resources.messages</base-name>

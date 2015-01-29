@@ -301,7 +301,7 @@
 						<h:outputText
 							value="Results (#{fn:length(searchViewBean.searchResult)})" />
 					</f:facet>
-					<p:ajax event="rowSelect" update=":menuForm @this" />
+					<p:ajax event="rowSelect" update=":menuForm" />
 
 					<p:column sortBy="#{alink.grPericopeId}" width="5%"
 						headerText="Greek Pericope Info">

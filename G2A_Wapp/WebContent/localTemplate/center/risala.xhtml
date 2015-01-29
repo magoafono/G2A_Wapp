@@ -6,7 +6,8 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 
-	<h1 align="center">Risāla fī l-ʿIlm al-ilāhī (Epistle on the Divine Science - expected April 2015)</h1>
+	<h1 align="center">Risāla fī l-ʿIlm al-ilāhī (Epistle on the
+		Divine Science)</h1>
 
 	<p:accordionPanel>
 		<p:tab title="Description">
@@ -15,8 +16,9 @@
 					value="Plotinus: Enneades. — Plotini opera, edd. Paul Henry et Hans-Rudolf Schwyzer;
 					t. 1–3 (t. 2: Plotiniana arabica ad fidem codicum anglice vertit Geoffrey Lewis.) 
 					Paris, Bruxelles 1951–73. (Museum Lessianum. Series Philosophica; 33–35). 
-					— Enn. V — Ref. to | Enneas | | section | , | chapter | . | line | ." />
-			</p>
+					— Enn. V — Ref. to | Enneas | | section | , | chapter | . | line | .
+					For technical reasons in this work the reference to the Enneads is given with the number of the Ennead and treatise repeated in each item." />
+			</p>    
 
 			<p>
 				<h:outputText
@@ -25,7 +27,10 @@
 			<p>
 				<h:outputText
 					value="ed. Badawī = Risāla fī l-ʿIlm al-ilāhī / Ps.-al-Fārābī, ed. Badawī, 
-					Aflūṭīn ʿind al-ʿArab, pp. 165–183. — Ref. to | page | . | line | ." />
+					Aflūṭīn ʿind al-ʿArab, pp. 165–183. — Ref. to | page | . | line | .
+					The text of the Epistle is that of the edition Badawi 1966, except 
+					for p. 183.18, where this edition erroneously omits by homoteleuton a 
+					sentence which is sound and features in Aflūṭīn 'ind a l-'Arab, ed. 'A. Badawī, Cairo 1955." />
 			</p>
 
 			<p>
@@ -105,8 +110,7 @@
 
 		</p:tab>
 	</p:accordionPanel>
-	<c:if test="false">
-		<!--c:if test="#{!loginBean.loggedIn}"-->
+	<c:if test="#{!loginBean.loggedIn}">
 		<h:form id="loginForm">
 			<p:growl id="loginMessage" />
 			<p:panelGrid styleClass="panelGridCenter">
@@ -145,6 +149,9 @@
 				</f:facet>
 			</p:panelGrid>
 		</h:form>
+	<!--/c:if-->
+
+	<!--c:if test="false"-->
 		<h:form id="guestLogin">
 			<p:panelGrid styleClass="tableNoBorder panelGridCenter">
 				<p:row>
@@ -166,7 +173,6 @@ functions." />
 					</p:column>
 				</p:row>
 			</p:panelGrid>
-
 		</h:form>
 	</c:if>
 

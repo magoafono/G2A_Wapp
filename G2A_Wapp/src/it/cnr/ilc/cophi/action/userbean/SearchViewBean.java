@@ -127,11 +127,6 @@ public class SearchViewBean  implements Serializable {
 		arItemPos.add(pronGroup);
 		arItemPos.add(verbGroup);
 
-
-
-
-
-
 		grItemType = new ArrayList<Pair>();
 		grItemType.add(new Pair<String, String>("Form",  "forma"));
 		grItemType.add(new Pair<String, String>("Lemma", "lemma"));

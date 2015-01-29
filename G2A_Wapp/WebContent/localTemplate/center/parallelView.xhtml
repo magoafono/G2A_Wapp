@@ -54,8 +54,8 @@
 			<!-- 
 					<p:column width="6%" headerText="Greek Ref" filterBy="#{link.greekPericopeInfo}" filterMatchMode="startsWith">
 	-->
-			<p:column width="6%" headerText="Greek Ref">
-				<h:outputText value="#{link.greekPericopeInfo}" styleClass=""
+			<p:column width="8%" headerText="Greek Ref" >
+				<h:outputText value="#{link.greekPericopeInfo}" 
 					rendered="#{link.greekPericopeHidden == 'false'}" />
 			</p:column>
 
@@ -114,7 +114,7 @@
 					rendered="#{link.arabicPericopeHidden == 'false'}" />
 			</p:column>
 
-			<p:column headerText="Comments" width="6%">
+			<p:column headerText="Comments" width="5%">
 				<h:outputText value="#{link.noOfComments}" styleClass="" />
 			</p:column>
 

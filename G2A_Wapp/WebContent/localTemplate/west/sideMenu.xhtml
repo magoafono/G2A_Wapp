@@ -5,20 +5,18 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<script>
-jQuery(document).ready(function(){
-    jQuery('.sidemenu_column').mouseover(function(){
-    	//alert("11111");
-    	$(this).addClass("ui-state-hover" );
-    });
-    jQuery('.sidemenu_column').mouseout(function(){
-    	//alert("11111");
-    	$(this).removeClass("ui-state-hover" );
-    });
+		jQuery(document).ready(function() {
+			jQuery('.sidemenu_column').mouseover(function() {
+				//alert("11111");
+				$(this).addClass("ui-state-hover");
+			});
+			jQuery('.sidemenu_column').mouseout(function() {
+				//alert("11111");
+				$(this).removeClass("ui-state-hover");
+			});
 
-    
-});
-
-</script>
+		});
+	</script>
 	<h:form id="SideMenuForm">
 
 		<p:growl id="messages" showDetail="true" />
@@ -55,38 +53,42 @@ jQuery(document).ready(function(){
 			</f:facet>
 
 			<p:row>
-				<p:column styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
-					<h:outputLink id="linkTeologia" value="../G2A_Wapp/Home.xhtml" 
+				<p:column
+					styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
+					<h:outputLink id="linkTeologia" value="../G2A_Wapp/Home.xhtml"
 						styleClass="sidemenu_link" title="Theology of Aristotle">
-					<f:param name="centerPage" value="teologia" />
+						<f:param name="centerPage" value="teologia" />
 						<h:outputText value="Kitāb Uṯūlūǧiyā" />
 					</h:outputLink>
 				</p:column>
 			</p:row>
 			<p:row>
-				<p:column styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
-					<h:outputLink id="linkRisala" value="Home.xhtml" title="Epistle on the Divine Science"
-						styleClass="sidemenu_link">
+				<p:column
+					styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
+					<h:outputLink id="linkRisala" title="Epistle on the Divine Science"
+						value="../Risala_Wapp/Home.xhtml" styleClass="sidemenu_link">
 						<f:param name="centerPage" value="risala" />
 						<h:outputText value="Risāla fī l-ʿIlm al-ilāhī" />
 					</h:outputLink>
 				</p:column>
 			</p:row>
 			<p:row>
-				<p:column styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
-					<h:outputLink id="linkDetti" title="Sayings of the Greek Sage" 
-						value="../Detti_Wapp/Home.xhtml" styleClass="sidemenu_link" >
+				<p:column
+					styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
+					<h:outputLink id="linkDetti" title="Sayings of the Greek Sage"
+						value="../Detti_Wapp/Home.xhtml" styleClass="sidemenu_link">
 						<f:param name="centerPage" value="detti" />
 						<h:outputText value="al-Šayḫ al-Yūnānī" />
 					</h:outputLink>
 				</p:column>
 			</p:row>
 			<p:row>
-				<p:column styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
+				<p:column
+					styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
 					<h:outputLink id="linkMetafisica" title="Aristotle's Metaphysics"
 						value="../Metafisica_Wapp/Home.xhtml" styleClass="sidemenu_link">
-						<f:param name="centerPage" value="metafisica"/>
-						<h:outputText value="Kitāb mā ba‘d al-ṭabī‘at"/>
+						<f:param name="centerPage" value="metafisica" />
+						<h:outputText value="Kitāb mā ba‘d al-ṭabī‘at" />
 					</h:outputLink>
 				</p:column>
 			</p:row>
@@ -102,14 +104,15 @@ jQuery(document).ready(function(){
 			<p:row>
 				<p:column styleClass="sidemenu_column ui-corner-all">
 					<h:outputLink id="linkManual" value="Home.xhtml"
-						styleClass="sidemenu_link " >
+						styleClass="sidemenu_link ">
 						<f:param name="centerPage" value="userManual" />
 						<h:outputText value="User manual" />
 					</h:outputLink>
 				</p:column>
 			</p:row>
 			<p:row>
-				<p:column styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
+				<p:column
+					styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
 					<h:outputLink id="linkTutorial" value="Home.xhtml"
 						styleClass="sidemenu_link">
 						<f:param name="centerPage" value="tutorials" />
@@ -127,7 +130,8 @@ jQuery(document).ready(function(){
 				</p:row>
 			</f:facet>
 			<p:row>
-				<p:column styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
+				<p:column
+					styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
 					<h:outputLink id="linkSourceCode" value="Home.xhtml"
 						styleClass="sidemenu_link">
 						<f:param name="centerPage" value="sourceCode" />
@@ -136,7 +140,8 @@ jQuery(document).ready(function(){
 				</p:column>
 			</p:row>
 			<p:row>
-				<p:column styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
+				<p:column
+					styleClass="sidemenu_column ui-menuitem ui-widget ui-corner-all">
 					<h:outputLink id="linkCopyright" value="Home.xhtml"
 						styleClass="sidemenu_link">
 						<f:param name="centerPage" value="copyright" />
