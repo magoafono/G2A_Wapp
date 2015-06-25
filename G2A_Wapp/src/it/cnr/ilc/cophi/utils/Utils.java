@@ -786,5 +786,34 @@ public class Utils {
 		return result;
 	}
 
+	/**
+	 * Converte alcuni caratteri appartenenti al Greek Extended nella loro versione "combined"
+	 * @param s
+	 * @return
+	 */
+	public static String extendToComposeGreekCharacter (String s) {
+		
+		String news = s.replaceAll("\u1F71","\u03AC");
+		news = news.replaceAll("\u1FBB","\u0386");
+		news = news.replaceAll("\u1F73","\u03AD");
+		news = news.replaceAll("\u1FC9","\u0388");
+		news = news.replaceAll("\u1F75","\u03AE");
+		news = news.replaceAll("\u1FCB","\u0389");
+		news = news.replaceAll("\u1F77","\u03AF");
+		news = news.replaceAll("\u1FDB","\u038A");
+		news = news.replaceAll("\u1F79","\u03CC");
+		news = news.replaceAll("\u1FF9","\u038C");
+		news = news.replaceAll("\u1F7B","\u03CD");
+		news = news.replaceAll("\u1FEB","\u038E");
+		news = news.replaceAll("\u1F7D","\u03CE");
+		news = news.replaceAll("\u1FFB","\u038F");
+		news = news.replaceAll("\u1FD3","\u0390");
+		news = news.replaceAll("\u1FE3","\u03B0");
+		news = news.replaceAll("\u037E","\u003B");
+		news = news.replaceAll("\u0387","\u00B7");
+		news = news.replaceAll("\u0344","\u0308");
+		
+		return news;
+	}
 
 }

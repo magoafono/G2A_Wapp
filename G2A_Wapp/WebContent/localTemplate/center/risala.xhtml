@@ -18,7 +18,7 @@
 					Paris, Bruxelles 1951–73. (Museum Lessianum. Series Philosophica; 33–35). 
 					— Enn. V — Ref. to | Enneas | | section | , | chapter | . | line | .
 					For technical reasons in this work the reference to the Enneads is given with the number of the Ennead and treatise repeated in each item." />
-			</p>    
+			</p>
 
 			<p>
 				<h:outputText
@@ -111,6 +111,34 @@
 		</p:tab>
 	</p:accordionPanel>
 	<c:if test="#{!loginBean.loggedIn}">
+
+		<h:form id="guestLogin">
+			<p:panelGrid styleClass="tableNoBorder panelGridCenter">
+				<p:row>
+					<p:column style="text-align:center">
+						<h:outputText style="font-weight:bold;font-size:1.2em"
+							value="No account is needed to browse the G2A Web App website and use G2A Web App reading functions." />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column style="text-align:center">
+						<h:outputText style="font-style: italic;"
+							value="ILC and Greek into Arabic provide free access (read only) to G2A Web Application." />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column style="text-align:center">
+						<p:commandButton id="freeAccessBtn" value="Free Access"
+							action="#{loginBean.doLogin}">
+							<f:setPropertyActionListener target="#{loginBean.username}"
+								value="guest" />
+							<f:setPropertyActionListener target="#{loginBean.password}"
+								value="guest" />
+						</p:commandButton>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</h:form>
 		<h:form id="loginForm">
 			<p:growl id="loginMessage" />
 			<p:panelGrid styleClass="panelGridCenter">
@@ -149,31 +177,10 @@
 				</f:facet>
 			</p:panelGrid>
 		</h:form>
-	<!--/c:if-->
+		<!--/c:if-->
 
-	<!--c:if test="false"-->
-		<h:form id="guestLogin">
-			<p:panelGrid styleClass="tableNoBorder panelGridCenter">
-				<p:row>
-					<p:column>
-						<h:outputText
-							value="Add. Notes: ILC and Greek into Arabic provide free access (read only) to G2A Web Application. No account is needed to browse the G2A Web App website and use G2A Web App reading
-functions." />
-					</p:column>
-				</p:row>
-				<p:row>
-					<p:column style="text-align:center">
-						<p:commandButton id="freeAccessBtn" value="Free Access"
-							action="#{loginBean.doLogin}">
-							<f:setPropertyActionListener target="#{loginBean.username}"
-								value="guest" />
-							<f:setPropertyActionListener target="#{loginBean.password}"
-								value="guest" />
-						</p:commandButton>
-					</p:column>
-				</p:row>
-			</p:panelGrid>
-		</h:form>
+		<!--c:if test="false"-->
+
 	</c:if>
 
 </ui:composition>

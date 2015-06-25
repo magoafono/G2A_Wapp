@@ -82,13 +82,13 @@
 				</p:panelGrid>
 			</div>
 		</p:tab>
-		<p:tab title="Query">
+		<!--p:tab title="Query">
 			<p:scrollPanel id="basic" style="height:350px" mode="native">
 				<br />
 				<h:form styleClass="colHeader" id="Domanda_1">
 					<p:fieldset styleClass="ui-fieldset-legend"
 						legend="Question about semantic relations and properties"
-						toggleable="true" toggleSpeed="500" collapsed="true">
+						toggleable="true" toggleSpeed="200" collapsed="true">
 						<p:panelGrid id="pg_1"
 							style="border-collapse:collapse;border-style: hidden;">
 							<p:row>
@@ -136,7 +136,7 @@
 				<h:form styleClass="colHeader" id="Domanda_2">
 					<p:fieldset styleClass="ui-fieldset-legend"
 						legend="Question about semantic relations among terms"
-						toggleable="true" toggleSpeed="500" collapsed="true">
+						toggleable="true" toggleSpeed="200" collapsed="true">
 						<p:panelGrid id="pg_2"
 							style="border-collapse:collapse;border-style: hidden;">
 							<p:row>
@@ -191,7 +191,7 @@
 				<h:form styleClass="colHeader" id="Domanda_3">
 					<p:growl id="growl" showDetail="true" sticky="false" life="8000" />
 					<p:fieldset styleClass="ui-fieldset-legend"
-						legend="Question about terms" toggleable="true" toggleSpeed="500"
+						legend="Question about terms" toggleable="true" toggleSpeed="200"
 						collapsed="true">
 						<p:panelGrid id="pg_3"
 							style="border-collapse:collapse;border-style: hidden;">
@@ -255,7 +255,251 @@
 								</p:dataTable>
 							</c:if>
 							<c:if test="#{plotinoQuestions.results.size() == 0}">
-							<h:outputText value="No results!!" />
+								<h:outputText value="No results!!" />
+							</c:if>
+						</p:tab>
+					</p:tabView>
+				</h:form>
+			</center>
+		</p:tab -->
+
+		<!-- NEW QUERY -->
+
+		<p:tab title="Query">
+			<p:scrollPanel id="basic" style="height:350px" mode="native">
+				<br />
+				<h:form styleClass="colHeader" id="Domanda_1">
+					<p:fieldset styleClass="ui-fieldset-legend"
+						legend="Querying a term and its concept" toggleable="true"
+						toggleSpeed="200" collapsed="true">
+						<p:panelGrid id="pg_1"
+							style="border-collapse:collapse;border-style: hidden;">
+							<p:row>
+								<p:column style="border:none">
+									<h:outputText
+										value="What are the relations that characterize the term " />
+								</p:column>
+								<p:column style="border:none">
+									<p:selectOneMenu styleClass="menu"
+										value="#{plotinoQuestions.query_1_param_1}" id="q1_p1"
+										filter="true" filterMatchMode="startsWith" effect="fade">
+										<f:selectItems value="#{plotinoQuestions.instances}" var="c"
+											itemLabel="#{c}" itemValue="#{c}" />
+									</p:selectOneMenu>
+								</p:column>
+								<p:column style="border:none">
+									<h:outputText value=" and the concept it denotes?" />
+								</p:column>
+								<p:column style="border:none">
+									<p:commandButton value="Ask" icon="ui-icon-search"
+										update=":tabViewId:risposte"
+										actionListener="#{plotinoQuestions.runQuestion_1()}"
+										styleClass="toolButtonRight">
+									</p:commandButton>
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:fieldset>
+				</h:form>
+
+				<h:form styleClass="colHeader" id="Domanda_1a">
+					<p:fieldset styleClass="ui-fieldset-legend"
+						legend="Querying the lexical relations of a term"
+						toggleable="true" toggleSpeed="200" collapsed="true">
+						<p:panelGrid id="pg_1a"
+							style="border-collapse:collapse;border-style: hidden;">
+							<p:row>
+								<p:column style="border:none">
+									<h:outputText value="What are the lexical relations the term " />
+								</p:column>
+								<p:column style="border:none">
+									<p:selectOneMenu styleClass="menu"
+										value="#{plotinoQuestions.query_1a_param_1}" id="q1a_p1"
+										filter="true" filterMatchMode="startsWith" effect="fade">
+										<f:selectItems value="#{plotinoQuestions.instances}" var="c"
+											itemLabel="#{c}" itemValue="#{c}" />
+									</p:selectOneMenu>
+								</p:column>
+								<p:column style="border:none">
+									<h:outputText value="is related to ?" />
+								</p:column>
+								<p:column style="border:none">
+									<p:commandButton value="Ask" icon="ui-icon-search"
+										update=":tabViewId:risposte"
+										actionListener="#{plotinoQuestions.runQuestion_1a()}"
+										styleClass="toolButtonRight">
+									</p:commandButton>
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:fieldset>
+				</h:form>
+
+				<h:form styleClass="colHeader" id="Domanda_1b">
+					<p:fieldset styleClass="ui-fieldset-legend"
+						legend="Querying the ontological relations of a concept"
+						toggleable="true" toggleSpeed="200" collapsed="true">
+						<p:panelGrid id="pg_1b"
+							style="border-collapse:collapse;border-style: hidden;">
+							<p:row>
+								<p:column style="border:none">
+									<h:outputText
+										value="What are the ontological relations the concept " />
+								</p:column>
+								<p:column style="border:none">
+									<p:selectOneMenu styleClass="menu"
+										value="#{plotinoQuestions.query_1b_param_1}" id="q1b_p1"
+										filter="true" filterMatchMode="startsWith" effect="fade">
+										<f:selectItems value="#{plotinoQuestions.enInstances}" var="c"
+											itemLabel="#{c}" itemValue="#{c}" />
+									</p:selectOneMenu>
+								</p:column>
+								<p:column style="border:none">
+									<h:outputText value="is related to ?" />
+								</p:column>
+								<p:column style="border:none">
+									<p:commandButton value="Ask" icon="ui-icon-search"
+										update=":tabViewId:risposte"
+										actionListener="#{plotinoQuestions.runQuestion_1b()}"
+										styleClass="toolButtonRight">
+									</p:commandButton>
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:fieldset>
+				</h:form>
+
+				<h:form styleClass="colHeader" id="Domanda_2">
+					<p:fieldset styleClass="ui-fieldset-legend"
+						legend="Querying the ontological relations linking 3 concepts"
+						toggleable="true" toggleSpeed="200" collapsed="true">
+						<p:panelGrid id="pg_2"
+							style="border-collapse:collapse;border-style: hidden;">
+							<p:row>
+								<p:column style="border:none">
+									<h:outputText value="What are the ontological relations among" />
+								</p:column>
+								<p:column style="border:none">
+
+									<p:selectOneMenu styleClass="menu"
+										value="#{plotinoQuestions.query_2_param_1}" id="q2_p1"
+										filter="true" filterMatchMode="startsWith" effect="fade">
+										<f:selectItems value="#{plotinoQuestions.enInstances}" var="a"
+											itemLabel="#{a}" itemValue="#{a}" />
+									</p:selectOneMenu>
+								</p:column>
+								<p:column style="border:none">
+									<h:outputText value="," />
+								</p:column>
+								<p:column style="border:none">
+									<p:selectOneMenu styleClass="menu"
+										value="#{plotinoQuestions.query_2_param_2}" id="q2_p2"
+										filter="true" filterMatchMode="startsWith" effect="fade">
+										<f:selectItems value="#{plotinoQuestions.enInstances}" var="b"
+											itemLabel="#{b}" itemValue="#{b}" />
+									</p:selectOneMenu>
+								</p:column>
+								<p:column style="border:none">
+									<h:outputText value="and" />
+								</p:column>
+								<p:column style="border:none">
+									<p:selectOneMenu styleClass="menu"
+										value="#{plotinoQuestions.query_2_param_3}" id="q2_p3"
+										filter="true" filterMatchMode="startsWith" effect="fade">
+										<f:selectItems value="#{plotinoQuestions.enInstances}" var="d"
+											itemLabel="#{d}" itemValue="#{d}" />
+									</p:selectOneMenu>
+								</p:column>
+								<p:column style="border:none">
+
+									<p:commandButton value="Ask" icon="ui-icon-search"
+										update=":tabViewId:risposte"
+										actionListener="#{plotinoQuestions.runQuestion_2()}"
+										styleClass="toolButtonRight">
+									</p:commandButton>
+								</p:column>
+							</p:row>
+
+						</p:panelGrid>
+					</p:fieldset>
+				</h:form>
+
+				<h:form styleClass="colHeader" id="Domanda_3">
+					<p:growl id="growl" showDetail="true" sticky="false" life="8000" />
+					<p:fieldset styleClass="ui-fieldset-legend"
+						legend="Querying the concepts linked by a specific relation"
+						toggleable="true" toggleSpeed="200" collapsed="true">
+						<p:panelGrid id="pg_3"
+							style="border-collapse:collapse;border-style: hidden;">
+							<p:row>
+								<p:column style="border:none">
+
+									<h:outputText value="What are the concepts related to" />
+								</p:column>
+								<p:column style="border:none">
+									<p:selectOneMenu styleClass="menu"
+										value="#{plotinoQuestions.query_3_param_1}"
+										valueChangeListener="#{plotinoQuestions.query_3_instanceChanged}"
+										filter="true" filterMatchMode="startsWith" effect="fade">
+										<p:ajax listener="#{plotinoQuestions.q_3_p_1Changed}"
+											update="q3p2" />
+										<f:selectItems value="#{plotinoQuestions.enInstances}" var="i"
+											itemLabel="#{i}" itemValue="#{i}" />
+									</p:selectOneMenu>
+								</p:column>
+								<p:column style="border:none">
+									<h:outputText value="by the relation" />
+								</p:column>
+								<p:column style="border:none">
+									<p:selectOneMenu styleClass="menu" style="width:200px"
+										value="#{plotinoQuestions.query_3_param_2}" id="q3p2">
+										<f:selectItems value="#{plotinoQuestions.objRelations}"
+											var="r" itemLabel="#{r}" itemValue="#{r}" />
+									</p:selectOneMenu>
+								</p:column>
+								<p:column style="border:none">
+									<h:outputText value="?" />
+								</p:column>
+								<p:column style="border:none">
+									<p:commandButton value="Ask" icon="ui-icon-search"
+										update=":tabViewId:risposte, growl"
+										actionListener="#{plotinoQuestions.runQuestion_3()}"
+										styleClass="toolButtonRight">
+									</p:commandButton>
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</p:fieldset>
+				</h:form>
+			</p:scrollPanel>
+			<center>
+				<h:form id="risposte">
+					<p:tabView styleClass="tabHeader" id="tabView">
+						<p:tab title="Results">
+							<c:if test="#{plotinoQuestions.results.size() != 0}">
+								<p:dataTable styleClass="colHeader" var="res" 
+									value="#{plotinoQuestions.results}" style="width:80%"
+									paginator="true"  rows="50" 
+									rowsPerPageTemplate="5, 10, 50, 100, 500"  
+									paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+									<p:columns styleClass="colHeader" headerText="#{column.header}"
+										value="#{plotinoQuestions.columns}" var="column" 
+										columnIndexVar="colIndex" sortBy="#{res[column.property]}">
+										<p:cellEditor>
+											<f:facet name="output">
+												<h:outputText value="#{res[column.property]}" />
+											</f:facet>
+											<f:facet name="input">
+												<p:inputText id="modelInput" value="#{res[column.property]}"
+													style="width:96%" />
+											</f:facet>
+										</p:cellEditor>
+									</p:columns>
+								</p:dataTable>
+								
+							</c:if>
+							<c:if test="#{plotinoQuestions.results.size() == 0}">
+								<h:outputText value="No results!!" />
 							</c:if>
 						</p:tab>
 					</p:tabView>

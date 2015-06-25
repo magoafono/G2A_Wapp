@@ -290,16 +290,6 @@
     
 
 
-    <!-- http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hasHyperonym -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hasHyperonym">
-        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
-        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#Lexical_Relation"/>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hasInternalActivity -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hasInternalActivity">
@@ -674,14 +664,6 @@
     
 
 
-    <!-- http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#isTranslatedBy -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#isTranslatedBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#Lexical_Relation"/>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#isTypicalOf -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#isTypicalOf">
@@ -693,6 +675,8 @@
     <!-- http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#isa -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#isa">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
         <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#Ontological_Relation"/>
     </owl:ObjectProperty>
     
@@ -3407,30 +3391,6 @@ non multiplicité</rdfs:comment>
     
 
 
-    <!-- http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#جسم -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#جسم">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ARABIC_TERM"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#عقل -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#عقل">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ARABIC_TERM"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#نفس -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#نفس">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ARABIC_TERM"/>
-    </owl:Class>
-    
-
-
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -3459,6 +3419,7 @@ non multiplicité</rdfs:comment>
         <hasActivity rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#contemplation"/>
         <isThePrincipleOf rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#essence"/>
         <coImplies rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#eternity"/>
+        <isa rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hypostasis2"/>
         <hasProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#indivisibility"/>
         <contains rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#intelligible_world"/>
         <isRealmOf rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#life"/>
@@ -3565,6 +3526,7 @@ l&apos;intellect donne la forme à l&apos;ame pigler 25</rdfs:comment>
         <hasActivity rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#contemplation"/>
         <isThePrincipleOf rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#essence"/>
         <coImplies rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#eternity"/>
+        <isa rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hypostasis2"/>
         <hasProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#indivisibility"/>
         <contains rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#intelligible_world"/>
         <isRealmOf rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#life"/>
@@ -3591,13 +3553,13 @@ l&apos;intellect donne la forme à l&apos;ame pigler 25</rdfs:comment>
         <rdfs:comment>non nella lista. provvisoriamente individual di property</rdfs:comment>
         <owl:annotatedSource rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#Intellect"/>
         <owl:annotatedProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hasProperty"/>
-        <owl:annotatedTarget rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#unity_in_duality"/>
+        <owl:annotatedTarget rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#self_knowledge"/>
     </owl:Axiom>
     <owl:Axiom>
         <rdfs:comment>non nella lista. provvisoriamente individual di property</rdfs:comment>
         <owl:annotatedSource rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#Intellect"/>
         <owl:annotatedProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hasProperty"/>
-        <owl:annotatedTarget rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#self_knowledge"/>
+        <owl:annotatedTarget rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#unity_in_duality"/>
     </owl:Axiom>
     
 
@@ -3965,6 +3927,7 @@ source eros ?</rdfs:comment>
         <instrument rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#contemplation"/>
         <hasInvolvedAgent rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hypostasis2"/>
         <isRelatedTo rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#procession"/>
+        <isa rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#relationship"/>
         <hasInvolvedAgent rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#soul"/>
         <produces rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#unity"/>
         <isDenotedBy rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ἐπιστροφή"/>
@@ -3991,6 +3954,7 @@ source eros ?</rdfs:comment>
         <downwards>yes</downwards>
         <movement>yes</movement>
         <rdfs:comment>process o change_of_state?</rdfs:comment>
+        <isa rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#motion"/>
         <isDenotedBy rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#κάθοδος"/>
     </owl:NamedIndividual>
     
@@ -4161,6 +4125,7 @@ l&apos;éternité ... demeure dans son unité multiple
         <isTypicalOf rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#Intellect"/>
         <hasProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#indivisibility"/>
         <isTypicalOf rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#intelligible_world"/>
+        <isa rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#life"/>
         <hasNo rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#otherness"/>
         <isNot rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#rest"/>
         <hasProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#simplicity"/>
@@ -4174,14 +4139,14 @@ l&apos;éternité ... demeure dans son unité multiple
     <rdf:Description>
         <rdf:type rdf:resource="&owl;NegativePropertyAssertion"/>
         <owl:sourceIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#eternity"/>
-        <owl:assertionProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#isa"/>
-        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#rest"/>
+        <owl:assertionProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#has"/>
+        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#otherness"/>
     </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="&owl;NegativePropertyAssertion"/>
         <owl:sourceIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#eternity"/>
-        <owl:assertionProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#has"/>
-        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#otherness"/>
+        <owl:assertionProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#isa"/>
+        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#rest"/>
     </rdf:Description>
     
 
@@ -4537,6 +4502,7 @@ this level at which the soul becomes fragmented into individual, embodied souls,
         <rdfs:comment>la vie ne peut donc etre considérée que comme un flot dynamique issu de l&apos;un, mais qui n&apos;est pas en l&apos;un (pigler, 18)</rdfs:comment>
         <rdfs:comment>emanatesfrom oppure derivedfrom per distinguere life dalle ipostasi ??</rdfs:comment>
         <greekTerm>ζωή</greekTerm>
+        <isa rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#flow"/>
         <emanatesFrom rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#the_Good"/>
         <emanatesFrom rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#the_One"/>
         <isDenotedBy rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ζωή"/>
@@ -4626,19 +4592,20 @@ matter è la condizione necessaria e sufficiente per il mutamento, il caso e il 
         <owl:sameAs rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#nonbeing"/>
         <hasProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#passivity"/>
         <hasNoProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#quality"/>
+        <isa rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#substrate"/>
         <isDenotedBy rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ὕλη"/>
     </owl:NamedIndividual>
     <rdf:Description>
         <rdf:type rdf:resource="&owl;NegativePropertyAssertion"/>
         <owl:assertionProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hasProperty"/>
+        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#intelligible"/>
         <owl:sourceIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#matter"/>
-        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#quality"/>
     </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="&owl;NegativePropertyAssertion"/>
         <owl:assertionProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hasProperty"/>
-        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#intelligible"/>
         <owl:sourceIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#matter"/>
+        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#quality"/>
     </rdf:Description>
     
 
@@ -4735,19 +4702,20 @@ matter/nonbeing è la condizione necessaria e sufficiente per il mutamento, il c
         <hasNoProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#intelligible"/>
         <hasProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#passivity"/>
         <hasNoProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#quality"/>
+        <isa rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#substrate"/>
         <isDenotedBy rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#μὴ_ὄν"/>
     </owl:NamedIndividual>
     <rdf:Description>
         <rdf:type rdf:resource="&owl;NegativePropertyAssertion"/>
         <owl:assertionProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hasProperty"/>
+        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#intelligible"/>
         <owl:sourceIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#nonbeing"/>
-        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#quality"/>
     </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="&owl;NegativePropertyAssertion"/>
         <owl:assertionProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hasProperty"/>
-        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#intelligible"/>
         <owl:sourceIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#nonbeing"/>
+        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#quality"/>
     </rdf:Description>
     
 
@@ -4967,6 +4935,7 @@ source eros ?</rdfs:comment>
         <hasInvolvedAgent rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hypostasis2"/>
         <implies rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#multiplicity"/>
         <implies rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#otherness"/>
+        <isa rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#relationship"/>
         <hasInvolvedAgent rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#soul"/>
         <isDenotedBy rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#πρόοδος"/>
     </owl:NamedIndividual>
@@ -5011,6 +4980,7 @@ source eros ?</rdfs:comment>
         <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#QUALITY"/>
         <rdfs:comment>quality qualifies something not itself: it is therefore an accidental; it resides in some other object.</rdfs:comment>
         <greekTerm>ποιότης</greekTerm>
+        <isa rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#accidental"/>
         <isDenotedBy rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ποιότης"/>
     </owl:NamedIndividual>
     
@@ -5398,8 +5368,14 @@ soul belongsto intelligible (sost.) pigler</rdfs:comment>
     <rdf:Description>
         <rdf:type rdf:resource="&owl;NegativePropertyAssertion"/>
         <owl:assertionProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#agentiveExperience"/>
+        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#intelligible_world"/>
         <owl:sourceIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#suffering"/>
-        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#the_One"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="&owl;NegativePropertyAssertion"/>
+        <owl:assertionProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#agentiveExperience"/>
+        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#matter"/>
+        <owl:sourceIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#suffering"/>
     </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="&owl;NegativePropertyAssertion"/>
@@ -5410,14 +5386,8 @@ soul belongsto intelligible (sost.) pigler</rdfs:comment>
     <rdf:Description>
         <rdf:type rdf:resource="&owl;NegativePropertyAssertion"/>
         <owl:assertionProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#agentiveExperience"/>
-        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#intelligible_world"/>
         <owl:sourceIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#suffering"/>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="&owl;NegativePropertyAssertion"/>
-        <owl:assertionProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#agentiveExperience"/>
-        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#matter"/>
-        <owl:sourceIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#suffering"/>
+        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#the_One"/>
     </rdf:Description>
     
 
@@ -5482,13 +5452,13 @@ http://www.dal.ca/content/dam/dalhousie/pdf/fass/classics/hankey/neoplatonist%20
     </owl:NamedIndividual>
     <rdf:Description>
         <rdf:type rdf:resource="&owl;NegativePropertyAssertion"/>
-        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#completion"/>
-        <owl:assertionProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hasHyperonym"/>
+        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#essence"/>
+        <owl:assertionProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#isa"/>
         <owl:sourceIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#the_Good"/>
     </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="&owl;NegativePropertyAssertion"/>
-        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#essence"/>
+        <owl:targetIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#completion"/>
         <owl:assertionProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#isa"/>
         <owl:sourceIndividual rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#the_Good"/>
     </rdf:Description>
@@ -5550,12 +5520,6 @@ l&apos;un donne la forme à l&apos;intellect pigler 25</rdfs:comment>
         <isDenotedBy rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#τὸ_ἕν"/>
     </owl:NamedIndividual>
     <owl:Axiom>
-        <rdfs:comment>non nella lista</rdfs:comment>
-        <owl:annotatedProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hasProperty"/>
-        <owl:annotatedTarget rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#self_sufficiency"/>
-        <owl:annotatedSource rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#the_One"/>
-    </owl:Axiom>
-    <owl:Axiom>
         <owl:annotatedTarget>no</owl:annotatedTarget>
         <rdfs:comment>xxxxxxxxxxxxxxx</rdfs:comment>
         <owl:annotatedProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#intentionality"/>
@@ -5564,8 +5528,32 @@ l&apos;un donne la forme à l&apos;intellect pigler 25</rdfs:comment>
     <owl:Axiom>
         <rdfs:comment>non nella lista. provvisoriamente individual di property</rdfs:comment>
         <owl:annotatedProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hasProperty"/>
+        <owl:annotatedTarget rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#impassibility"/>
+        <owl:annotatedSource rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#the_One"/>
+    </owl:Axiom>
+    <owl:Axiom>
+        <rdfs:comment>non nella lista. provvisoriamente individual di property</rdfs:comment>
+        <owl:annotatedProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hasProperty"/>
         <owl:annotatedTarget rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#omnipresence"/>
         <owl:annotatedSource rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#the_One"/>
+    </owl:Axiom>
+    <owl:Axiom>
+        <rdfs:comment>non nella lista. provvisoriamente individual di property</rdfs:comment>
+        <owl:annotatedProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hasProperty"/>
+        <owl:annotatedSource rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#the_One"/>
+        <owl:annotatedTarget rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#unpredicable"/>
+    </owl:Axiom>
+    <owl:Axiom>
+        <rdfs:comment>non nella lista</rdfs:comment>
+        <owl:annotatedProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hasProperty"/>
+        <owl:annotatedTarget rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#self_sufficiency"/>
+        <owl:annotatedSource rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#the_One"/>
+    </owl:Axiom>
+    <owl:Axiom>
+        <owl:annotatedTarget>yes</owl:annotatedTarget>
+        <rdfs:comment>yyyyyyyy</rdfs:comment>
+        <owl:annotatedSource rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#the_One"/>
+        <owl:annotatedProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#will"/>
     </owl:Axiom>
     <rdf:Description>
         <rdf:type rdf:resource="&owl;NegativePropertyAssertion"/>
@@ -5575,27 +5563,9 @@ l&apos;un donne la forme à l&apos;intellect pigler 25</rdfs:comment>
     </rdf:Description>
     <owl:Axiom>
         <rdfs:comment>non nella lista. provvisoriamente individual di property</rdfs:comment>
-        <owl:annotatedProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hasProperty"/>
-        <owl:annotatedTarget rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#impassibility"/>
-        <owl:annotatedSource rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#the_One"/>
-    </owl:Axiom>
-    <owl:Axiom>
-        <rdfs:comment>non nella lista. provvisoriamente individual di property</rdfs:comment>
         <owl:annotatedTarget rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#above_being"/>
         <owl:annotatedProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hasProperty"/>
         <owl:annotatedSource rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#the_One"/>
-    </owl:Axiom>
-    <owl:Axiom>
-        <rdfs:comment>yyyyyyyy</rdfs:comment>
-        <owl:annotatedTarget>yes</owl:annotatedTarget>
-        <owl:annotatedSource rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#the_One"/>
-        <owl:annotatedProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#will"/>
-    </owl:Axiom>
-    <owl:Axiom>
-        <rdfs:comment>non nella lista. provvisoriamente individual di property</rdfs:comment>
-        <owl:annotatedProperty rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#hasProperty"/>
-        <owl:annotatedSource rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#the_One"/>
-        <owl:annotatedTarget rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#unpredicable"/>
     </owl:Axiom>
     <rdf:Description>
         <rdf:type rdf:resource="&owl;NegativePropertyAssertion"/>
@@ -5631,7 +5601,6 @@ l&apos;un donne la forme à l&apos;intellect pigler 25</rdfs:comment>
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#time">
         <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#TIME"/>
-        <greekTerm>χρόνος</greekTerm>
         <rdfs:comment>“non dobbiamo prendere il tempo al di fuori dell’anima, come non (si deve prendere) l’eternità al fuori dell’essere; esso non accompagna (l’anima) né le è posteriore, come non è tale l’eternità rispetto all’essere; ma si manifesta in essa, come l’eternità nell’essere intelligibile.
 bisogna perciò concepire la natura (del tempo) come una distensione della vita (dell’anima) che si svolge in mutamenti uniformi, simili (tra loro) e procedenti in silenzio, e che possiede un atto continuo”.enneadi, iii,7, 11-12.
 il tempo non è in alternativa né in opposizione all’eternità, non è reale di per sé ma in quanto radicato, fondato nell’eternità. e’ il distendersi dell’anima nel molteplice, nel mondo, nelle cose e la tensione del ritorno all’uno.
@@ -5646,8 +5615,10 @@ le temps est altérité incessante
 il est l&apos;acte de l&apos;ame (pigler, 17)
 
 &quot;...le temps est l&apos;image de l&apos;éternité....une image de l&apos;unité, l&apos;un qui est dans le continu&quot; plotin iii, 7</rdfs:comment>
+        <greekTerm>χρόνος</greekTerm>
         <comment2>isnotrelatedto motion : troppo forte</comment2>
         <derivesFrom rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#eternity"/>
+        <isa rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#life"/>
         <isNotRelatedTo rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#motion"/>
         <isRelatedTo rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#otherness"/>
         <isTypicalOf rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#sensible_world"/>
@@ -5831,7 +5802,6 @@ c&apos;est l&apos;âme universelle qui a produit, en leur soufflant un esprit de
         <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#AΙΩΝ"/>
         <englishTerm>eternity</englishTerm>
         <denotes rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#eternity"/>
-        <hasHyperonym rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ζωή"/>
     </owl:NamedIndividual>
     
 
@@ -5964,7 +5934,6 @@ c&apos;est l&apos;âme universelle qui a produit, en leur soufflant un esprit de
         <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ΖΟH"/>
         <englishTerm>life</englishTerm>
         <denotes rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#life"/>
-        <hasHyperonym rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ροή"/>
     </owl:NamedIndividual>
     
 
@@ -6005,7 +5974,6 @@ c&apos;est l&apos;âme universelle qui a produit, en leur soufflant un esprit de
         <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ΚAΘΟΔΟΣ"/>
         <englishTerm>descent</englishTerm>
         <denotes rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#descent"/>
-        <hasHyperonym rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#κίνησις"/>
     </owl:NamedIndividual>
     
 
@@ -6136,7 +6104,7 @@ c&apos;est l&apos;âme universelle qui a produit, en leur soufflant un esprit de
     <!-- http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#λόγος1 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#λόγος1">
-        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ΛOΓΟΣ_1"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ΛOΓΟΣ_2"/>
         <englishTerm>universal_logos</englishTerm>
         <denotes rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#universal_logos"/>
     </owl:NamedIndividual>
@@ -6265,7 +6233,6 @@ c&apos;est l&apos;âme universelle qui a produit, en leur soufflant un esprit de
         <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#MH_OΝ"/>
         <englishTerm>nonbeing</englishTerm>
         <denotes rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#nonbeing"/>
-        <hasHyperonym rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ὑποκείμενον"/>
         <hasSynonym rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ὕλη"/>
     </owl:NamedIndividual>
     
@@ -6288,8 +6255,6 @@ c&apos;est l&apos;âme universelle qui a produit, en leur soufflant un esprit de
         <englishTerm>intellect (upper case)</englishTerm>
         <denotes rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#Intellect"/>
         <hasSynonym rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#τὸ_ὄν"/>
-        <isTranslatedBy rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#عقل"/>
-        <hasHyperonym rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ὑπόστασις2"/>
     </owl:NamedIndividual>
     
 
@@ -6465,7 +6430,6 @@ c&apos;est l&apos;âme universelle qui a produit, en leur soufflant un esprit de
         <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ΠΟΙOΤΗΣ"/>
         <englishTerm>quality</englishTerm>
         <denotes rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#quality"/>
-        <hasHyperonym rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#τὸ_αὐτομάτον"/>
     </owl:NamedIndividual>
     
 
@@ -6608,7 +6572,6 @@ c&apos;est l&apos;âme universelle qui a produit, en leur soufflant un esprit de
         <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ΣΩΜΑ"/>
         <englishTerm>body</englishTerm>
         <denotes rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#body"/>
-        <isTranslatedBy rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#جسم"/>
     </owl:NamedIndividual>
     
 
@@ -6735,7 +6698,6 @@ c&apos;est l&apos;âme universelle qui a produit, en leur soufflant un esprit de
         <englishTerm>being</englishTerm>
         <denotes rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#Being"/>
         <hasSynonym rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#νοῦς1"/>
-        <hasHyperonym rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ὑπόστασις2"/>
     </owl:NamedIndividual>
     
 
@@ -6799,7 +6761,6 @@ c&apos;est l&apos;âme universelle qui a produit, en leur soufflant un esprit de
         <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ΧΡOΝΟΣ"/>
         <englishTerm>time</englishTerm>
         <denotes rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#time"/>
-        <hasHyperonym rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ζωή"/>
     </owl:NamedIndividual>
     
 
@@ -6820,37 +6781,6 @@ c&apos;est l&apos;âme universelle qui a produit, en leur soufflant un esprit de
         <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ΨΥΧH"/>
         <englishTerm>soul</englishTerm>
         <denotes rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#soul"/>
-        <isTranslatedBy rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#نفس"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#جسم -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#جسم">
-        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#جسم"/>
-        <denotes rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#body"/>
-        <translates rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#σῶμα"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#عقل -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#عقل">
-        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#عقل"/>
-        <denotes rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#Intellect"/>
-        <translates rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#νοῦς1"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#نفس -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#نفس">
-        <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#نفس"/>
-        <denotes rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#soul"/>
-        <translates rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ψυχή"/>
     </owl:NamedIndividual>
     
 
@@ -6955,7 +6885,6 @@ c&apos;est l&apos;âme universelle qui a produit, en leur soufflant un esprit de
         <rdf:type rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#AΣΩΜΑΤΟΣ"/>
         <englishTerm>incorporeal</englishTerm>
         <also>ἄϋλος</also>
-        <denotes rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#incorporeal"/>
         <hasAntonym rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#σωματικός"/>
     </owl:NamedIndividual>
     
@@ -7319,7 +7248,6 @@ c&apos;est l&apos;âme universelle qui a produit, en leur soufflant un esprit de
         <englishTerm>matter</englishTerm>
         <denotes rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#matter"/>
         <hasSynonym rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#μὴ_ὄν"/>
-        <hasHyperonym rdf:resource="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#ὑποκείμενον"/>
     </owl:NamedIndividual>
     
 
@@ -7335,14 +7263,14 @@ c&apos;est l&apos;âme universelle qui a produit, en leur soufflant un esprit de
     <rdf:Description>
         <rdf:type rdf:resource="&owl;AllDifferent"/>
         <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#Being"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#Intellect"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#intellect"/>
         </owl:distinctMembers>
     </rdf:Description>
     <rdf:Description>
         <rdf:type rdf:resource="&owl;AllDifferent"/>
         <owl:distinctMembers rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#Intellect"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#Being"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#intellect"/>
         </owl:distinctMembers>
     </rdf:Description>
@@ -7351,5 +7279,4 @@ c&apos;est l&apos;âme universelle qui a produit, en leur soufflant un esprit de
 
 
 <!-- Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net -->
-
 

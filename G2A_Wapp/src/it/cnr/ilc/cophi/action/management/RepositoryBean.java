@@ -232,7 +232,7 @@ public class RepositoryBean {
 	}
 
 	private HashMap<String, ResultViewEntity> simpleSearchLinksByGreekTokens (SearchBean parameters) {
-
+	
 		return simpleSearchLinksByTokens(parameters, Consts.GREEK);
 	}
 
@@ -448,6 +448,19 @@ public class RepositoryBean {
 	public void setOntoInstanceMap(Map<String, String> ontoInstanceMap) {
 		em.setOntoInstanceMap(ontoInstanceMap);
 	}
+	/**
+	 * @return the ontoInstanceMap
+	 */
+	public Map<String, String> getOntoInstanceMapEn() {
+		return em.getOntoInstanceMapEn();
+	}
+
+	/**
+	 * @param ontoInstanceMap the ontoInstanceMap to set
+	 */
+	public void setOntoInstanceMapEn(Map<String, String> ontoInstanceMapEn) {
+		em.setOntoInstanceMapEn(ontoInstanceMapEn);
+	}
 
 	/**
 	 * @return the ontoInstanceMap
@@ -528,18 +541,33 @@ public class RepositoryBean {
 	}
 
 	/**
-	 * @return the query_1_param_2
+	 * @return the query_1_param_1
 	 */
-	public String getQuery_1_param_2() {
-		return em.getQuery_1_param_2();
+	public String getQuery_1a_param_1() {
+		return em.getQuery_1a_param_1();
 	}
 
 	/**
-	 * @param query_1_param_2 the query_1_param_2 to set
+	 * @param query_1_param_1 the query_1_param_1 to set
 	 */
-	public void setQuery_1_param_2(String query_1_param_2) {
-		em.setQuery_1_param_2(query_1_param_2);
+	public void setQuery_1a_param_1(String query_1a_param_1) {
+		em.setQuery_1a_param_1( query_1a_param_1);
 	}
+
+	/**
+	 * @return the query_1_param_1
+	 */
+	public String getQuery_1b_param_1() {
+		return em.getQuery_1b_param_1();
+	}
+
+	/**
+	 * @param query_1_param_1 the query_1_param_1 to set
+	 */
+	public void setQuery_1b_param_1(String query_1b_param_1) {
+		em.setQuery_1b_param_1( query_1b_param_1);
+	}
+
 
 	/**
 	 * @return the query_2_param_1

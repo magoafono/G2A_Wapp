@@ -16,11 +16,11 @@ public class BuckwalterUnstemmer {
 	static Pattern patternNounArabicVocal   = Pattern.compile("(.+\\+)?(.+)=(NOUN|NOUN_PROP|ADJ|ADV)\\+([aiuFKN])?=(CASE_.*)(\\+.*)?");
 	static Pattern patternNounAtAp          = Pattern.compile("(.+\\+)?(.+)=(NOUN|NOUN_PROP|ADJ|ADV)\\+(At|ap)=NSUFF_(FEM_.*)\\+([aiuFKN])?=(CASE_.*)(\\+.*)?");
 	static Pattern patternNounSuffix        = Pattern.compile("(.*\\+)?(.+)=(NOUN|NOUN_PROP|ADJ|ADV)\\+(.+)=NSUFF_(.*)(\\+.*)?");
-	static Pattern patternVerbPerfect       = Pattern.compile("(.*\\+)?(.+)=VERB_PERFECT\\+(.+)=PVSUFF_(SUBJ:.+)(\\+.*)?");
+	static Pattern patternVerbPerfect       = Pattern.compile("(.*\\+)?(.+)=VERB_PERFECT\\+(.+)=(PVSUFF_SUBJ:.+)(\\+.*)?");
 	static Pattern patternVerbImperfectSuff = Pattern.compile("(.*\\+)?(.+)=IV(.+)\\+(.+)=VERB_IMPERFECT\\+(.+)=IVSUFF_(MOOD|SUBJ)([^\\+]+)(\\+.*)?");
 	static Pattern patternVerbImperfectDo   = Pattern.compile("(.*\\+)?(.+)=IV(.+)\\+(.+)=VERB_IMPERFECT\\+(.+)(=IVSUFF_DO)(.*)?");
 	static Pattern patternVerbImperfectMood = Pattern.compile("(.*\\+)?(.+)=IV(.+)\\+(.+)=VERB_IMPERFECT\\+=(MOOD:[^\\+]+)(\\+.*)?");
-	static Pattern patternVerbImperative    = Pattern.compile("(.*\\+)?(.+)=VERB_IMPERATIVE\\+(.+)=CVSUFF_(SUBJ:.+)(\\+.*)?");
+	static Pattern patternVerbImperative    = Pattern.compile("(.*\\+)?(.+)=VERB_IMPERATIVE\\+(.+)=(CVSUFF_SUBJ:.+)(\\+.*)?");
 
 	static String[] replaces = {
 		"$1$2$4=$3*$5$6", 

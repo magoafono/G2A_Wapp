@@ -7,6 +7,7 @@ import it.cnr.ilc.cophi.action.userbean.Pair;
 import it.cnr.ilc.cophi.utils.BuckwalterArabicConverter;
 import it.cnr.ilc.cophi.utils.Consts;
 import it.cnr.ilc.cophi.utils.MessageProvider;
+import it.cnr.ilc.cophi.utils.Utils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -787,6 +788,9 @@ public class ExistDBConnector {
 				case Consts.ARABIC:
 					value = BuckwalterArabicConverter.unicodeToBuckwalter(value);
 					break;
+				case Consts.GREEK:
+					value = Utils.extendToComposeGreekCharacter(value);
+					break;
 				default:
 					break;
 				}
@@ -924,7 +928,7 @@ public class ExistDBConnector {
 			//			String id = "@value='"+ tokenId +"']/parent::node()/xm:param[@name='analysisRef']/@value"; //piu' lento che con il sibling
 			String query = "data(" + doc + path + id + ")";
 
-			//System.err.println(query);
+			System.err.println(query);
 			ret = xqRunWithMultipleResults(URI, query);
 			//se non ci sono risultati ret e' una string vuota
 		}

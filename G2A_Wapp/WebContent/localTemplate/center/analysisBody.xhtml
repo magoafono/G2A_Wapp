@@ -21,13 +21,13 @@
 				</p:column>
 
 				<p:column colspan="1">
-					<h:outputText styleClass="greek"
-						style="display:block;white-space:pre"
+					<h:outputText styleClass="greek"  
+						style="display:block;white-space:pre;font-size:#{loginBean.greekFontSize}"
 						value="#{analysisViewBean.selectedViewLink.greekPericopeHidden == 'false'?analysisViewBean.formattedGreekPericopeText:''}" />
 				</p:column>
 				<p:column colspan="1">
 					<h:outputText styleClass="arabic"
-						style="display:block;white-space:pre"
+						style="display:block;white-space:pre;font-size:#{loginBean.arabicFontSize}"
 						value="#{analysisViewBean.selectedViewLink.arabicPericopeHidden == 'false'?analysisViewBean.formattedArabicPericopeText:''}" />
 				</p:column>
 				<p:column colspan="1">
@@ -48,13 +48,13 @@
 							scrollHeight="600" rendered="#{!sharedBean.loadNewAnalysis}"
 							value="#{analysisViewBean.retrieveGreekAnalysis}">
 							<p:column headerText="Form" width="40%">
-								<h:outputText value="#{greekAnalysis.forma}" styleClass="greek" />
+								<h:outputText value="#{greekAnalysis.forma}" styleClass="greek" style="font-size:#{loginBean.greekFontSize}"/>
 							</p:column>
 							<p:column headerText="PoS" width="20%">
-								<h:outputText value="#{greekAnalysis.pos}" styleClass="latin" />
+								<h:outputText value="#{greekAnalysis.pos}" styleClass="latin" style="font-size:#{loginBean.greekFontSize}"/>
 							</p:column>
 							<p:column headerText="Lemma" width="40%">
-								<h:outputText value="#{greekAnalysis.lemma}" styleClass="greek" />
+								<h:outputText value="#{greekAnalysis.lemma}" styleClass="greek" style="font-size:#{loginBean.greekFontSize}"/>
 							</p:column>
 						</p:dataTable>
 					</p:column>
@@ -68,8 +68,8 @@
 							value="#{analysisViewBean.retrieveArabicAnalysis}">
 							<c:if test="#{analysisViewBean.viewArabic}">
 								<p:column headerText="جِذْر" width="10%" styleClass="arabic"
-									style="text-align:right">
-									<h:outputText value="#{arabicAnalysis.radice}"
+									style="text-align:right;font-size:#{loginBean.arabicFontSize}">
+									<h:outputText value="#{arabicAnalysis.radice}" style="font-size:#{loginBean.arabicFontSize}"
 										styleClass="arabic" />
 								</p:column>
 							</c:if>
@@ -81,8 +81,8 @@
 							</c:if>
 							<c:if test="#{analysisViewBean.viewArabic}">
 								<p:column headerText="وَحْدَة مُعْجَمِيّة" width="10%"
-									styleClass="arabic" style="text-align:right">
-									<h:outputText value="#{arabicAnalysis.lemma}"
+									styleClass="arabic" style="text-align:right;font-size:#{loginBean.arabicFontSize}">
+									<h:outputText value="#{arabicAnalysis.lemma}" style="font-size:#{loginBean.arabicFontSize}"
 										styleClass="arabic" />
 								</p:column>
 							</c:if>
@@ -94,7 +94,7 @@
 							</c:if>
 
 							<c:if test="#{analysisViewBean.viewArabic}">
-								<p:column headerText="إِعْرَاب" styleClass="arabic">
+								<p:column headerText="إِعْرَاب" styleClass="arabic" style="font-size:#{loginBean.arabicFontSize}" >
 									<p:dataTable var="arabicSubAnalysis"
 										styleClass="hide-column-names"
 										value="#{arabicAnalysis.subanalysis}">
@@ -102,11 +102,11 @@
 										<p:column
 											style="text-align:right;white-space:normal;width:70%">
 											<h:outputText value="#{arabicSubAnalysis.pos}"
-												styleClass="arabic" />
+												styleClass="arabic" style="font-size:#{loginBean.arabicFontSize}"/>
 										</p:column>
-										<p:column style="text-align:right">
+										<p:column style="text-align:right;font-size:#{loginBean.arabicFontSize}">
 											<h:outputText value="#{arabicSubAnalysis.word}"
-												styleClass="arabic" />
+												styleClass="arabic" style="font-size:#{loginBean.arabicFontSize}" />
 										</p:column>
 									</p:dataTable>
 								</p:column>
@@ -131,8 +131,8 @@
 							</c:if>
 							<c:if test="#{analysisViewBean.viewArabic}">
 								<p:column headerText="كَلِمَة" width="20%" styleClass="arabic"
-									style="text-align: right;">
-									<h:outputText value="#{arabicAnalysis.forma}"
+									style="text-align: right;font-size:#{loginBean.arabicFontSize}">
+									<h:outputText value="#{arabicAnalysis.forma}" style="font-size:#{loginBean.arabicFontSize}"
 										styleClass="arabic" />
 								</p:column>
 							</c:if>

@@ -102,14 +102,26 @@ public class EntityManager {
 	private  OntModel ontoExplicitModel = null;
 
 	private  Map<String, String> ontoInstanceMap;
+	private  Map<String, String> ontoInstanceMapEn;
 	private  Map<String, String> greek2EnglishMap;
 	private  String ontoResult2JS = "";
 
 	private  Map<String, String> ontoQueryInstanceMap;
 	private  Map<String, String> objRelationMap;
 
+	/*
 	private String query_1_param_1 = "ObjectProperty";
 	private String query_1_param_2 = "";
+	private String query_2_param_1 = "Being";
+	private String query_2_param_2 = "Forms";
+	private String query_2_param_3 = "Intellect";
+	private String query_3_param_1 = "Being";
+	private String query_3_param_2 = "";
+	 */	
+
+	private String query_1_param_1 = "";
+	private String query_1a_param_1 = "";
+	private String query_1b_param_1 = "";
 	private String query_2_param_1 = "Being";
 	private String query_2_param_2 = "Forms";
 	private String query_2_param_3 = "Intellect";
@@ -460,7 +472,7 @@ public class EntityManager {
 
 
 		//Lexicon
-		InputStream in = getClass().getClassLoader().getResourceAsStream("/it/cnr/ilc/cophi/resources/Plotino.owl");
+		InputStream in  = getClass().getClassLoader().getResourceAsStream("/it/cnr/ilc/cophi/resources/Plotino.owl");
 		InputStream in2 = getClass().getClassLoader().getResourceAsStream("/it/cnr/ilc/cophi/resources/Plotino.owl");
 		setOntoModel( ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM_MICRO_RULE_INF));
 		getOntoModel().read(in, "RDF/XML");
@@ -758,6 +770,20 @@ public class EntityManager {
 
 
 	/**
+	 * @return the ontoInstanceMapEn
+	 */
+	public Map<String, String> getOntoInstanceMapEn() {
+		return ontoInstanceMapEn;
+	}
+
+	/**
+	 * @param ontoInstanceMapEn the ontoInstanceMapEn to set
+	 */
+	public void setOntoInstanceMapEn(Map<String, String> ontoInstanceMapEn) {
+		this.ontoInstanceMapEn = ontoInstanceMapEn;
+	}
+
+	/**
 	 * @return the greek2EnglishMap
 	 */
 	public Map<String, String> getGreek2EnglishMap() {
@@ -989,17 +1015,31 @@ public class EntityManager {
 	}
 
 	/**
-	 * @return the query_1_param_2
+	 * @return the query_1_param_1
 	 */
-	public String getQuery_1_param_2() {
-		return query_1_param_2;
+	public String getQuery_1a_param_1() {
+		return query_1a_param_1;
 	}
 
 	/**
-	 * @param query_1_param_2 the query_1_param_2 to set
+	 * @param query_1_param_1 the query_1_param_1 to set
 	 */
-	public void setQuery_1_param_2(String query_1_param_2) {
-		this.query_1_param_2 = query_1_param_2;
+	public void setQuery_1a_param_1(String query_1a_param_1) {
+		this.query_1a_param_1 = query_1a_param_1;
+	}
+
+	/**
+	 * @return the query_1_param_1
+	 */
+	public String getQuery_1b_param_1() {
+		return query_1b_param_1;
+	}
+
+	/**
+	 * @param query_1_param_1 the query_1_param_1 to set
+	 */
+	public void setQuery_1b_param_1(String query_1b_param_1) {
+		this.query_1b_param_1 = query_1b_param_1;
 	}
 
 	/**
@@ -1358,7 +1398,7 @@ public class EntityManager {
 
 		try {
 			Profiler profiler = new Profiler("simpleSearchLinksByTokens");
-			
+
 			if (XPathUtils.existsMorphoFile(getDbName(), lang)) {
 				profiler.start("XPathUtils.simpleSearchTokenIdsByMopho");
 				tokenIds = XPathUtils.simpleSearchTokenIdsByMopho(getDbName(), itemName, itemValue, lang);
@@ -1366,7 +1406,7 @@ public class EntityManager {
 				profiler.start("XPathUtils.simpleSearchTokenIdsByMopho");
 				tokenIds = XPathUtils.simpleSearchTokenIdsByForma(getDbName(), itemValue, lang);
 			}
-			
+
 			profiler.start("XPathUtils.simpleSearchPericopeIdsByTokenIds");
 			List<String> pericopeIds = XPathUtils.simpleSearchPericopeIdsByTokenIds(getDbName(), tokenIds, lang);
 
@@ -1444,21 +1484,22 @@ public class EntityManager {
 	public  void initializeOntoMenu() {
 		String queryString = null;
 		ontoInstanceMap = new  LinkedHashMap<String, String>();
+		ontoInstanceMapEn = new  LinkedHashMap<String, String>();
 		greek2EnglishMap = new  LinkedHashMap<String, String>();
 		List<String> wordToSort =  new ArrayList<String>();
 		String greekTerm = null;
-		String englishTerm = null; 
+		String englishTerm = null;
 
 		queryString = Consts.NAMESPACES
 				+ "SELECT ?gTerm ?termine "
-				+ "WHERE { ?termine plotino:greekTerm ?gTerm . } "
+				+ "WHERE { ?gTerm plotino:englishTerm ?termine . } "
 				+ "ORDER BY ?gTerm";
 		Query query = QueryFactory.create(queryString);
 		QueryExecution qe = QueryExecutionFactory.create(query, getOntoModel());
 		for (ResultSet rs = qe.execSelect(); rs.hasNext();) {
 			QuerySolution binding = rs.nextSolution();
-			greekTerm = binding.get("gTerm").toString();
-			englishTerm = binding.get("termine").toString().split("#")[1];
+			greekTerm = binding.get("gTerm").toString().split("#")[1];
+			englishTerm = binding.get("termine").toString();
 			System.err.println(greekTerm + " " + englishTerm);
 			wordToSort.add(greekTerm + "|" + englishTerm);
 		}
@@ -1468,8 +1509,12 @@ public class EntityManager {
 			englishTerm = s.split("\\|")[1]; 
 
 			//System.err.println(greekTerm + " <> " + englishTerm);
-			ontoInstanceMap.put(greekTerm, greekTerm);
-			greek2EnglishMap.put(greekTerm, englishTerm);
+			if (!"cause".equals(greekTerm)) {
+				ontoInstanceMap.put(greekTerm, greekTerm);
+				greek2EnglishMap.put(greekTerm, englishTerm);
+			}
+			ontoInstanceMapEn.put(englishTerm, englishTerm);
+
 
 		}
 		qe.close();
@@ -1482,7 +1527,8 @@ public class EntityManager {
 	}
 
 
-	public void initializeQuestion_1()  {
+
+	public void initializeQuestion_1_old()  {
 		String queryString = null;
 		String inst = null;
 		ontoQueryInstanceMap = new HashMap<String, String>();
@@ -1490,6 +1536,25 @@ public class EntityManager {
 				+ "SELECT ?termine "
 				+ "WHERE { ?termine a owl:Thing . ?termine ?property ?value . ?property rdf:type owl:"
 				+ query_1_param_1 + " . } " + "ORDER BY ?termine";
+		Query query = QueryFactory.create(queryString);
+		QueryExecution qe = QueryExecutionFactory.create(query, getOntoModel());
+		for (ResultSet rs = qe.execSelect(); rs.hasNext();) {
+			QuerySolution binding = rs.nextSolution();
+			inst = binding.get("termine").toString().split("#")[1];
+			ontoQueryInstanceMap.put(inst, inst);
+		}
+		qe.close();
+	}
+
+	public void initializeQuestion_1()  {
+		String queryString = null;
+		String inst = null;
+		ontoQueryInstanceMap = new HashMap<String, String>();
+		queryString = Consts.NAMESPACES
+				+ "SELECT ?termine "
+				+ "WHERE { ?termine a plotino:GREEK_TERM . } ORDER BY ?termine";
+
+
 		Query query = QueryFactory.create(queryString);
 		QueryExecution qe = QueryExecutionFactory.create(query, getOntoModel());
 		for (ResultSet rs = qe.execSelect(); rs.hasNext();) {
@@ -1521,11 +1586,11 @@ public class EntityManager {
 				+ "WHERE { "
 				+ "{ plotino:"
 				+ query_3_param_1
-				+ " ?property ?v1 . ?property rdf:type owl:ObjectProperty . } "
+				+ " ?property ?v1 . ?property rdfs:subPropertyOf plotino:Ontological_Relation . } "
 				+ "UNION "
 				+ "{ ?v2 ?property plotino:"
 				+ query_3_param_1
-				+ " . ?property rdf:type owl:ObjectProperty . } "
+				+ " . ?property rdfs:subPropertyOf plotino:Ontological_Relation . } "
 				+ "} "
 				+ "ORDER BY ?property";
 		Query query = QueryFactory.create(queryString);

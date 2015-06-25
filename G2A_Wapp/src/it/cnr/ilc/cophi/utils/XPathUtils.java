@@ -96,7 +96,7 @@ public class XPathUtils {
 
 		Pattern sequencePattern = Pattern.compile("<xm:sequence xmlns:xm=\"(.+?)\" id=\"(?<id>.+?)\" classname=\"(.+?)\">");
 		Pattern elementPattern = Pattern.compile("<xm:element id=\"(?<id>.+?)\" classname=\"(.+?)\">(?<params>.+?)</xm:element>");
-		Pattern paramPattern = Pattern.compile("<xm:param name=\"(?<name>.+?)\" value=\"(?<value>.*?)\"/>");
+		Pattern paramPattern = Pattern.compile("<xm:param nameconvert=\"(?<name>.+?)\" value=\"(?<value>.*?)\"/>");
 
 		HashMap<String, String> parameters = new HashMap<String, String>();
 		//int i = 0;
@@ -183,6 +183,7 @@ public class XPathUtils {
 		switch (lang) {
 		case Consts.GREEK:
 			collection = getGreekCollectionPath();
+			
 			analysisIds = dbconn.searchAnalysisIdByParameter(dbName + collection, itemName, itemValue, Consts.GREEK);
 			break;
 		case Consts.ARABIC:
