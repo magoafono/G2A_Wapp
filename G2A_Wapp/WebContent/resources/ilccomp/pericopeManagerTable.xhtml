@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<composite:interface>
+	<composite:attribute name="id" required="true" />
+	<composite:attribute name="lang" required="true" />
+</composite:interface>
+
+<composite:implementation>
+	<ui:param name="id" value="#{cc.attrs.id}" />
+	<ui:param name="ccid" value="#{id eq '_0'?'0':'1'}" />
+	<ui:param name="lang" value="#{cc.attrs.lang}" />
+	<ui:param name="tableid" value="table_#{ccid}" />
+	<ui:param name="plid" value="PL_#{ccid}" />
+<!-- 	<h:outputText value="[ccid : #{ccid}]" /> -->
+<!-- 	<h:outputText value="[plid : #{plid}]" /> -->
+<!-- 	<h:outputText value="[formBody:_0:table_0]" /> -->
+	<p:contextMenu for="#{tableid}" id="ctxMenu_#{ccid}">
+		<p:menuitem id="ctxMnEdit_#{ccid}" value="Edit" icon="ui-icon-disk"
+			action="edit" partialSubmit="true" process="@this #{tableid}" />
+		<p:menuitem id="ctxMnDel_#{ccid}" value="Delete" icon="ui-icon-close"
+			actionListener="#{testBean.deletePericope}"
+			onclick="confirm('Are you sure you want to delete?')"
+			update="#{tableid}" partialSubmit="true" process="@this #{tableid}" />
+		<p:menuitem id="ctxMnRem_#{ccid}" value="Remove Link"
+			icon="ui-icon-arrowrefresh-1-w" />
+	</p:contextMenu>
+	<p:dataTable value="#{testBean.pericopesGroup[plid]}" var="pericope"
+		widgetVar="#{tableid}" rowKey="#{pericope.info}"
+		selection="#{testBean.selectedPericope}" rowStyleClass="viewPericopeDataTable"
+		filteredValue="#{testBean.filteredPericopes}" id="#{tableid}"
+		style="width:100%;" scrollable="false" paginator="true" rows="5"
+		selectionMode="single" >
+		<p:ajax event="page" listener="#{testBean.setPageTableTemplate}" />
+		<p:ajax event="rowSelect" listener="#{testBean.onRowClick}"
+			immediate="true" />
+		<p:ajax event="rowUnselect" listener="#{testBean.onRowClick}"
+			update="#{tableid}" immediate="true" />
+		<f:facet name="header">  
+    		Header  
+	        </f:facet>
+		<p:column styleClass="info_table" headerText="textPosition"
+			filterBy="#{pericope.info}" filterMatchMode="contains"
+			id="textPosition_#{ccid}">
+			<h:outputText value="#{pericope.info}"></h:outputText>
+			#{pericope.id}
+			
+		</p:column>
+
+		<p:column styleClass="text_table" headerText="pericopeText"
+			style="text-align: #{lang eq 'ar'?'right':'left'}"
+			filterBy="#{pericope.text}" id="pericopeText_#{ccid}">
+			<h:outputText
+				value="#{!empty(pericope.text)?pericope.text:'&lt;em&gt;EMPTY&lt;/em&gt;'}"
+				escape="false" dir="#{lang eq 'ar'?'rtl':'ltr'}" styleClass="#{lang eq 'ar'?'arabic':'greek'}"></h:outputText>
+		</p:column>
+		<f:facet name="footer">
+			<p:commandButton value="Order by #{lang eq 'ar'?'Arabic':'Greek'}"
+				ajax="false" id="orderby_#{ccid}"
+				actionListener="#{testBean.orderBy}" />
+		</f:facet>
+	</p:dataTable>
+	<p:dialog header="Pericope Detail" widgetVar="pericopeDlg_#{ccid}"
+		resizable="false" width="200" showEffect="explode"
+		hideEffect="explode" id="dialog_#{ccid}">
+
+		<h:panelGrid id="display_#{ccid}" columns="2" cellpadding="4">
+
+			<h:outputText value="Text:" />
+			<h:outputText value="#{testBean.selectedPericope.text}"
+				id="text_#{ccid}" />
+
+		</h:panelGrid>
+	</p:dialog>
+	<script type="text/javascript">
+        $(document).ready(function() {
+			#{tableid}.getPaginator().setPage(#{testBean.selectedPaginatorPages[ccid]});
+		});
+	</script>
+
+</composite:implementation>
+</html>

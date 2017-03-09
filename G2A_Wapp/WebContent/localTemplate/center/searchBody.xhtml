@@ -38,7 +38,8 @@
 									</p:column>
 									<p:column style="text-align:center;">
 										<p:inputText id="gr_word_1" styleClass="greek" size="10"
-											value="#{searchViewBean.grSb.word[0]}" style="font-size:#{loginBean.greekFontSize}"/>
+											value="#{searchViewBean.grSb.word[0]}"
+											style="font-size:#{loginBean.greekFontSize}" />
 										<p:watermark for="gr_word_1" value="Insert word ..."></p:watermark>
 										<!--p:keyboard id="gr_word_1" value="#{searchViewBean.grSb.word[0]}" showMode="button"  layout="greek" /-->
 									</p:column>
@@ -71,7 +72,8 @@
 									</p:column>
 									<p:column style="text-align:center;">
 										<p:inputText id="gr_word_2" styleClass="greek" size="10"
-											value="#{searchViewBean.grSb.word[1]}" style="font-size:#{loginBean.greekFontSize}" />
+											value="#{searchViewBean.grSb.word[1]}"
+											style="font-size:#{loginBean.greekFontSize}" />
 										<p:watermark for="gr_word_2" value="Insert word ..."></p:watermark>
 									</p:column>
 									<p:column style="text-align:center;">
@@ -96,7 +98,8 @@
 									</p:column>
 									<p:column style="text-align:center;">
 										<p:inputText id="gr_word_3" styleClass="greek" size="10"
-											value="#{searchViewBean.grSb.word[2]}" style="font-size:#{loginBean.greekFontSize}"/>
+											value="#{searchViewBean.grSb.word[2]}"
+											style="font-size:#{loginBean.greekFontSize}" />
 										<p:watermark for="gr_word_3" value="Insert word ..."></p:watermark>
 									</p:column>
 									<p:column style="text-align:center;">
@@ -187,7 +190,8 @@
 									</p:column>
 									<p:column style="text-align:center;">
 										<p:inputText id="ar_word_1" styleClass="arabic" size="10"
-											value="#{searchViewBean.arSb.word[0]}" style="font-size:#{loginBean.arabicFontSize}"/>
+											value="#{searchViewBean.arSb.word[0]}"
+											style="font-size:#{loginBean.arabicFontSize}" />
 										<p:watermark for="ar_word_1" value="Insert word ..."></p:watermark>
 									</p:column>
 									<p:column style="text-align:center;">
@@ -219,7 +223,8 @@
 									</p:column>
 									<p:column style="text-align:center;">
 										<p:inputText id="ar_word_2" styleClass="arabic" size="10"
-											value="#{searchViewBean.arSb.word[1]}" style="font-size:#{loginBean.arabicFontSize}"/>
+											value="#{searchViewBean.arSb.word[1]}"
+											style="font-size:#{loginBean.arabicFontSize}" />
 										<p:watermark for="ar_word_2"
 											value="#{searchViewBean.arSb.word[1]}"></p:watermark>
 									</p:column>
@@ -245,7 +250,8 @@
 									</p:column>
 									<p:column style="text-align:center;">
 										<p:inputText id="ar_word_3" styleClass="arabic" size="10"
-											value="#{searchViewBean.arSb.word[2]}" style="font-size:#{loginBean.arabicFontSize}"/>
+											value="#{searchViewBean.arSb.word[2]}"
+											style="font-size:#{loginBean.arabicFontSize}" />
 										<p:watermark for="ar_word_3"
 											value="#{searchViewBean.arSb.word[2]}"></p:watermark>
 									</p:column>
@@ -292,7 +298,7 @@
 			resizable="true" minSize="300" maxSize="800">
 			<h:form id="searchResultFormId">
 				<p:dataTable id="results_dt" var="alink" scrollable="true"
-					scrollHeight="500"  scrollRows="10"
+					scrollHeight="500" scrollRows="10"
 					selection="#{parallelViewBean.selectedResultViewEntity}"
 					rendered="#{not empty searchViewBean.searchResult}"
 					value="#{searchViewBean.searchResult}" selectionMode="single"
@@ -345,7 +351,17 @@
 						<h:outputText value="#{alink.arPericopeInfo}" styleClass="latin" />
 					</p:column>
 
+					<f:facet name="footer">
+						<p:commandButton id="download_btn" icon="ui-icon-arrowthick-1-s"
+							action="#{searchViewBean.fileDownloadView()}" ajax="false"
+							value="Download Results"
+							rendered="#{searchViewBean.downloadableResult != null}">
+							<p:fileDownload value="#{searchViewBean.downloadableResult}" />
+						</p:commandButton>
+					</f:facet>
 				</p:dataTable>
+
+
 			</h:form>
 		</p:layoutUnit>
 	</p:layout>

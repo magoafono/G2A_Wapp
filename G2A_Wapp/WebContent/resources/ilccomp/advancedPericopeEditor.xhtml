@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<composite:interface>
+	<composite:attribute name="id" required="true" />
+	<composite:attribute name="lang" type="java.lang.String"
+		required="true" />
+</composite:interface>
+
+<composite:implementation>
+
+	<ui:param name="ccid" value="#{cc.attrs.id}" />
+	<ui:param name="lang" value="#{cc.attrs.lang}" />
+	<ui:param name="editor"
+		value="#{pericopeEditorsHandler.pericopeEditorMap[ccid]}"></ui:param>
+	<h:outputText value="(ccid: #{ccid})">
+	</h:outputText>
+	<br />
+
+	<!-- Renderizzato se c'e' una pericope selezionata -->
+	<p:panel id="panel_#{ccid}"
+		rendered="#{not empty editor.selectedPericope}">
+		<!-- Rederizzo le pericopi prima della selezionata -->
+		<h:panelGroup layout="block"
+			style="text-align:#{lang eq 'ar'?'right':'left'}">
+			<ui:repeat var="pericopeText" value="#{editor.precPericopes}">
+				<h:outputText value="#{pericopeText.text}"
+					dir="#{lang eq 'ar'?'rtl':'ltr'}" styleClass="#{lang eq 'ar'?'arabic':'greek'}"/>
+				<br />
+			</ui:repeat>
+		</h:panelGroup>
+
+		<p:growl id="messages_#{ccid}" life="1500"
+			rendered="#{not pericopeEditorsHandler.validateError}" />
+		<p:panel id="panelEditor_#{ccid}">
+
+			<!-- Rederizzo la pericope selezionata e il suo contesto -->
+
+			<h:panelGroup layout="block"
+				style="text-align:#{lang eq 'ar'?'right':'left'}">
+				<h:outputText value="#{editor.textPericopeInContext}"
+					dir="#{lang eq 'ar'?rtl:ltr}" id="outputText_#{ccid}"
+					escape="false" styleClass="#{lang eq 'ar'?'arabic':'greek'}"/>
+			</h:panelGroup>
+
+		</p:panel>
+
+		<p:panelGrid>
+			<!-- p:row id="rowText_#{ccid}">
+				<p:column colspan="4" id="columnText_#{ccid}">
+					<h:outputText value="#{editor.textPericopeInContext}"
+						escape="false" id="outputText_#{ccid}" />
+				</p:column>
+			</p:row -->
+			<f:facet name="header">
+				<p:row>
+					<p:column colspan="2">Head</p:column>
+					<p:column colspan="2">Tail</p:column>
+				</p:row>
+			</f:facet>
+			<p:row>
+				<p:column colspan="2" id="columnText_1_#{ccid}">
+					<p:commandButton id="beginleftarrow_#{ccid}"
+						update="outputText_#{ccid}" icon="ui-icon-circle-arrow-w"
+						actionListener="#{pericopeEditorsHandler.shiftBeginToLeft}" />
+					<p:commandButton id="beginrightarrow_#{ccid}"
+						update="outputText_#{ccid}" icon="ui-icon-circle-arrow-e"
+						actionListener="#{pericopeEditorsHandler.shiftBeginToRight}" />
+				</p:column>
+				<p:column colspan="2" id="columnText_2_#{ccid}">
+					<p:commandButton id="endleftarrow_#{ccid}"
+						update="outputText_#{ccid}" icon="ui-icon-circle-arrow-w"
+						actionListener="#{pericopeEditorsHandler.shiftEndToLeft}" />
+					<p:commandButton id="endrightarrow_#{ccid}"
+						update="outputText_#{ccid}" icon="ui-icon-circle-arrow-e"
+						actionListener="#{pericopeEditorsHandler.shiftEndToRight}" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column colspan="4" id="columnSave_#{ccid}"
+					style="text-align:center;">
+					<p:commandButton value="Save" id="salva" ajax="true"
+						actionListener="#{pericopeEditorsHandler.save}">
+						<f:attribute name="salva" value="true" />
+					</p:commandButton>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+
+		<h:panelGroup layout="block"
+			style="text-align:#{lang eq 'ar'?'right':'left'}">
+			<ui:repeat var="pericopeText" value="#{editor.succPericopes}">
+				<h:outputText value="#{pericopeText.text}"
+					dir="#{lang eq 'ar'?'rtl':'ltr'}" styleClass="#{lang eq 'ar'?'arabic':'greek'}"/>
+				<br />
+			</ui:repeat>
+		</h:panelGroup>
+	</p:panel>
+	<!-- Rendered se NON c'e' una pericope selezionata -->
+	<p:outputPanel rendered="#{empty editor.selectedPericope}">
+		<p:scrollPanel mode="native" style="height:400px">
+
+			<h:panelGroup layout="block"
+				style="text-align:#{lang eq 'ar'?'right':'left'}">
+				<ui:repeat var="pericopeText" value="#{editor.pericopeList}" varStatus="status">
+					<p:outputPanel   >
+						<!-- h:outputText value="#{pericopeText.text}"
+						dir="#{lang eq 'ar'?'rtl':'ltr'}" / -->
+						<ui:repeat var="words" value="#{pericopeText.listOfAnalysis}">
+							<ui:repeat var="w" value="#{words}">
+								<p:commandLink value="#{w.word['form']}" styleClass="link_nodecor bk_#{token.rel%4}"  /> 
+								<p:spacer width="5"  styleClass="link_nodecor}"></p:spacer>
+							</ui:repeat>
+						</ui:repeat>
+					</p:outputPanel>
+				</ui:repeat>
+			</h:panelGroup>
+		</p:scrollPanel>
+	</p:outputPanel>
+
+	<p:dialog header="Pericope Detail" widgetVar="pericopeDlg_#{ccid}"
+		resizable="false" width="200" showEffect="explode"
+		hideEffect="explode" id="dialog_#{cc.attrs.id}">
+
+		<h:panelGrid id="display_#{ccid}" columns="2" cellpadding="4">
+
+			<h:outputText value="Text:" />
+			<h:outputText value="#{editor.selectedPericope.text}"
+				id="text_#{ccid}" />
+
+		</h:panelGrid>
+	</p:dialog>
+
+</composite:implementation>
+</html>

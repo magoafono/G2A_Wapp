@@ -692,6 +692,7 @@ public class Utils {
 
 
 
+
 	public static  <T> Map<String, ? extends T> hashMapIntersect (Map<String, ? extends T> a, Map <String, ? extends T> b) {
 
 		Map<String, T> result = null;
@@ -792,7 +793,7 @@ public class Utils {
 	 * @return
 	 */
 	public static String extendToComposeGreekCharacter (String s) {
-		
+
 		String news = s.replaceAll("\u1F71","\u03AC");
 		news = news.replaceAll("\u1FBB","\u0386");
 		news = news.replaceAll("\u1F73","\u03AD");
@@ -812,7 +813,7 @@ public class Utils {
 		news = news.replaceAll("\u037E","\u003B");
 		news = news.replaceAll("\u0387","\u00B7");
 		news = news.replaceAll("\u0344","\u0308");
-		
+
 		return news;
 	}
 

@@ -2,9 +2,16 @@ package it.cnr.ilc.cophi.action.userbean;
 
 import it.cnr.ilc.cophi.action.management.RepositoryBean;
 import it.cnr.ilc.cophi.model.view.ResultViewEntity;
+import it.cnr.ilc.cophi.model.view.TokenViewEntity;
+import it.cnr.ilc.cophi.utils.Consts;
+import it.cnr.ilc.cophi.utils.Utils;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -16,6 +23,8 @@ import javax.faces.model.SelectItemGroup;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 
 
@@ -55,6 +64,23 @@ public class SearchViewBean  implements Serializable {
 	//Result
 	List<ResultViewEntity> searchResult = null;
 
+	//CVS Result
+	StreamedContent downloadableResult = null;
+
+	/**
+	 * @return the file
+	 */
+	public StreamedContent getDownloadableResult() {
+		return downloadableResult;
+	}
+
+	/**
+	 * @param file the file to set
+	 */
+	public void setDownloadableResult(StreamedContent file) {
+		this.downloadableResult = file; 
+	}
+
 	@PostConstruct
 	public void init() {
 		//numberOfentries = new ArrayList<Integer>(Arrays.asList(1,2,3));
@@ -68,11 +94,11 @@ public class SearchViewBean  implements Serializable {
 
 		SelectItemGroup grAllGroup = new SelectItemGroup("ALL");
 		grAllGroup.setSelectItems(new SelectItem[] {new SelectItem("adj", "ADJECTIVE"),new SelectItem("adv", "ADVERB")
-		,new SelectItem("art", "ARTICLE"),new SelectItem("art_pron", "Art_Pron"),new SelectItem("conj", "CONJUNCTION")
-		,new SelectItem("conj_adj", "CONJUNCTION ADJECTIVE"),new SelectItem("conj_adv", "CONJUNCTION ADVERB"),new SelectItem("conj_partic", "CONJUNCTION PARTICLE")
-		,new SelectItem("n", "N"),new SelectItem("noun", "NOUN"),new SelectItem("numeral", "NUMERAL")
-		,new SelectItem("partic", "PARTICLE"),new SelectItem("prep", "PREPOSITION"),new SelectItem("pron", "PRONOUN")
-		,new SelectItem("pron_partic", "PRONOUN PARTICLE"),new SelectItem("verb", "VERB")});
+				,new SelectItem("art", "ARTICLE"),new SelectItem("art_pron", "Art_Pron"),new SelectItem("conj", "CONJUNCTION")
+				,new SelectItem("conj_adj", "CONJUNCTION ADJECTIVE"),new SelectItem("conj_adv", "CONJUNCTION ADVERB"),new SelectItem("conj_partic", "CONJUNCTION PARTICLE")
+				,new SelectItem("n", "N"),new SelectItem("noun", "NOUN"),new SelectItem("numeral", "NUMERAL")
+				,new SelectItem("partic", "PARTICLE"),new SelectItem("prep", "PREPOSITION"),new SelectItem("pron", "PRONOUN")
+				,new SelectItem("pron_partic", "PRONOUN PARTICLE"),new SelectItem("verb", "VERB")});
 
 		grItemPos.add(grAnyGroup);
 		grItemPos.add(grAllGroup);
@@ -100,11 +126,11 @@ public class SearchViewBean  implements Serializable {
 		particGroup.setSelectItems(new SelectItem[] {new SelectItem("ACC_PART", "ACCUSATIVE PARTICLE"),new SelectItem("ANSWER_PART", "ANSWER PARTICLE"),
 				new SelectItem("CONDIZIONALE_PART", "CONDITIONAL PARTICLE"),new SelectItem("EXCEPTIVE_PART", "EXCEPTIVE PARTICLE"),
 				new SelectItem("EXCLAMATIVE_NOUN", "EXCLAMATIVE NOUN")
-		,new SelectItem("EXPLANATION_PART", "EXPLANATION PARTICLE"),new SelectItem("EXPLICATIVE_PART", "EXPLICATIVE PARTICLE"),
-		new SelectItem("FUT_PART", "FUTURE PARTICLE"),new SelectItem("INTERROG_PART", "INTEROGATIVE PARTICLE"),new SelectItem("NEG_PART", "NEGATIVE PARTICLE")
-		,new SelectItem("CERTAINTY_PART", "PARTICLE OF CERTAINTY"),new SelectItem("JUS_CONJ_V", "PARTICLE OF JUSSIVE"),
-		new SelectItem("PREVENTIVE_PART", "PREVENTIVE PARTICLE"),new SelectItem("PURPOSE_PART", "PURPOSE PARTICLE"),new SelectItem("EMPHATIC_COND", "RESULT PARTICLE")
-		,new SelectItem("SUPPLEMENTAL_PART", "SUPPLEMENTAL PARTICLE"),new SelectItem("VOCATIVE_PART", "VOCATIVE PARTICLE")});
+				,new SelectItem("EXPLANATION_PART", "EXPLANATION PARTICLE"),new SelectItem("EXPLICATIVE_PART", "EXPLICATIVE PARTICLE"),
+				new SelectItem("FUT_PART", "FUTURE PARTICLE"),new SelectItem("INTERROG_PART", "INTEROGATIVE PARTICLE"),new SelectItem("NEG_PART", "NEGATIVE PARTICLE")
+				,new SelectItem("CERTAINTY_PART", "PARTICLE OF CERTAINTY"),new SelectItem("JUS_CONJ_V", "PARTICLE OF JUSSIVE"),
+				new SelectItem("PREVENTIVE_PART", "PREVENTIVE PARTICLE"),new SelectItem("PURPOSE_PART", "PURPOSE PARTICLE"),new SelectItem("EMPHATIC_COND", "RESULT PARTICLE")
+				,new SelectItem("SUPPLEMENTAL_PART", "SUPPLEMENTAL PARTICLE"),new SelectItem("VOCATIVE_PART", "VOCATIVE PARTICLE")});
 
 		SelectItemGroup prepGroup = new SelectItemGroup("PREPOSITION");
 		prepGroup.setSelectItems(new SelectItem[] {new SelectItem("PREP", "PREPOSITION")});
@@ -294,6 +320,7 @@ public class SearchViewBean  implements Serializable {
 		logger.debug("grSubmit: " + grSb.toString());
 		try {
 			setSearchResult(repositoryBean.simpleGreekSearchLinksByTokens(grSb));
+			fileDownloadView();
 		} catch (Exception e) {
 			logger.fatal("Greek parameter: " + grSb.toString());
 			e.printStackTrace();
@@ -305,6 +332,8 @@ public class SearchViewBean  implements Serializable {
 		logger.debug("arSubmit: " + arSb.toString());
 		try {
 			setSearchResult(repositoryBean.simpleArabicSearchLinksByTokens(arSb));
+			fileDownloadView();
+
 		} catch (Exception e) {
 			logger.fatal("Arabic parameter: " + arSb.toString());
 			e.printStackTrace();
@@ -316,6 +345,8 @@ public class SearchViewBean  implements Serializable {
 		logger.debug("combinedSubmit: ar:" + arSb.toString() + " gr: " + grSb.toString() + " op: " + getCombinedOperation()) ;
 		try {
 			setSearchResult(repositoryBean.combinedSearchLinksByTokens(grSb, arSb, getCombinedOperation()));
+			fileDownloadView();
+
 		} catch (Exception e) {
 			logger.fatal("Greek parameter: " + grSb.toString() + ", Arabic parameter: " + arSb.toString());
 			e.printStackTrace();
@@ -329,6 +360,129 @@ public class SearchViewBean  implements Serializable {
 
 		setGrSb(new SearchBean());
 		setArSb(new SearchBean());
+	}
+
+
+
+	/**
+	 * Costruisce una rappresentazione CVS tab based a partire da una lista di risultati della ricerca
+	 * @param lrve
+	 * @return
+	 */
+	public  String resultViewEntity2CVSOld (List<ResultViewEntity> lrve) {
+
+		StringBuffer result = null;
+		List<TokenViewEntity> tvel = null;
+		if (null != lrve) {
+			result = new StringBuffer();
+			for (ResultViewEntity rve : lrve) {
+
+				//Info GR
+				result.append("\"" + rve.getGrPericopeInfo()  + "\"" +'\t' );
+				StringBuffer sb = new StringBuffer();
+				//Pericope GR
+				System.err.println(repositoryBean.getPericopeTextById(rve.getGrPericopeId(), Consts.GREEK));
+				tvel = rve.getGreekTVE();
+				for (Iterator iterator = tvel.iterator(); iterator.hasNext();) {
+					TokenViewEntity tve = (TokenViewEntity) iterator.next();
+					if ("↲".equals(tve.getText())){
+						sb.deleteCharAt(sb.length() - 1);
+						sb.append('\n');
+					} else {
+						sb.append(tve.getText());
+						if (iterator.hasNext()) {
+							sb.append(" ");
+						}
+					}
+
+
+				}
+				result.append("\"" + sb.toString()  + "\"" + '\t');
+
+				sb = new StringBuffer(); //clean the stringbuffer
+				//Pericope AR
+				tvel = rve.getArabicTVE();
+				for (Iterator iterator = tvel.iterator(); iterator.hasNext();) {
+					TokenViewEntity tve = (TokenViewEntity) iterator.next();
+					//System.err.println("(" + tve.getText()+")");
+					if ("↳".equals(tve.getText())){
+						sb.deleteCharAt(sb.length() - 1);
+						sb.append('\n');
+					} else {
+						sb.append(tve.getText());
+						if (iterator.hasNext()) {
+							sb.append(" ");
+						}
+					}
+				}
+
+
+				result.append("\"" + sb.toString()  + "\"" + '\t');
+				//Info AR
+				result.append("\"" +rve.getArPericopeInfo() + "\"");
+				result.append(System.getProperty("line.separator"));
+
+			}
+		}
+
+
+		return (result!=null)?result.toString():null;
+	}
+
+	/**
+	 * Costruisce una rappresentazione CVS tab based a partire da una lista di risultati della ricerca
+	 * @param lrve
+	 * @return
+	 */
+	public  String resultViewEntity2CVS (List<ResultViewEntity> lrve) {
+
+		StringBuffer result = null;
+
+		if (null != lrve) {
+			result = new StringBuffer();
+			for (ResultViewEntity rve : lrve) {
+
+				//Info GR
+				result.append("\"" + rve.getGrPericopeInfo()  + "\"" +'\t' );
+
+				//Pericope GR
+				String greekPericope = repositoryBean.getPericopeTextById(rve.getGrPericopeId(), Consts.GREEK);
+				greekPericope = greekPericope.replaceAll("\\s*↲\\s*", System.getProperty("line.separator"));
+				greekPericope = greekPericope.replaceAll("\\s*([,.;:])", "$1");
+				result.append("\"" + greekPericope  + "\"" + '\t');
+
+				//Pericope AR
+				String arabicPericope = repositoryBean.getPericopeTextById(rve.getArPericopeId(), Consts.ARABIC);
+				arabicPericope = arabicPericope.replaceAll("\\s*↳\\s*", System.getProperty("line.separator"));
+				arabicPericope = arabicPericope.replaceAll("\\s*([\u060C\u061b\\.:])", "$1");
+
+				result.append("\"" + arabicPericope  + "\"" + '\t');
+
+				//Info AR
+				result.append("\"" +rve.getArPericopeInfo() + "\"");
+				result.append(System.getProperty("line.separator"));
+
+			}
+		}
+
+
+		return (result!=null)?result.toString():null;
+	}
+
+	public void fileDownloadView() {        
+		InputStream stream;
+		try {
+			if (null != getSearchResult()) {
+				//repositoryBean.getPericopeTextById(pericopeId, langId);
+				stream = new ByteArrayInputStream(resultViewEntity2CVS(getSearchResult()).getBytes("UTF-8"));
+				setDownloadableResult(new DefaultStreamedContent(stream, "text/csv", "results.csv"));
+			} else {
+				setDownloadableResult(null);
+			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 
 }

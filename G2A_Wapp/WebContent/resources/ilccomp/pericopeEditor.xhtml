@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<composite:interface>
+	<composite:attribute name="id" required="true" />
+	<composite:attribute name="lang" type="java.lang.String"
+		required="true" />
+</composite:interface>
+
+<composite:implementation>
+
+	<ui:param name="ccid" value="#{cc.attrs.id}" />
+	<ui:param name="lang" value="#{cc.attrs.lang}" />
+	<ui:param name="editor"
+		value="#{pericopeEditorsHandler.pericopeEditorMap[ccid]}"></ui:param>
+	<h:outputText value="(ccid: #{ccid})">
+	</h:outputText>
+	<br />
+
+	<p:panel rendered="#{not empty editor.selectedPericope}">
+		<h:panelGroup layout="block" rendered="#{lang eq 'gr'}">
+			<ui:repeat var="pericopeText" value="#{editor.precPericopes}">
+				<h:outputText value="#{pericopeText.text}" />
+				<br />
+			</ui:repeat>
+		</h:panelGroup>
+		<h:panelGroup layout="block" style="text-align:right"
+			rendered="#{lang eq 'ar'}">
+			<ui:repeat var="pericopeText" value="#{editor.precPericopes}">
+				<h:outputText value="#{pericopeText.text}" dir="rtl"
+					rendered="#{lang eq 'ar'}" />
+				<br />
+			</ui:repeat>
+		</h:panelGroup>
+		<p:separator></p:separator>
+		<p:growl id="messages_#{ccid}" life="1500"
+			rendered="#{not pericopeEditorsHandler.validateError}" />
+		<p:panel id="panelEditor_#{ccid}">
+			<pe:ckEditor language="#{lang}" id="editor_#{ccid}"
+				value="#{editor.textPericopeInContext}" toolbar="[['Bold','-', '']]">
+				<f:validator for="editor_#{ccid}" 
+					validatorId="it.cnr.ilc.demo.PericopeEditorsHandler" />
+			</pe:ckEditor>
+
+			<p:commandButton value="Salva" id="salva" partialSubmit="true"
+				update="messages_#{ccid} editor_#{ccid} msg_#{ccid}"
+				process="editor_#{ccid} salva"
+				actionListener="#{pericopeEditorsHandler.save}" >
+				    <f:attribute name="salva" value="true" />
+				</p:commandButton>
+			<p:message id="msg_#{ccid}" for="editor_#{ccid}" showDetail="true"></p:message>
+			<p:commandButton value="Clear" type="button" id="clear" partialSubmit="true"
+				update="editor_#{ccid}" process="editor_#{ccid} clear"
+				actionListener="#{pericopeEditorsHandler.clear}" />
+			
+		</p:panel>
+		<p:separator></p:separator>
+		<h:panelGroup layout="block" rendered="#{lang eq 'gr'}">
+			<ui:repeat var="pericopeText" value="#{editor.succPericopes}">
+				<h:outputText value="#{pericopeText.text}" />
+				<br />
+			</ui:repeat>
+		</h:panelGroup>
+		<h:panelGroup layout="block" style="text-align:right"
+			rendered="#{lang eq 'ar'}">
+			<ui:repeat var="pericopeText" value="#{editor.succPericopes}">
+				<h:outputText value="#{pericopeText.text}" dir="rtl"
+					rendered="#{lang eq 'ar'}" />
+				<br />
+			</ui:repeat>
+		</h:panelGroup>
+	</p:panel>
+	<p:panel>
+		<p:scrollPanel mode="native"
+			rendered="#{empty editor.selectedPericope}"
+			style="height:200px;width:500px">
+
+			<h:panelGroup layout="block" rendered="#{lang eq 'gr'}">
+				<ui:repeat var="pericopeText" value="#{editor.pericopeList}">
+					<h:outputText value="#{pericopeText.text}" />
+					<br />
+				</ui:repeat>
+			</h:panelGroup>
+			<h:panelGroup layout="block" style="text-align:right"
+				rendered="#{lang eq 'ar'}">
+				<ui:repeat var="pericopeText" value="#{editor.pericopeList}">
+					<h:outputText value="#{pericopeText.text}" dir="rtl" />
+					<br />
+				</ui:repeat>
+			</h:panelGroup>
+		</p:scrollPanel>
+	</p:panel>
+
+	<p:dialog header="Pericope Detail" widgetVar="pericopeDlg_#{ccid}"
+		resizable="false" width="200" showEffect="explode"
+		hideEffect="explode" id="dialog_#{cc.attrs.id}">
+
+		<h:panelGrid id="display_#{ccid}" columns="2" cellpadding="4">
+
+			<h:outputText value="Text:" />
+			<h:outputText value="#{editor.selectedPericope.text}"
+				id="text_#{ccid}" />
+
+		</h:panelGrid>
+	</p:dialog>
+
+</composite:implementation>
+</html>

@@ -96,7 +96,7 @@ public class XPathUtils {
 
 		Pattern sequencePattern = Pattern.compile("<xm:sequence xmlns:xm=\"(.+?)\" id=\"(?<id>.+?)\" classname=\"(.+?)\">");
 		Pattern elementPattern = Pattern.compile("<xm:element id=\"(?<id>.+?)\" classname=\"(.+?)\">(?<params>.+?)</xm:element>");
-		Pattern paramPattern = Pattern.compile("<xm:param nameconvert=\"(?<name>.+?)\" value=\"(?<value>.*?)\"/>");
+		Pattern paramPattern = Pattern.compile("<xm:param name=\"(?<name>.+?)\" value=\"(?<value>.*?)\"/>");
 
 		HashMap<String, String> parameters = new HashMap<String, String>();
 		//int i = 0;
@@ -123,7 +123,7 @@ public class XPathUtils {
 						//System.err.println("element id" + elementMatcher.group("id"));
 
 
-						Matcher paramMatcher = paramPattern.matcher(elementMatcher.group("params"));
+						Matcher paramMatcher = paramPattern.matcher(elementMatcher.group("params")); //
 						parameters.clear();
 						while (paramMatcher.find()){
 							// System.err.println(paramMatcher.group());
