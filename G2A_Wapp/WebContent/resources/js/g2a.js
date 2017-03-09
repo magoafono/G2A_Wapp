@@ -63,7 +63,7 @@ function resetArabic () {
 	$(".arabic").css('font-size', "1.5em");
 }
 //END NON USATE
-function cophiTest2() {
+function g2aTest2() {
 	var obj = document.getElementById("parallelViewFormId:dataTableId");
 	style = window.getComputedStyle(obj);
 	size = style.getPropertyValue("font-size");

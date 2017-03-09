@@ -6,27 +6,27 @@
 	version="2.1">
 	<application>
 		<resource-bundle>
-			<base-name>it.cnr.ilc.cophi.resources.configPlotino</base-name>
+			<base-name>it.cnr.ilc.g2a.resources.configPlotino</base-name>
 			<var>configPlotino</var>
 		</resource-bundle>
 		<resource-bundle>
-			<base-name>it.cnr.ilc.cophi.resources.configMetafisica</base-name>
+			<base-name>it.cnr.ilc.g2a.resources.configMetafisica</base-name>
 			<var>configMetafisica</var>
 		</resource-bundle>
 		<resource-bundle>
-			<base-name>it.cnr.ilc.cophi.resources.configDetti</base-name>
+			<base-name>it.cnr.ilc.g2a.resources.configDetti</base-name>
 			<var>configDetti</var>
 		</resource-bundle>
 		<resource-bundle>
-			<base-name>it.cnr.ilc.cophi.resources.configRisala</base-name>
+			<base-name>it.cnr.ilc.g2a.resources.configRisala</base-name>
 			<var>configRisala</var>
 		</resource-bundle>
 		<resource-bundle>
-			<base-name>it.cnr.ilc.cophi.resources.messages</base-name>
+			<base-name>it.cnr.ilc.g2a.resources.messages</base-name>
 			<var>msg</var>
 		</resource-bundle>
 		<resource-bundle>
-			<base-name>it.cnr.ilc.cophi.resources.type</base-name>
+			<base-name>it.cnr.ilc.g2a.resources.type</base-name>
 			<var>type</var>
 		</resource-bundle>
 	</application>

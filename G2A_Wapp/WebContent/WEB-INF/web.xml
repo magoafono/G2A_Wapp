@@ -3,7 +3,7 @@
   <display-name>GA Wapp</display-name>
   <filter>
     <filter-name>LoginFilter</filter-name>
-    <filter-class>it.cnr.ilc.cophi.utils.LoginFilter</filter-class>
+    <filter-class>it.cnr.ilc.g2a.utils.LoginFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>LoginFilter</filter-name>
@@ -49,7 +49,7 @@
   </context-param>
   <filter>
     <filter-name>CustomCharacterEncodingFilter</filter-name>
-    <filter-class>it.cnr.ilc.cophi.utils.CustomCharacterEncodingFilter</filter-class>
+    <filter-class>it.cnr.ilc.g2a.utils.CustomCharacterEncodingFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>CustomCharacterEncodingFilter</filter-name>

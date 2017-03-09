@@ -17,7 +17,7 @@ public class BuckwalterToViewConverter {
 	private static HashMap<String, String> buckwalter2ArabicPos;
 	
 	static {
-		buckwalter2ArabicPos = Utils.loadFile2HashMap("/it/cnr/ilc/cophi/resources/buckwalterPos2Arabic.csv");
+		buckwalter2ArabicPos = Utils.loadFile2HashMap("/it/cnr/ilc/g2a/resources/buckwalterPos2Arabic.csv");
 		logger = LogManager.getLogger("BuckwalterToViewConverter");
 	}
 

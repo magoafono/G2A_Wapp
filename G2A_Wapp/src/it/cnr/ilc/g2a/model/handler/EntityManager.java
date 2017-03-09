@@ -472,8 +472,8 @@ public class EntityManager {
 
 
 		//Lexicon
-		InputStream in  = getClass().getClassLoader().getResourceAsStream("/it/cnr/ilc/cophi/resources/Plotino.owl");
-		InputStream in2 = getClass().getClassLoader().getResourceAsStream("/it/cnr/ilc/cophi/resources/Plotino.owl");
+		InputStream in  = getClass().getClassLoader().getResourceAsStream("/it/cnr/ilc/g2a/resources/Plotino.owl");
+		InputStream in2 = getClass().getClassLoader().getResourceAsStream("/it/cnr/ilc/g2a/resources/Plotino.owl");
 		setOntoModel( ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM_MICRO_RULE_INF));
 		getOntoModel().read(in, "RDF/XML");
 		setOntoExplicitModel(ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM));
