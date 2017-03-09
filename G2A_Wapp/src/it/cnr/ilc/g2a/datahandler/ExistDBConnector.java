@@ -41,7 +41,7 @@ public class ExistDBConnector {
 
 	MessageProvider mp = new MessageProvider();
 
-	private static final Logger logger = LogManager.getLogger("ExistDBConnector");
+	private static final Logger log = LogManager.getLogger("ExistDBConnector");
 	
 	private String dbDriver = mp.getValue(Consts.CONFIGNAME, "db_driver");
 	private String dbServerName = mp.getValue(Consts.CONFIGNAME,"db_server");
@@ -197,9 +197,9 @@ public class ExistDBConnector {
 			DatabaseManager.registerDatabase(db);
 			String URL = "xmldb:exist://" + dbServerName + ":" + dbServerPort +  dbServerProtocol +  dbRootName +  dbName;
 			resourceCollection = DatabaseManager.getCollection(URL, dbLogin, dbPassword);
-			logger.debug("getNewCollection() " + URL);
+			log.debug("getNewCollection() " + URL);
 		} else {
-			logger.fatal("No dbName!!!");
+			log.fatal("No dbName!!!");
 		}
 		return resourceCollection;
 	}
@@ -211,15 +211,15 @@ public class ExistDBConnector {
 			if (! connectionsCache.containsKey(dbName)) {
 				resourceCollection = getNewCollection(dbName);
 				if (null != resourceCollection) {
-					logger.debug("Get new collection "  + resourceCollection.getName());
+					log.debug("Get new collection "  + resourceCollection.getName());
 				} else {
-					logger.fatal("Collection not found!");
+					log.fatal("Collection not found!");
 				}
 
 			} else {
 				resourceCollection = connectionsCache.get(dbName);
 				if (! resourceCollection.isOpen()) {
-					logger.debug("Collection is close => get a new one");
+					log.debug("Collection is close => get a new one");
 					resourceCollection = getNewCollection(dbName);
 				}
 			}
@@ -236,14 +236,14 @@ public class ExistDBConnector {
 
 		if (connectionsCache != null) {
 			if (null != resourceCollection) {
-				logger.trace("Store collection");
+				log.trace("Store collection");
 				connectionsCache.put(dbName, resourceCollection);
 			} else {
-				logger.fatal("Error in storeConnection("+ dbName + ", "+ resourceCollection +")");
+				log.fatal("Error in storeConnection("+ dbName + ", "+ resourceCollection +")");
 				throw new XMLDBException();
 			}
 		} else {
-			logger.fatal("Error in storeConnection("+ dbName + ", "+ resourceCollection +"): connections hash map is null!");
+			log.fatal("Error in storeConnection("+ dbName + ", "+ resourceCollection +"): connections hash map is null!");
 		}
 	}
 
@@ -477,7 +477,7 @@ public class ExistDBConnector {
 			String path = "/sequence/sequence";
 			String id = "[@id='"+ pericopeId +"']";
 			String query = "update insert " + node + " into "  + doc + path + id ;
-			//System.err.println("query " + query);
+			log.debug("query " + query);
 			ret = xqRunWithMultipleResults (URI, query);
 			//se non ci sono risultati ret e' una string vuota
 		}
@@ -494,7 +494,7 @@ public class ExistDBConnector {
 			String path = "/xm:sequence/xm:sequence";
 			String id = "[@id='"+ pericopeId +"']";
 			String query = "update replace " + doc + path + id + " with "  + node ;
-			//System.err.println("query: " + query);
+			log.debug("query: " + query);
 			ret = xqRunWithMultipleResults (URI, query);
 			//se non ci sono risultati ret e' una string vuota
 		}
@@ -526,7 +526,7 @@ public class ExistDBConnector {
 			//String xquery = "data(doc('pericopes.xml')//xm:sequence[@id='00301.00312']/xm:element/@ref|doc('pericopes.xml')//xm:sequence[@id='00301.00312']/xm:element/@id)";
 			//String xquery = "data(doc('pericopes.xml')//xm:sequence[@id='00301.00312']/xm:element/@*)";
 			ret = xqRunWithMultipleResults (URI, query);
-			logger.info(query);
+			log.info(query);
 		}
 
 		//se non ci sono risultati ret e' una string vuota
@@ -563,7 +563,7 @@ public class ExistDBConnector {
 			//			String id = "@value='"+ tokenId +"']/parent::node()/xm:param[@name='analysisRef']/@value"; //piu' lento che con il sibling
 			String query = "data(" + doc + path + id + ")";
 
-			//System.err.println(query);
+			log.debug(query);
 			ret = xqRunWithSingleResult(URI, query);
 			//se non ci sono risultati ret e' una string vuota
 		}
@@ -604,8 +604,7 @@ public class ExistDBConnector {
 			//String id = "";
 			//			String id = "@value='"+ tokenId +"']/parent::node()/xm:param[@name='analysisRef']/@value"; //piu' lento che con il sibling
 			String query = "data(" + doc + path + id + ")";
-			logger.debug(query);
-			//System.err.println(query);
+			log.debug(query);
 			ret = xqRunWithSingleResult(URI, query);
 			//se non ci sono risultati ret e' una string vuota
 		}
@@ -634,9 +633,9 @@ public class ExistDBConnector {
 			//			String id = "@value='"+ tokenId +"']/parent::node()/xm:param[@name='analysisRef']/@value"; //piu' lento che con il sibling
 			String query = "data(" + doc + path + id + ")";
 
-			//System.err.print(query);
+			log.debug(query);
 			ret = xqRunWithSingleResult(URI, query);
-			//System.err.println(" => " + ret);
+			log.debug("return value " + ret);
 		}
 
 		return ret;
@@ -1072,7 +1071,7 @@ public class ExistDBConnector {
 			ret = xqs.query(xquery);
 			long end_time1 = System.currentTimeMillis();
 			double difference1 = (end_time1 - start_time1);///1e6;
-			logger.debug("xqExecute " + xquery + " in " + difference1 + "ms");
+			log.debug("xqExecute " + xquery + " in " + difference1 + "ms");
 		} catch (XMLDBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1190,14 +1189,14 @@ public class ExistDBConnector {
 			//	dbconn.searchTokenIdByParameter("aristotele/doc/greek", Arrays.asList(""), Arrays.asList(""), Consts.GREEK);
 			long end_time1 = System.currentTimeMillis();
 			double difference1 = (end_time1 - start_time1);///1e6;
-			System.err.println( difference1 + " (" + ret +")");
+			log.debug( difference1 + " (" + ret +")");
 		}/*/
 		/*System.err.println(dbconn.xqRunWithMultipleResults("xmldb:exist://localhost:8085/exist/xmlrpc/db/ga/new_GA/doc/bada/", 
 			"doc('pericopes.xml')//xm:sequence[@id='00301.00312']/child::node()"));/**/
 		//System.err.println(dbconn.xqRunAsDomWithMultipleResults("xmldb:exist://localhost:8085/exist/xmlrpc/db/ga/new_GA/doc/bada/", 
 		//"doc('pericopes.xml')//xm:sequence[@id='00301.00312']/*"));
 		//dbconn.searchAnalysisAttibutesById("new_GA/doc/bada", "2769");
-		System.err.println("Done.");
+		log.debug("Done.");
 
 	}
 

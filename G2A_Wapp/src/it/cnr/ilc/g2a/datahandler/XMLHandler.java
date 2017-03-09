@@ -8,6 +8,8 @@ import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument;
 
 import java.util.HashMap;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
 import org.apache.xmlbeans.XmlOptions;
@@ -28,6 +30,8 @@ public  class XMLHandler  {
 	 * @return XMLResource
 	 * @throws XMLDBException 
 	 */
+	private static final Logger log = LogManager.getLogger("XMLHandler");
+
 	public XMLResource getResource(String dbName, String resourceName) {
 
 		XMLResource xr = null;
@@ -41,7 +45,7 @@ public  class XMLHandler  {
 				e.printStackTrace();
 			} catch (java.lang.ClassCastException ee) {
 				ee.printStackTrace();	
-				System.err.println("dbName (" + dbName + ") resourceName (" + resourceName + ")");
+				log.error("dbName (" + dbName + ") resourceName (" + resourceName + ")");
 			}
 		}
 
@@ -71,6 +75,7 @@ public  class XMLHandler  {
 				}
 			} catch (XMLDBException e) {
 				e.printStackTrace();
+				log.error(e);
 			}
 
 		}
@@ -101,14 +106,15 @@ public  class XMLHandler  {
 					//per importare i vecchi XML
 					xmlDoc = (XmlObject) AddDocument.Factory.parse(node);
 				} else {
-					System.err.println("XMLHandler.loadDocument() error for " + document.toString());
+					log.error("XMLHandler.loadDocument() error for " + document.toString());
 				}
 			}  else {
-				System.err.println("XMLHandler.loadDocument() error for resource " + resource);
+				log.error("XMLHandler.loadDocument() error for resource " + resource);
 
 			}
 		} catch (XmlException e) {
 			e.printStackTrace();
+			log.error(e);
 		}
 		return xmlDoc;
 
@@ -125,10 +131,11 @@ public  class XMLHandler  {
 				//per importare i vecchi XML
 				xmlDoc = (XmlObject) AddDocument.Factory.parse(node);
 			} else {
-				System.err.println("XMLHandler.loadDocument() error for " + document.toString());
+				log.error("XMLHandler.loadDocument() error for " + document.toString());
 			}
 		} catch (XmlException e) {
 			e.printStackTrace();
+			log.error(e);
 		}
 
 		return xmlDoc;
