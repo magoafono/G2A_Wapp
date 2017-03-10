@@ -1,18 +1,18 @@
 /*
  * An XML document type.
  * Localname: sequence
- * Namespace: http://ilc.cnr.it/Cophi/Model/xmlmapping
- * Java type: it.cnr.ilc.cophi.model.xmlmapping.SequenceDocument
+ * Namespace: http://ilc.cnr.it/gtoa/Model/xmlmapping
+ * Java type: it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument
  *
  * Automatically generated - do not modify.
  */
-package it.cnr.ilc.g2a.model.xmlmapping.impl;
+package it.cnr.ilc.gtoa.model.xmlmapping.impl;
 /**
- * A document containing one sequence(@http://ilc.cnr.it/Cophi/Model/xmlmapping) element.
+ * A document containing one sequence(@http://ilc.cnr.it/gtoa/Model/xmlmapping) element.
  *
  * This is a complex type.
  */
-public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument
+public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument
 {
     private static final long serialVersionUID = 1L;
     
@@ -22,19 +22,19 @@ public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCom
     }
     
     private static final javax.xml.namespace.QName SEQUENCE$0 = 
-        new javax.xml.namespace.QName("http://ilc.cnr.it/Cophi/Model/xmlmapping", "sequence");
+        new javax.xml.namespace.QName("http://ilc.cnr.it/gtoa/Model/xmlmapping", "sequence");
     
     
     /**
      * Gets the "sequence" element
      */
-    public it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence getSequence()
+    public it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence getSequence()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence target = null;
-            target = (it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence)get_store().find_element_user(SEQUENCE$0, 0);
+            it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence target = null;
+            target = (it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence)get_store().find_element_user(SEQUENCE$0, 0);
             if (target == null)
             {
                 return null;
@@ -46,7 +46,7 @@ public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCom
     /**
      * Sets the "sequence" element
      */
-    public void setSequence(it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence sequence)
+    public void setSequence(it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence sequence)
     {
         generatedSetterHelperImpl(sequence, SEQUENCE$0, 0, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_SINGLETON);
     }
@@ -54,22 +54,22 @@ public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCom
     /**
      * Appends and returns a new empty "sequence" element
      */
-    public it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence addNewSequence()
+    public it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence addNewSequence()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence target = null;
-            target = (it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence)get_store().add_element_user(SEQUENCE$0);
+            it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence target = null;
+            target = (it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence)get_store().add_element_user(SEQUENCE$0);
             return target;
         }
     }
     /**
-     * An XML sequence(@http://ilc.cnr.it/Cophi/Model/xmlmapping).
+     * An XML sequence(@http://ilc.cnr.it/gtoa/Model/xmlmapping).
      *
      * This is a complex type.
      */
-    public static class SequenceImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence
+    public static class SequenceImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence
     {
         private static final long serialVersionUID = 1L;
         
@@ -79,11 +79,11 @@ public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCom
         }
         
         private static final javax.xml.namespace.QName SEQUENCE$0 = 
-            new javax.xml.namespace.QName("http://ilc.cnr.it/Cophi/Model/xmlmapping", "sequence");
+            new javax.xml.namespace.QName("http://ilc.cnr.it/gtoa/Model/xmlmapping", "sequence");
         private static final javax.xml.namespace.QName ELEMENT$2 = 
-            new javax.xml.namespace.QName("http://ilc.cnr.it/Cophi/Model/xmlmapping", "element");
+            new javax.xml.namespace.QName("http://ilc.cnr.it/gtoa/Model/xmlmapping", "element");
         private static final javax.xml.namespace.QName PARAM$4 = 
-            new javax.xml.namespace.QName("http://ilc.cnr.it/Cophi/Model/xmlmapping", "param");
+            new javax.xml.namespace.QName("http://ilc.cnr.it/gtoa/Model/xmlmapping", "param");
         private static final javax.xml.namespace.QName ID$6 = 
             new javax.xml.namespace.QName("", "id");
         private static final javax.xml.namespace.QName CLASSNAME$8 = 
@@ -97,14 +97,14 @@ public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCom
         /**
          * Gets array of all "sequence" elements
          */
-        public it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence[] getSequenceArray()
+        public it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence[] getSequenceArray()
         {
             synchronized (monitor())
             {
                 check_orphaned();
                 java.util.List targetList = new java.util.ArrayList();
                 get_store().find_all_element_users(SEQUENCE$0, targetList);
-                it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence[] result = new it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence[targetList.size()];
+                it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence[] result = new it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence[targetList.size()];
                 targetList.toArray(result);
                 return result;
             }
@@ -113,13 +113,13 @@ public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCom
         /**
          * Gets ith "sequence" element
          */
-        public it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence getSequenceArray(int i)
+        public it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence getSequenceArray(int i)
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence target = null;
-                target = (it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence)get_store().find_element_user(SEQUENCE$0, i);
+                it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence target = null;
+                target = (it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence)get_store().find_element_user(SEQUENCE$0, i);
                 if (target == null)
                 {
                     throw new IndexOutOfBoundsException();
@@ -143,7 +143,7 @@ public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCom
         /**
          * Sets array of all "sequence" element  WARNING: This method is not atomicaly synchronized.
          */
-        public void setSequenceArray(it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence[] sequenceArray)
+        public void setSequenceArray(it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence[] sequenceArray)
         {
             check_orphaned();
             arraySetterHelper(sequenceArray, SEQUENCE$0);
@@ -152,31 +152,21 @@ public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCom
         /**
          * Sets ith "sequence" element
          */
-        public void setSequenceArray(int i, it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence sequence)
+        public void setSequenceArray(int i, it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence sequence)
         {
-            synchronized (monitor())
-            {
-                check_orphaned();
-                it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence target = null;
-                target = (it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence)get_store().find_element_user(SEQUENCE$0, i);
-                if (target == null)
-                {
-                    throw new IndexOutOfBoundsException();
-                }
-                target.set(sequence);
-            }
+            generatedSetterHelperImpl(sequence, SEQUENCE$0, i, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_ARRAYITEM);
         }
         
         /**
          * Inserts and returns a new empty value (as xml) as the ith "sequence" element
          */
-        public it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence insertNewSequence(int i)
+        public it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence insertNewSequence(int i)
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence target = null;
-                target = (it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence)get_store().insert_element_user(SEQUENCE$0, i);
+                it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence target = null;
+                target = (it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence)get_store().insert_element_user(SEQUENCE$0, i);
                 return target;
             }
         }
@@ -184,13 +174,13 @@ public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCom
         /**
          * Appends and returns a new empty value (as xml) as the last "sequence" element
          */
-        public it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence addNewSequence()
+        public it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence addNewSequence()
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence target = null;
-                target = (it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence)get_store().add_element_user(SEQUENCE$0);
+                it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence target = null;
+                target = (it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence)get_store().add_element_user(SEQUENCE$0);
                 return target;
             }
         }
@@ -210,14 +200,14 @@ public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCom
         /**
          * Gets array of all "element" elements
          */
-        public it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element[] getElementArray()
+        public it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element[] getElementArray()
         {
             synchronized (monitor())
             {
                 check_orphaned();
                 java.util.List targetList = new java.util.ArrayList();
                 get_store().find_all_element_users(ELEMENT$2, targetList);
-                it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element[] result = new it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element[targetList.size()];
+                it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element[] result = new it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element[targetList.size()];
                 targetList.toArray(result);
                 return result;
             }
@@ -226,13 +216,13 @@ public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCom
         /**
          * Gets ith "element" element
          */
-        public it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element getElementArray(int i)
+        public it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element getElementArray(int i)
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element target = null;
-                target = (it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element)get_store().find_element_user(ELEMENT$2, i);
+                it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element target = null;
+                target = (it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element)get_store().find_element_user(ELEMENT$2, i);
                 if (target == null)
                 {
                     throw new IndexOutOfBoundsException();
@@ -256,7 +246,7 @@ public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCom
         /**
          * Sets array of all "element" element  WARNING: This method is not atomicaly synchronized.
          */
-        public void setElementArray(it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element[] elementArray)
+        public void setElementArray(it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element[] elementArray)
         {
             check_orphaned();
             arraySetterHelper(elementArray, ELEMENT$2);
@@ -265,31 +255,21 @@ public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCom
         /**
          * Sets ith "element" element
          */
-        public void setElementArray(int i, it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element element)
+        public void setElementArray(int i, it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element element)
         {
-            synchronized (monitor())
-            {
-                check_orphaned();
-                it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element target = null;
-                target = (it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element)get_store().find_element_user(ELEMENT$2, i);
-                if (target == null)
-                {
-                    throw new IndexOutOfBoundsException();
-                }
-                target.set(element);
-            }
+            generatedSetterHelperImpl(element, ELEMENT$2, i, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_ARRAYITEM);
         }
         
         /**
          * Inserts and returns a new empty value (as xml) as the ith "element" element
          */
-        public it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element insertNewElement(int i)
+        public it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element insertNewElement(int i)
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element target = null;
-                target = (it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element)get_store().insert_element_user(ELEMENT$2, i);
+                it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element target = null;
+                target = (it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element)get_store().insert_element_user(ELEMENT$2, i);
                 return target;
             }
         }
@@ -297,13 +277,13 @@ public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCom
         /**
          * Appends and returns a new empty value (as xml) as the last "element" element
          */
-        public it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element addNewElement()
+        public it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element addNewElement()
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element target = null;
-                target = (it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element)get_store().add_element_user(ELEMENT$2);
+                it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element target = null;
+                target = (it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element)get_store().add_element_user(ELEMENT$2);
                 return target;
             }
         }
@@ -323,14 +303,14 @@ public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCom
         /**
          * Gets array of all "param" elements
          */
-        public it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param[] getParamArray()
+        public it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param[] getParamArray()
         {
             synchronized (monitor())
             {
                 check_orphaned();
                 java.util.List targetList = new java.util.ArrayList();
                 get_store().find_all_element_users(PARAM$4, targetList);
-                it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param[] result = new it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param[targetList.size()];
+                it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param[] result = new it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param[targetList.size()];
                 targetList.toArray(result);
                 return result;
             }
@@ -339,13 +319,13 @@ public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCom
         /**
          * Gets ith "param" element
          */
-        public it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param getParamArray(int i)
+        public it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param getParamArray(int i)
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param target = null;
-                target = (it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param)get_store().find_element_user(PARAM$4, i);
+                it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param target = null;
+                target = (it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param)get_store().find_element_user(PARAM$4, i);
                 if (target == null)
                 {
                     throw new IndexOutOfBoundsException();
@@ -369,7 +349,7 @@ public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCom
         /**
          * Sets array of all "param" element  WARNING: This method is not atomicaly synchronized.
          */
-        public void setParamArray(it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param[] paramArray)
+        public void setParamArray(it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param[] paramArray)
         {
             check_orphaned();
             arraySetterHelper(paramArray, PARAM$4);
@@ -378,31 +358,21 @@ public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCom
         /**
          * Sets ith "param" element
          */
-        public void setParamArray(int i, it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param param)
+        public void setParamArray(int i, it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param param)
         {
-            synchronized (monitor())
-            {
-                check_orphaned();
-                it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param target = null;
-                target = (it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param)get_store().find_element_user(PARAM$4, i);
-                if (target == null)
-                {
-                    throw new IndexOutOfBoundsException();
-                }
-                target.set(param);
-            }
+            generatedSetterHelperImpl(param, PARAM$4, i, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_ARRAYITEM);
         }
         
         /**
          * Inserts and returns a new empty value (as xml) as the ith "param" element
          */
-        public it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param insertNewParam(int i)
+        public it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param insertNewParam(int i)
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param target = null;
-                target = (it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param)get_store().insert_element_user(PARAM$4, i);
+                it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param target = null;
+                target = (it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param)get_store().insert_element_user(PARAM$4, i);
                 return target;
             }
         }
@@ -410,13 +380,13 @@ public class SequenceDocumentImpl extends org.apache.xmlbeans.impl.values.XmlCom
         /**
          * Appends and returns a new empty value (as xml) as the last "param" element
          */
-        public it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param addNewParam()
+        public it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param addNewParam()
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param target = null;
-                target = (it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param)get_store().add_element_user(PARAM$4);
+                it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param target = null;
+                target = (it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param)get_store().add_element_user(PARAM$4);
                 return target;
             }
         }

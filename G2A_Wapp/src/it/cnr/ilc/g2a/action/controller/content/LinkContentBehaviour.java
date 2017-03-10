@@ -8,9 +8,9 @@ import it.cnr.ilc.g2a.model.ReferenceSet;
 import it.cnr.ilc.g2a.model.handler.EntityTypeHandler;
 import it.cnr.ilc.g2a.model.text.PericopeText;
 import it.cnr.ilc.g2a.model.text.RefPericopeText;
-import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument;
-import it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element;
-import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence;
+import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument;
+import it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element;
+import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence;
 
 import java.util.ArrayList;
 import java.util.HashMap;

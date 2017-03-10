@@ -7,10 +7,10 @@ import it.cnr.ilc.g2a.model.handler.EntityTypeHandler;
 import it.cnr.ilc.g2a.model.text.PericopeText;
 import it.cnr.ilc.g2a.model.text.RefTokenText;
 import it.cnr.ilc.g2a.model.text.TokenText;
-import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument;
-import it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element;
-import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence;
-import it.cnr.ilc.g2a.utils.CophiSort;
+import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument;
+import it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element;
+import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence;
+import it.cnr.ilc.g2a.utils.G2ASort;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -66,7 +66,7 @@ public class PericopeTextContentBehaviour extends BaseContent implements Content
 					 * http://cdi.uvm.edu/exist/update_ext.xml#d50e288
 					 */
 
-					Collections.sort(lort, CophiSort.TOKENREF_FROM_ORDER);
+					Collections.sort(lort, G2ASort.TOKENREF_FROM_ORDER);
 					pt.setValue(lort);
 					lop.put(pt.getId(),pt);
 				}

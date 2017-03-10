@@ -6,7 +6,7 @@ import org.jdom2.Document;
 import org.xmldb.api.base.Resource;
 import org.xmldb.api.modules.XMLResource;
 
-import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument;
+import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument;
 
 
 public interface ResourceBehaviour {

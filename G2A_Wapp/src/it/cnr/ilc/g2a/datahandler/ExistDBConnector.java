@@ -941,7 +941,7 @@ public class ExistDBConnector {
 		try {
 			Collection col = getCollection(dbName);
 			xqs = (XQueryService) col.getService("XPathQueryService", "1.0");
-			xqs.setNamespace("xm", "http://ilc.cnr.it/Cophi/Model/xmlmapping");
+			xqs.setNamespace("xm", "http://ilc.cnr.it/gtoa/Model/xmlmapping");
 			xqs.setProperty("indent", "no");
 
 		} catch (XMLDBException e) {

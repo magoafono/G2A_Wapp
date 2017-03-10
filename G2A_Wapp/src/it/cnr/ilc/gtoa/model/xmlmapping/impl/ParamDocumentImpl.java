@@ -1,18 +1,18 @@
 /*
  * An XML document type.
  * Localname: param
- * Namespace: http://ilc.cnr.it/Cophi/Model/xmlmapping
- * Java type: it.cnr.ilc.cophi.model.xmlmapping.ParamDocument
+ * Namespace: http://ilc.cnr.it/gtoa/Model/xmlmapping
+ * Java type: it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument
  *
  * Automatically generated - do not modify.
  */
-package it.cnr.ilc.g2a.model.xmlmapping.impl;
+package it.cnr.ilc.gtoa.model.xmlmapping.impl;
 /**
- * A document containing one param(@http://ilc.cnr.it/Cophi/Model/xmlmapping) element.
+ * A document containing one param(@http://ilc.cnr.it/gtoa/Model/xmlmapping) element.
  *
  * This is a complex type.
  */
-public class ParamDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements it.cnr.ilc.g2a.model.xmlmapping.ParamDocument
+public class ParamDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument
 {
     private static final long serialVersionUID = 1L;
     
@@ -22,19 +22,19 @@ public class ParamDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComple
     }
     
     private static final javax.xml.namespace.QName PARAM$0 = 
-        new javax.xml.namespace.QName("http://ilc.cnr.it/Cophi/Model/xmlmapping", "param");
+        new javax.xml.namespace.QName("http://ilc.cnr.it/gtoa/Model/xmlmapping", "param");
     
     
     /**
      * Gets the "param" element
      */
-    public it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param getParam()
+    public it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param getParam()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param target = null;
-            target = (it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param)get_store().find_element_user(PARAM$0, 0);
+            it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param target = null;
+            target = (it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param)get_store().find_element_user(PARAM$0, 0);
             if (target == null)
             {
                 return null;
@@ -46,7 +46,7 @@ public class ParamDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComple
     /**
      * Sets the "param" element
      */
-    public void setParam(it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param param)
+    public void setParam(it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param param)
     {
         generatedSetterHelperImpl(param, PARAM$0, 0, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_SINGLETON);
     }
@@ -54,22 +54,22 @@ public class ParamDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComple
     /**
      * Appends and returns a new empty "param" element
      */
-    public it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param addNewParam()
+    public it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param addNewParam()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param target = null;
-            target = (it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param)get_store().add_element_user(PARAM$0);
+            it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param target = null;
+            target = (it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param)get_store().add_element_user(PARAM$0);
             return target;
         }
     }
     /**
-     * An XML param(@http://ilc.cnr.it/Cophi/Model/xmlmapping).
+     * An XML param(@http://ilc.cnr.it/gtoa/Model/xmlmapping).
      *
      * This is a complex type.
      */
-    public static class ParamImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param
+    public static class ParamImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param
     {
         private static final long serialVersionUID = 1L;
         

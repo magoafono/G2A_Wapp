@@ -1,6 +1,6 @@
 package it.cnr.ilc.g2a.action.controller.content;
 
-import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument;
+import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument;
 
 public abstract class BaseContent {
 

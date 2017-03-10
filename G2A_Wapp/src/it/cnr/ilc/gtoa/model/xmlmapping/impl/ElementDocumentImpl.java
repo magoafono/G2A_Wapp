@@ -1,18 +1,18 @@
 /*
  * An XML document type.
  * Localname: element
- * Namespace: http://ilc.cnr.it/Cophi/Model/xmlmapping
- * Java type: it.cnr.ilc.cophi.model.xmlmapping.ElementDocument
+ * Namespace: http://ilc.cnr.it/gtoa/Model/xmlmapping
+ * Java type: it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument
  *
  * Automatically generated - do not modify.
  */
-package it.cnr.ilc.g2a.model.xmlmapping.impl;
+package it.cnr.ilc.gtoa.model.xmlmapping.impl;
 /**
- * A document containing one element(@http://ilc.cnr.it/Cophi/Model/xmlmapping) element.
+ * A document containing one element(@http://ilc.cnr.it/gtoa/Model/xmlmapping) element.
  *
  * This is a complex type.
  */
-public class ElementDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements it.cnr.ilc.g2a.model.xmlmapping.ElementDocument
+public class ElementDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument
 {
     private static final long serialVersionUID = 1L;
     
@@ -22,19 +22,19 @@ public class ElementDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComp
     }
     
     private static final javax.xml.namespace.QName ELEMENT$0 = 
-        new javax.xml.namespace.QName("http://ilc.cnr.it/Cophi/Model/xmlmapping", "element");
+        new javax.xml.namespace.QName("http://ilc.cnr.it/gtoa/Model/xmlmapping", "element");
     
     
     /**
      * Gets the "element" element
      */
-    public it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element getElement()
+    public it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element getElement()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element target = null;
-            target = (it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element)get_store().find_element_user(ELEMENT$0, 0);
+            it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element target = null;
+            target = (it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element)get_store().find_element_user(ELEMENT$0, 0);
             if (target == null)
             {
                 return null;
@@ -46,7 +46,7 @@ public class ElementDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComp
     /**
      * Sets the "element" element
      */
-    public void setElement(it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element element)
+    public void setElement(it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element element)
     {
         generatedSetterHelperImpl(element, ELEMENT$0, 0, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_SINGLETON);
     }
@@ -54,22 +54,22 @@ public class ElementDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComp
     /**
      * Appends and returns a new empty "element" element
      */
-    public it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element addNewElement()
+    public it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element addNewElement()
     {
         synchronized (monitor())
         {
             check_orphaned();
-            it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element target = null;
-            target = (it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element)get_store().add_element_user(ELEMENT$0);
+            it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element target = null;
+            target = (it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element)get_store().add_element_user(ELEMENT$0);
             return target;
         }
     }
     /**
-     * An XML element(@http://ilc.cnr.it/Cophi/Model/xmlmapping).
+     * An XML element(@http://ilc.cnr.it/gtoa/Model/xmlmapping).
      *
      * This is a complex type.
      */
-    public static class ElementImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element
+    public static class ElementImpl extends org.apache.xmlbeans.impl.values.XmlComplexContentImpl implements it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element
     {
         private static final long serialVersionUID = 1L;
         
@@ -79,7 +79,7 @@ public class ElementDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComp
         }
         
         private static final javax.xml.namespace.QName PARAM$0 = 
-            new javax.xml.namespace.QName("http://ilc.cnr.it/Cophi/Model/xmlmapping", "param");
+            new javax.xml.namespace.QName("http://ilc.cnr.it/gtoa/Model/xmlmapping", "param");
         private static final javax.xml.namespace.QName ID$2 = 
             new javax.xml.namespace.QName("", "id");
         private static final javax.xml.namespace.QName CLASSNAME$4 = 
@@ -95,14 +95,14 @@ public class ElementDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComp
         /**
          * Gets array of all "param" elements
          */
-        public it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param[] getParamArray()
+        public it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param[] getParamArray()
         {
             synchronized (monitor())
             {
                 check_orphaned();
                 java.util.List targetList = new java.util.ArrayList();
                 get_store().find_all_element_users(PARAM$0, targetList);
-                it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param[] result = new it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param[targetList.size()];
+                it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param[] result = new it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param[targetList.size()];
                 targetList.toArray(result);
                 return result;
             }
@@ -111,13 +111,13 @@ public class ElementDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComp
         /**
          * Gets ith "param" element
          */
-        public it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param getParamArray(int i)
+        public it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param getParamArray(int i)
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param target = null;
-                target = (it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param)get_store().find_element_user(PARAM$0, i);
+                it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param target = null;
+                target = (it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param)get_store().find_element_user(PARAM$0, i);
                 if (target == null)
                 {
                     throw new IndexOutOfBoundsException();
@@ -141,7 +141,7 @@ public class ElementDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComp
         /**
          * Sets array of all "param" element  WARNING: This method is not atomicaly synchronized.
          */
-        public void setParamArray(it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param[] paramArray)
+        public void setParamArray(it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param[] paramArray)
         {
             check_orphaned();
             arraySetterHelper(paramArray, PARAM$0);
@@ -150,31 +150,21 @@ public class ElementDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComp
         /**
          * Sets ith "param" element
          */
-        public void setParamArray(int i, it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param param)
+        public void setParamArray(int i, it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param param)
         {
-            synchronized (monitor())
-            {
-                check_orphaned();
-                it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param target = null;
-                target = (it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param)get_store().find_element_user(PARAM$0, i);
-                if (target == null)
-                {
-                    throw new IndexOutOfBoundsException();
-                }
-                target.set(param);
-            }
+            generatedSetterHelperImpl(param, PARAM$0, i, org.apache.xmlbeans.impl.values.XmlObjectBase.KIND_SETTERHELPER_ARRAYITEM);
         }
         
         /**
          * Inserts and returns a new empty value (as xml) as the ith "param" element
          */
-        public it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param insertNewParam(int i)
+        public it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param insertNewParam(int i)
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param target = null;
-                target = (it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param)get_store().insert_element_user(PARAM$0, i);
+                it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param target = null;
+                target = (it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param)get_store().insert_element_user(PARAM$0, i);
                 return target;
             }
         }
@@ -182,13 +172,13 @@ public class ElementDocumentImpl extends org.apache.xmlbeans.impl.values.XmlComp
         /**
          * Appends and returns a new empty value (as xml) as the last "param" element
          */
-        public it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param addNewParam()
+        public it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param addNewParam()
         {
             synchronized (monitor())
             {
                 check_orphaned();
-                it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param target = null;
-                target = (it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param)get_store().add_element_user(PARAM$0);
+                it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param target = null;
+                target = (it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param)get_store().add_element_user(PARAM$0);
                 return target;
             }
         }

@@ -1,7 +1,7 @@
 package it.cnr.ilc.g2a.action.controller.resource;
 
 import it.cnr.ilc.g2a.datahandler.XMLHandler;
-import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument;
+import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument;
 
 import java.io.IOException;
 import java.util.HashMap;

@@ -2,8 +2,8 @@ package it.cnr.ilc.g2a.action.controller.content;
 
 import it.cnr.ilc.g2a.model.Reference;
 import it.cnr.ilc.g2a.model.ReferenceSet;
-import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument;
-import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence;
+import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument;
+import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence;
 
 import java.util.HashMap;
 import java.util.List;

@@ -9,7 +9,7 @@ import it.cnr.ilc.g2a.model.analysis.AnalysisDB;
 import it.cnr.ilc.g2a.model.analysis.AnalysisDelegate;
 import it.cnr.ilc.g2a.model.analysis.AnalysisSet;
 import it.cnr.ilc.g2a.model.analysis.BaseAnalysis;
-import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument;
+import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument;
 import it.cnr.ilc.g2a.utils.Consts;
 import it.cnr.ilc.g2a.utils.MessageProvider;
 

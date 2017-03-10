@@ -2,10 +2,10 @@ package it.cnr.ilc.g2a.action.controller.importxml;
 
 import it.cnr.ilc.g2a.datahandler.XMLHandler;
 import it.cnr.ilc.g2a.model.importxml.xmlmapping.AddDocument;
-import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument;
-import it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element;
-import it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param;
-import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence;
+import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument;
+import it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element;
+import it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param;
+import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence;
 import it.cnr.ilc.g2a.utils.Utils;
 
 import java.io.FileNotFoundException;

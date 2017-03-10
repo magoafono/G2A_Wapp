@@ -2,8 +2,8 @@ package it.cnr.ilc.g2a.action.controller.content;
 
 import it.cnr.ilc.g2a.model.Reference;
 import it.cnr.ilc.g2a.model.ReferenceSet;
-import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument;
-import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence;
+import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument;
+import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -127,13 +127,13 @@ public class ContextContent<T> {
 
 		/* per togliere la dichiarazione del namespace */
 		Map prefixes = new HashMap();
-		prefixes.put("xm", "http://ilc.cnr.it/Cophi/Model/xmlmapping");
+		prefixes.put("xm", "http://ilc.cnr.it/gtoa/Model/xmlmapping");
 		opts.setSaveImplicitNamespaces(prefixes);
 
 		/*
 		 * per togliere il prefix da ogni tag ma funziona se non usata insieme alla setSaveImplicitNamespaces!!!
 		HashMap suggestedPrefixes = new HashMap();
-		suggestedPrefixes.put("http://ilc.cnr.it/Cophi/Model/xmlmapping", "");
+		suggestedPrefixes.put("http://ilc.cnr.it/G2A/Model/xmlmapping", "");
 		opts.setSaveSuggestedPrefixes(suggestedPrefixes);
 		 */
 		setXmlString(seq.xmlText(opts));

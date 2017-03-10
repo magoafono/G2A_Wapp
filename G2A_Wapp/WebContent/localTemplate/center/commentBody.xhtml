@@ -1,179 +1,179 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
 
 
-	<p:growl id="onSubmitMessage" for="onSubmitMessage" life="1000" />
-	<p:growl id="selectBeforeMessage" for="selectBeforeMessage" life="1000" />
+    <p:growl id="onSubmitMessage" for="onSubmitMessage" life="1000" />
+    <p:growl id="selectBeforeMessage" for="selectBeforeMessage" life="1000" />
 
-	<h:form id="pericopesTextForm">
-		<h:outputScript name="selection.js" library="js"></h:outputScript>
-		<h:inputHidden id="greektext" value="#{commentViewBean.greekText}"></h:inputHidden>
-		<h:inputHidden id="arabictext" value="#{commentViewBean.arabicText}"
-			style="direction:rtl; text-align:right"></h:inputHidden>
+    <h:form id="pericopesTextForm">
+        <h:outputScript name="selection.js" library="js"></h:outputScript>
+        <h:inputHidden id="greektext" value="#{commentViewBean.greekText}"></h:inputHidden>
+        <h:inputHidden id="arabictext" value="#{commentViewBean.arabicText}"  
+                       style="direction:rtl; text-align:right"></h:inputHidden>
 
-		<div align="center">
-			<p:panelGrid id="tabella_pg" style="width:70%;"
-				styleClass="tableNoBorder">
+        <div align="center">
+            <p:panelGrid id="tabella_pg" style="width:70%;"
+                         styleClass="tableNoBorder">
 
-				<f:facet name="header">
-					<p:row>
-						<p:column>
-			Greek Pericope: #{commentViewBean.selectedLinkViewEntity.greekPericopeHidden == 'false'?commentViewBean.selectedLinkViewEntity.greekPericopeInfo:''}
-					</p:column>
-						<p:column>
-			Arabic Pericope: #{commentViewBean.selectedLinkViewEntity.arabicPericopeHidden == 'false'?commentViewBean.selectedLinkViewEntity.arabicPericopeInfo:''}
-					</p:column>
-					</p:row>
-				</f:facet>
-				<p:row>
-					<p:column style="padding:2px;">
-						<p:inputTextarea id="greektextarea" styleClass="greek"
-							style="width:100%;height:150px;font-size:#{loginBean.greekFontSize}"
-							value="#{commentViewBean.sharedBean.selectedLinkViewEntity.greekPericopeHidden ?'':commentViewBean.getGreekPericopeText(commentViewBean.sharedBean.selectedLinkViewEntity.greekPericopeRefId)}"
-							onblur="greekselection();return false;"
-							readonly="#{commentViewBean.selectedComment eq null}" />
-					</p:column>
-					<p:column>
-						<p:inputTextarea id="arabictextarea" styleClass="arabic"
-							style="width:100%;height:150px;font-size:#{loginBean.arabicFontSize}"
-							value="#{commentViewBean.sharedBean.selectedLinkViewEntity.arabicPericopeHidden ?'':commentViewBean.getArabicPericopeText(commentViewBean.sharedBean.selectedLinkViewEntity.arabicPericopeRefId)}"
-							onblur="arabicselection();return false;"
-							readonly="#{commentViewBean.selectedComment eq null}" />
+                <f:facet name="header">
+                    <p:row>
+                        <p:column>
+                            Greek Pericope: #{commentViewBean.selectedLinkViewEntity.greekPericopeHidden == 'false'?commentViewBean.selectedLinkViewEntity.greekPericopeInfo:''}
+                        </p:column>
+                        <p:column>
+                            Arabic Pericope: #{commentViewBean.selectedLinkViewEntity.arabicPericopeHidden == 'false'?commentViewBean.selectedLinkViewEntity.arabicPericopeInfo:''}
+                        </p:column>
+                    </p:row>
+                </f:facet>
+                <p:row>
+                    <p:column style="padding:2px;">
+                        <p:inputTextarea id="greektextarea" styleClass="greek"
+                                         style="width:100%;height:150px;font-size:#{loginBean.greekFontSize}"
+                                         value="#{commentViewBean.sharedBean.selectedLinkViewEntity.greekPericopeHidden ?'':commentViewBean.getGreekPericopeText(commentViewBean.sharedBean.selectedLinkViewEntity.greekPericopeRefId)}"
+                                         onblur="greekselection();return false;"
+                                         readonly="#{commentViewBean.selectedComment eq null}" />
+                    </p:column>
+                    <p:column>
+                        <p:inputTextarea id="arabictextarea" styleClass="arabic"
+                                         style="width:100%;height:150px;font-size:#{loginBean.arabicFontSize}"
+                                         value="#{commentViewBean.sharedBean.selectedLinkViewEntity.arabicPericopeHidden ?'':commentViewBean.getArabicPericopeText(commentViewBean.sharedBean.selectedLinkViewEntity.arabicPericopeRefId)}"
+                                         onblur="arabicselection();return false;"
+                                         readonly="#{commentViewBean.selectedComment eq null}" />
 
-					</p:column>
-				</p:row>
-				<p:row>
-					<p:column>
-						<h:outputText id="greekselectedText" styleClass="greek"
-							style="display:inline-block;width:500px;font-size:#{loginBean.greekFontSize}"
-							value="#{commentViewBean.greekSelectedText}" />
-					</p:column>
-					<p:column>
-						<h:outputText id="arabicselectedText" styleClass="arabic"
-							style="display:inline-block;width:500px;font-size:#{loginBean.arabicFontSize};"
-							value="#{commentViewBean.arabicSelectedText}" />
-					</p:column>
-				</p:row>
-				<p:row>
-					<p:column>
-						<h:panelGroup style="display:block; text-align:left">
-							<p:commandButton id="greekClick" value="greek selection"
-								styleClass="latin" partialSubmit="true"
-								process="@this :pericopesTextForm:greektext"
-								actionListener="#{commentViewBean.greekClick}"
-								update=":pericopesTextForm:greekselectedText"
-								disabled="#{commentViewBean.selectedComment.commentId ne null or commentViewBean.selectedComment eq null}" />
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <h:outputText id="greekselectedText" styleClass="greek"
+                                      style="display:inline-block;width:500px;font-size:#{loginBean.greekFontSize}"
+                                      value="#{commentViewBean.greekSelectedText}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputText id="arabicselectedText" styleClass="arabic"
+                                      style="display:inline-block;width:500px;font-size:#{loginBean.arabicFontSize};"
+                                      value="#{commentViewBean.arabicSelectedText}" />
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <h:panelGroup style="display:block; text-align:left">
+                            <p:commandButton id="greekClick" value="greek selection"
+                                             styleClass="latin" partialSubmit="true"
+                                             process="@this :pericopesTextForm:greektext"
+                                             actionListener="#{commentViewBean.greekClick}"
+                                             update=":pericopesTextForm:greekselectedText"
+                                             disabled="#{commentViewBean.selectedComment.commentId ne null or commentViewBean.selectedComment eq null}" />
 
-							<p:commandButton type="submit"
-								update="greektextarea greekselectedText" immediate="true"
-								icon="ui-icon-circle-plus"
-								actionListener="#{loginBean.increaseGreekSize}" />
-							<p:commandButton type="submit"
-								update="greektextarea greekselectedText" immediate="true"
-								icon="ui-icon-circle-minus"
-								actionListener="#{loginBean.decreaseGreekSize}" />
-							<p:commandButton type="submit"
-								update="greektextarea greekselectedText" immediate="true"
-								icon="ui-icon-circle-check"
-								actionListener="#{loginBean.resetGreekSize}" />
-						</h:panelGroup>
-					</p:column>
-					<p:column>
-						<h:panelGroup style="display:block; text-align:right">
-							<p:commandButton type="submit"
-								update="arabictextarea arabicselectedText" immediate="true"
-								icon="ui-icon-circle-plus"
-								actionListener="#{loginBean.increaseArabicSize}" />
-							<p:commandButton type="submit"
-								update="arabictextarea arabicselectedText" immediate="true"
-								icon="ui-icon-circle-minus"
-								actionListener="#{loginBean.decreaseArabicSize}" />
-							<p:commandButton type="submit"
-								update="arabictextarea arabicselectedText" immediate="true"
-								icon="ui-icon-circle-check"
-								actionListener="#{loginBean.resetArabicSize}" />
-							<p:commandButton id="arabicClick" value="arabic selection"
-								styleClass="latin" partialSubmit="true"
-								process="@this :pericopesTextForm:arabictext"
-								actionListener="#{commentViewBean.arabicClick}"
-								update=":pericopesTextForm:arabicselectedText"
-								disabled="#{commentViewBean.selectedComment.commentId ne null or commentViewBean.selectedComment eq null}" />
-						</h:panelGroup>
-					</p:column>
-				</p:row>
-			</p:panelGrid>
-		</div>
-	</h:form>
+                            <p:commandButton type="submit"
+                                             update="greektextarea greekselectedText" immediate="true"
+                                             icon="ui-icon-circle-plus"
+                                             actionListener="#{loginBean.increaseGreekSize}" />
+                            <p:commandButton type="submit"
+                                             update="greektextarea greekselectedText" immediate="true"
+                                             icon="ui-icon-circle-minus"
+                                             actionListener="#{loginBean.decreaseGreekSize}" />
+                            <p:commandButton type="submit"
+                                             update="greektextarea greekselectedText" immediate="true"
+                                             icon="ui-icon-circle-check"
+                                             actionListener="#{loginBean.resetGreekSize}" />
+                        </h:panelGroup>
+                    </p:column>
+                    <p:column>
+                        <h:panelGroup style="display:block; text-align:right">
+                            <p:commandButton type="submit"
+                                             update="arabictextarea arabicselectedText" immediate="true"
+                                             icon="ui-icon-circle-plus"
+                                             actionListener="#{loginBean.increaseArabicSize}" />
+                            <p:commandButton type="submit"
+                                             update="arabictextarea arabicselectedText" immediate="true"
+                                             icon="ui-icon-circle-minus"
+                                             actionListener="#{loginBean.decreaseArabicSize}" />
+                            <p:commandButton type="submit"
+                                             update="arabictextarea arabicselectedText" immediate="true"
+                                             icon="ui-icon-circle-check"
+                                             actionListener="#{loginBean.resetArabicSize}" />
+                            <p:commandButton id="arabicClick" value="arabic selection"
+                                             styleClass="latin" partialSubmit="true"
+                                             process="@this :pericopesTextForm:arabictext"
+                                             actionListener="#{commentViewBean.arabicClick}"
+                                             update=":pericopesTextForm:arabicselectedText"
+                                             disabled="#{commentViewBean.selectedComment.commentId ne null or commentViewBean.selectedComment eq null}" />
+                        </h:panelGroup>
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
+        </div>
+    </h:form>
 
-	<p:separator id="separator" style="width:500px;height:5px"></p:separator>
+    <p:separator id="separator" style="width:500px;height:5px"></p:separator>
 
-	<div align="center">
+    <div align="center">
 
-		<p:confirmDialog closable="true" appendToBody="true"
-			id="confirmDialog" message="Are you sure?" header="header"
-			severity="alert" widgetVar="confirmation">
-			<h:form>
-				<p:commandButton id="confirm" value="yes" ajax="true"
-					oncomplete="confirmation.hide()"
-					update=":commentlistform:comments :onSubmitMessage :pericopesTextForm:arabicselectedText :pericopesTextForm:greekselectedText :commentEditorForm:editor :pericopesTextForm:greekClick :pericopesTextForm:arabicClick :commentEditorForm:deleteButton :commentEditorForm:submitButton :commentEditorForm:commentType :commentEditorForm:clearButton"
-					action="#{commentViewBean.deleteComment}" />
-				<p:commandButton id="decline" value="no"
-					onclick="confirmation.hide()" type="button" />
-			</h:form>
-		</p:confirmDialog>
-		<h:form id="commentEditorForm">
+        <p:confirmDialog closable="true" appendToBody="true"
+                         id="confirmDialog" message="Are you sure?" header="header"
+                         severity="alert" widgetVar="confirmation">
+            <h:form>
+                <p:commandButton id="confirm" value="yes" ajax="true"
+                                 oncomplete="confirmation.hide()"
+                                 update=":commentlistform:comments :onSubmitMessage :pericopesTextForm:arabicselectedText :pericopesTextForm:greekselectedText :commentEditorForm:editor :pericopesTextForm:greekClick :pericopesTextForm:arabicClick :commentEditorForm:deleteButton :commentEditorForm:submitButton :commentEditorForm:commentType :commentEditorForm:clearButton"
+                                 action="#{commentViewBean.deleteComment}" />
+                <p:commandButton id="decline" value="no"
+                                 onclick="confirmation.hide()" type="button" />
+            </h:form>
+        </p:confirmDialog>
+        <h:form id="commentEditorForm">
 
-			<p:editor id="editor" value="#{commentViewBean.commentText}"
-				disabled="#{commentViewBean.selectedComment eq null  or loginBean.role eq 'reader'}"
-				width="600" height="200"/>
+            <p:editor id="editor" value="#{commentViewBean.commentText}"
+                      disabled="#{commentViewBean.selectedComment eq null  or loginBean.role eq 'reader'}"
+                      width="600" height="200"/>
 
-			<h:panelGrid columns="6" style="margin-top:10px"
-				rendered="#{loginBean.role ne 'reader'}">
-				<p:commandButton id="newButton" value="new"
-					update=":commentEditorForm :pericopesTextForm:arabicselectedText :pericopesTextForm:greekselectedText editor :pericopesTextForm:greekClick :pericopesTextForm:arabicClick deleteButton submitButton commentType clearButton"
-					action="#{commentViewBean.newComment}"
-					disabled="#{commentViewBean.selectedLinkViewEntity eq null}" />
+            <h:panelGrid columns="6" style="margin-top:10px"
+                         rendered="#{loginBean.role ne 'reader'}">
+                <p:commandButton id="newButton" value="new"
+                                 update=":commentEditorForm :pericopesTextForm:arabicselectedText :pericopesTextForm:greekselectedText editor :pericopesTextForm:greekClick :pericopesTextForm:arabicClick deleteButton submitButton commentType clearButton"
+                                 action="#{commentViewBean.newComment}"
+                                 disabled="#{commentViewBean.selectedLinkViewEntity eq null}" />
 
 
-				<p:commandButton id="deleteButton" value="delete"
-					onclick="confirmation.show()" type="button"
-					disabled="#{commentViewBean.selectedComment eq null}" />
+                <p:commandButton id="deleteButton" value="delete"
+                                 onclick="confirmation.show()" type="button"
+                                 disabled="#{commentViewBean.selectedComment eq null}" />
 
-				<!-- p:commandButton id="deleteButton" value="delete"
-						update=":pericopesTextForm:arabicselectedText :pericopesTextForm:greekselectedText editor :pericopesTextForm:greekClick :pericopesTextForm:arabicClick deleteButton submitButton commentType clearButton"
-						action="#{commentViewBean.deleteComment}"
-						onclick="confirmation.show()"
-						disabled="#{commentViewBean.selectedComment eq null}" /-->
-				<p:selectOneMenu id="commentType"
-					value="#{commentViewBean.commentType}"
-					disabled="#{commentViewBean.selectedComment eq null}">
+                <!-- p:commandButton id="deleteButton" value="delete"
+                                update=":pericopesTextForm:arabicselectedText :pericopesTextForm:greekselectedText editor :pericopesTextForm:greekClick :pericopesTextForm:arabicClick deleteButton submitButton commentType clearButton"
+                                action="#{commentViewBean.deleteComment}"
+                                onclick="confirmation.show()"
+                                disabled="#{commentViewBean.selectedComment eq null}" /-->
+                <p:selectOneMenu id="commentType"
+                                 value="#{commentViewBean.commentType}"
+                                 disabled="#{commentViewBean.selectedComment eq null}">
 
-					<f:selectItem itemLabel="literal translation" itemValue="LT" />
-					<f:selectItem itemLabel="free rendering" itemValue="FR" />
-					<f:selectItem itemLabel="amplification" itemValue="Am" />
-					<f:selectItem itemLabel="misunderstanding" itemValue="Ms" />
-					<f:selectItem itemLabel="interpolation" itemValue="Ip" />
-					<f:selectItem itemLabel="glossary" itemValue="Gs" />
-					<f:selectItem itemLabel="additional note" itemValue="AN" />
-					<f:selectItem itemLabel="omissions" itemValue="Om" />
-					<f:selectItem itemLabel="variant readings" itemValue="VR" />
-					<f:selectItem itemLabel="bibliography"
-						itemValue="Ref" />
-				</p:selectOneMenu>
-				<p:commandButton id="submitButton" value="submit"
-					update=":commentlistform:comments :onSubmitMessage :commentEditorForm :pericopesTextForm"
-					partialSubmit="true" process="@form @this"
-					actionListener="#{commentViewBean.submit}"
-					disabled="#{commentViewBean.selectedComment eq null}" />
-				<p:commandButton id="clearButton" value="clear"
-					update=":commentEditorForm:editor" process="@this"
-					actionListener="#{commentViewBean.clearCommentForm}"
-					disabled="#{commentViewBean.selectedComment eq null}" />
-			</h:panelGrid>
-		</h:form>
-	</div>
+                    <f:selectItem itemLabel="literal translation" itemValue="LT" />
+                    <f:selectItem itemLabel="free rendering" itemValue="FR" />
+                    <f:selectItem itemLabel="amplification" itemValue="Am" />
+                    <f:selectItem itemLabel="misunderstanding" itemValue="Ms" />
+                    <f:selectItem itemLabel="interpolation" itemValue="Ip" />
+                    <f:selectItem itemLabel="glossary" itemValue="Gs" />
+                    <f:selectItem itemLabel="additional note" itemValue="AN" />
+                    <f:selectItem itemLabel="omissions" itemValue="Om" />
+                    <f:selectItem itemLabel="variant readings" itemValue="VR" />
+                    <f:selectItem itemLabel="bibliography"
+                                  itemValue="Ref" />
+                </p:selectOneMenu>
+                <p:commandButton id="submitButton" value="submit"
+                                 update=":commentlistform:comments :onSubmitMessage :commentEditorForm :pericopesTextForm"
+                                 partialSubmit="true" process="@form @this"
+                                 actionListener="#{commentViewBean.submit}"
+                                 disabled="#{commentViewBean.selectedComment eq null}" />
+                <p:commandButton id="clearButton" value="clear"
+                                 update=":commentEditorForm:editor" process="@this"
+                                 actionListener="#{commentViewBean.clearCommentForm}"
+                                 disabled="#{commentViewBean.selectedComment eq null}" />
+            </h:panelGrid>
+        </h:form>
+    </div>
 
 </ui:composition>

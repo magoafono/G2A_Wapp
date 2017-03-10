@@ -22,7 +22,7 @@ import it.cnr.ilc.g2a.model.view.LinkViewEntity;
 import it.cnr.ilc.g2a.model.view.ResultViewEntity;
 import it.cnr.ilc.g2a.model.view.TokenViewEntity;
 import it.cnr.ilc.g2a.utils.Consts;
-import it.cnr.ilc.g2a.utils.CophiSort;
+import it.cnr.ilc.g2a.utils.G2ASort;
 import it.cnr.ilc.g2a.utils.GreekCollator;
 import it.cnr.ilc.g2a.utils.MessageProvider;
 import it.cnr.ilc.g2a.utils.OntoUtils;
@@ -943,11 +943,11 @@ public class EntityManager {
 
 		switch (langId) {
 		case Consts.GREEK:
-			Collections.sort(lvel, CophiSort.GREEKLINKVIEW_FROM_ORDER);
+			Collections.sort(lvel, G2ASort.GREEKLINKVIEW_FROM_ORDER);
 			setLinksOrderByGreek(lvel);
 			break;
 		case Consts.ARABIC:
-			Collections.sort(lvel, CophiSort.ARABICLINKVIEW_FROM_ORDER);
+			Collections.sort(lvel, G2ASort.ARABICLINKVIEW_FROM_ORDER);
 			setLinksOrderByArabic(lvel);
 			break;
 
@@ -967,7 +967,7 @@ public class EntityManager {
 
 		List<Comment> unsorted = getLinkComments(linkId);
 		if (null != unsorted) {
-			Collections.sort(unsorted, CophiSort.COMMENT_ID_ORDER);
+			Collections.sort(unsorted, G2ASort.COMMENT_ID_ORDER);
 		}
 		return unsorted;
 	}
@@ -1325,7 +1325,7 @@ public class EntityManager {
 			}
 		}
 
-		Collections.sort(tokens, CophiSort.TOKENREF_FROM_ORDER);
+		Collections.sort(tokens, G2ASort.TOKENREF_FROM_ORDER);
 		pericope.setValue(tokens); 
 	}
 

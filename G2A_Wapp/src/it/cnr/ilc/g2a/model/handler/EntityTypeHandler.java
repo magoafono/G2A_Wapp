@@ -1,7 +1,7 @@
 package it.cnr.ilc.g2a.model.handler;
 
-import it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element;
-import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence;
+import it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element;
+import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence;
 import it.cnr.ilc.g2a.utils.MessageProvider;
 
 import org.apache.xmlbeans.XmlCursor;

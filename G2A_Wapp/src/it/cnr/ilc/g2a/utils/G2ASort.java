@@ -9,7 +9,7 @@ import it.cnr.ilc.g2a.model.view.TokenViewEntity;
 
 import java.util.Comparator;
 
-public class CophiSort {
+public class G2ASort {
 
 	public static final Comparator<Comment> 
 	COMMENT_ID_ORDER = 

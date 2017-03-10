@@ -12,10 +12,10 @@ import it.cnr.ilc.g2a.model.importxml.xmlmapping.FieldDocument.Field;
 import it.cnr.ilc.g2a.model.text.RefPericopeText;
 import it.cnr.ilc.g2a.model.text.RefTokenText;
 import it.cnr.ilc.g2a.model.text.TokenText;
-import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument;
-import it.cnr.ilc.g2a.model.xmlmapping.ElementDocument.Element;
-import it.cnr.ilc.g2a.model.xmlmapping.ParamDocument.Param;
-import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence;
+import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument;
+import it.cnr.ilc.gtoa.model.xmlmapping.ElementDocument.Element;
+import it.cnr.ilc.gtoa.model.xmlmapping.ParamDocument.Param;
+import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence;
 
 import java.util.ArrayList;
 import java.util.Arrays;

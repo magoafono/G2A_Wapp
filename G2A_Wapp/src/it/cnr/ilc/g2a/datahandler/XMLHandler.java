@@ -4,7 +4,7 @@
 package it.cnr.ilc.g2a.datahandler;
 
 import it.cnr.ilc.g2a.model.importxml.xmlmapping.AddDocument;
-import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument;
+import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument;
 
 import java.util.HashMap;
 

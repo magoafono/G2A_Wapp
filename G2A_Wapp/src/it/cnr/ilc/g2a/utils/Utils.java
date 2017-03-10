@@ -214,7 +214,7 @@ public class Utils {
 		List<TokenText> tokensList = new ArrayList<TokenText>(tokens.values());
 		int i = 0;
 		TokenViewEntity prec = null;
-		Collections.sort(tokensList,CophiSort.TOKENTEXT_FROM_ORDER);
+		Collections.sort(tokensList,G2ASort.TOKENTEXT_FROM_ORDER);
 		int index = 0;
 		for (TokenText token: tokensList) {
 			TokenViewEntity tv = new TokenViewEntity();
@@ -274,7 +274,7 @@ public class Utils {
 			index++;
 			ltv.add(tv);
 		}
-		//		Collections.sort(ltv,CophiSort.TOKENVIEW_FROM_ORDER);
+		//		Collections.sort(ltv,G2ASort.TOKENVIEW_FROM_ORDER);
 
 		return ltv;
 	}
@@ -293,7 +293,7 @@ public class Utils {
 		List<TokenText> tokensList = new ArrayList<TokenText>(tokens.values());
 		int i = 0;
 		TokenViewEntity prec = null;
-		Collections.sort(tokensList,CophiSort.TOKENTEXT_FROM_ORDER);
+		Collections.sort(tokensList,G2ASort.TOKENTEXT_FROM_ORDER);
 
 		for (TokenText token: tokensList) {
 			TokenViewEntity tv = new TokenViewEntity();
@@ -362,7 +362,7 @@ public class Utils {
 			prec = tv;
 			ltv.add(tv);
 		}
-		//		Collections.sort(ltv,CophiSort.TOKENVIEW_FROM_ORDER);
+		//		Collections.sort(ltv,G2ASort.TOKENVIEW_FROM_ORDER);
 
 		return ltv;
 	}
@@ -564,7 +564,7 @@ public class Utils {
 
 		List<TokenViewEntity> ltv = new ArrayList<TokenViewEntity>();
 		TokenViewEntity prec = null;
-		//		Collections.sort(tokensList,CophiSort.TOKENTEXT_FROM_ORDER);
+		//		Collections.sort(tokensList,G2ASort.TOKENTEXT_FROM_ORDER);
 		int index = 0;
 		HashMap<String, String> highlightTokenIdsHM = stringList2HashMap(highlightTokenIds);
 		List<Reference> tokenList = pericopes.get(pericopeId).getValue();
@@ -601,7 +601,7 @@ public class Utils {
 			index++;
 			ltv.add(tve);
 		}
-		//		Collections.sort(ltv,CophiSort.TOKENVIEW_FROM_ORDER);
+		//		Collections.sort(ltv,G2ASort.TOKENVIEW_FROM_ORDER);
 
 		return ltv;
 

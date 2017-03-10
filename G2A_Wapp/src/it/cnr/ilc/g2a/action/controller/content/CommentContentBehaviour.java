@@ -19,8 +19,8 @@ import it.cnr.ilc.g2a.model.Reference;
 import it.cnr.ilc.g2a.model.ReferenceSet;
 import it.cnr.ilc.g2a.model.comment.Comment;
 import it.cnr.ilc.g2a.model.view.SelectedTextBoundaries;
-import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument;
-import it.cnr.ilc.g2a.model.xmlmapping.SequenceDocument.Sequence;
+import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument;
+import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence;
 
 public class CommentContentBehaviour extends BaseContent implements
 ContentBehaviour<Comment> {
