@@ -20,7 +20,7 @@ import org.slf4j.profiler.Profiler;
 
 public class XPathUtils {
 
-	private static final Logger logger = LogManager.getLogger("XPathUtils");
+	private static final Logger log = LogManager.getLogger("XPathUtils");
 	private static MessageProvider mp = new MessageProvider();
 
 	public static String getDbName() {
@@ -92,7 +92,7 @@ public class XPathUtils {
 		ExistDBConnector dbconn = ExistDBConnector.getInstance();
 		ArrayList<AnalysisBean> analyses = null;
 		ArrayList<String> tokensId = dbconn.searchTokensInPericopeById(collection, pericopeId);
-		System.err.println("pericopeId " + pericopeId);
+		log.debug("pericopeId " + pericopeId);
 
 		Pattern sequencePattern = Pattern.compile("<xm:sequence xmlns:xm=\"(.+?)\" id=\"(?<id>.+?)\" classname=\"(.+?)\">");
 		Pattern elementPattern = Pattern.compile("<xm:element id=\"(?<id>.+?)\" classname=\"(.+?)\">(?<params>.+?)</xm:element>");
@@ -238,7 +238,7 @@ public class XPathUtils {
 		}
 
 		Set<String> s = new HashSet<String>(tokenIds);
-		System.err.println("====> simpleSearchTokenIdsByForma(): reduction: " + tokenIds.size() + " " + s.size());
+		log.debug("====> simpleSearchTokenIdsByForma(): reduction: " + tokenIds.size() + " " + s.size());
 		tokenIds.clear();
 		tokenIds.addAll(s);
 
@@ -327,7 +327,7 @@ public class XPathUtils {
 			}
 		}
 		Set<String> s = new HashSet<String>(pericopeIds);
-		System.err.println("====> simpleSearchPericopeIdsByTokenIds(): reduction: " + pericopeIds.size() + " " + s.size());
+		log.debug("====> simpleSearchPericopeIdsByTokenIds(): reduction: " + pericopeIds.size() + " " + s.size());
 		pericopeIds.clear();
 		pericopeIds.addAll(s);
 
@@ -377,6 +377,7 @@ public class XPathUtils {
 			break;
 
 		default:
+                    log.error("Unknown language " + lang);
 			throw new LanguageUnknownException("Unknonw language " + lang);
 		}
 		return ret;

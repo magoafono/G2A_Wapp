@@ -6,6 +6,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.model.DefaultTreeNode;
@@ -19,6 +21,7 @@ public class SideMenuController implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 2523882070010733059L;
+	private static final Logger log = LogManager.getLogger("SideMenuController");
 
 	private TreeNode root;
 	private TreeNode selectedNode;  
@@ -54,7 +57,7 @@ public class SideMenuController implements Serializable {
 	 * @param selectedNode the selectedNode to set
 	 */
 	public void setSelectedNode(TreeNode selectedNode) {
-		System.err.println("setSelectedNode: " + selectedNode.getData());
+		log.info("setSelectedNode: " + selectedNode.getData());
 
 		this.selectedNode = selectedNode;
 	}
@@ -63,7 +66,7 @@ public class SideMenuController implements Serializable {
 
 	public void onNodeSelect(NodeSelectEvent event) {  
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", event.getTreeNode().toString());  
-		System.err.println("onNodeSelect: " + message.getSummary());
+		log.info("onNodeSelect: " + message.getSummary());
 		FacesContext.getCurrentInstance().addMessage(null, message);  
 	}  
 	

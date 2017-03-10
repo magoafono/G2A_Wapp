@@ -33,7 +33,7 @@ import org.primefaces.model.StreamedContent;
 @SessionScoped
 public class SearchViewBean  implements Serializable {
 
-	private static final Logger logger = LogManager.getLogger("SearchViewBean");
+	private static final Logger log = LogManager.getLogger("SearchViewBean");
 
 	/**
 	 * 
@@ -163,7 +163,7 @@ public class SearchViewBean  implements Serializable {
 		arItemType.add(new Pair<String, String>("Word",  "word"));
 		//arItemType.add(new Pair<String, String>("Pos",  "pos"));
 
-		logger.info("SearchViewBean init()");
+		log.info("SearchViewBean init()");
 	}
 
 	/**
@@ -317,38 +317,38 @@ public class SearchViewBean  implements Serializable {
 
 	public void grSubmit() {
 
-		logger.debug("grSubmit: " + grSb.toString());
+		log.debug("grSubmit: " + grSb.toString());
 		try {
 			setSearchResult(repositoryBean.simpleGreekSearchLinksByTokens(grSb));
 			fileDownloadView();
 		} catch (Exception e) {
-			logger.fatal("Greek parameter: " + grSb.toString());
+			log.fatal("Greek parameter: " + grSb.toString());
 			e.printStackTrace();
 		}
 
 	}
 
 	public void arSubmit() {
-		logger.debug("arSubmit: " + arSb.toString());
+		log.debug("arSubmit: " + arSb.toString());
 		try {
 			setSearchResult(repositoryBean.simpleArabicSearchLinksByTokens(arSb));
 			fileDownloadView();
 
 		} catch (Exception e) {
-			logger.fatal("Arabic parameter: " + arSb.toString());
+			log.fatal("Arabic parameter: " + arSb.toString());
 			e.printStackTrace();
 		}
 
 	}
 
 	public void combinedSubmit() {
-		logger.debug("combinedSubmit: ar:" + arSb.toString() + " gr: " + grSb.toString() + " op: " + getCombinedOperation()) ;
+		log.debug("combinedSubmit: ar:" + arSb.toString() + " gr: " + grSb.toString() + " op: " + getCombinedOperation()) ;
 		try {
 			setSearchResult(repositoryBean.combinedSearchLinksByTokens(grSb, arSb, getCombinedOperation()));
 			fileDownloadView();
 
 		} catch (Exception e) {
-			logger.fatal("Greek parameter: " + grSb.toString() + ", Arabic parameter: " + arSb.toString());
+			log.fatal("Greek parameter: " + grSb.toString() + ", Arabic parameter: " + arSb.toString());
 			e.printStackTrace();
 		}
 
@@ -381,7 +381,7 @@ public class SearchViewBean  implements Serializable {
 				result.append("\"" + rve.getGrPericopeInfo()  + "\"" +'\t' );
 				StringBuffer sb = new StringBuffer();
 				//Pericope GR
-				System.err.println(repositoryBean.getPericopeTextById(rve.getGrPericopeId(), Consts.GREEK));
+				log.info(repositoryBean.getPericopeTextById(rve.getGrPericopeId(), Consts.GREEK));
 				tvel = rve.getGreekTVE();
 				for (Iterator iterator = tvel.iterator(); iterator.hasNext();) {
 					TokenViewEntity tve = (TokenViewEntity) iterator.next();

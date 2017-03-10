@@ -16,6 +16,8 @@ import java.util.regex.Pattern;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.primefaces.event.SelectEvent;
 
@@ -28,6 +30,7 @@ public class CommentViewBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -1736278370494347942L;
+	private static final Logger log = LogManager.getLogger("CommentViewBean");
 
 	private String greekText = null;
 	private String arabicText = null;
@@ -209,7 +212,7 @@ public class CommentViewBean implements Serializable {
 			setSelectedComment(null);
 
 		} else {
-			System.err.println("setSelectedViewLink(): selectedViewLink is null!!!");
+			log.error("setSelectedViewLink(): selectedViewLink is null!!!");
 		}
 	}
 
@@ -241,7 +244,7 @@ public class CommentViewBean implements Serializable {
 		if (null != lve) {
 			loc = repositoryBean.getCommentsByLinkId(lve.getLink().getId()); 
 		} else {
-			System.err.println("Warn: getLinkComments() no link selected");
+			log.warn("Warn: getLinkComments() no link selected");
 		}
 		return loc;
 	}
@@ -334,7 +337,7 @@ public class CommentViewBean implements Serializable {
 			selectedBound.setEnd(new Integer (m.group(3)));
 
 		} else {
-			System.err.println("SelectedTextBoundaries click() error!!!");		
+			log.error("SelectedTextBoundaries click() error!!!");		
 		}
 
 		return selectedBound;
@@ -458,7 +461,7 @@ public class CommentViewBean implements Serializable {
 				setArabicSelectedText(Utils.substring(selectedComment.getArabicSelectedBound(), sharedBean.getSelectedLinkViewEntity().getArabicPericopeText().replaceAll("\n"," ↳ " )));
 			} catch (java.lang.StringIndexOutOfBoundsException e) {
 
-				System.err.println(e.toString() + " Error in "+ selectedComment.getCommentId() +", arabic substring, boundaries are outside " + selectedComment.getGreekSelectedBound().getStart() + ":" + selectedComment.getGreekSelectedBound().getEnd() + ", over " + sharedBean.getSelectedLinkViewEntity().getArabicPericopeText().length());
+				log.error(e.toString() + " Error in "+ selectedComment.getCommentId() +", arabic substring, boundaries are outside " + selectedComment.getGreekSelectedBound().getStart() + ":" + selectedComment.getGreekSelectedBound().getEnd() + ", over " + sharedBean.getSelectedLinkViewEntity().getArabicPericopeText().length());
 
 			}
 		}
@@ -466,7 +469,7 @@ public class CommentViewBean implements Serializable {
 			try {
 				setGreekSelectedText(Utils.substring(selectedComment.getGreekSelectedBound(), sharedBean.getSelectedLinkViewEntity().getGreekPericopeText().replaceAll("\n", " ↲ ")));
 			} catch (java.lang.StringIndexOutOfBoundsException e) {
-				System.err.println(e.toString() + " Error in "+ selectedComment.getCommentId() +", greek substring, boundaries are outside " + selectedComment.getGreekSelectedBound().getStart() + ":" + selectedComment.getGreekSelectedBound().getEnd() + ", over " + sharedBean.getSelectedLinkViewEntity().getGreekPericopeText().length());
+				log.error(e.toString() + " Error in "+ selectedComment.getCommentId() +", greek substring, boundaries are outside " + selectedComment.getGreekSelectedBound().getStart() + ":" + selectedComment.getGreekSelectedBound().getEnd() + ", over " + sharedBean.getSelectedLinkViewEntity().getGreekPericopeText().length());
 			}
 		}
 

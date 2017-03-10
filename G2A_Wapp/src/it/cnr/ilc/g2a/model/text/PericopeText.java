@@ -5,8 +5,12 @@ import java.util.List;
 
 import it.cnr.ilc.g2a.model.Pericope;
 import it.cnr.ilc.g2a.model.Reference;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class PericopeText extends Pericope<Reference>{
+
+    	private static final Logger log = LogManager.getLogger("PericopeText");
 
 	/**
 	 * Costruisce il testo di ogni pericope a partire dai valori dei token che (la pericope) contiene
@@ -48,12 +52,12 @@ public class PericopeText extends Pericope<Reference>{
 			if (firstToken.getTok() != null) {
 				start = firstToken.getTok().getFrom();
 			} else {
-				System.err.println("Error in get pericope text firstToken.getId() " + firstToken.getId());
+				log.error("Error in get pericope text firstToken.getId() " + firstToken.getId());
 			}
 			if (lastToken.getTok() != null) {
 				end = lastToken.getTok().getTo();
 			} else {
-				System.err.println("Error in get pericope text lastToken.getId(): " + lastToken.getId());
+				log.error("Error in get pericope text lastToken.getId(): " + lastToken.getId());
 			}
 		}
 		return cb.subSequence(start, end).toString();

@@ -4,6 +4,8 @@
 package it.cnr.ilc.g2a.model.text;
 
 import it.cnr.ilc.g2a.model.Token;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * @author simone
@@ -11,6 +13,8 @@ import it.cnr.ilc.g2a.model.Token;
  */
 public class TokenText extends Token {
 	
+    	private static final Logger log = LogManager.getLogger("TokenText");
+
 	private int from;
 	private int to;
 	private String value;
@@ -59,7 +63,7 @@ public class TokenText extends Token {
 	public String getTextOnCharSequence (CharSequence s) {
 		String ret = null;
 		if (getTo() > s.length()) {
-			System.err.println(" ERR in getText("+ s.subSequence(0, 20) +")" + s.length() +", "+getFrom() + ":" + getTo());
+			log.error(" ERR in getText("+ s.subSequence(0, 20) +")" + s.length() +", "+getFrom() + ":" + getTo());
 			
 		} else {
 			ret = (s.subSequence(getFrom(), getTo())).toString(); 

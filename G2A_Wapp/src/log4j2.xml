@@ -5,9 +5,9 @@
             <!--PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" /-->
             <PatternLayout pattern="%d{dd.MM.yyy HH:mm:ss} %F:%L %-5level - %m%n" />
         </Console>
-        <!--File name="MyFile" fileName="all.log" immediateFlush="false" append="true">
+        <File name="MyFile" fileName="all.log" immediateFlush="false" append="true">
             <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
-        </File-->
+        </File>
     </Appenders>
     <Loggers>
         <Root level="info">

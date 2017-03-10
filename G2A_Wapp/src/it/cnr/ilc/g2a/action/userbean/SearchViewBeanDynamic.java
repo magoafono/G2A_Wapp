@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @ManagedBean
 @ViewScoped
@@ -15,6 +17,7 @@ public class SearchViewBeanDynamic  implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 5106285848810682454L;
+	private static final Logger log = LogManager.getLogger("SearchViewBeanDynamic");
 
 	private SearchBean item = null;
 	private int index;
@@ -38,7 +41,7 @@ public class SearchViewBeanDynamic  implements Serializable {
 		sb.setPos("");
 		sb.setIndex("1");
 		entryFields.add(sb);*/
-		System.err.println("SearchViewBean init()");
+		log.info("SearchViewBean init()");
 	}
 
 	/**
@@ -119,7 +122,7 @@ public class SearchViewBeanDynamic  implements Serializable {
 	public void onChangeOperator() {
 		
 	//	System.err.println("operator is (" + item.getOperator() + ")");
-		System.err.println("index is (" + getIndex() + ")");
+		log.info("index is (" + getIndex() + ")");
 		
 	}
 	

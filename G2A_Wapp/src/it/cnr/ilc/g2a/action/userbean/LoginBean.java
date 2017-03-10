@@ -76,7 +76,6 @@ public class LoginBean implements Serializable {
 				//Prendo l'indirizzo remoto del client
 				HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 				String ipAddress = request.getRemoteAddr();
-				System.out.println(request.getRemoteAddr());
 				
 				logger.info("User '" + username + "' logged in from ip " + ipAddress);
 				return navigationBean.redirectToWelcome();

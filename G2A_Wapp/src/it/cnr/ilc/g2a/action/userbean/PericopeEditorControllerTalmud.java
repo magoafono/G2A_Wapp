@@ -7,6 +7,8 @@ import it.cnr.ilc.g2a.utils.view.BaseController;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @ManagedBean
 @SessionScoped
@@ -18,7 +20,8 @@ public class PericopeEditorControllerTalmud extends BaseController {
 //	private String arabicText = null;
 //	private String greekText = null;
 		
-	
+	    private static final Logger log = LogManager.getLogger("PericopeEditorControllerTalmud");
+
 	@ManagedProperty(value="#{repository}")
 	private RepositoryBean repositoryBean;
 	

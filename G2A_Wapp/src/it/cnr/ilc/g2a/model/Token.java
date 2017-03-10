@@ -6,6 +6,8 @@ package it.cnr.ilc.g2a.model;
 import java.util.List;
 
 import it.cnr.ilc.g2a.model.analysis.AnalysisDelegate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * @author simone
@@ -16,6 +18,7 @@ public abstract class Token {
 	private String id;
 	private String refAnalysis;
 	private AnalysisDelegate analyses;
+	private static final Logger log = LogManager.getLogger("Token");
 
 	public List<String> getAnalysisValuesByKey(String analysisType, String key) {
 
@@ -24,7 +27,7 @@ public abstract class Token {
 			ret = analyses.getValuesByKey(analysisType, key);
 		} else {
 			//FIXME ??
-			System.err.println("Token.getAnalysisValuesByKey(" + analysisType + ", " + key + "): Analysis not loaded!");
+			log.warn("Token.getAnalysisValuesByKey(" + analysisType + ", " + key + "): Analysis not loaded!");
 		}
 		
 		return ret;
@@ -38,7 +41,7 @@ public abstract class Token {
 			ret = analyses.getBestValueByKey(analysisType, key);
 		} else {
 			//FIXME ??
-			System.err.println("Token.getBestAnalysisValueByKey(" + analysisType + ", " + key + "): Analysis not loaded!");
+			log.warn("Token.getBestAnalysisValueByKey(" + analysisType + ", " + key + "): Analysis not loaded!");
 		}
 		
 		return ret;

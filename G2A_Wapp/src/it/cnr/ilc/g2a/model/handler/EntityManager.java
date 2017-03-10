@@ -50,6 +50,8 @@ import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * 
@@ -57,6 +59,8 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
  *
  */
 public class EntityManager {
+
+    	private static final Logger log = LogManager.getLogger("EntityManager");
 
 	private static EntityManager instance;
 
@@ -915,7 +919,7 @@ public class EntityManager {
 			lve.setGreekPericopeId(grRpt.getId().substring(4)); //tolgo ref_
 			lve.setGreekPericopeHidden(Consts.HIDDEN_REF_PERICOPE.equals(grRpt.getClassname()));
 		} else {
-			System.err.println("Pericope greca non trovata in links.xml! Gr Pericope ID: " + grRpt.getId() + " Gr Pericope ref " + grRpt.getRef());
+			log.error("Pericope greca non trovata in links.xml! Gr Pericope ID: " + grRpt.getId() + " Gr Pericope ref " + grRpt.getRef());
 		}
 		RefPericopeText arRpt = link.getValue().get(Consts.ARABIC);
 		PericopeText arPericope = (PericopeText) arRpt.getPericope();
@@ -927,7 +931,7 @@ public class EntityManager {
 			lve.setArabicPericopeId(arRpt.getId().substring(4));
 			lve.setArabicPericopeHidden(Consts.HIDDEN_REF_PERICOPE.equals(arRpt.getClassname()));
 		} else {
-			System.err.println("Pericope araba non trovata in links.xml! " + arRpt.getId() + " ref " + arRpt.getRef());
+			log.error("Pericope araba non trovata in links.xml! " + arRpt.getId() + " ref " + arRpt.getRef());
 		}
 
 		return lve;
@@ -1500,7 +1504,7 @@ public class EntityManager {
 			QuerySolution binding = rs.nextSolution();
 			greekTerm = binding.get("gTerm").toString().split("#")[1];
 			englishTerm = binding.get("termine").toString();
-			System.err.println(greekTerm + " " + englishTerm);
+			log.debug(greekTerm + " " + englishTerm);
 			wordToSort.add(greekTerm + "|" + englishTerm);
 		}
 		GreekCollator.sort(wordToSort, CollatorEnum.Primary);

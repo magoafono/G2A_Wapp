@@ -5,6 +5,8 @@ import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument;
 
 import java.io.IOException;
 import java.util.HashMap;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
@@ -17,6 +19,7 @@ import org.xmldb.api.modules.XMLResource;
 
 public class XMLResourceBehaviour implements ResourceBehaviour {
 
+	private static final Logger log = LogManager.getLogger("XMLResourceBehaviour");
 
 	XMLHandler handler = new XMLHandler();
 
@@ -46,7 +49,7 @@ public class XMLResourceBehaviour implements ResourceBehaviour {
 			sd = (SequenceDocument) handler.loadDocument((XMLResource) resource, SequenceDocument.Factory.newInstance());
 
 		} catch (XMLDBException e) {
-			System.err.println(e.getMessage());
+			log.error(e.getMessage());
 		} finally {
 			if(null == sd) {
 				sd = SequenceDocument.Factory.newInstance();

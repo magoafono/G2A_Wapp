@@ -927,7 +927,7 @@ public class ExistDBConnector {
 			//			String id = "@value='"+ tokenId +"']/parent::node()/xm:param[@name='analysisRef']/@value"; //piu' lento che con il sibling
 			String query = "data(" + doc + path + id + ")";
 
-			System.err.println(query);
+			log.info(query);
 			ret = xqRunWithMultipleResults(URI, query);
 			//se non ci sono risultati ret e' una string vuota
 		}
@@ -996,10 +996,10 @@ public class ExistDBConnector {
 		List<Pair<String, String>> ret = null;
 		try {
 
-			System.err.println(xquery);
+			log.info("xquery: " + xquery);
 			ResourceSet result = xqExecute(URI, xquery);
 			ResourceIterator i = result.getIterator();
-			System.err.println(((XMLResource)result.getResource(0)).getContentAsDOM());
+			log.debug(((XMLResource)result.getResource(0)).getContentAsDOM());
 			System.exit(0);
 			if (i.hasMoreResources()) {
 				//ret = new ArrayList<String>();

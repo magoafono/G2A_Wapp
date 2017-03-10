@@ -17,6 +17,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @ManagedBean
 @ViewScoped
@@ -27,6 +29,7 @@ public class PericopeEditorController implements Serializable{
 	private static final long serialVersionUID = -8195576909186725358L;
 	//	private String arabicText = null;
 	//	private String greekText = null;
+	private static final Logger log = LogManager.getLogger("PericopeEditorController");
 
 
 	@ManagedProperty(value="#{repository}")
@@ -133,7 +136,7 @@ public class PericopeEditorController implements Serializable{
 				}
 			}
 		} else {
-			System.err.println("Err in PericopeEditor.getArabicTokenViewList(): malformed id: " + selectedPericopeId);
+			log.error("Err in PericopeEditor.getArabicTokenViewList(): malformed id: " + selectedPericopeId);
 		}
 
 		return lotve;
@@ -511,11 +514,11 @@ public class PericopeEditorController implements Serializable{
 
 
 	public void dblClickOnToken() {
-		System.err.println("dblClick");
+		log.info("dblClick");
 		Utils.addInfoMessageToContext("dblClick", "onDebug");
 	}
 	public void clickOnToken(ActionEvent event) {
-		System.err.println("click");
+		log.info("click");
 		Utils.addInfoMessageToContext("click", "onDebug");
 	}
 
