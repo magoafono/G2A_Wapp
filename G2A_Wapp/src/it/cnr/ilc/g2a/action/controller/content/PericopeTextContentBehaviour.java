@@ -1,3 +1,6 @@
+/**
+ * @author simone
+ */
 package it.cnr.ilc.g2a.action.controller.content;
 
 import it.cnr.ilc.g2a.model.Factory;

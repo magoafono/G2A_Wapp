@@ -59,7 +59,7 @@ public class GreekCollator {
 			collator.setStrength(collatorEnum.collatorStrength);
 			Collections.sort(aWords, collator);
 		}
-		System.out.println(aWords.toString() + " " + collatorEnum);
+		//System.out.println(aWords.toString() + " " + collatorEnum);
 	}
 
 	private static void compare(String aThis, String aThat, CollatorEnum collatorEnum) {

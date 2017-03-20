@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <faces-config xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
-	version="2.1">
-	<application>
-		<resource-bundle>
-			<base-name>it.cnr.ilc.g2a.resources.configPlotino</base-name>
-			<var>configPlotino</var>
-		</resource-bundle>
-		<resource-bundle>
-			<base-name>it.cnr.ilc.g2a.resources.configMetafisica</base-name>
-			<var>configMetafisica</var>
-		</resource-bundle>
-		<resource-bundle>
-			<base-name>it.cnr.ilc.g2a.resources.configDetti</base-name>
-			<var>configDetti</var>
-		</resource-bundle>
-		<resource-bundle>
-			<base-name>it.cnr.ilc.g2a.resources.configRisala</base-name>
-			<var>configRisala</var>
-		</resource-bundle>
-		<resource-bundle>
-			<base-name>it.cnr.ilc.g2a.resources.messages</base-name>
-			<var>msg</var>
-		</resource-bundle>
-		<resource-bundle>
-			<base-name>it.cnr.ilc.g2a.resources.type</base-name>
-			<var>type</var>
-		</resource-bundle>
-	</application>
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+              version="2.1">
+    <application>
+        <!--		<resource-bundle>
+                <base-name>it.cnr.ilc.g2a.resources.configTeologia</base-name>
+                <var>configTeologia</var>
+        </resource-bundle>
+        <resource-bundle>
+                <base-name>it.cnr.ilc.g2a.resources.configMetafisica</base-name>
+                <var>configMetafisica</var>
+        </resource-bundle>
+        <resource-bundle>
+                <base-name>it.cnr.ilc.g2a.resources.configDetti</base-name>
+                <var>configDetti</var>
+        </resource-bundle>
+        <resource-bundle>
+                <base-name>it.cnr.ilc.g2a.resources.configRisala</base-name>
+                <var>configRisala</var>
+        </resource-bundle>-->
+        <resource-bundle>
+            <base-name>it.cnr.ilc.g2a.resources.config</base-name>
+            <var>config</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>it.cnr.ilc.g2a.resources.messages</base-name>
+            <var>msg</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>it.cnr.ilc.g2a.resources.type</base-name>
+            <var>type</var>
+        </resource-bundle>
+    </application>
 </faces-config>

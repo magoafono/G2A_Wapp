@@ -35,7 +35,7 @@ import com.hp.hpl.jena.ontology.OntModel;
 public class RepositoryBean {
 	EntityManager em = null;
 
-	private static final Logger logger = LogManager.getLogger("RepositoryBean");
+	private static final Logger logger = LogManager.getLogger(RepositoryBean.class);
 
 	public RepositoryBean() {
 

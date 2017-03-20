@@ -28,9 +28,11 @@ public class Consts {
 			+ "PREFIX owl: <http://www.w3.org/2002/07/owl#> ";
 	public static final String plotinoNS = "http://www.semanticweb.org/ontologies/2014/4/8/Plotino1.owl#";
 
-	public static final String CONFIGNAME = "configPlotino";
-	//public static final String CONFIGNAME = "configMetafisica";
-	//public static final String CONFIGNAME = "configDetti";
-	//public static final String CONFIGNAME = "configRisala";
+	public static final String CONFIGNAME = "config";
+        
+//	public static final String CONFIGNAME = "configTeologia";
+//	public static final String CONFIGNAME = "configMetafisica";
+//	public static final String CONFIGNAME = "configDetti";
+//	public static final String CONFIGNAME = "configRisala";
 
 }
