@@ -1,37 +1,35 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	template="/onto/template.xhtml">
-	<ui:define name="content">
-		<h:outputScript library="js" name="generaGrafo.js" />
-		<h:outputScript library="js" name="vis.js" />
-		<h:outputStylesheet name="./css/ontoView.css" />
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                template="/onto/template.xhtml">
+    <ui:define name="content">
+        <h:outputScript library="js" name="generaGrafo.js" />
+        <h:outputScript library="js" name="vis.js" />
+        <h:outputStylesheet name="./css/ontoView.css" />
 
-		<p:layout styleClass="layout">
-			<p:layoutUnit header="Lessico di Plotino" styleClass="layoutUnit"
-				position="west" size="25%" resizable="true">
-				<ui:include src="/onto/graphicalViewResource.xhtml" />
-			</p:layoutUnit>
-			<p:layoutUnit styleClass="layoutUnit" position="center">
-				<p:layout styleClass="layout">
-					<p:layoutUnit styleClass="layoutUnit" position="center">
-						<h:form id="formnascosto">
-							<h:inputHidden id="nascosto" value="#{plotinoReport.result}"></h:inputHidden>
-							<p:commandButton value="Genera"
-								onclick="draw();
-                                        return false;"></p:commandButton>
-						</h:form>
-						<div id='mynetwork'></div>
-						<div id='info'></div>
-					</p:layoutUnit>
-					<p:layoutUnit styleClass="layoutUnit" position="south">
-					
-Bobbe					</p:layoutUnit>
-				</p:layout>
-			</p:layoutUnit>
-		</p:layout>
-	</ui:define>
+        <p:layout styleClass="layout">
+            <p:layoutUnit header="Lessico di Plotino" styleClass="layoutUnit"
+                          position="west" size="25%" resizable="true">
+                <ui:include src="/onto/graphicalViewResource.xhtml" />
+            </p:layoutUnit>
+            <p:layoutUnit styleClass="layoutUnit" position="center">
+                <p:layout styleClass="layout">
+                    <p:layoutUnit styleClass="layoutUnit" position="center">
+                        <h:form id="formnascosto">
+                            <h:inputHidden id="nascosto" value="#{plotinoReport.ontoResult2JS}"></h:inputHidden>
+                            <p:commandButton value="Genera" onclick="draw();return false;"></p:commandButton>
+                        </h:form>
+                        <div id='mynetwork'></div>
+                        <div id='info'></div>
+                    </p:layoutUnit>
+                    <p:layoutUnit styleClass="layoutUnit" position="south">
+
+                    </p:layoutUnit>
+                </p:layout>
+            </p:layoutUnit>
+        </p:layout>
+    </ui:define>
 </ui:composition>

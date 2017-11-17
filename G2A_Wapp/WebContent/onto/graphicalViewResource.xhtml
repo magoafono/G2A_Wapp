@@ -7,18 +7,18 @@
     <h:form id="reportViewForm">
 
         Scegli un termine del lessico <p:selectOneMenu styleClass="menu" panelStyleClass="panel"
-                                                       value="#{plotinoReport.entryReport}" id="q1p2" filter="true"
+                                                       value="#{plotinoReport.selectedLemma}" id="q1p2" filter="true"
                                                        filterMatchMode="startsWith" effect="fade">
-            <f:selectItems value="#{plotinoReport.instances}" var="c"
+            <f:selectItems value="#{plotinoReport.ontoInstanceMap}" var="c"
                            itemLabel="#{c}" itemValue="#{c}" />
-            <f:ajax listener="#{plotinoReport.runReport()}" execute="q1p2" render=":formnascosto:nascosto" />
+            <f:ajax listener="#{plotinoReport.runOntoQuery()}" execute="q1p2" render=":formnascosto:nascosto" />
         </p:selectOneMenu>
         <p:outputLabel for="console" value="Visualizza le relazioni:" />
-        <p:selectOneRadio id="console" value="#{plotinoReport.visualizedRelations}">
+        <p:selectOneRadio id="console" value="#{plotinoReport.selectedRelType}">
             <f:selectItem itemLabel="Tutte" itemValue="all" />
             <f:selectItem itemLabel="Solo inferite" itemValue="inf" />
             <f:selectItem itemLabel="Solo dirette" itemValue="clean" />
-            <f:ajax listener="#{plotinoReport.runReport()}" execute="console" render=":formnascosto:nascosto" />
+            <f:ajax listener="#{plotinoReport.runOntoQuery()}" execute="console" render=":formnascosto:nascosto" />
         </p:selectOneRadio>
     </h:form>
 </ui:composition>

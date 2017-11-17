@@ -1,376 +1,376 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:p="http://primefaces.org/ui">
-	<p:layout id="global_layout">
-		<p:layoutUnit id="lu_center" position="center" size="30%"
-			resizable="true" minSize="300" maxSize="800">
-			<h:form id="gr_form">
-				<p:panelGrid id="search_pg" style="margin: 0 auto;border:none;">
-					<p:row>
-						<p:column>
-							<p:panelGrid id="greek_search_parameters_pg"
-								style="margin: 0 auto;border:none;">
-								<f:facet name="header">
-									<p:row>
-										<p:column colspan="4" style="text-align: center">Greek Search</p:column>
-									</p:row>
-									<p:row>
-										<p:column style="text-align: center">Type</p:column>
-										<p:column style="text-align: center">Word</p:column>
-										<p:column style="text-align: center">Pos</p:column>
-										<p:column style="text-align: center">Operator</p:column>
-									</p:row>
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:p="http://primefaces.org/ui">
+    <p:layout id="global_layout">
+        <p:layoutUnit id="lu_center" position="center" size="30%"
+                      resizable="true" minSize="300" maxSize="800">
+            <h:form id="gr_form">
+                <p:panelGrid id="search_pg" style="margin: 0 auto;border:none;">
+                    <p:row>
+                        <p:column>
+                            <p:panelGrid id="greek_search_parameters_pg"
+                                         style="margin: 0 auto;border:none;">
+                                <f:facet name="header">
+                                    <p:row>
+                                        <p:column colspan="4" style="text-align: center">Greek Search</p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style="text-align: center">Type</p:column>
+                                        <p:column style="text-align: center">Word</p:column>
+                                        <p:column style="text-align: center">Pos</p:column>
+                                        <p:column style="text-align: center">Operator</p:column>
+                                    </p:row>
 
-								</f:facet>
-								<p:row id="gr_parameter_row_1">
-									<p:column headerText="Type" style="text-align:center;">
-										<p:selectOneMenu effect="none" id="gr_type_1"
-											value="#{searchViewBean.grSb.type[0]}"
-											style="text-align:left;">
-											<f:selectItems value="#{searchViewBean.grItemType}"
-												var="tipo" itemLabel="#{tipo.left}"
-												itemValue="#{tipo.right}" />
-										</p:selectOneMenu>
-									</p:column>
-									<p:column style="text-align:center;">
-										<p:inputText id="gr_word_1" styleClass="greek" size="10"
-											value="#{searchViewBean.grSb.word[0]}"
-											style="font-size:#{loginBean.greekFontSize}" />
-										<p:watermark for="gr_word_1" value="Insert word ..."></p:watermark>
-										<!--p:keyboard id="gr_word_1" value="#{searchViewBean.grSb.word[0]}" showMode="button"  layout="greek" /-->
-									</p:column>
-									<p:column style="text-align:center;">
-										<p:selectOneMenu id="gr_pos_1" effect="none"
-											value="#{searchViewBean.grSb.pos[0]}"
-											style="text-align:left;">
-											<f:selectItems value="#{searchViewBean.grItemPos}" var="pos"
-												itemLabel="#{pos.left}" itemValue="#{pos.right}" />
-										</p:selectOneMenu>
-									</p:column>
-									<p:column rowspan="3" style="text-align:center;">
-										<p:selectOneMenu id="gr_operator" effect="none"
-											value="#{searchViewBean.grSb.op}" style="text-align:left;">
-											<f:selectItem itemLabel="And" itemValue="and" />
-											<f:selectItem itemLabel="Or" itemValue="or" />
-											<!--f:selectItem itemLabel="Distance" itemValue="distance" /-->
-										</p:selectOneMenu>
-									</p:column>
-								</p:row>
-								<p:row id="gr_parameter_row_2">
-									<p:column headerText="Type" style="text-align:center;">
-										<p:selectOneMenu effect="none" id="gr_type_2"
-											value="#{searchViewBean.grSb.type[1]}"
-											style="text-align:left;">
-											<f:selectItems value="#{searchViewBean.grItemType}"
-												var="tipo" itemLabel="#{tipo.left}"
-												itemValue="#{tipo.right}" />
-										</p:selectOneMenu>
-									</p:column>
-									<p:column style="text-align:center;">
-										<p:inputText id="gr_word_2" styleClass="greek" size="10"
-											value="#{searchViewBean.grSb.word[1]}"
-											style="font-size:#{loginBean.greekFontSize}" />
-										<p:watermark for="gr_word_2" value="Insert word ..."></p:watermark>
-									</p:column>
-									<p:column style="text-align:center;">
-										<p:selectOneMenu id="gr_pos_2" effect="none"
-											value="#{searchViewBean.grSb.pos[1]}"
-											style="text-align:left;">
-											<f:selectItems value="#{searchViewBean.grItemPos}" var="pos"
-												itemLabel="#{pos.left}" itemValue="#{pos.right}" />
-										</p:selectOneMenu>
-									</p:column>
+                                </f:facet>
+                                <p:row id="gr_parameter_row_1">
+                                    <p:column headerText="Type" style="text-align:center;">
+                                        <p:selectOneMenu effect="none" id="gr_type_1"
+                                                         value="#{searchViewBean.grSb.type[0]}"
+                                                         style="text-align:left;">
+                                            <f:selectItems value="#{searchViewBean.grItemType}"
+                                                           var="tipo" itemLabel="#{tipo.left}"
+                                                           itemValue="#{tipo.right}" />
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                    <p:column style="text-align:center;">
+                                        <p:inputText id="gr_word_1" styleClass="greek" size="10"
+                                                     value="#{searchViewBean.grSb.word[0]}"
+                                                     style="font-size:#{loginBean.greekFontSize}" />
+                                        <p:watermark for="gr_word_1" value="Insert word ..."></p:watermark>
+                                        <!--p:keyboard id="gr_word_1" value="#{searchViewBean.grSb.word[0]}" showMode="button"  layout="greek" /-->
+                                    </p:column>
+                                    <p:column style="text-align:center;">
+                                        <p:selectOneMenu id="gr_pos_1" effect="none"
+                                                         value="#{searchViewBean.grSb.pos[0]}"
+                                                         style="text-align:left;">
+                                            <f:selectItems value="#{searchViewBean.grItemPos}" var="pos"
+                                                           itemLabel="#{pos.left}" itemValue="#{pos.right}" />
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                    <p:column rowspan="3" style="text-align:center;">
+                                        <p:selectOneMenu id="gr_operator" effect="none"
+                                                         value="#{searchViewBean.grSb.op}" style="text-align:left;">
+                                            <f:selectItem itemLabel="And" itemValue="and" />
+                                            <f:selectItem itemLabel="Or" itemValue="or" />
+                                            <!--f:selectItem itemLabel="Distance" itemValue="distance" /-->
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                                <p:row id="gr_parameter_row_2">
+                                    <p:column headerText="Type" style="text-align:center;">
+                                        <p:selectOneMenu effect="none" id="gr_type_2"
+                                                         value="#{searchViewBean.grSb.type[1]}"
+                                                         style="text-align:left;">
+                                            <f:selectItems value="#{searchViewBean.grItemType}"
+                                                           var="tipo" itemLabel="#{tipo.left}"
+                                                           itemValue="#{tipo.right}" />
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                    <p:column style="text-align:center;">
+                                        <p:inputText id="gr_word_2" styleClass="greek" size="10"
+                                                     value="#{searchViewBean.grSb.word[1]}"
+                                                     style="font-size:#{loginBean.greekFontSize}" />
+                                        <p:watermark for="gr_word_2" value="Insert word ..."></p:watermark>
+                                    </p:column>
+                                    <p:column style="text-align:center;">
+                                        <p:selectOneMenu id="gr_pos_2" effect="none"
+                                                         value="#{searchViewBean.grSb.pos[1]}"
+                                                         style="text-align:left;">
+                                            <f:selectItems value="#{searchViewBean.grItemPos}" var="pos"
+                                                           itemLabel="#{pos.left}" itemValue="#{pos.right}" />
+                                        </p:selectOneMenu>
+                                    </p:column>
 
-								</p:row>
-								<p:row id="gr_parameter_row_3">
-									<p:column headerText="Type" style="text-align:center;">
-										<p:selectOneMenu effect="none" id="gr_type_3"
-											value="#{searchViewBean.grSb.type[2]}"
-											style="text-align:left;">
-											<f:selectItems value="#{searchViewBean.grItemType}"
-												var="tipo" itemLabel="#{tipo.left}"
-												itemValue="#{tipo.right}" />
-										</p:selectOneMenu>
-									</p:column>
-									<p:column style="text-align:center;">
-										<p:inputText id="gr_word_3" styleClass="greek" size="10"
-											value="#{searchViewBean.grSb.word[2]}"
-											style="font-size:#{loginBean.greekFontSize}" />
-										<p:watermark for="gr_word_3" value="Insert word ..."></p:watermark>
-									</p:column>
-									<p:column style="text-align:center;">
-										<p:selectOneMenu id="gr_pos_3" effect="none"
-											value="#{searchViewBean.grSb.pos[2]}"
-											style="text-align:left;">
-											<f:selectItems value="#{searchViewBean.grItemPos}" var="pos"
-												itemLabel="#{pos.left}" itemValue="#{pos.right}" />
-										</p:selectOneMenu>
-									</p:column>
-								</p:row>
-								<f:facet name="footer">
-									<p:row>
-										<p:column colspan="2" style="text-align:center;">
-											<p:commandButton id="gr_search_btn" icon="ui-icon-search"
-												update=":searchResultFormId" value="Search"
-												onstart="ajaxWaitDialog.show();" partialSubmit="true"
-												oncomplete="ajaxWaitDialog.hide();"
-												action="#{searchViewBean.grSubmit}">
-											</p:commandButton>
-										</p:column>
-										<p:column colspan="2" style="text-align:center;">
-											<p:commandButton value="Clear Form"
-												update="greek_search_parameters_pg" process="@this"
-												style="margin-right:20px;" action="#{searchViewBean.reset}">
-											</p:commandButton>
-										</p:column>
-									</p:row>
-								</f:facet>
-							</p:panelGrid>
-						</p:column>
-						<!-- COMBINED SEARCH -->
-						<p:column>
-							<p:panelGrid style="margin: 0 auto;">
-								<f:facet name="header">
-									<p:row>
-										<p:column colspan="2" style="text-align: center;padding:10px;">Combined Search</p:column>
-									</p:row>
-								</f:facet>
-								<p:row>
-									<p:column style="padding:10px;">
-										<p:selectOneMenu id="combined_operator" effect="none"
-											value="#{searchViewBean.combinedOperation}"
-											style="text-align:left;">
-											<f:selectItem itemLabel="And" itemValue="and" />
-											<f:selectItem itemLabel="Or" itemValue="or" />
-										</p:selectOneMenu>
-									</p:column>
-									<p:column>
-										<p:commandButton id="combined_search_btn"
-											icon="ui-icon-search" ajax="true"
-											update=":searchResultFormId" value="Search" type="submit"
-											onstart="ajaxWaitDialog.show();"
-											oncomplete="ajaxWaitDialog.hide();" partialSubmit="true"
-											action="#{searchViewBean.combinedSubmit}">
-										</p:commandButton>
-									</p:column>
-								</p:row>
-							</p:panelGrid>
-						</p:column>
+                                </p:row>
+                                <p:row id="gr_parameter_row_3">
+                                    <p:column headerText="Type" style="text-align:center;">
+                                        <p:selectOneMenu effect="none" id="gr_type_3"
+                                                         value="#{searchViewBean.grSb.type[2]}"
+                                                         style="text-align:left;">
+                                            <f:selectItems value="#{searchViewBean.grItemType}"
+                                                           var="tipo" itemLabel="#{tipo.left}"
+                                                           itemValue="#{tipo.right}" />
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                    <p:column style="text-align:center;">
+                                        <p:inputText id="gr_word_3" styleClass="greek" size="10"
+                                                     value="#{searchViewBean.grSb.word[2]}"
+                                                     style="font-size:#{loginBean.greekFontSize}" />
+                                        <p:watermark for="gr_word_3" value="Insert word ..."></p:watermark>
+                                    </p:column>
+                                    <p:column style="text-align:center;">
+                                        <p:selectOneMenu id="gr_pos_3" effect="none"
+                                                         value="#{searchViewBean.grSb.pos[2]}"
+                                                         style="text-align:left;">
+                                            <f:selectItems value="#{searchViewBean.grItemPos}" var="pos"
+                                                           itemLabel="#{pos.left}" itemValue="#{pos.right}" />
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                                <f:facet name="footer">
+                                    <p:row>
+                                        <p:column colspan="2" style="text-align:center;">
+                                            <p:commandButton id="gr_search_btn" icon="ui-icon-search"
+                                                             update=":searchResultFormId" value="Search"
+                                                             onstart="ajaxWaitDialog.show();" partialSubmit="true"
+                                                             oncomplete="ajaxWaitDialog.hide();"
+                                                             action="#{searchViewBean.grSubmit}">
+                                            </p:commandButton>
+                                        </p:column>
+                                        <p:column colspan="2" style="text-align:center;">
+                                            <p:commandButton value="Clear Form"
+                                                             update="greek_search_parameters_pg" process="@this"
+                                                             style="margin-right:20px;" action="#{searchViewBean.reset}">
+                                            </p:commandButton>
+                                        </p:column>
+                                    </p:row>
+                                </f:facet>
+                            </p:panelGrid>
+                        </p:column>
+                        <!-- COMBINED SEARCH -->
+                        <p:column>
+                            <p:panelGrid style="margin: 0 auto;">
+                                <f:facet name="header">
+                                    <p:row>
+                                        <p:column colspan="2" style="text-align: center;padding:10px;">Combined Search</p:column>
+                                    </p:row>
+                                </f:facet>
+                                <p:row>
+                                    <p:column style="padding:10px;">
+                                        <p:selectOneMenu id="combined_operator" effect="none"
+                                                         value="#{searchViewBean.combinedOperation}"
+                                                         style="text-align:left;">
+                                            <f:selectItem itemLabel="And" itemValue="and" />
+                                            <f:selectItem itemLabel="Or" itemValue="or" />
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                    <p:column>
+                                        <p:commandButton id="combined_search_btn"
+                                                         icon="ui-icon-search" ajax="true"
+                                                         update=":searchResultFormId" value="Search" type="submit"
+                                                         onstart="ajaxWaitDialog.show();"
+                                                         oncomplete="ajaxWaitDialog.hide();" partialSubmit="true"
+                                                         action="#{searchViewBean.combinedSubmit}">
+                                        </p:commandButton>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                        </p:column>
 
-						<!-- ARABIC -->
-						<p:column>
-							<!--p:layoutUnit position="east" resizable="true" size="50%"-->
-							<p:panelGrid id="arabic_search_parameters_pg"
-								style="margin: 0 auto;border:none;">
-								<f:facet name="header">
-									<p:row>
-										<p:column colspan="4" style="text-align: center">Arabic Search</p:column>
-									</p:row>
-									<p:row>
-										<p:column style="text-align: center">Type</p:column>
-										<p:column style="text-align: center">Word</p:column>
-										<p:column style="text-align: center">Pos</p:column>
-										<p:column style="text-align: center">Operator</p:column>
-									</p:row>
+                        <!-- ARABIC -->
+                        <p:column>
+                            <!--p:layoutUnit position="east" resizable="true" size="50%"-->
+                            <p:panelGrid id="arabic_search_parameters_pg"
+                                         style="margin: 0 auto;border:none;">
+                                <f:facet name="header">
+                                    <p:row>
+                                        <p:column colspan="4" style="text-align: center">Arabic Search</p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column style="text-align: center">Type</p:column>
+                                        <p:column style="text-align: center">Word</p:column>
+                                        <p:column style="text-align: center">Pos</p:column>
+                                        <p:column style="text-align: center">Operator</p:column>
+                                    </p:row>
 
-								</f:facet>
-								<p:row id="ar_parameter_row_1">
-									<p:column headerText="Type" style="text-align:center;">
-										<p:selectOneMenu effect="none" id="ar_type_1"
-											value="#{searchViewBean.arSb.type[0]}"
-											style="text-align:left;">
-											<f:selectItems value="#{searchViewBean.arItemType}"
-												var="tipo" itemLabel="#{tipo.left}"
-												itemValue="#{tipo.right}" />
-										</p:selectOneMenu>
-									</p:column>
-									<p:column style="text-align:center;">
-										<p:inputText id="ar_word_1" styleClass="arabic" size="10"
-											value="#{searchViewBean.arSb.word[0]}"
-											style="font-size:#{loginBean.arabicFontSize}" />
-										<p:watermark for="ar_word_1" value="Insert word ..."></p:watermark>
-									</p:column>
-									<p:column style="text-align:center;">
-										<p:selectOneMenu id="ar_pos_1" effect="none" height="500"
-											value="#{searchViewBean.arSb.pos[0]}"
-											panelStyle="width:300px" style="text-align:left;width:180px">
-											<f:selectItems value="#{searchViewBean.arItemPos}" var="pos"
-												itemLabel="#{pos.left}" itemValue="#{pos.right}" />
-										</p:selectOneMenu>
-									</p:column>
-									<p:column rowspan="3" style="text-align:center;">
-										<p:selectOneMenu id="ar_operator" effect="none"
-											value="#{searchViewBean.arSb.op}" style="text-align:left;">
-											<f:selectItem itemLabel="And" itemValue="and" />
-											<f:selectItem itemLabel="Or" itemValue="or" />
-											<!-- f:selectItem itemLabel="Distance" itemValue="distance" /-->
-										</p:selectOneMenu>
-									</p:column>
-								</p:row>
-								<p:row id="ar_parameter_row_2">
-									<p:column headerText="Type" style="text-align:center;">
-										<p:selectOneMenu effect="none" id="ar_type_2"
-											value="#{searchViewBean.arSb.type[1]}"
-											style="text-align:left;">
-											<f:selectItems value="#{searchViewBean.arItemType}"
-												var="tipo" itemLabel="#{tipo.left}"
-												itemValue="#{tipo.right}" />
-										</p:selectOneMenu>
-									</p:column>
-									<p:column style="text-align:center;">
-										<p:inputText id="ar_word_2" styleClass="arabic" size="10"
-											value="#{searchViewBean.arSb.word[1]}"
-											style="font-size:#{loginBean.arabicFontSize}" />
-										<p:watermark for="ar_word_2"
-											value="#{searchViewBean.arSb.word[1]}"></p:watermark>
-									</p:column>
-									<p:column style="text-align:center;">
-										<p:selectOneMenu id="ar_pos_2" effect="none" height="500"
-											value="#{searchViewBean.arSb.pos[1]}"
-											panelStyle="width:300px" style="text-align:left; width:180px">
-											<f:selectItems value="#{searchViewBean.arItemPos}" var="pos"
-												itemLabel="#{pos.left}" itemValue="#{pos.right}" />
-										</p:selectOneMenu>
-									</p:column>
+                                </f:facet>
+                                <p:row id="ar_parameter_row_1">
+                                    <p:column headerText="Type" style="text-align:center;">
+                                        <p:selectOneMenu effect="none" id="ar_type_1"
+                                                         value="#{searchViewBean.arSb.type[0]}"
+                                                         style="text-align:left;">
+                                            <f:selectItems value="#{searchViewBean.arItemType}"
+                                                           var="tipo" itemLabel="#{tipo.left}"
+                                                           itemValue="#{tipo.right}" />
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                    <p:column style="text-align:center;">
+                                        <p:inputText id="ar_word_1" styleClass="arabic" size="10"
+                                                     value="#{searchViewBean.arSb.word[0]}"
+                                                     style="font-size:#{loginBean.arabicFontSize}" />
+                                        <p:watermark for="ar_word_1" value="Insert word ..."></p:watermark>
+                                    </p:column>
+                                    <p:column style="text-align:center;">
+                                        <p:selectOneMenu id="ar_pos_1" effect="none" height="500"
+                                                         value="#{searchViewBean.arSb.pos[0]}"
+                                                         panelStyle="width:300px" style="text-align:left;width:180px">
+                                            <f:selectItems value="#{searchViewBean.arItemPos}" var="pos"
+                                                           itemLabel="#{pos.left}" itemValue="#{pos.right}" />
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                    <p:column rowspan="3" style="text-align:center;">
+                                        <p:selectOneMenu id="ar_operator" effect="none"
+                                                         value="#{searchViewBean.arSb.op}" style="text-align:left;">
+                                            <f:selectItem itemLabel="And" itemValue="and" />
+                                            <f:selectItem itemLabel="Or" itemValue="or" />
+                                            <!-- f:selectItem itemLabel="Distance" itemValue="distance" /-->
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                                <p:row id="ar_parameter_row_2">
+                                    <p:column headerText="Type" style="text-align:center;">
+                                        <p:selectOneMenu effect="none" id="ar_type_2"
+                                                         value="#{searchViewBean.arSb.type[1]}"
+                                                         style="text-align:left;">
+                                            <f:selectItems value="#{searchViewBean.arItemType}"
+                                                           var="tipo" itemLabel="#{tipo.left}"
+                                                           itemValue="#{tipo.right}" />
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                    <p:column style="text-align:center;">
+                                        <p:inputText id="ar_word_2" styleClass="arabic" size="10"
+                                                     value="#{searchViewBean.arSb.word[1]}"
+                                                     style="font-size:#{loginBean.arabicFontSize}" />
+                                        <p:watermark for="ar_word_2"
+                                                     value="#{searchViewBean.arSb.word[1]}"></p:watermark>
+                                    </p:column>
+                                    <p:column style="text-align:center;">
+                                        <p:selectOneMenu id="ar_pos_2" effect="none" height="500"
+                                                         value="#{searchViewBean.arSb.pos[1]}"
+                                                         panelStyle="width:300px" style="text-align:left; width:180px">
+                                            <f:selectItems value="#{searchViewBean.arItemPos}" var="pos"
+                                                           itemLabel="#{pos.left}" itemValue="#{pos.right}" />
+                                        </p:selectOneMenu>
+                                    </p:column>
 
-								</p:row>
-								<p:row id="ar_parameter_row_3">
-									<p:column headerText="Type" style="text-align:center;">
-										<p:selectOneMenu effect="none" id="ar_type_3"
-											value="#{searchViewBean.arSb.type[2]}"
-											style="text-align:left;">
-											<f:selectItems value="#{searchViewBean.arItemType}"
-												var="tipo" itemLabel="#{tipo.left}"
-												itemValue="#{tipo.right}" />
-										</p:selectOneMenu>
-									</p:column>
-									<p:column style="text-align:center;">
-										<p:inputText id="ar_word_3" styleClass="arabic" size="10"
-											value="#{searchViewBean.arSb.word[2]}"
-											style="font-size:#{loginBean.arabicFontSize}" />
-										<p:watermark for="ar_word_3"
-											value="#{searchViewBean.arSb.word[2]}"></p:watermark>
-									</p:column>
-									<p:column style="text-align:center;">
-										<p:selectOneMenu id="ar_pos_3" effect="none" height="500"
-											value="#{searchViewBean.arSb.pos[2]}"
-											panelStyle="width:300px" style="text-align:left;width:180px">
-											<f:selectItems value="#{searchViewBean.arItemPos}" var="pos"
-												itemLabel="#{pos.left}" itemValue="#{pos.right}" />
-										</p:selectOneMenu>
-									</p:column>
-								</p:row>
-								<f:facet name="footer">
-									<p:row>
-										<p:column colspan="2" style="text-align:center;">
-											<p:commandButton id="ar_search_btn" icon="ui-icon-search"
-												ajax="true" update=":searchResultFormId" value="Search"
-												onstart="ajaxWaitDialog.show();" partialSubmit="true"
-												oncomplete="ajaxWaitDialog.hide();" type="submit"
-												action="#{searchViewBean.arSubmit}">
-											</p:commandButton>
-										</p:column>
-										<p:column colspan="2" style="text-align:center;">
-											<p:commandButton value="Clear Form"
-												update="arabic_search_parameters_pg" process="@this"
-												style="margin-right:20px;" action="#{searchViewBean.reset}">
-											</p:commandButton>
-										</p:column>
-									</p:row>
-								</f:facet>
-							</p:panelGrid>
-						</p:column>
-					</p:row>
-					<p:row>
-					</p:row>
-				</p:panelGrid>
-			</h:form>
+                                </p:row>
+                                <p:row id="ar_parameter_row_3">
+                                    <p:column headerText="Type" style="text-align:center;">
+                                        <p:selectOneMenu effect="none" id="ar_type_3"
+                                                         value="#{searchViewBean.arSb.type[2]}"
+                                                         style="text-align:left;">
+                                            <f:selectItems value="#{searchViewBean.arItemType}"
+                                                           var="tipo" itemLabel="#{tipo.left}"
+                                                           itemValue="#{tipo.right}" />
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                    <p:column style="text-align:center;">
+                                        <p:inputText id="ar_word_3" styleClass="arabic" size="10"
+                                                     value="#{searchViewBean.arSb.word[2]}"
+                                                     style="font-size:#{loginBean.arabicFontSize}" />
+                                        <p:watermark for="ar_word_3"
+                                                     value="#{searchViewBean.arSb.word[2]}"></p:watermark>
+                                    </p:column>
+                                    <p:column style="text-align:center;">
+                                        <p:selectOneMenu id="ar_pos_3" effect="none" height="500"
+                                                         value="#{searchViewBean.arSb.pos[2]}"
+                                                         panelStyle="width:300px" style="text-align:left;width:180px">
+                                            <f:selectItems value="#{searchViewBean.arItemPos}" var="pos"
+                                                           itemLabel="#{pos.left}" itemValue="#{pos.right}" />
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                                <f:facet name="footer">
+                                    <p:row>
+                                        <p:column colspan="2" style="text-align:center;">
+                                            <p:commandButton id="ar_search_btn" icon="ui-icon-search"
+                                                             ajax="true" update=":searchResultFormId" value="Search"
+                                                             onstart="ajaxWaitDialog.show();" partialSubmit="true"
+                                                             oncomplete="ajaxWaitDialog.hide();" type="submit"
+                                                             action="#{searchViewBean.arSubmit}">
+                                            </p:commandButton>
+                                        </p:column>
+                                        <p:column colspan="2" style="text-align:center;">
+                                            <p:commandButton value="Clear Form"
+                                                             update="arabic_search_parameters_pg" process="@this"
+                                                             style="margin-right:20px;" action="#{searchViewBean.reset}">
+                                            </p:commandButton>
+                                        </p:column>
+                                    </p:row>
+                                </f:facet>
+                            </p:panelGrid>
+                        </p:column>
+                    </p:row>
+                    <p:row>
+                    </p:row>
+                </p:panelGrid>
+            </h:form>
 
-		</p:layoutUnit>
+        </p:layoutUnit>
 
-		<!-- RESULTS -->
+        <!-- RESULTS -->
 
-		<p:layoutUnit position="south" id="lu_south" size="70%"
-			resizable="true" minSize="300" maxSize="800">
-			<h:form id="searchResultFormId">
-				<p:dataTable id="results_dt" var="alink" scrollable="true"
-					scrollHeight="500" scrollRows="10"
-					selection="#{parallelViewBean.selectedResultViewEntity}"
-					rendered="#{not empty searchViewBean.searchResult}"
-					value="#{searchViewBean.searchResult}" selectionMode="single"
-					rowKey="#{not empty alink.linkId ? alink.linkId : alink.hashCode()}">
-					<f:facet name="header">
-						<h:outputText
-							value="Results (#{fn:length(searchViewBean.searchResult)})" />
-					</f:facet>
-					<p:ajax event="rowSelect" update=":menuForm" />
+        <p:layoutUnit position="south" id="lu_south" size="70%"
+                      resizable="true" minSize="300" maxSize="800">
+            <h:form id="searchResultFormId">
+                <p:dataTable id="results_dt" var="alink" scrollable="true"
+                             scrollHeight="500" scrollRows="10"
+                             selection="#{parallelViewBean.selectedResultViewEntity}"
+                             rendered="#{not empty searchViewBean.searchResult}"
+                             value="#{searchViewBean.searchResult}" selectionMode="single"
+                             rowKey="#{not empty alink.linkId ? alink.linkId : alink.hashCode()}">
+                    <f:facet name="header">
+                        <h:outputText
+                            value="Results (#{fn:length(searchViewBean.searchResult)})" />
+                    </f:facet>
+                    <p:ajax event="rowSelect" update=":menuForm" />
 
-					<p:column sortBy="#{alink.grPericopeId}" width="5%"
-						headerText="Greek Pericope Info">
-						<h:outputText value="#{alink.grPericopeInfo}" styleClass="latin" />
-					</p:column>
+                    <p:column sortBy="#{alink.grPericopeId}" width="5%"
+                              headerText="Greek Pericope Info">
+                        <h:outputText value="#{alink.grPericopeInfo}" styleClass="latin" />
+                    </p:column>
 
-					<p:column style="white-space:normal" headerText="Greek Pericope"
-						styleClass="latin">
-						<p:outputPanel layout="block" styleClass="greek"
-							style="padding-right:0px;font-size:#{loginBean.greekFontSize}">
-							<ui:repeat value="#{alink.greekTVE}" var="gr">
-								<ui:fragment rendered="#{gr.text eq '&#x21b2;'}">
-									<h:outputText value="&#x0020;" />
-								</ui:fragment>
-								<ui:fragment rendered="#{gr.text ne '&#x21b2;'}">
-									<h:outputText value="#{gr.text}"
-										styleClass="#{gr.color == 1  ? 'highlight': ''} greek" />
-									<h:outputText value="&#xa0;" />
-								</ui:fragment>
-							</ui:repeat>
-						</p:outputPanel>
-					</p:column>
-					<p:column style="white-space:normal" headerText="Arabic Pericope"
-						styleClass="latin">
-						<p:outputPanel layout="block" styleClass="arabic"
-							style="padding-right:0px;font-size:#{loginBean.arabicFontSize}">
-							<ui:repeat value="#{alink.arabicTVE}" var="ar">
-								<ui:fragment rendered="#{ar.text eq '&#x21b3;'}">
-									<h:outputText value="&#x0020;" />
-								</ui:fragment>
-								<ui:fragment rendered="#{ar.text ne '&#x21b3;'}">
-									<h:outputText value="#{ar.text}"
-										styleClass="#{ar.color == 1  ? 'highlight': ''}" />
-									<h:outputText value="&#xa0;" />
-								</ui:fragment>
-							</ui:repeat>
-						</p:outputPanel>
-					</p:column>
-					<p:column sortBy="#{alink.arPericopeId}"
-						headerText="Arabic Pericope Info" width="5%">
-						<h:outputText value="#{alink.arPericopeInfo}" styleClass="latin" />
-					</p:column>
+                    <p:column style="white-space:normal" headerText="Greek Pericope"
+                              styleClass="latin">
+                        <p:outputPanel layout="block" styleClass="greek"
+                                       style="padding-right:0px;font-size:#{loginBean.greekFontSize}">
+                            <ui:repeat value="#{alink.greekTVE}" var="gr">
+                                <ui:fragment rendered="#{gr.text eq '&#x21b2;'}">
+                                    <h:outputText value="&#x0020;" />
+                                </ui:fragment>
+                                <ui:fragment rendered="#{gr.text ne '&#x21b2;'}">
+                                    <h:outputText value="#{gr.text}"
+                                                  styleClass="#{gr.color == 1  ? 'highlight': ''} greek" />
+                                    <h:outputText value="&#xa0;" />
+                                </ui:fragment>
+                            </ui:repeat>
+                        </p:outputPanel>
+                    </p:column>
+                    <p:column style="white-space:normal" headerText="Arabic Pericope"
+                              styleClass="latin">
+                        <p:outputPanel layout="block" styleClass="arabic"
+                                       style="padding-right:0px;font-size:#{loginBean.arabicFontSize}">
+                            <ui:repeat value="#{alink.arabicTVE}" var="ar">
+                                <ui:fragment rendered="#{ar.text eq '&#x21b3;'}">
+                                    <h:outputText value="&#x0020;" />
+                                </ui:fragment>
+                                <ui:fragment rendered="#{ar.text ne '&#x21b3;'}">
+                                    <h:outputText value="#{ar.text}"
+                                                  styleClass="#{ar.color == 1  ? 'highlight': ''}" />
+                                    <h:outputText value="&#xa0;" />
+                                </ui:fragment>
+                            </ui:repeat>
+                        </p:outputPanel>
+                    </p:column>
+                    <p:column sortBy="#{alink.arPericopeId}"
+                              headerText="Arabic Pericope Info" width="5%">
+                        <h:outputText value="#{alink.arPericopeInfo}" styleClass="latin" />
+                    </p:column>
 
-					<f:facet name="footer">
-						<p:commandButton id="download_btn" icon="ui-icon-arrowthick-1-s"
-							action="#{searchViewBean.fileDownloadView()}" ajax="false"
-							value="Download Results"
-							rendered="#{searchViewBean.downloadableResult != null}">
-							<p:fileDownload value="#{searchViewBean.downloadableResult}" />
-						</p:commandButton>
-					</f:facet>
-				</p:dataTable>
+                    <f:facet name="footer">
+                        <p:commandButton id="download_btn" icon="ui-icon-arrowthick-1-s"
+                                         action="#{searchViewBean.fileDownloadView()}" ajax="false"
+                                         value="Download Results"
+                                         rendered="#{searchViewBean.downloadableResult != null}">
+                            <p:fileDownload value="#{searchViewBean.downloadableResult}" />
+                        </p:commandButton>
+                    </f:facet>
+                </p:dataTable>
 
 
-			</h:form>
-		</p:layoutUnit>
-	</p:layout>
+            </h:form>
+        </p:layoutUnit>
+    </p:layout>
 
-	<p:dialog id="seachDialogId" modal="true" showHeader="false"
-		widgetVar="ajaxWaitDialog" draggable="false" closable="false"
-		resizable="false">
-		<h:graphicImage value="#{resource['images/load.gif']}" />
-	</p:dialog>
+    <p:dialog id="seachDialogId" modal="true" showHeader="false"
+              widgetVar="ajaxWaitDialog" draggable="false" closable="false"
+              resizable="false">
+        <h:graphicImage value="#{resource['images/load.gif']}" />
+    </p:dialog>
 
 
 </ui:composition>

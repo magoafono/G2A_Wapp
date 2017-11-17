@@ -1,6 +1,8 @@
 
-function draw() {
+/* global vis */
 
+function drawGraph(height, width) {
+   // alert("nella drawGraph(" + height + ", " + width+ " ) ");
     var a = document.getElementById('tabViewId:formnascosto:nascosto').value;
     var res = a.split("-");
     var nodeList = res[0].split("*");
@@ -13,7 +15,7 @@ function draw() {
     // creo i nodi
     var len = nodeList.length;
     for (var i = 0; i < len; i++) {
-        if (i == 0) {
+        if (i === 0) {
             nodes.push({
                 id: i,
                 label: nodeList[i],
@@ -37,20 +39,12 @@ function draw() {
         });
     }
 
-    options = {
-        navigation: true,
-        stabilize: false,
-        configurePhysics:false,
-        smoothCurves: false,
+    var options = {
+        autoResize: true,
 
-        edges: {
-            width: 2,
-            style: 'arrow',
-            color: 'gray'
-        },
         nodes: {
             // default for all nodes
-            fontFace: 'times',
+            // fontFace: 'times',// unknown
             shape: 'box',
             color: {
                 border: 'orange',
@@ -61,6 +55,54 @@ function draw() {
                 }
             }
         },
+        "edges": {
+            "arrows": {
+                "to": {
+                    "enabled": true
+                }
+            },
+            "smooth": {
+                "forceDirection": "none"
+            }
+        },
+        "interaction": {
+            "navigationButtons": true
+        },
+        "physics": {
+            "enabled": true,
+            "minVelocity": 0.75,
+            "solver": "repulsion"
+        }
+    }
+
+    var options2 = {
+        //  navigation: true, // unknown
+        //   stabilize: true, // unknown
+        //   configurePhysics: false,// unknown
+        //   smoothCurves: false,// unknown
+        autoResize: true,
+        //   showButton: true,// unknown
+
+        edges: {
+            width: 2,
+            arrows: true,
+            //  style: 'arrow',// unknown
+            color: 'gray'
+        },
+        nodes: {
+            // default for all nodes
+            // fontFace: 'times',// unknown
+            shape: 'box',
+            color: {
+                border: 'orange',
+                background: 'yellow',
+                highlight: {
+                    border: 'darkorange',
+                    background: 'gold'
+                }
+            }
+        },
+
         physics: {
             barnesHut: {
                 gravitationalConstant: -20000,
@@ -68,28 +110,26 @@ function draw() {
                 springLength: 300,
                 springConstant: 0.5, //this should be set to 0 to avoid jumping
                 damping: 0.3
-            },/*
-            repulsion: {
-                centralGravity: 0.1,
-                springLength: 10,
-                springConstant: 0.1,
-                nodeDistance: 300,
-                damping: 0.09
-            }*/
+            }/*, 
+             repulsion: {
+             centralGravity: 0.1,
+             springLength: 10,
+             springConstant: 0.1,
+             nodeDistance: 300,
+             damping: 0.09
+             }*/
         }// this is the correct way to set the length of the springs
     };
     // create the network
-    var container = document.getElementById('mynetwork');
+    var container = document.getElementById('tabViewId:reportViewForm:mynetwork');
     var data = {
         nodes: nodes,
         edges: edges
     };
     network = new vis.Network(container, data, options);
-    opt2 = [
-    		{zoomExtent:'linear'}
-    ]
-    network.zoomExtent(true);
-
+    network.setSize( width, height );
+    //network.zoomExtent(true);
+    //  network.fit({animate: false});
     // add event listener
     //network.on('select', function(properties) {
     //    document.getElementById('info').innerHTML += 'Hai selezionato il nodo: ' + properties.nodes + '<br/>';

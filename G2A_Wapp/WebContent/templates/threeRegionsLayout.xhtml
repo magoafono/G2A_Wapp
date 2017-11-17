@@ -1,38 +1,38 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<h:outputStylesheet library="css" name="my-style.css" />
-	<h:outputScript name="jquery/jquery.js" library="primefaces" />
-	<h:outputScript name="jquery/jquery-plugins.js" library="primefaces" />
-	<title><ui:insert name="title">Default title</ui:insert></title>
-</h:head>
+    <h:head>
+        <h:outputStylesheet library="css" name="my-style.css" />
+        <h:outputScript name="jquery/jquery.js" library="primefaces" />
+        <h:outputScript name="jquery/jquery-plugins.js" library="primefaces" />
+        <title><ui:insert name="title">Default title</ui:insert></title>
+    </h:head>
 
-<h:body>
-	<p:layout fullPage="true">
+    <h:body>
+        <p:layout fullPage="true">
 
-		<p:layoutUnit position="north"
-			header="Greek into Arabic Web Application v.#{msg['version']}"
-			resizable="false" closable="false" collapsible="false">
-			<ui:insert name="header">CL:Header</ui:insert>
-		</p:layoutUnit>
+            <p:layoutUnit position="north" id="northLayoutUnit"
+                          header="Greek into Arabic Web Application v.#{msg['version']}"
+                          resizable="false" closable="false" collapsible="false">
+                <ui:insert name="header">CL:Header</ui:insert>
+            </p:layoutUnit>
 
 
-		<p:layoutUnit position="center">
-			<ui:insert name="body">CL:body</ui:insert>
-		</p:layoutUnit>
+            <p:layoutUnit position="center" id="centerLayoutUnit">
+                <ui:insert name="body">CL:body</ui:insert>
+            </p:layoutUnit>
 
-		<p:layoutUnit position="south" size="80" resizable="false"
-			closable="false" collapsible="false">
-			<ui:insert name="footer">CL:footer</ui:insert>
-		</p:layoutUnit>
+            <p:layoutUnit position="south" id="southLayoutUnit"
+                          size="80" resizable="false"
+                          closable="false" collapsible="false">
+                <ui:insert name="footer">CL:footer</ui:insert>
+            </p:layoutUnit>
 
-	</p:layout>
-</h:body>
+        </p:layout>
+    </h:body>
 
 </html>

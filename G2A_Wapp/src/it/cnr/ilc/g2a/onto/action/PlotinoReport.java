@@ -13,85 +13,113 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import it.cnr.ilc.g2a.action.management.RepositoryBean;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.primefaces.context.RequestContext;
 
 @ManagedBean
 @SessionScoped
 public class PlotinoReport implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -3552854684791859105L;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3552854684791859105L;
+    private static final Logger LOG = LogManager.getLogger("PlotinoReport");
 
+    @ManagedProperty(value = "#{repository}")
+    private RepositoryBean repositoryBean;
 
-	@ManagedProperty(value="#{repository}")
-	private  RepositoryBean repositoryBean;
+    private String selectedLemma = "";
+    private String selectedRelType = "all";
 
+    private Integer canvasHeight;
+    private Integer canvasWidth;
 
-	private  String selectedLemma = "";
-	private  String selectedRelType = "all";
+    /**
+     * @return the repositoryBean
+     */
+    public RepositoryBean getRepositoryBean() {
+        return repositoryBean;
+    }
 
-	/**
-	 * @return the repositoryBean
-	 */
-	public RepositoryBean getRepositoryBean() {
-		return repositoryBean;
-	}
+    /**
+     * @param repositoryBean the repositoryBean to set
+     */
+    public void setRepositoryBean(RepositoryBean repositoryBean) {
+        this.repositoryBean = repositoryBean;
+    }
 
-	/**
-	 * @param repositoryBean the repositoryBean to set
-	 */
-	public void setRepositoryBean(RepositoryBean repositoryBean) {
-		this.repositoryBean = repositoryBean;
-	}
+    public String getSelectedLemma() {
+        LOG.info("getSelectedLemma() " + selectedLemma);
+        return selectedLemma;
+    }
 
+    public void setSelectedLemma(String selectedLemma) {
+        this.selectedLemma = selectedLemma;
+    }
 
-	public String getSelectedLemma() {
-		return selectedLemma;
-	}
+    public String getSelectedRelType() {
+        return selectedRelType;
+    }
 
-	public void setSelectedLemma(String selectedLemma) {
-		this.selectedLemma = selectedLemma;
-	}
+    public void setSelectedRelType(String selectedRelType) {
+        this.selectedRelType = selectedRelType;
+    }
 
+    /**
+     * @return the ontoInstanceMap
+     */
+    public Map<String, String> getOntoInstanceMap() {
+        return repositoryBean.getOntoInstanceMap();
+    }
 
-	public  String getSelectedRelType() {
-		return selectedRelType;
-	}
+    /**
+     * @return the greek2EnglishMap
+     */
+    public Map<String, String> getGreek2EnglishMap() {
+        return repositoryBean.getGreek2EnglishMap();
+    }
 
-	public void setSelectedRelType(String selectedRelType) {
-		this.selectedRelType = selectedRelType;
-	}
+    /**
+     * @return the ontoResult2JS
+     */
+    public String getOntoResult2JS() {
+        return repositoryBean.getOntoResult2JS();
+    }
 
+    public void setOntoResult2JS(String s) {
 
-	/**
-	 * @return the ontoInstanceMap
-	 */
-	public Map<String, String> getOntoInstanceMap() {
-		return repositoryBean.getOntoInstanceMap();
-	}
+        repositoryBean.setOntoResult2JS(s);
+    }
 
-	/**
-	 * @return the greek2EnglishMap
-	 */
-	public Map<String, String> getGreek2EnglishMap() {
-		return repositoryBean.getGreek2EnglishMap();
-	}
+    public void runOntoQuery() {
+        LOG.info("selectdLemma: " + selectedLemma);
+        repositoryBean.runOntoQuery(selectedLemma, selectedRelType, getGreek2EnglishMap().get(selectedLemma));
+    }
 
-	/**
-	 * @return the ontoResult2JS
-	 */
-	public String getOntoResult2JS() {
-		return repositoryBean.getOntoResult2JS();
-	}
+    public Integer getCanvasHeight() {
+        return canvasHeight;
+    }
 
-	public void setOntoResult2JS(String s) {
-		repositoryBean.setOntoResult2JS(s);
-	}
+    public void setCanvasHeight(Integer canvasHeight) {
+        this.canvasHeight = canvasHeight;
+    }
 
-	public void runOntoQuery () {
+    public Integer getCanvasWidth() {
+        return canvasWidth;
+    }
 
-		repositoryBean.runOntoQuery(selectedLemma, selectedRelType, getGreek2EnglishMap().get(selectedLemma));
-	}
+    public void setCanvasWidth(Integer canvasWidth) {
+        this.canvasWidth = canvasWidth;
+    }
+    public void draw() {
+
+        LOG.info("call draw() height=(" + canvasHeight + ")");
+       // System.err.println("canvasHeight " + canvasHeight);
+        LOG.info("call draw() width=(" + canvasWidth + ")");
+        RequestContext.getCurrentInstance().execute("drawGraph(" + canvasHeight + "," + canvasWidth + " );");
+    }
+
 }

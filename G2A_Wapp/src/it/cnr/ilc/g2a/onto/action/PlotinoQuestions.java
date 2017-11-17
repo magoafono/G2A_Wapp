@@ -23,14 +23,14 @@ import javax.faces.event.ValueChangeEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.hp.hpl.jena.ontology.OntModel;
-import com.hp.hpl.jena.query.Query;
-import com.hp.hpl.jena.query.QueryExecution;
-import com.hp.hpl.jena.query.QueryExecutionFactory;
-import com.hp.hpl.jena.query.QueryFactory;
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.query.ResultSet;
 import javax.faces.bean.SessionScoped;
+import org.apache.jena.ontology.OntModel;
+import org.apache.jena.query.Query;
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QueryFactory;
+import org.apache.jena.query.QuerySolution;
+import org.apache.jena.query.ResultSet;
 
 /**
  *
@@ -40,7 +40,7 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped	
 public class PlotinoQuestions {
 
-	private static final Logger logger = LogManager.getLogger("PlotinoQuestions");
+	private final Logger logger = LogManager.getLogger("PlotinoQuestions");
 
 	private static List<ColumnModel> columns = new ArrayList<ColumnModel>();
 	private final static List<String> VALID_COLUMN_KEYS = Arrays.asList(
@@ -946,7 +946,7 @@ public class PlotinoQuestions {
 	}
 
 	public List<OntoResult> getResults() {
-		logger.info("getResults() " + res);
+		logger.info("getResults() " + res.size());
 
 		return res;
 	}

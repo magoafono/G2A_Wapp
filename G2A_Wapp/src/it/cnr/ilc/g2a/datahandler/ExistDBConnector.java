@@ -219,7 +219,7 @@ public class ExistDBConnector {
             storeConnection(dbName, resourceCollection);
 
         } catch (XMLDBException ex) {
-            log.error(dbName);
+            log.error(String.format("DBname: %s, Error: %s",dbName, ex));
         }
 
         return resourceCollection;

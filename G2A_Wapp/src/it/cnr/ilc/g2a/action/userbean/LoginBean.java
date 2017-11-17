@@ -37,7 +37,7 @@ public class LoginBean implements Serializable {
 	private static final Logger logger = LogManager.getLogger("LoginBean");
 
 	// Simple user database :)
-	private static final String[] users = {"simone:simone:editor","ilcpisa:GApisa12:editor","elisa:agToyrbo:editor","cecilia:ASkl12:editor","cristina:zJn3gpWU:editor",
+	private static final String[] users = {"simone:mobius12:editor","ilcpisa:GApisa12:editor","elisa:agToyrbo:editor","cecilia:ASkl12:editor","cristina:zJn3gpWU:editor",
 		"roche:xEN6e7irea:editor", "ouafae:riChZiZXQz:editor", "ge:5wYdX34t8i:editor", "torsten:MqjrW5VAG6:editor" ,"guest:guest:reader"};
 
 	//	private static final String[] users = {"simone:simone"}; //in manutenzione
