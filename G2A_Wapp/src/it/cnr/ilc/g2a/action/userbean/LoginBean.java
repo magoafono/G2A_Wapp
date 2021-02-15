@@ -1,6 +1,5 @@
 package it.cnr.ilc.g2a.action.userbean;
 
-
 import java.io.IOException;
 import java.io.Serializable;
 
@@ -17,276 +16,264 @@ import org.apache.logging.log4j.Logger;
 
 import it.cnr.ilc.g2a.utils.Consts;
 import it.cnr.ilc.g2a.utils.Utils;
-
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.logging.Level;
+import org.eclipse.jetty.servlet.ServletContextHandler;
 
 /**
  * Simple login bean.
- * 
+ *
  * @author itcuties
  */
 @ManagedBean
 @SessionScoped
 public class LoginBean implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -4497884335833238273L;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4497884335833238273L;
+    private static final Logger logger = LogManager.getLogger("LoginBean");
 
-	private static final Logger logger = LogManager.getLogger("LoginBean");
+    private String username;
+    private String password;
+    private String role;
+    private boolean loggedIn;
+    private String arabicFontSize = Consts.ARABIC_FONT_SIZE;
+    private String greekFontSize = Consts.GREEK_FONT_SIZE;
 
-	// Simple user database :)
-	private static final String[] users = {"simone:mobius12:editor","ilcpisa:GApisa12:editor","elisa:agToyrbo:editor","cecilia:ASkl12:editor","cristina:zJn3gpWU:editor",
-		"roche:xEN6e7irea:editor", "ouafae:riChZiZXQz:editor", "ge:5wYdX34t8i:editor", "torsten:MqjrW5VAG6:editor" ,"guest:guest:reader"};
+    @ManagedProperty(value = "#{navigationBean}")
+    private NavigationBean navigationBean;
 
-	//	private static final String[] users = {"simone:simone"}; //in manutenzione
+    /**
+     * Login operation.
+     *
+     * @return
+     * @throws java.io.IOException
+     */
+    public String doLogin() throws IOException {
 
-	private String username;
-	private String password;
-	private String role;
-	private boolean loggedIn;
-	private String arabicFontSize = Consts.ARABIC_FONT_SIZE;
-	private String greekFontSize = Consts.GREEK_FONT_SIZE;
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream input = classLoader.getResourceAsStream("main/resources/users.properties");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+        try {
+            while (reader.ready()) {
+                String line = reader.readLine();
+                System.err.println("line " + line);
+                String dbUsername = line.split(":")[0];
+                String dbPassword = line.split(":")[1];
+                String dbRole = line.split(":")[2];
 
-	@ManagedProperty(value="#{navigationBean}")
-	private NavigationBean navigationBean;
+                if (dbUsername.equals(username) && dbPassword.equals(password)) {
+                    loggedIn = true;
+                    setRole(dbRole);
+                    
+                    //Prendo l'indirizzo remoto del client
+                    HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+                    String ipAddress = request.getRemoteAddr();
 
-	/**
-	 * Login operation.
-	 * @return
-	 */
-	public String doLogin() {
-		// Get every user from our sample database :)
-		for (String user: users) {
-			String dbUsername = user.split(":")[0];
-			String dbPassword = user.split(":")[1];
-			String dbRole 	  = user.split(":")[2];
+                    logger.info("User '" + username + "' logged in from ip " + ipAddress);
+                    return navigationBean.redirectToWelcome();
+                }
+            }
+        } catch (IOException ex) {
+            logger.error(ex.getMessage());
+        }
+        reader.close();
+        input.close();
+        logger.warn("User '" + username + "' with password '" + password + "' not logged in!!");
 
-			// Successful login
-			if (dbUsername.equals(username) && dbPassword.equals(password)) {
-				loggedIn = true;
-				setRole(dbRole);
-				/*
-				 *  XXX non funziona il getFlash...
-				 * Utils.addInfoMessageToContext("Login done", "loginMessage");
-				 * FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-				 */
-				//
-				//Prendo l'indirizzo remoto del client
-				HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-				String ipAddress = request.getRemoteAddr();
-				
-				logger.info("User '" + username + "' logged in from ip " + ipAddress);
-				return navigationBean.redirectToWelcome();
-			} 
-		}
-		logger.warn("User '" + username + "' with password '" + password + "' not logged in!!");
+        return navigationBean.toLogin();
 
-		// Set login ERROR
-		/*
-		 *  XXX non funziona il getFlash...
-		 * Utils.addErrorMessageToContext("Login error! Check username and password", "loginMessage");
-		 * FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-		 */
+    }
 
-		/*
-		ClassLoader cl = ClassLoader.getSystemClassLoader();
+    /**
+     * Logout operation.
+     *
+     * @return
+     */
+    public String doLogout() {
+        // Set the paremeter indicating that user is logged in to false
+        loggedIn = false;
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        logger.info("User '" + username + "' logged out");
 
-		URL[] urls = ((URLClassLoader)cl).getURLs();
+        Utils.addInfoMessageToContext("Logout done", "loginMessage");
+        return navigationBean.toLogin();
+    }
 
-		for(URL url: urls){
-			System.err.println(url.getFile());
-		}
-		*/
-		return navigationBean.toLogin();
+    public void verifyUseLogin(ComponentSystemEvent event) {
+        if (!loggedIn) {
+            //System.err.println("User is NOT logged in");
+            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+            try {
+                ec.redirect(ec.getRequestContextPath() + navigationBean.redirectToLogin());
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        } else {
+            //System.err.println("User is logged in");
+        }
+    }
 
-	}
+    // ------------------------------
+    // Getters & Setters 
+    public String getUsername() {
+        return username;
+    }
 
-	/**
-	 * Logout operation.
-	 * @return
-	 */
-	public String doLogout() {
-		// Set the paremeter indicating that user is logged in to false
-		loggedIn = false;
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		logger.info("User '" + username + "' logged out");
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-		Utils.addInfoMessageToContext("Logout done", "loginMessage");
-		return navigationBean.toLogin();
-	}
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void verifyUseLogin(ComponentSystemEvent event){
-		if(!loggedIn){
-			//System.err.println("User is NOT logged in");
-			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-			try {
-				ec.redirect(ec.getRequestContextPath() + navigationBean.redirectToLogin());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else { 
-			//System.err.println("User is logged in");
-		}
-	}
+    public boolean getLoggedIn() {
+        return loggedIn;
+    }
 
-	// ------------------------------
-	// Getters & Setters 
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    /**
+     * @return the role
+     */
+    public String getRole() {
+        return role;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    /**
+     * @param role the role to set
+     */
+    public void setRole(String role) {
+        this.role = role;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setNavigationBean(NavigationBean navigationBean) {
+        this.navigationBean = navigationBean;
+    }
 
-	public boolean getLoggedIn() {
-		return loggedIn;
-	}
+    /**
+     * @return the arabicFontSize
+     */
+    public String getArabicFontSize() {
+        return arabicFontSize;
+    }
 
-	public boolean isLoggedIn() {
-		return loggedIn;
-	}
+    /**
+     * @param arabicFontSize the arabicFontSize to set
+     */
+    public void setArabicFontSize(String arabicFontSize) {
+        this.arabicFontSize = arabicFontSize;
+    }
 
-	/**
-	 * @return the role
-	 */
-	public String getRole() {
-		return role;
-	}
+    /**
+     * @return the greekFontSize
+     */
+    public String getGreekFontSize() {
+        return greekFontSize;
+    }
 
-	/**
-	 * @param role the role to set
-	 */
-	public void setRole(String role) {
-		this.role = role;
-	}
+    /**
+     * @param greekFontSize the greekFontSize to set
+     */
+    public void setGreekFontSize(String greekFontSize) {
+        this.greekFontSize = greekFontSize;
+    }
 
-	public void setLoggedIn(boolean loggedIn) {
-		this.loggedIn = loggedIn;
-	}
+    public void decreaseArabicSize() {
+        decreaseSize(Consts.ARABIC);
+    }
 
-	public void setNavigationBean(NavigationBean navigationBean) {
-		this.navigationBean = navigationBean;
-	}
+    public void decreaseGreekSize() {
+        decreaseSize(Consts.GREEK);
+    }
 
-	/**
-	 * @return the arabicFontSize
-	 */
-	public String getArabicFontSize() {
-		return arabicFontSize;
-	}
+    private void decreaseSize(int lang) {
+        switch (lang) {
+            case Consts.GREEK:
+                if (Utils.emToFloat(getGreekFontSize()) > 0.5) {
+                    setGreekFontSize((Utils.emToFloat(getGreekFontSize()) - 0.1) + "em");
+                }
+                break;
 
-	/**
-	 * @param arabicFontSize the arabicFontSize to set
-	 */
-	public void setArabicFontSize(String arabicFontSize) {
-		this.arabicFontSize = arabicFontSize;
-	}
+            case Consts.ARABIC:
+                if (Utils.emToFloat(getArabicFontSize()) > 0.5) {
+                    setArabicFontSize((Utils.emToFloat(getArabicFontSize()) - 0.1) + "em");
+                }
+                break;
 
-	/**
-	 * @return the greekFontSize
-	 */
-	public String getGreekFontSize() {
-		return greekFontSize;
-	}
+            default:
+                break;
+        }
 
-	/**
-	 * @param greekFontSize the greekFontSize to set
-	 */
-	public void setGreekFontSize(String greekFontSize) {
-		this.greekFontSize = greekFontSize;
-	}
+    }
 
-	public void decreaseArabicSize() {
-		decreaseSize(Consts.ARABIC);
-	}
+    public void increaseArabicSize() {
+        increaseSize(Consts.ARABIC);
+    }
 
-	public void decreaseGreekSize() {
-		decreaseSize(Consts.GREEK);
-	}
+    public void increaseGreekSize() {
+        increaseSize(Consts.GREEK);
+    }
 
-	private void decreaseSize(int lang){
-		switch (lang) {
-		case Consts.GREEK:
-			if (Utils.emToFloat(getGreekFontSize()) > 0.5) {
-				setGreekFontSize((Utils.emToFloat(getGreekFontSize()) - 0.1 ) + "em");
-			}
-			break;
+    private void increaseSize(int lang) {
+        switch (lang) {
+            case Consts.GREEK:
+                if (Utils.emToFloat(getGreekFontSize()) < 4.0) {
+                    setGreekFontSize((Utils.emToFloat(getGreekFontSize()) + 0.1) + "em");
+                }
+                break;
 
-		case Consts.ARABIC:
-			if (Utils.emToFloat(getArabicFontSize()) > 0.5) {
-				setArabicFontSize((Utils.emToFloat(getArabicFontSize()) - 0.1) + "em");
-			}
-			break;
+            case Consts.ARABIC:
+                if (Utils.emToFloat(getArabicFontSize()) < 4.0) {
+                    setArabicFontSize((Utils.emToFloat(getArabicFontSize()) + 0.1) + "em");
+                }
+                break;
 
-		default:
-			break;
-		}
+            default:
+                break;
+        }
 
-	}
-	public void increaseArabicSize() {
-		increaseSize(Consts.ARABIC);
-	}
+    }
 
-	public void increaseGreekSize() {
-		increaseSize(Consts.GREEK);
-	}
+    public void resetArabicSize() {
+        resetSize(Consts.ARABIC);
+    }
 
-	private void increaseSize(int lang){
-		switch (lang) {
-		case Consts.GREEK:
-			if (Utils.emToFloat(getGreekFontSize()) < 4.0) {
-				setGreekFontSize((Utils.emToFloat(getGreekFontSize()) + 0.1 ) + "em");
-			}
-			break;
+    public void resetGreekSize() {
+        resetSize(Consts.GREEK);
+    }
 
-		case Consts.ARABIC:
-			if (Utils.emToFloat(getArabicFontSize()) < 4.0) {
-				setArabicFontSize((Utils.emToFloat(getArabicFontSize()) + 0.1) + "em");
-			}
-			break;
+    private void resetSize(int lang) {
 
-		default:
-			break;
-		}
+        switch (lang) {
+            case Consts.GREEK:
+                setGreekFontSize(Consts.GREEK_FONT_SIZE);
+                break;
 
-	}
+            case Consts.ARABIC:
+                setArabicFontSize(Consts.ARABIC_FONT_SIZE);
+                break;
 
-	public void resetArabicSize() {
-		resetSize(Consts.ARABIC);
-	}
-
-	public void resetGreekSize() {
-		resetSize(Consts.GREEK);
-	}
-
-	private void resetSize (int lang){
-
-		switch (lang) {
-		case Consts.GREEK:
-			setGreekFontSize(Consts.GREEK_FONT_SIZE);
-			break;
-
-		case Consts.ARABIC:
-			setArabicFontSize(Consts.ARABIC_FONT_SIZE);
-			break;
-
-		default:
-			break;
-		}
-	}
+            default:
+                break;
+        }
+    }
 
 }
