@@ -6,9 +6,7 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ComponentSystemEvent;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
@@ -19,8 +17,7 @@ import it.cnr.ilc.g2a.utils.Utils;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.logging.Level;
-import org.eclipse.jetty.servlet.ServletContextHandler;
+import javax.faces.application.FacesMessage;
 
 /**
  * Simple login bean.
@@ -41,7 +38,7 @@ public class LoginBean implements Serializable {
     private String username;
     private String password;
     private String role;
-    private boolean loggedIn;
+    private boolean loggedIn = false;
     private String arabicFontSize = Consts.ARABIC_FONT_SIZE;
     private String greekFontSize = Consts.GREEK_FONT_SIZE;
 
@@ -53,16 +50,20 @@ public class LoginBean implements Serializable {
      *
      * @return
      * @throws java.io.IOException
+     * @throws javax.security.auth.login.LoginException
      */
     public String doLogin() throws IOException {
 
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream input = classLoader.getResourceAsStream("main/resources/users.properties");
         BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String ipAddress = request.getRemoteAddr();
+        logger.info("Login request for username: " + username + " and password: " + password);
+
         try {
-            while (reader.ready()) {
+            while (reader.ready() && !loggedIn) {
                 String line = reader.readLine();
-                System.err.println("line " + line);
                 String dbUsername = line.split(":")[0];
                 String dbPassword = line.split(":")[1];
                 String dbRole = line.split(":")[2];
@@ -70,24 +71,24 @@ public class LoginBean implements Serializable {
                 if (dbUsername.equals(username) && dbPassword.equals(password)) {
                     loggedIn = true;
                     setRole(dbRole);
-                    
-                    //Prendo l'indirizzo remoto del client
-                    HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-                    String ipAddress = request.getRemoteAddr();
-
-                    logger.info("User '" + username + "' logged in from ip " + ipAddress);
-                    return navigationBean.redirectToWelcome();
+                } else {
+                    loggedIn = false;
                 }
+            }
+            reader.close();
+            input.close();
+            if (loggedIn) {
+                logger.info("User '" + username + "' logged in from ip " + ipAddress);
+                return navigationBean.redirectToWelcome();
+            } else {
+                FacesContext.getCurrentInstance().addMessage("errorMsg", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: User/Password not found", ""));
+                logger.error("User " + username + " not found!");
+                return "error";
             }
         } catch (IOException ex) {
             logger.error(ex.getMessage());
         }
-        reader.close();
-        input.close();
-        logger.warn("User '" + username + "' with password '" + password + "' not logged in!!");
-
-        return navigationBean.toLogin();
-
+        return "";
     }
 
     /**
@@ -103,21 +104,6 @@ public class LoginBean implements Serializable {
 
         Utils.addInfoMessageToContext("Logout done", "loginMessage");
         return navigationBean.toLogin();
-    }
-
-    public void verifyUseLogin(ComponentSystemEvent event) {
-        if (!loggedIn) {
-            //System.err.println("User is NOT logged in");
-            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-            try {
-                ec.redirect(ec.getRequestContextPath() + navigationBean.redirectToLogin());
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        } else {
-            //System.err.println("User is logged in");
-        }
     }
 
     // ------------------------------
