@@ -45,11 +45,7 @@
             <url>http://repository.primefaces.org</url>
             <layout>default</layout>
         </repository>
-        <!--repository>
-            <id>eXistDB</id>
-            <url>https://raw.github.com/eXist-db/mvn-repo/master/</url>
-        </repository-->
-        <repository>
+         <repository>
             <id>jvnet-nexus-releases</id>
             <name>jvnet-nexus-releases</name>
             <url>https://maven.java.net/content/repositories/releases/</url>
