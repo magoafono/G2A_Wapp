@@ -1,6 +1,6 @@
 function resizeText(multiplier) {
 
-    if (document.body.style.fontSize == "") {
+    if (document.body.style.fontSize === "") {
         document.body.style.fontSize = "1.0em";
     }
     document.body.style.fontSize = parseFloat(document.body.style.fontSize) + (multiplier * 0.2) + "em";
@@ -8,7 +8,7 @@ function resizeText(multiplier) {
 
 function increaseText() {
 
-    if (document.body.style.fontSize == "") {
+    if (document.body.style.fontSize === "") {
         document.body.style.fontSize = "1.0em";
     }
     if (parseFloat(document.body.style.fontSize) < 2) {
@@ -18,7 +18,7 @@ function increaseText() {
 
 function decreaseText() {
 
-    if (document.body.style.fontSize == "") {
+    if (document.body.style.fontSize === "") {
         document.body.style.fontSize = "1.0em";
     }
     if (parseFloat(document.body.style.fontSize) > 0.5) {
@@ -80,7 +80,7 @@ function canvasDim() {
 
     console.log("Bobbe " + height);
 
-    
+
     document.getElementById('tabViewId:reportViewForm:canvasHeight').value = height;
     document.getElementById('tabViewId:reportViewForm:canvasWidth').value = width;
 ////
