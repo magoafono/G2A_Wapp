@@ -104,15 +104,24 @@ function setHeight() {
     // var height = $(document).height() - $('body').offset().top;
     var heightCenter = $('#centerLayoutUnit').height(); // - $('#southLayoutUnit').height();
     //var heightCenter = $(document.getElementById('tabViewId:tab1')).height() 
-    console.log("setHeight() centerLayout " + heightCenter);
+    //console.log("setHeight() centerLayout " + heightCenter);
 
     $(document.getElementById('tabViewId:tab1')).css('height', heightCenter - 100);
     //$(document.getElementById('tabViewId:reportViewForm:genera_pg')).css('height', height - 100);
     //var heightGraphRow = $(document.getElementById('tabViewId:tab1')).height(); // - $('#southLayoutUnit').height();
     var heightToRemove = $(document.getElementById('tabViewId:reportViewForm:global_pg')).height();
-    console.log("setHeight() heightToRemove " + heightToRemove);
+    //console.log("setHeight() heightToRemove " + heightToRemove);
     var heightGraphRow = heightCenter - 260; // - heightToRemove;
-    console.log("setHeight() graphRow " + heightGraphRow);
+    //console.log("setHeight() graphRow " + heightGraphRow);
+
+    //ridimensionamento della tabella dei risultati in Search
+    // console.log((document.getElementById('searchResultFormId:results_dt').childNodes[2]).style.height = heightGraphRow - 120);
+    if ((document.getElementById('searchResultFormId:results_dt')) !== null) {
+        console.log((document.getElementById('searchResultFormId:results_dt')));
+        $(document.getElementById('searchResultFormId:results_dt').childNodes[2]).height(heightGraphRow - 120);
+    }
+    console.log($(document.getElementById('parallelViewFormId:dataTableId').childNodes));
+    $(document.getElementById('parallelViewFormId:dataTableId').childNodes[2]).height(heightCenter - 120);
 
     $(document.getElementById('tabViewId:reportViewForm:graphRow')).css('height', heightGraphRow);
 }

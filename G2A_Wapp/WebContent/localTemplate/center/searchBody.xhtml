@@ -5,10 +5,9 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core"
                 xmlns:fn="http://java.sun.com/jsp/jstl/functions"
                 xmlns:p="http://primefaces.org/ui">
-    <p:layout id="global_layout">
-        <p:layoutUnit id="lu_center" position="center" size="30%"
-                      resizable="true" minSize="300" maxSize="800">
-            <h:form id="gr_form">
+    <p:layout id="global_layout"  >
+        <p:layoutUnit id="lu_center" position="center" size="25%" style='min-height: 250px;'>
+            <h:form id="gr_form" >
                 <p:panelGrid id="search_pg" style="margin: 0 auto;border:none;">
                     <p:row>
                         <p:column>
@@ -294,11 +293,9 @@
 
         <!-- RESULTS -->
 
-        <p:layoutUnit position="south" id="lu_south" size="70%"
-                      resizable="true" minSize="300" maxSize="800">
-            <h:form id="searchResultFormId">
-                <p:dataTable id="results_dt" var="alink" scrollable="true"
-                             scrollHeight="500" scrollRows="10"
+        <p:layoutUnit position="south" id="lu_south" size="75%" resizable="true" >
+            <h:form id="searchResultFormId" >
+                <p:dataTable id="results_dt" var="alink" scrollable="true" 
                              selection="#{parallelViewBean.selectedResultViewEntity}"
                              rendered="#{not empty searchViewBean.searchResult}"
                              value="#{searchViewBean.searchResult}" selectionMode="single"
