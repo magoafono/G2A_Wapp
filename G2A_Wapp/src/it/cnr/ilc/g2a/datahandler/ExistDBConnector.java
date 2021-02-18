@@ -50,16 +50,6 @@ public class ExistDBConnector {
     private String dbLogin = mp.getValue(Consts.CONFIGNAME, "db_login");
     private String dbPassword = mp.getValue(Consts.CONFIGNAME, "db_password");
 
-    //the following variables are set in config.properties
-/*
-	private String dbDriver = "org.exist.xmldb.DatabaseImpl";
-	private String dbServerName = "localhost";
-	private String dbServerPort = "8085";
-	private String dbServerProtocol = "/exist/xmlrpc/db";
-	private String dbRootName = "/ga";
-	private String dbLogin = "admin";
-	private String dbPassword = "angelodel80";
-     */
     private HashMap<String, Collection> connectionsCache = new HashMap<String, Collection>();
     private HashMap<String, CompiledExpression> compiledXPathExprCache = new HashMap<String, CompiledExpression>();
 
