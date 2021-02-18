@@ -2,8 +2,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>G2A_Wapp</groupId>
-    <!--artifactId>Teologia_Wapp</artifactId-->
-    <artifactId>Detti_Wapp</artifactId>
+    <artifactId>Teologia_Wapp</artifactId>
+    <!--artifactId>Detti_Wapp</artifactId-->
     <!--artifactId>Risala_Wapp</artifactId-->
     <!--artifactId>Metafisica_Wapp</artifactId-->
     <version>1.0.0</version>
@@ -45,7 +45,7 @@
             <url>http://repository.primefaces.org</url>
             <layout>default</layout>
         </repository>
-         <repository>
+        <repository>
             <id>jvnet-nexus-releases</id>
             <name>jvnet-nexus-releases</name>
             <url>https://maven.java.net/content/repositories/releases/</url>
