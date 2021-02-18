@@ -18,6 +18,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
+import javax.faces.event.ComponentSystemEvent;
 
 /**
  * Simple login bean.
@@ -104,6 +106,21 @@ public class LoginBean implements Serializable {
 
         Utils.addInfoMessageToContext("Logout done", "loginMessage");
         return navigationBean.toLogin();
+    }
+
+    public void verifyUseLogin(ComponentSystemEvent event) {
+        if (!loggedIn) {
+            //System.err.println("User is NOT logged in");
+            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+            try {
+                ec.redirect(ec.getRequestContextPath() + navigationBean.redirectToLogin());
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        } else {
+            //System.err.println("User is logged in");
+        }
     }
 
     // ------------------------------
