@@ -157,7 +157,7 @@ public class SearchViewBean implements Serializable {
         arItemType.add(new Pair<String, String>("Word", "word"));
         //arItemType.add(new Pair<String, String>("Pos",  "pos"));
 
-        log.info("SearchViewBean init()");
+        log.debug("SearchViewBean init()");
     }
 
     /**
@@ -371,7 +371,7 @@ public class SearchViewBean implements Serializable {
                 result.append("\"" + rve.getGrPericopeInfo() + "\"" + '\t');
                 StringBuffer sb = new StringBuffer();
                 //Pericope GR
-                log.info(repositoryBean.getPericopeTextById(rve.getGrPericopeId(), Consts.GREEK));
+                log.debug(repositoryBean.getPericopeTextById(rve.getGrPericopeId(), Consts.GREEK));
                 tvel = rve.getGreekTVE();
                 for (Iterator iterator = tvel.iterator(); iterator.hasNext();) {
                     TokenViewEntity tve = (TokenViewEntity) iterator.next();

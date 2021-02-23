@@ -514,11 +514,11 @@ public class PericopeEditorController implements Serializable{
 
 
 	public void dblClickOnToken() {
-		log.info("dblClick");
+		log.debug("dblClick");
 		Utils.addInfoMessageToContext("dblClick", "onDebug");
 	}
 	public void clickOnToken(ActionEvent event) {
-		log.info("click");
+		log.debug("click");
 		Utils.addInfoMessageToContext("click", "onDebug");
 	}
 

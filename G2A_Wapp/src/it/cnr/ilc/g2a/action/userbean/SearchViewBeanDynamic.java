@@ -122,7 +122,7 @@ public class SearchViewBeanDynamic  implements Serializable {
 	public void onChangeOperator() {
 		
 	//	System.err.println("operator is (" + item.getOperator() + ")");
-		log.info("index is (" + getIndex() + ")");
+		log.debug("index is (" + getIndex() + ")");
 		
 	}
 	

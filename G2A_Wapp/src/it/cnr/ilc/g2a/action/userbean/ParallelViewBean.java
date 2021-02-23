@@ -267,7 +267,7 @@ public class ParallelViewBean implements Serializable {
         if (null != offset && !"".equals(offset)) {
             this.rowOffset = Integer.parseInt(offset);
         } else {
-            log.info("offset: " + offset);
+            log.debug("offset: " + offset);
         }
     }
 

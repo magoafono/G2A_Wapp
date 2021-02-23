@@ -331,7 +331,7 @@ public class ExistDBConnector {
                 if (resourceCollection.isOpen()) {
                     resourceCollection.close();
                     connectionsCache.remove(dbName);
-                    log.info("disconnected from " + dbName);
+                    log.debug("disconnected from " + dbName);
                 }
             } catch (XMLDBException e) {
                 // TODO Auto-generated catch block

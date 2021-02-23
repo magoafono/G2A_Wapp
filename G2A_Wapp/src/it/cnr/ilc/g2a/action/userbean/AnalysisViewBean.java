@@ -192,7 +192,7 @@ public class AnalysisViewBean {
         } else {
             setGreekAlreadyDone(false);
         }
-        log.info("getRetrieveGreekAnalysis (" + isGreekAlreadyDone() + ")\n");
+        log.debug("getRetrieveGreekAnalysis (" + isGreekAlreadyDone() + ")\n");
         return getGreekAnalyses();
     }
 

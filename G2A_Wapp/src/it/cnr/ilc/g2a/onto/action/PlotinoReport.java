@@ -52,7 +52,7 @@ public class PlotinoReport implements Serializable {
     }
 
     public String getSelectedLemma() {
-        LOG.info("getSelectedLemma() " + selectedLemma);
+        LOG.debug("getSelectedLemma() " + selectedLemma);
         return selectedLemma;
     }
 

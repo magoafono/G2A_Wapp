@@ -79,7 +79,7 @@ public class PlotinoQuestions {
 	}
 
 	public List<ColumnModel> getColumns() {
-		logger.info("getColumns() columns: " + columns);
+		logger.debug("getColumns() columns: " + columns);
 
 		return columns;
 	}
@@ -88,12 +88,12 @@ public class PlotinoQuestions {
 	 * @param columns the columns to set
 	 */
 	public void setColumns(List<ColumnModel> columns) {
-		logger.info("setColumns() columns: " + columns);
+		logger.debug("setColumns() columns: " + columns);
 		this.columns = columns;
 	}
 
 	public void createDynamicColumns(String template) {
-		logger.info("createDynamicColumns template: " + template);
+		logger.debug("createDynamicColumns template: " + template);
 		String[] columnKeys = template.split(" ");
 		columns.clear();
 		for (String columnKey : columnKeys) {
@@ -359,21 +359,21 @@ public class PlotinoQuestions {
 	 */
 	private void executeQuery_1(String queryString, boolean isEnglishTerm, String modelType, String termScope, String relType) {
 		
-		logger.info("executeQuery_1(" + queryString + " " + modelType + " " + termScope + " " + relType + ")");
+		logger.debug("executeQuery_1(" + queryString + " " + modelType + " " + termScope + " " + relType + ")");
 		executeQuery_1_1a(queryString, isEnglishTerm, modelType, termScope, relType, getQuery_1_param_1());
 
 	}
 	
 	private void executeQuery_1a(String queryString, boolean isEnglishTerm, String modelType, String termScope, String relType) {
 		
-		logger.info("executeQuery_1a(" + queryString + " " + modelType + " " + termScope + " " + relType + ")");
+		logger.debug("executeQuery_1a(" + queryString + " " + modelType + " " + termScope + " " + relType + ")");
 		executeQuery_1_1a(queryString, isEnglishTerm, modelType, termScope, relType, getQuery_1a_param_1());
 
 	}
 
 	private void executeQuery_1_1a(String queryString, boolean isEnglishTerm, String modelType, String termScope, String relType, String sourceTerm) {
 		
-		logger.info("executeQuery_1(" + queryString + " " + modelType + " " + termScope + " " + relType + ")");
+		logger.debug("executeQuery_1(" + queryString + " " + modelType + " " + termScope + " " + relType + ")");
 		
 		OntModel model = modelType.equals("model") ? repositoryBean.getOntoModel() : repositoryBean.getOntoExplicitModel();
 		Query query = QueryFactory.create(queryString);
@@ -417,7 +417,7 @@ public class PlotinoQuestions {
 	 */
 	private void executeQuery_1b(String queryString, String modelType, String termScope, String relType) {
 		
-		logger.info("executeQuery_1b(" + queryString + " " + modelType + " " + termScope + " " + relType + ")");
+		logger.debug("executeQuery_1b(" + queryString + " " + modelType + " " + termScope + " " + relType + ")");
 		OntModel model = modelType.equals("model") ? repositoryBean.getOntoModel() : repositoryBean.getOntoExplicitModel();
 		Query query = QueryFactory.create(queryString);
 		QueryExecution qe = QueryExecutionFactory.create(query, model);
@@ -451,7 +451,7 @@ public class PlotinoQuestions {
 
 	// esegue una query_2 dato un modello
 	private void executeQuery_2(String queryString, String modelType, String src, String trg) {
-		logger.info("executeQuery_2(" + queryString + " " + modelType + " " + src + " " + trg + ")");
+		logger.debug("executeQuery_2(" + queryString + " " + modelType + " " + src + " " + trg + ")");
 		OntModel model = modelType.equals("model") ? repositoryBean.getOntoModel() : repositoryBean.getOntoExplicitModel();
 		Query query = QueryFactory.create(queryString);
 		QueryExecution qe = QueryExecutionFactory.create(query, model);
@@ -476,7 +476,7 @@ public class PlotinoQuestions {
 
 	// esegue una query_3 dato un modello
 	private void executeQuery_3(String queryString, String modelType) {
-		logger.info("executeQuery_3(" + queryString + " " + modelType + ")");
+		logger.debug("executeQuery_3(" + queryString + " " + modelType + ")");
 
 		OntModel model = modelType.equals("model") ? repositoryBean.getOntoModel() : repositoryBean.getOntoExplicitModel();
 		Query query = QueryFactory.create(queryString);
@@ -498,7 +498,7 @@ public class PlotinoQuestions {
 	}
 
 	private boolean inferred(OntoResult e, int queryType) {
-		logger.info("inferred(" + e + " " + queryType + ")");
+		logger.debug("inferred(" + e + " " + queryType + ")");
 
 		switch (queryType) {
 		case 1:
@@ -664,7 +664,7 @@ public class PlotinoQuestions {
 	 * @throws IOException
 	 */
 	public void runQuestion_1b() throws IOException {
-		logger.info("runQuestion_1b() english: " + getQuery_1b_param_1());
+		logger.debug("runQuestion_1b() english: " + getQuery_1b_param_1());
 		res.clear();
 		clearRes.clear();
 		//		columns.clear();
@@ -709,7 +709,7 @@ public class PlotinoQuestions {
 	 * @throws IOException
 	 */
 	public void runQuestion_1() throws IOException {
-		logger.info("runQuestion_1() greek term: " + getQuery_1_param_1());
+		logger.debug("runQuestion_1() greek term: " + getQuery_1_param_1());
 		res.clear();
 		clearRes.clear();
 		//		columns.clear();
@@ -812,7 +812,7 @@ public class PlotinoQuestions {
 	}
 
 	public void runQuestion_2() throws IOException {
-		logger.info("runQuestion_2() "+ getQuery_2_param_1());
+		logger.debug("runQuestion_2() "+ getQuery_2_param_1());
 
 		res.clear();
 		clearRes.clear();
@@ -903,7 +903,7 @@ public class PlotinoQuestions {
 	}
 
 	public void runQuestion_3() throws IOException {
-		logger.info("runQuestion_3()");
+		logger.debug("runQuestion_3()");
 
 		res.clear();
 		clearRes.clear();
@@ -946,7 +946,7 @@ public class PlotinoQuestions {
 	}
 
 	public List<OntoResult> getResults() {
-		logger.info("getResults() " + res.size());
+		logger.debug("getResults() " + res.size());
 
 		return res;
 	}

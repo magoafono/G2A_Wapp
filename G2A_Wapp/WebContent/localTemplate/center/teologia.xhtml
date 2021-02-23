@@ -186,9 +186,9 @@
                         <p:commandButton id="freeAccessBtn" value="Free Access" 
                                          action="#{loginBean.doLogin}"> 
                             <f:setPropertyActionListener target="#{loginBean.username}"
-                                                         value="" />
+                                                         value="guest" />
                             <f:setPropertyActionListener target="#{loginBean.password}"
-                                                         value="" />
+                                                         value="guest" />
                         </p:commandButton>
                     </p:column>
                 </p:row>

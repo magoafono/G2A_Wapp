@@ -57,7 +57,7 @@ public class SideMenuController implements Serializable {
 	 * @param selectedNode the selectedNode to set
 	 */
 	public void setSelectedNode(TreeNode selectedNode) {
-		log.info("setSelectedNode: " + selectedNode.getData());
+		log.debug("setSelectedNode: " + selectedNode.getData());
 
 		this.selectedNode = selectedNode;
 	}
@@ -66,7 +66,7 @@ public class SideMenuController implements Serializable {
 
 	public void onNodeSelect(NodeSelectEvent event) {  
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", event.getTreeNode().toString());  
-		log.info("onNodeSelect: " + message.getSummary());
+		log.debug("onNodeSelect: " + message.getSummary());
 		FacesContext.getCurrentInstance().addMessage(null, message);  
 	}  
 	

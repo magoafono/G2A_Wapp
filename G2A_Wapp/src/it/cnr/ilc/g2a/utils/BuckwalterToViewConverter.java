@@ -39,7 +39,7 @@ public class BuckwalterToViewConverter {
 			StringBuilder arabicPos = new StringBuilder();
 			for (String f: pair.getRight().split("\n")) {
 				if (! buckwalter2ArabicPos.containsKey(f)) {
-					logger.error("No POS (" + f + ") in WebContent/resources/buckwalterPos2Arabic.csv");
+					logger.warn("No POS (" + f + ") in WebContent/resources/buckwalterPos2Arabic.csv");
 				} else {
 					if (arabicPos.length() > 0) {
 						arabicPos.append(" ");
