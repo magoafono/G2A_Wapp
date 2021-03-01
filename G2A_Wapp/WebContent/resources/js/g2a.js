@@ -1,6 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", function(event) { 
-    console.log("DOMContentLoaded");
+    //console.log("DOMContentLoaded");
     clearTimeout(doit);
     doit = setTimeout(resizedw(), 100);
  });
@@ -85,9 +85,6 @@ function canvasDim() {
     var height = Math.round($(document.getElementById('tabViewId:tab1')).height()) - 200; // - $('#southLayoutUnit').height();
     var width = Math.round($(document.getElementById('tabViewId:tab1')).width()) - 10; // 
 
-    console.log("Bobbe " + height);
-
-
     document.getElementById('tabViewId:reportViewForm:canvasHeight').value = height;
     document.getElementById('tabViewId:reportViewForm:canvasWidth').value = width;
 ////
@@ -99,7 +96,7 @@ function canvasDim() {
 function setCanvasHeight() {
     var height = $(document.getElementById('tabViewId:tab1')).height() - 200; // - $('#southLayoutUnit').height();
     //var height = $('#centerLayoutUnit').height(); // - $('#southLayoutUnit').height();
-    console.log("setCanvasHeight() heigth canvasHeight " + height);
+    //console.log("setCanvasHeight() heigth canvasHeight " + height);
     $(document.getElementById('tabViewId:reportViewForm:mynetwork')).css('height', height);
     $(document.getElementById('tabViewId:reportViewForm:graphRow')).css('height', height + 100);
 
@@ -124,11 +121,11 @@ function setHeight() {
     //ridimensionamento della tabella dei risultati in Search
     // console.log((document.getElementById('searchResultFormId:results_dt').childNodes[2]).style.height = heightGraphRow - 120);
     if ((document.getElementById('searchResultFormId:results_dt')) !== null) {
-        console.log((document.getElementById('searchResultFormId:results_dt')));
+        //console.log((document.getElementById('searchResultFormId:results_dt')));
         $(document.getElementById('searchResultFormId:results_dt').childNodes[2]).height(heightGraphRow - 120);
     }
     if($(document.getElementById('parallelViewFormId:dataTableId') !== null)) {
-        console.log($(document.getElementById('parallelViewFormId:dataTableId')));
+        //console.log($(document.getElementById('parallelViewFormId:dataTableId')));
         if($(document.getElementById('parallelViewFormId:dataTableId') !== null).childNodes) {
             $(document.getElementById('parallelViewFormId:dataTableId').childNodes[2]).height(heightCenter - 120);
         }
