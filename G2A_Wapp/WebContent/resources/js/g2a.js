@@ -1,3 +1,10 @@
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+    console.log("DOMContentLoaded");
+    clearTimeout(doit);
+    doit = setTimeout(resizedw(), 100);
+ });
+
 function resizeText(multiplier) {
 
     if (document.body.style.fontSize === "") {
@@ -120,10 +127,15 @@ function setHeight() {
         console.log((document.getElementById('searchResultFormId:results_dt')));
         $(document.getElementById('searchResultFormId:results_dt').childNodes[2]).height(heightGraphRow - 120);
     }
-    console.log($(document.getElementById('parallelViewFormId:dataTableId').childNodes));
-    $(document.getElementById('parallelViewFormId:dataTableId').childNodes[2]).height(heightCenter - 120);
-
-    $(document.getElementById('tabViewId:reportViewForm:graphRow')).css('height', heightGraphRow);
+    if($(document.getElementById('parallelViewFormId:dataTableId') !== null)) {
+        console.log($(document.getElementById('parallelViewFormId:dataTableId')));
+        if($(document.getElementById('parallelViewFormId:dataTableId') !== null).childNodes) {
+            $(document.getElementById('parallelViewFormId:dataTableId').childNodes[2]).height(heightCenter - 120);
+        }
+    }
+    if($(document.getElementById('tabViewId:reportViewForm:graphRow'))!== null) {
+        $(document.getElementById('tabViewId:reportViewForm:graphRow')).css('height', heightGraphRow);
+    }
 }
 ;
 
@@ -150,16 +162,10 @@ window.onresize = function () {
     clearTimeout(doit);
     doit = setTimeout(resizedw, 500);
 };
-document.onmouseover = function () {
+
+/*document.onmouseover = function () {
     clearTimeout(doit);
     doit = setTimeout(resizedw, 100);
-    //  doit = setTimeout(resizeCanvas, 100);
+    console.log("document.onmouseover");
+};*/
 
-    //alert();
-};
-
-window.onload = function () {
-    clearTimeout(doit);
-    doit = setTimeout(resizedw(), 100);
-
-};
