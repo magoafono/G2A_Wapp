@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>G2A_Wapp</groupId>
     <artifactId>Teologia_Wapp</artifactId>
-    <!--artifactId>Detti_Wapp</artifactId-->
-    <!--artifactId>Risala_Wapp</artifactId-->
+<!--    <artifactId>Detti_Wapp</artifactId>-->
+<!--    <artifactId>Risala_Wapp</artifactId>-->
 <!--    <artifactId>Metafisica_Wapp</artifactId>-->
     <version>1.0.0</version>
     <packaging>war</packaging>
@@ -178,7 +178,7 @@
         <dependency>
             <groupId>org.apache.xmlbeans</groupId>
             <artifactId>xmlbeans</artifactId>
-            <version>2.6.0</version>
+            <version>3.1.0</version> <!-- massima versione utilizzabile 3.1.0 -->
         </dependency>
         <!-- https://mvnrepository.com/artifact/javax.enterprise/cdi-api -->
         <dependency>
