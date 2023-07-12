@@ -4,8 +4,8 @@ La piattaforma permette di visualizzare in parallelo pericopi manualmente partiz
 E' possibile, annotare le risorse testuali e navigarle grazie ad un apposito search engine sia mediante parole e lemmi in
 greco, sia mediante parole e lemmi in arabo.
 
-sito di progetto: [https://www.ilc.cnr.it/en/progetti/greek-into-arabic/][1]
-sito proncipale: [http://www.greekintoarabic.eu/][2]
+* sito principale: [http://www.greekintoarabic.eu/][2]
+* sito di progetto: [https://www.ilc.cnr.it/en/progetti/greek-into-arabic/][1]
 
 # Autori
 * [Angelo Mario Del Grosso](https://www.ilc.cnr.it/en/people/angelo-mario-del-grosso/) -- angelomario.delgrosso[at]ilc.cnr.it -- *ricercatore@CNR-ILC*
