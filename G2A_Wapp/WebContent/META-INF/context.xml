@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/Teologia_Wapp"/>
-<!--<Context path="/Detti_Wapp"/>-->
-<!--<Context path="/Risala_Wapp"/>-->
-<!--<Context path="/Metafisica_Wapp"/>-->
+<Context path="${webappname}" />
+<!--<Context path="/Teologia_Wapp"/>-->
+<!--Context path="/Detti_Wapp"/-->
+<!--Context path="/Risala_Wapp"/-->
+<!--Context path="/Metafisica_Wapp"/-->
