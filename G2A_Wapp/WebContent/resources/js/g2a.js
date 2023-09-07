@@ -1,9 +1,9 @@
 
-document.addEventListener("DOMContentLoaded", function(event) { 
+document.addEventListener("DOMContentLoaded", function (event) {
     //console.log("DOMContentLoaded");
     clearTimeout(doit);
     doit = setTimeout(resizedw(), 100);
- });
+});
 
 function resizeText(multiplier) {
 
@@ -120,17 +120,17 @@ function setHeight() {
 
     //ridimensionamento della tabella dei risultati in Search
     // console.log((document.getElementById('searchResultFormId:results_dt').childNodes[2]).style.height = heightGraphRow - 120);
-    if ((document.getElementById('searchResultFormId:results_dt')) !== null) {
+    if (document.getElementById('searchResultFormId:results_dt')) {
         //console.log((document.getElementById('searchResultFormId:results_dt')));
         $(document.getElementById('searchResultFormId:results_dt').childNodes[2]).height(heightGraphRow - 120);
     }
-    if($(document.getElementById('parallelViewFormId:dataTableId') !== null)) {
-        //console.log($(document.getElementById('parallelViewFormId:dataTableId')));
-        if($(document.getElementById('parallelViewFormId:dataTableId') !== null).childNodes) {
-            $(document.getElementById('parallelViewFormId:dataTableId').childNodes[2]).height(heightCenter - 120);
-        }
+
+    if (document.getElementById('parallelViewFormId:dataTableId') &&
+            document.getElementById('parallelViewFormId:dataTableId').childNodes) {
+        $(document.getElementById('parallelViewFormId:dataTableId').childNodes[2]).height(heightCenter - 120);
     }
-    if($(document.getElementById('tabViewId:reportViewForm:graphRow'))!== null) {
+
+    if (document.getElementById('tabViewId:reportViewForm:graphRow')) {
         $(document.getElementById('tabViewId:reportViewForm:graphRow')).css('height', heightGraphRow);
     }
 }
@@ -161,8 +161,8 @@ window.onresize = function () {
 };
 
 /*document.onmouseover = function () {
-    clearTimeout(doit);
-    doit = setTimeout(resizedw, 100);
-    console.log("document.onmouseover");
-};*/
+ clearTimeout(doit);
+ doit = setTimeout(resizedw, 100);
+ console.log("document.onmouseover");
+ };*/
 
