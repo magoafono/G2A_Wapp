@@ -22,7 +22,8 @@
                 <var>configRisala</var>
         </resource-bundle>-->
         <resource-bundle>
-            <base-name>it.cnr.ilc.g2a.resources.config</base-name>
+            <!--            <base-name>it.cnr.ilc.g2a.resources.config</base-name>-->
+            <base-name>main.resources.config</base-name>
             <var>config</var>
         </resource-bundle>
         <resource-bundle>
