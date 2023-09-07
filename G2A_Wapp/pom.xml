@@ -2,9 +2,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>G2A_Wapp</groupId>
-    <!--artifactId>Teologia_Wapp</artifactId-->
-    <!--artifactId>Detti_Wapp</artifactId-->
-    <!--artifactId>Risala_Wapp</artifactId-->
     <artifactId>G2A_Wapp</artifactId>
     <version>1.0.0</version>
     <packaging>war</packaging>
@@ -206,7 +203,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.5</version>
+            <version>2.11.0</version>
         </dependency>
         <dependency>
             <groupId>org.ow2.asm</groupId>
