@@ -22,3 +22,32 @@ div.table_content {
 div.table_description {
 	width: 100px;
 }
+/* ===================================================================== */
+/* Layout del report Plotino (ex p:layout west + center/south) in flexbox */
+/* Sostituisce p:layout/p:layoutUnit in onto/graphicalView.xhtml.         */
+/* ===================================================================== */
+.g2a-report-layout {
+    display: flex;
+    flex-direction: row;
+    height: 500px;
+    width: 100%;
+    overflow: hidden;
+}
+.g2a-report-west {
+    flex: 0 0 25%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-right: 6px;
+}
+.g2a-report-west .g2a-unit-header { padding: 6px 10px; font-weight: bold; }
+.g2a-report-west .g2a-unit-content { flex: 1 1 auto; overflow: auto; padding: 6px; }
+.g2a-report-main {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+.g2a-report-center { flex: 1 1 auto; overflow: auto; padding: 6px; position: relative; }
+.g2a-report-center #mynetwork { width: 100%; height: 100%; min-height: 300px; }
+.g2a-report-south { flex: 0 0 auto; }

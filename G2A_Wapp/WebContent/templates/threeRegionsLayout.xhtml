@@ -13,26 +13,27 @@
     </h:head>
 
     <h:body>
-        <p:layout fullPage="true">
+        <!-- Layout a 3 regioni in CSS flexbox (sostituisce p:layout/p:layoutUnit,
+             fragili/rimossi nelle versioni recenti di PrimeFaces). Id e classi-tema
+             preservati per compatibilita' con JS e aspetto. -->
+        <div class="g2a-layout">
 
-            <p:layoutUnit position="north" id="northLayoutUnit"
-                          header="Greek into Arabic Web Application v.#{msg['version']}"
-                          resizable="false" closable="false" collapsible="false">
-                <ui:insert name="header">CL:Header</ui:insert>
-            </p:layoutUnit>
+            <div id="northLayoutUnit" class="g2a-north">
+                <div class="g2a-unit-header ui-widget-header">Greek into Arabic Web Application v.#{msg['version']}</div>
+                <div class="g2a-unit-content ui-widget-content">
+                    <ui:insert name="header">CL:Header</ui:insert>
+                </div>
+            </div>
 
-
-            <p:layoutUnit position="center" id="centerLayoutUnit">
+            <div id="centerLayoutUnit" class="g2a-center ui-widget-content">
                 <ui:insert name="body">CL:body</ui:insert>
-            </p:layoutUnit>
+            </div>
 
-            <p:layoutUnit position="south" id="southLayoutUnit"
-                          size="80" resizable="false"
-                          closable="false" collapsible="false">
+            <div id="southLayoutUnit" class="g2a-south ui-widget-content">
                 <ui:insert name="footer">CL:footer</ui:insert>
-            </p:layoutUnit>
+            </div>
 
-        </p:layout>
+        </div>
     </h:body>
 
 </html>

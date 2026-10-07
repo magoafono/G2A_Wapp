@@ -9,27 +9,38 @@
         <h:outputScript library="js" name="generaGrafo.js" />
         <h:outputScript library="js" name="vis.js" />
         <h:outputStylesheet name="./css/ontoView.css" />
+        <!-- CSS del layout report inline: su /onto/template.xhtml i fogli di
+             stile esterni non vengono caricati, quindi le regole stanno qui. -->
+        <style type="text/css">
+            .g2a-report-layout { display:flex; flex-direction:row; height:500px; width:100%; overflow:hidden; }
+            .g2a-report-west { flex:0 0 25%; display:flex; flex-direction:column; overflow:hidden; margin-right:6px; }
+            .g2a-report-west .g2a-unit-header { padding:6px 10px; font-weight:bold; }
+            .g2a-report-west .g2a-unit-content { flex:1 1 auto; overflow:auto; padding:6px; }
+            .g2a-report-main { flex:1 1 auto; display:flex; flex-direction:column; min-width:0; }
+            .g2a-report-center { flex:1 1 auto; overflow:auto; padding:6px; position:relative; }
+            .g2a-report-center #mynetwork { width:100%; height:100%; min-height:300px; }
+            .g2a-report-south { flex:0 0 auto; }
+        </style>
 
-        <p:layout styleClass="layout">
-            <p:layoutUnit header="Lessico di Plotino" styleClass="layoutUnit"
-                          position="west" size="25%" resizable="true">
-                <ui:include src="/onto/graphicalViewResource.xhtml" />
-            </p:layoutUnit>
-            <p:layoutUnit styleClass="layoutUnit" position="center">
-                <p:layout styleClass="layout">
-                    <p:layoutUnit styleClass="layoutUnit" position="center">
-                        <h:form id="formnascosto">
-                            <h:inputHidden id="nascosto" value="#{plotinoReport.ontoResult2JS}"></h:inputHidden>
-                            <p:commandButton value="Genera" onclick="draw();return false;"></p:commandButton>
-                        </h:form>
-                        <div id='mynetwork'></div>
-                        <div id='info'></div>
-                    </p:layoutUnit>
-                    <p:layoutUnit styleClass="layoutUnit" position="south">
-
-                    </p:layoutUnit>
-                </p:layout>
-            </p:layoutUnit>
-        </p:layout>
+        <!-- Layout del report in CSS flexbox (ex p:layout west + center/south) -->
+        <div class="g2a-report-layout">
+            <div class="g2a-report-west">
+                <div class="g2a-unit-header ui-widget-header">Lessico di Plotino</div>
+                <div class="g2a-unit-content ui-widget-content">
+                    <ui:include src="/onto/graphicalViewResource.xhtml" />
+                </div>
+            </div>
+            <div class="g2a-report-main">
+                <div class="g2a-report-center ui-widget-content">
+                    <h:form id="formnascosto">
+                        <h:inputHidden id="nascosto" value="#{plotinoReport.ontoResult2JS}"></h:inputHidden>
+                        <p:commandButton value="Genera" onclick="draw();return false;"></p:commandButton>
+                    </h:form>
+                    <div id='mynetwork'></div>
+                    <div id='info'></div>
+                </div>
+                <div class="g2a-report-south ui-widget-content"></div>
+            </div>
+        </div>
     </ui:define>
 </ui:composition>

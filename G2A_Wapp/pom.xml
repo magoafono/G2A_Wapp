@@ -69,13 +69,13 @@
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
-            <version>4.0</version>
+            <version>6.2</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.primefaces.extensions/primefaces-extensions -->
         <dependency>
             <groupId>org.primefaces.extensions</groupId>
             <artifactId>primefaces-extensions</artifactId>
-            <version>4.0.0</version>
+            <version>6.2.8</version>
         </dependency>
 
         <dependency>

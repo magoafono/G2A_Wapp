@@ -273,3 +273,77 @@ div.vis-network div.vis-navigation div.vis-button:hover {
 .vis-button.vis-zoomExtends:after {
     content: "⤧";
 }
+/* ===================================================================== */
+/* Layout a 3 regioni in CSS flexbox (rimpiazza p:layout/p:layoutUnit).  */
+/* Vedi templates/threeRegionsLayout.xhtml e center/searchBody.xhtml.    */
+/* ===================================================================== */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.g2a-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+.g2a-north { flex: 0 0 auto; margin-bottom: 6px; }
+.g2a-north .g2a-unit-header {
+    padding: 9px 10px;
+    font-weight: bold;
+    border: none;
+}
+.g2a-north .g2a-unit-content { padding: 5px 8px; }
+.g2a-center {
+    flex: 1 1 auto;
+    overflow: auto;
+    padding: 6px;
+    border: none;
+}
+.g2a-south {
+    flex: 0 0 auto;
+    height: 80px;
+    overflow: hidden;
+    border: none;
+}
+
+/* Sotto-layout della ricerca (ex global_layout: lu_center / lu_south) */
+.g2a-sublayout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.g2a-sub-center { flex: 0 0 auto; }
+.g2a-sub-south {
+    flex: 1 1 auto;
+    overflow: auto;
+    border: none;
+}
+
+/* ===================================================================== */
+/* Ricerca responsive: scale-to-fit via JS (zoom) in searchBody.xhtml.    */
+/* Il form resta una tabella a 3 pannelli in fila; se piu' largo del      */
+/* viewport viene rimpicciolito in blocco (g2aFitSearch).                 */
+/* Centratura orizzontale del form.                                      */
+/* ===================================================================== */
+#gr_form\:search_pg { margin: 0 auto; }
+
+/* ===================================================================== */
+/* Voce di menu SELEZIONATA: classe custom. In PF 6.2 il widget menubar  */
+/* rimuove 'ui-state-active' dai menuitem al mouseleave, perdendo         */
+/* l'evidenziazione. Usiamo una classe nostra (non gestita da PF) e       */
+/* replichiamo il colore attivo del tema hot-sneaks (rgb 219,72,101).     */
+/* ===================================================================== */
+#menuForm .ui-menuitem-link.g2a-menu-selected,
+#menuForm .ui-menuitem-link.g2a-menu-selected:hover,
+#menuForm .ui-menuitem-link.g2a-menu-selected.ui-state-hover {
+    background: rgb(219, 72, 101) !important;
+    color: #ffffff !important;
+    border-color: transparent !important;
+}
+
+/* Le regole del layout report Plotino (.g2a-report-*) sono in ontoView.css,
+   che e' il foglio di stile caricato da onto/graphicalView.xhtml. */
