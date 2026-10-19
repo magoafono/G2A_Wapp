@@ -23,40 +23,40 @@ public class SideMenuController implements Serializable {
 	private static final long serialVersionUID = 2523882070010733059L;
 	private static final Logger log = LogManager.getLogger("SideMenuController");
 
-	private TreeNode root;
-	private TreeNode selectedNode;  
+	private TreeNode<String> root;
+	private TreeNode<String> selectedNode;
 
 	public SideMenuController() {
-		root = new DefaultTreeNode("Root", null);
+		root = new DefaultTreeNode<>("Root", null);
 
-		TreeNode collections = new DefaultTreeNode("Collections", root);
-		TreeNode manual = new DefaultTreeNode("document","User Manual", root);
-		TreeNode tutorial = new DefaultTreeNode("document","Tutorial", root);
-		TreeNode sourceCode = new DefaultTreeNode("document","Source Code", root);
-		TreeNode copyPubs = new DefaultTreeNode("document","Copyright & Publications", root);
+		TreeNode<String> collections = new DefaultTreeNode<>("Collections", root);
+		TreeNode<String> manual = new DefaultTreeNode<>("document","User Manual", root);
+		TreeNode<String> tutorial = new DefaultTreeNode<>("document","Tutorial", root);
+		TreeNode<String> sourceCode = new DefaultTreeNode<>("document","Source Code", root);
+		TreeNode<String> copyPubs = new DefaultTreeNode<>("document","Copyright & Publications", root);
 
-		TreeNode kitab  = new DefaultTreeNode("document","Kitāb Uṯūlūǧiyā wa-huwa qawl ʿalā l-rubūbiyya [Theologia Aristotelis]", collections);
-		TreeNode risala = new DefaultTreeNode("document","Risāla fī l-ʿIlm al-ilāhī [Ps.-al-Fārābī, Epistle on the Divine Science]", collections);
-		TreeNode detti  = new DefaultTreeNode("document","al-Šayḫ al-Yūnānī = [Sayings of the Greek Sage]", collections);
+		TreeNode<String> kitab  = new DefaultTreeNode<>("document","Kitāb Uṯūlūǧiyā wa-huwa qawl ʿalā l-rubūbiyya [Theologia Aristotelis]", collections);
+		TreeNode<String> risala = new DefaultTreeNode<>("document","Risāla fī l-ʿIlm al-ilāhī [Ps.-al-Fārābī, Epistle on the Divine Science]", collections);
+		TreeNode<String> detti  = new DefaultTreeNode<>("document","al-Šayḫ al-Yūnānī = [Sayings of the Greek Sage]", collections);
 		
 		collections.setExpanded(true);
 	}
 
-	public TreeNode getRoot() {
+	public TreeNode<String> getRoot() {
 		return root;
 	}
 
 	/**
 	 * @return the selectedNode
 	 */
-	public TreeNode getSelectedNode() {
+	public TreeNode<String> getSelectedNode() {
 		return selectedNode;
 	}
 
 	/**
 	 * @param selectedNode the selectedNode to set
 	 */
-	public void setSelectedNode(TreeNode selectedNode) {
+	public void setSelectedNode(TreeNode<String> selectedNode) {
 		log.debug("setSelectedNode: " + selectedNode.getData());
 
 		this.selectedNode = selectedNode;

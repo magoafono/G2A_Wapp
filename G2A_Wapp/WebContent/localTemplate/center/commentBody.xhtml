@@ -125,9 +125,10 @@
         </p:confirmDialog>
         <h:form id="commentEditorForm">
 
-            <p:editor id="editor" value="#{commentViewBean.commentText}"
-                      disabled="#{commentViewBean.selectedComment eq null  or loginBean.role eq 'reader'}"
-                      width="600" height="200"/>
+            <p:textEditor id="editor" value="#{commentViewBean.commentText}"
+                          disabled="#{commentViewBean.selectedComment eq null or loginBean.role eq 'reader'}"
+                          readonly="#{commentViewBean.selectedComment eq null or loginBean.role eq 'reader'}"
+                          secure="true" style="width:600px;max-width:100%;" height="200"/>
 
             <h:panelGrid columns="6" style="margin-top:10px"
                          rendered="#{loginBean.role ne 'reader'}">
