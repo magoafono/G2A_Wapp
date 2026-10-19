@@ -55,6 +55,10 @@
         <param-name>app.name.short</param-name>
         <param-value>G2A Web App</param-value>
     </context-param>
+    <!-- Enforce the dedicated JVM's Protobuf policy before JSF eager beans. -->
+    <listener>
+        <listener-class>it.cnr.ilc.g2a.utils.ProtobufSecurityListener</listener-class>
+    </listener>
     <listener>
         <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
     </listener>
