@@ -17,7 +17,7 @@
 					<p:layoutUnit id="greek_search_parameters" position="center"
 						resizable="true" size="50%">
 						<h:form>
-							<p:panelGrid id="greek_search_parameters_pg"
+							<p:panelGrid layout="tabular" columns="0" id="greek_search_parameters_pg"
 								style="width:80%;margin: 0 auto;">
 								<f:facet name="header">
 									<p:row>
@@ -46,9 +46,7 @@
 										</p:column>
 										<p:column style="text-align:center;">
 											<p:inputText id="gr_word_#{entry.index}"
-												value="#{searchViewBean.item.word}" />
-											<p:watermark for="gr_word_#{entry.index}"
-												value="#{entry.index}"></p:watermark>
+												value="#{searchViewBean.item.word}" placeholder="#{entry.index}" />
 										</p:column>
 										<p:column style="text-align:center;">
 											<p:selectOneMenu id="gr_pos_#{entry.index}" effect="none"

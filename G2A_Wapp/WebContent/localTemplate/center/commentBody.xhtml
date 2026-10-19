@@ -14,7 +14,7 @@
         <h:inputHidden id="arabictext" value="#{commentViewBean.arabicText}"></h:inputHidden>
 
         <div align="center">
-            <p:panelGrid id="tabella_pg" style="width:100%;max-width:1080px;table-layout:fixed;"
+            <p:panelGrid layout="tabular" columns="0" id="tabella_pg" style="width:100%;max-width:1080px;table-layout:fixed;"
                          styleClass="tableNoBorder">
 
                 <f:facet name="header">
@@ -128,7 +128,7 @@
             <p:textEditor id="editor" value="#{commentViewBean.commentText}"
                           disabled="#{commentViewBean.selectedComment eq null or loginBean.role eq 'reader'}"
                           readonly="#{commentViewBean.selectedComment eq null or loginBean.role eq 'reader'}"
-                          secure="true" styleClass="g2a-comment-editor" style="width:600px;max-width:100%;" height="200"/>
+                          secure="true" styleClass="g2a-comment-editor" style="width:600px;max-width:100%;" height="200px"/>
 
             <h:panelGrid columns="6" style="margin-top:10px"
                          rendered="#{loginBean.role ne 'reader'}">

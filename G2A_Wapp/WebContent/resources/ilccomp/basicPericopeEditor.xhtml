@@ -43,11 +43,12 @@
 		<p:growl id="messages_#{ccid}" life="1500"
 			rendered="#{not pericopeEditorsHandler.validateError}" />
 		<p:panel id="panelEditor_#{ccid}">
-			<pe:ckEditor language="#{lang}" id="editor_#{ccid}"
-				value="#{editor.textPericopeInContext}" toolbar="[['Bold','-', '']]">
+			<p:textEditor id="editor_#{ccid}" value="#{editor.textPericopeInContext}"
+				secure="true" height="200px" style="direction:#{lang eq 'ar' ? 'rtl' : 'ltr'};">
+				<f:facet name="toolbar"><span class="ql-formats"><button class="ql-bold" type="button" aria-label="Bold" /></span></f:facet>
 				<f:validator for="editor_#{ccid}" 
 					validatorId="it.cnr.ilc.demo.PericopeEditorsHandler" />
-			</pe:ckEditor>
+			</p:textEditor>
 
 			<p:commandButton value="Salva" id="salva" partialSubmit="true"
 				update="messages_#{ccid} editor_#{ccid} msg_#{ccid}"

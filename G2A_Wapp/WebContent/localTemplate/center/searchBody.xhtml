@@ -8,10 +8,10 @@
     <div id="global_layout" class="g2a-sublayout">
         <div id="lu_center" class="g2a-sub-center" style='min-height: 250px;'>
             <h:form id="gr_form" >
-                <p:panelGrid id="search_pg" style="margin: 0 auto;border:none;">
+                <p:panelGrid layout="tabular" columns="0" id="search_pg" style="margin: 0 auto;border:none;">
                     <p:row>
                         <p:column>
-                            <p:panelGrid id="greek_search_parameters_pg"
+                            <p:panelGrid layout="tabular" columns="0" id="greek_search_parameters_pg"
                                          style="margin: 0 auto;border:none;">
                                 <f:facet name="header">
                                     <p:row>
@@ -36,10 +36,9 @@
                                         </p:selectOneMenu>
                                     </p:column>
                                     <p:column style="text-align:center;">
-                                        <p:inputText id="gr_word_1" styleClass="greek" size="10"
+                                        <p:inputText id="gr_word_1" styleClass="greek" size="10" placeholder="Insert word ..."
                                                      value="#{searchViewBean.grSb.word[0]}"
                                                      style="font-size:#{loginBean.greekFontSize}" />
-                                        <p:watermark for="gr_word_1" value="Insert word ..."></p:watermark>
                                         <!--p:keyboard id="gr_word_1" value="#{searchViewBean.grSb.word[0]}" showMode="button"  layout="greek" /-->
                                     </p:column>
                                     <p:column style="text-align:center;">
@@ -70,10 +69,9 @@
                                         </p:selectOneMenu>
                                     </p:column>
                                     <p:column style="text-align:center;">
-                                        <p:inputText id="gr_word_2" styleClass="greek" size="10"
+                                        <p:inputText id="gr_word_2" styleClass="greek" size="10" placeholder="Insert word ..."
                                                      value="#{searchViewBean.grSb.word[1]}"
                                                      style="font-size:#{loginBean.greekFontSize}" />
-                                        <p:watermark for="gr_word_2" value="Insert word ..."></p:watermark>
                                     </p:column>
                                     <p:column style="text-align:center;">
                                         <p:selectOneMenu id="gr_pos_2" effect="none"
@@ -96,10 +94,9 @@
                                         </p:selectOneMenu>
                                     </p:column>
                                     <p:column style="text-align:center;">
-                                        <p:inputText id="gr_word_3" styleClass="greek" size="10"
+                                        <p:inputText id="gr_word_3" styleClass="greek" size="10" placeholder="Insert word ..."
                                                      value="#{searchViewBean.grSb.word[2]}"
                                                      style="font-size:#{loginBean.greekFontSize}" />
-                                        <p:watermark for="gr_word_3" value="Insert word ..."></p:watermark>
                                     </p:column>
                                     <p:column style="text-align:center;">
                                         <p:selectOneMenu id="gr_pos_3" effect="none"
@@ -132,7 +129,7 @@
                         </p:column>
                         <!-- COMBINED SEARCH -->
                         <p:column>
-                            <p:panelGrid style="margin: 0 auto;">
+                            <p:panelGrid layout="tabular" columns="0" style="margin: 0 auto;">
                                 <f:facet name="header">
                                     <p:row>
                                         <p:column colspan="2" style="text-align: center;padding:10px;">Combined Search</p:column>
@@ -163,7 +160,7 @@
                         <!-- ARABIC -->
                         <p:column>
                             <!--p:layoutUnit position="east" resizable="true" size="50%"-->
-                            <p:panelGrid id="arabic_search_parameters_pg"
+                            <p:panelGrid layout="tabular" columns="0" id="arabic_search_parameters_pg"
                                          style="margin: 0 auto;border:none;">
                                 <f:facet name="header">
                                     <p:row>
@@ -188,10 +185,9 @@
                                         </p:selectOneMenu>
                                     </p:column>
                                     <p:column style="text-align:center;">
-                                        <p:inputText id="ar_word_1" styleClass="arabic" size="10"
+                                        <p:inputText id="ar_word_1" styleClass="arabic" size="10" placeholder="Insert word ..."
                                                      value="#{searchViewBean.arSb.word[0]}"
                                                      style="font-size:#{loginBean.arabicFontSize}" />
-                                        <p:watermark for="ar_word_1" value="Insert word ..."></p:watermark>
                                     </p:column>
                                     <p:column style="text-align:center;">
                                         <p:selectOneMenu id="ar_pos_1" effect="none" height="500"
@@ -221,11 +217,9 @@
                                         </p:selectOneMenu>
                                     </p:column>
                                     <p:column style="text-align:center;">
-                                        <p:inputText id="ar_word_2" styleClass="arabic" size="10"
+                                        <p:inputText id="ar_word_2" styleClass="arabic" size="10" placeholder="#{searchViewBean.arSb.word[1]}"
                                                      value="#{searchViewBean.arSb.word[1]}"
                                                      style="font-size:#{loginBean.arabicFontSize}" />
-                                        <p:watermark for="ar_word_2"
-                                                     value="#{searchViewBean.arSb.word[1]}"></p:watermark>
                                     </p:column>
                                     <p:column style="text-align:center;">
                                         <p:selectOneMenu id="ar_pos_2" effect="none" height="500"
@@ -248,11 +242,9 @@
                                         </p:selectOneMenu>
                                     </p:column>
                                     <p:column style="text-align:center;">
-                                        <p:inputText id="ar_word_3" styleClass="arabic" size="10"
+                                        <p:inputText id="ar_word_3" styleClass="arabic" size="10" placeholder="#{searchViewBean.arSb.word[2]}"
                                                      value="#{searchViewBean.arSb.word[2]}"
                                                      style="font-size:#{loginBean.arabicFontSize}" />
-                                        <p:watermark for="ar_word_3"
-                                                     value="#{searchViewBean.arSb.word[2]}"></p:watermark>
                                     </p:column>
                                     <p:column style="text-align:center;">
                                         <p:selectOneMenu id="ar_pos_3" effect="none" height="500"

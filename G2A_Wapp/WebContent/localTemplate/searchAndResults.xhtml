@@ -15,7 +15,7 @@
 
 				<p:tab id="greekTab" title="Greek">
 
-					<p:panelGrid styleClass="nestedUnit" id="grPanelSearch">
+					<p:panelGrid layout="tabular" columns="0" styleClass="nestedUnit" id="grPanelSearch">
 						<p:row>
 							<!-- <p:layout>  -->
 							<!-- <p:layoutUnit size="150" styleClass="nestedUnit" position="west" header="Word Index" resizable="true" closable="true" collapsible="true">  -->
@@ -32,7 +32,7 @@
 							<!-- <p:layoutUnit styleClass="nestedUnit" position="center" resizable="true"> -->
 							<p:column>
 								<h:form>
-									<p:panelGrid styleClass="borderUnit">
+									<p:panelGrid layout="tabular" columns="0" styleClass="borderUnit">
 										<f:facet name="header">
 
 											<p:row>
@@ -67,19 +67,16 @@
 										</p:row>
 										<p:row>
 											<p:column>
-												<p:inputText id="queryterm0"
+												<p:inputText id="queryterm0" placeholder="Search for..."
 													value="#{queryIndexBean.termValue0gr}"></p:inputText>
-												<p:watermark for="queryterm0" value="Search for..." />
 											</p:column>
 											<p:column>
-												<p:inputText id="queryterm1"
+												<p:inputText id="queryterm1" placeholder="Search for..."
 													value="#{queryIndexBean.termValue1gr}"></p:inputText>
-												<p:watermark for="queryterm1" value="Search for..." />
 											</p:column>
 											<p:column>
-												<p:inputText id="queryterm2"
+												<p:inputText id="queryterm2" placeholder="Search for..."
 													value="#{queryIndexBean.termValue2gr}"></p:inputText>
-												<p:watermark for="queryterm2" value="Search for..." />
 											</p:column>
 										</p:row>
 
@@ -179,7 +176,7 @@
 
 
 				<p:tab id="arabicTab" title="Arabic">
-					<p:panelGrid styleClass="nestedUnit" id="arPanelSearch">
+					<p:panelGrid layout="tabular" columns="0" styleClass="nestedUnit" id="arPanelSearch">
 						<p:row>
 							<p:column>
 								<p:panel styleClass="nestedUnit" id="arpnl" header="Word Index"
@@ -192,7 +189,7 @@
 							</p:column>
 							<p:column>
 								<h:form>
-									<p:panelGrid styleClass="borderUnit">
+									<p:panelGrid layout="tabular" columns="0" styleClass="borderUnit">
 										<f:facet name="header">
 											<p:row>
 												<p:column colspan="3">SEARCH ARABIC</p:column>
@@ -229,19 +226,16 @@
 										</p:row>
 										<p:row>
 											<p:column>
-												<p:inputText id="queryterm0"
+												<p:inputText id="queryterm0" placeholder="Search for..."
 													value="#{queryIndexBean.termValue0ar}"></p:inputText>
-												<p:watermark for="queryterm0" value="Search for..." />
 											</p:column>
 											<p:column>
-												<p:inputText id="queryterm1"
+												<p:inputText id="queryterm1" placeholder="Search for..."
 													value="#{queryIndexBean.termValue1ar}"></p:inputText>
-												<p:watermark for="queryterm1" value="Search for..." />
 											</p:column>
 											<p:column>
-												<p:inputText id="queryterm2"
+												<p:inputText id="queryterm2" placeholder="Search for..."
 													value="#{queryIndexBean.termValue2ar}"></p:inputText>
-												<p:watermark for="queryterm2" value="Search for..." />
 											</p:column>
 										</p:row>
 
@@ -382,10 +376,10 @@
 				<p:tab title="Composite Search">
 					<h:form>
 
-						<p:panelGrid>
+						<p:panelGrid layout="tabular" columns="0">
 							<p:row>
 								<p:column>
-									<p:panelGrid>
+									<p:panelGrid layout="tabular" columns="0">
 										<f:facet name="header">
 											<p:row>
 												<p:column colspan="3">Greek Search Parameters</p:column>
@@ -445,7 +439,7 @@
 									</p:panelGrid>
 								</p:column>
 								<p:column>
-									<p:panelGrid columns="1">
+									<p:panelGrid layout="tabular" columns="1">
 										<p:selectOneMenu value="#{queryIndexBean.operator}">
 											<f:selectItem itemLabel="AND" itemValue="true" />
 											<f:selectItem itemLabel="OR" itemValue="false" />
@@ -456,7 +450,7 @@
 									</p:panelGrid>
 								</p:column>
 								<p:column>
-									<p:panelGrid>
+									<p:panelGrid layout="tabular" columns="0">
 										<f:facet name="header">
 											<p:row>
 												<p:column colspan="3">Arabic Search Parameters</p:column>

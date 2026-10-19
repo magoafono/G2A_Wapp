@@ -7,7 +7,7 @@
          <h:form>
          	<div align="center">
          	
-         	<p:panelGrid>
+		<p:panelGrid layout="tabular" columns="0">
          		<f:facet name="header">
          			<p:row>
          				<p:column>Greek Selected Text</p:column>
@@ -21,7 +21,7 @@
          		</p:row>
          	</p:panelGrid>
          	
-         	<p:panelGrid style="border:0px;" columns="2" >
+		<p:panelGrid layout="tabular" style="border:0px;" columns="2" >
 				<p:dataTable  var="grlinUnit" value="#{commentBean.selectedPericope.greekText.analysis.analysis}" style="border:0px; width:100%">
 					<f:facet name="header">
 						Greek Text Analysis

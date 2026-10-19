@@ -168,7 +168,7 @@
 
     <c:if test="#{!loginBean.loggedIn}">
         <h:form id="guestLogin" >
-            <p:panelGrid styleClass="tableNoBorder panelGridCenter">
+            <p:panelGrid layout="tabular" columns="0" styleClass="tableNoBorder panelGridCenter">
                 <p:row>
                     <p:column style="text-align:center">
                         <h:outputText style="font-weight:bold;font-size:1.2em"
@@ -196,7 +196,7 @@
         </h:form>
         <h:form id="loginForm">
             <!-- p:growl id="loginMessage" autoUpdate="true" /-->
-            <p:panelGrid styleClass="panelGridCenter">
+            <p:panelGrid layout="tabular" columns="0" styleClass="panelGridCenter">
                 <f:facet name="header">
                     <p:row>
                         <p:column colspan="2">
