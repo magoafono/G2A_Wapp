@@ -61,7 +61,7 @@ public class LoginBean implements Serializable {
         BufferedReader reader = new BufferedReader(new InputStreamReader(input));
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String ipAddress = request.getRemoteAddr();
-        logger.info("Login request for username: " + username + " and password: " + password);
+        logger.info("Login request from ip {}", ipAddress);
 
         try {
             while (reader.ready() && !loggedIn) {

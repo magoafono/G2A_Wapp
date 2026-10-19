@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import it.cnr.ilc.g2a.action.userbean.LoginBean;
  
@@ -27,18 +28,16 @@ public class LoginFilter implements Filter {
      * Checks if user is logged in. If not it redirects to the login.xhtml page.
      */
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        // Get the loginBean from session attribute
-        LoginBean loginBean = (LoginBean)((HttpServletRequest)request).getSession().getAttribute("loginBean");
-         
-        // For the first application request there is no loginBean in the session so user needs to log in
-        // For other requests loginBean is present but we need to check if user has logged in successfully
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpSession session = httpRequest.getSession(false);
+        LoginBean loginBean = session == null ? null : (LoginBean) session.getAttribute("loginBean");
+
         if (loginBean == null || !loginBean.isLoggedIn()) {
-            String contextPath = ((HttpServletRequest)request).getContextPath();
-            ((HttpServletResponse)response).sendRedirect(contextPath + "/Home.xhtml");
+            ((HttpServletResponse) response).sendRedirect(httpRequest.getContextPath() + "/Home.xhtml");
+            return;
         }
-         
+
         chain.doFilter(request, response);
-             
     }
  
     public void init(FilterConfig config) throws ServletException {
