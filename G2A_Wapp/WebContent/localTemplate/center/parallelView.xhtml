@@ -145,7 +145,7 @@
 	$(document).ready(function() {
          	//$('#dataTableId').getPaginator().setPage(#{parallelViewBean.paginatorPage});
  			//scroll to selected row
-           	dataTable.getPaginator().setPage(#{parallelViewBean.paginatorPage});
+            PF('dataTable').getPaginator().setPage(#{parallelViewBean.paginatorPage});
    			setTimeout(function() { 
  				//workaround per chrome che non sempre riesce a posizionarsi sulla riga evidenziata
            	$('.ui-datatable-scrollable-body').scrollTo(".ui-state-highlight", 200, {over:{top:-0.5}});

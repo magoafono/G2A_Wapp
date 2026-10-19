@@ -116,11 +116,11 @@
                          severity="alert" widgetVar="confirmation">
             <h:form>
                 <p:commandButton id="confirm" value="yes" ajax="true"
-                                 oncomplete="confirmation.hide()"
+                                 oncomplete="PF('confirmation').hide()"
                                  update=":commentlistform:comments :onSubmitMessage :pericopesTextForm:arabicselectedText :pericopesTextForm:greekselectedText :commentEditorForm:editor :pericopesTextForm:greekClick :pericopesTextForm:arabicClick :commentEditorForm:deleteButton :commentEditorForm:submitButton :commentEditorForm:commentType :commentEditorForm:clearButton"
                                  action="#{commentViewBean.deleteComment}" />
                 <p:commandButton id="decline" value="no"
-                                 onclick="confirmation.hide()" type="button" />
+                                 onclick="PF('confirmation').hide()" type="button" />
             </h:form>
         </p:confirmDialog>
         <h:form id="commentEditorForm">
@@ -138,7 +138,7 @@
 
 
                 <p:commandButton id="deleteButton" value="delete"
-                                 onclick="confirmation.show()" type="button"
+                                 onclick="PF('confirmation').show()" type="button"
                                  disabled="#{commentViewBean.selectedComment eq null}" />
 
                 <!-- p:commandButton id="deleteButton" value="delete"

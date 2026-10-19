@@ -1,40 +1,41 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<h:outputScript name="jquery/jquery.js" library="primefaces" />
-	<h:outputScript name="jquery/jquery-plugins.js" library="primefaces" />
-	<title><ui:insert name="title">Default title</ui:insert></title>
+    <h:outputStylesheet library="css" name="my-style.css" />
+    <h:outputScript name="jquery/jquery.js" library="primefaces" />
+    <h:outputScript name="jquery/jquery-plugins.js" library="primefaces" />
+    <title><ui:insert name="title">Default title</ui:insert></title>
 </h:head>
 
 <h:body>
-	<h:outputStylesheet library="css" name="my-style.css" />
-	<p:layout fullPage="true">
+    <!-- Quattro regioni CSS: Home e Comment condividono questo template.
+         Nessuna inizializzazione jQuery Layout durante la navigazione JSF. -->
+    <div class="g2a-layout g2a-layout-four">
+        <div id="northLayoutUnit" class="g2a-north ui-widget">
+            <div class="g2a-unit-header ui-widget-header">Greek into Arabic Web Application v.#{msg['version']}</div>
+            <div class="g2a-unit-content ui-widget-content">
+                <ui:insert name="header">CL:Header</ui:insert>
+            </div>
+        </div>
 
-		<p:layoutUnit position="north"
-			header="Greek into Arabic Web Application v.#{msg['version']}"
-			resizable="false" closable="false" collapsible="false">
-			<ui:insert name="header">CL:Header</ui:insert>
-		</p:layoutUnit>
+        <div class="g2a-body-row">
+            <div id="westLayoutUnit" class="g2a-west ui-widget ui-widget-content ui-corner-all">
+                <ui:insert name="leftSide">CL:leftSide</ui:insert>
+            </div>
+            <div id="centerBody" class="g2a-center ui-widget ui-widget-content ui-corner-all">
+                <ui:insert name="body">CL:body</ui:insert>
+            </div>
+        </div>
 
-		<p:layoutUnit position="west">
-			<ui:insert name="leftSide">CL:leftSide</ui:insert>
-		</p:layoutUnit>
-
-		<p:layoutUnit position="center" id="centerBody">
-			<ui:insert name="body">CL:body</ui:insert>
-		</p:layoutUnit>
-
-		<p:layoutUnit position="south" size="80" resizable="false"
-			closable="false" collapsible="false">
-			<ui:insert name="footer">CL:footer</ui:insert>
-		</p:layoutUnit>
-
-	</p:layout>
+        <div id="southLayoutUnit" class="g2a-south ui-widget ui-widget-content ui-corner-all">
+            <ui:insert name="footer">CL:footer</ui:insert>
+        </div>
+    </div>
 </h:body>
 
 </html>

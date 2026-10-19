@@ -309,6 +309,34 @@ html, body {
     border: none;
 }
 
+/* Quattro regioni (Home / Comment): sidebar e contenuto restano affiancati. */
+.g2a-layout-four { gap: 6px; }
+.g2a-layout-four .g2a-north { margin-bottom: 0; }
+.g2a-body-row {
+    display: flex;
+    flex: 1 1 auto;
+    min-height: 0;
+    gap: 6px;
+}
+.g2a-west {
+    flex: 0 0 228px;
+    box-sizing: border-box;
+    min-width: 0;
+    overflow: auto;
+    padding: 3px;
+}
+.g2a-layout-four .g2a-center {
+    min-width: 0;
+    min-height: 0;
+    border: 1px solid #aaaaaa;
+}
+.g2a-layout-four .g2a-south {
+    flex: 0 0 80px;
+    box-sizing: border-box;
+    border: 1px solid #aaaaaa;
+    padding: 6px;
+}
+
 /* Sotto-layout della ricerca (ex global_layout: lu_center / lu_south) */
 .g2a-sublayout {
     display: flex;
