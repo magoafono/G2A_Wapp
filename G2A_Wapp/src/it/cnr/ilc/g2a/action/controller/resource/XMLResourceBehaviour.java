@@ -1,6 +1,7 @@
 package it.cnr.ilc.g2a.action.controller.resource;
 
 import it.cnr.ilc.g2a.datahandler.XMLHandler;
+import it.cnr.ilc.g2a.utils.XmlSecurity;
 import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument;
 
 import java.io.IOException;
@@ -80,7 +81,7 @@ public class XMLResourceBehaviour implements ResourceBehaviour {
 	}
 
 	public static void main(String[] args) {
-		SAXBuilder sax = new SAXBuilder();
+		SAXBuilder sax = XmlSecurity.newSaxBuilder();
 		try {
 			Document document = sax.build("/home/simone/test-pericopes.xml");
 			// System.out.println(xFactory.getClass());

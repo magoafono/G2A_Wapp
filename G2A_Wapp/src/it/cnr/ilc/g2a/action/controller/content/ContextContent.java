@@ -2,6 +2,7 @@ package it.cnr.ilc.g2a.action.controller.content;
 
 import it.cnr.ilc.g2a.model.Reference;
 import it.cnr.ilc.g2a.model.ReferenceSet;
+import it.cnr.ilc.g2a.utils.XmlSecurity;
 import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument;
 import it.cnr.ilc.gtoa.model.xmlmapping.SequenceDocument.Sequence;
 
@@ -94,7 +95,7 @@ public class ContextContent<T> {
 	public void contentToSequenceDocument(List listOfReference, String work) { 
 
 		SequenceDocument sd = this.contentType.createSequenceDocument(listOfReference, work);  //FIXME verificare: lenta
-		SAXBuilder sb = new SAXBuilder();
+		SAXBuilder sb = XmlSecurity.newSaxBuilder();
 		Document doc;
 		try {
 			String sdString = sd.toString(); //FIXME verificare lenta!!
