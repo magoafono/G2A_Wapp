@@ -20,20 +20,21 @@
         			</f:facet>
 
 			<p:column>
-				<p:commandLink
-					update=":commentEditorForm:editor :pericopesTextForm:greekselectedText :pericopesTextForm:greekClick
+				<p:commandLink process="@this"
+					styleClass="g2a-comment-link #{comment.commentId eq commentViewBean.selectedComment.commentId ? 'g2a-comment-link-selected' : ''}"
+					update=":commentlistform:comments :commentEditorForm:editor :pericopesTextForm:greekselectedText :pericopesTextForm:greekClick
 							 :pericopesTextForm:arabicClick
 						:pericopesTextForm:arabicselectedText :commentEditorForm:commentType 
 						:commentEditorForm:submitButton :commentEditorForm:clearButton :commentEditorForm:commentType
 						:commentEditorForm:deleteButton"
 					action="#{commentViewBean.loadComment}" title="View Comment">
 					<p:graphicImage value="#{resource['images/search.png']}" />
+					<h:outputText value="[#{comment.type}]: #{comment.snippet}"
+						styleClass="g2a-comment-preview" />
 					<f:setPropertyActionListener value="#{comment}"
 						target="#{commentViewBean.selectedComment}" />
 				</p:commandLink>
 
-				<h:outputText value="[#{comment.type}]: #{comment.snippet}"
-					style="margin-left:3px" />
 
 			</p:column>
 		</p:dataList>

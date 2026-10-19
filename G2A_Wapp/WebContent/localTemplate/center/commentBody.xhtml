@@ -14,7 +14,7 @@
         <h:inputHidden id="arabictext" value="#{commentViewBean.arabicText}"></h:inputHidden>
 
         <div align="center">
-            <p:panelGrid id="tabella_pg" style="width:70%;"
+            <p:panelGrid id="tabella_pg" style="width:100%;max-width:1080px;table-layout:fixed;"
                          styleClass="tableNoBorder">
 
                 <f:facet name="header">
@@ -29,15 +29,15 @@
                 </f:facet>
                 <p:row>
                     <p:column style="padding:2px;">
-                        <p:inputTextarea id="greektextarea" styleClass="greek"
-                                         style="width:100%;height:150px;font-size:#{loginBean.greekFontSize}"
+                        <p:inputTextarea id="greektextarea" styleClass="greek" autoResize="false"
+                                         style="box-sizing:border-box;width:100%;height:160px;font-size:#{loginBean.greekFontSize}"
                                          value="#{commentViewBean.sharedBean.selectedLinkViewEntity.greekPericopeHidden ?'':commentViewBean.getGreekPericopeText(commentViewBean.sharedBean.selectedLinkViewEntity.greekPericopeRefId)}"
                                          onblur="greekselection();return false;"
                                          readonly="#{commentViewBean.selectedComment eq null}" />
                     </p:column>
-                    <p:column>
-                        <p:inputTextarea id="arabictextarea" styleClass="arabic"
-                                         style="width:100%;height:150px;font-size:#{loginBean.arabicFontSize}"
+                    <p:column style="padding:2px;">
+                        <p:inputTextarea id="arabictextarea" styleClass="arabic" autoResize="false"
+                                         style="box-sizing:border-box;width:100%;height:160px;font-size:#{loginBean.arabicFontSize}"
                                          value="#{commentViewBean.sharedBean.selectedLinkViewEntity.arabicPericopeHidden ?'':commentViewBean.getArabicPericopeText(commentViewBean.sharedBean.selectedLinkViewEntity.arabicPericopeRefId)}"
                                          onblur="arabicselection();return false;"
                                          readonly="#{commentViewBean.selectedComment eq null}" />
@@ -47,12 +47,12 @@
                 <p:row>
                     <p:column>
                         <h:outputText id="greekselectedText" styleClass="greek"
-                                      style="display:inline-block;width:500px;font-size:#{loginBean.greekFontSize}"
+                                      style="display:block;overflow-wrap:anywhere;font-size:#{loginBean.greekFontSize}"
                                       value="#{commentViewBean.greekSelectedText}" />
                     </p:column>
                     <p:column>
                         <h:outputText id="arabicselectedText" styleClass="arabic"
-                                      style="display:inline-block;width:500px;font-size:#{loginBean.arabicFontSize};"
+                                      style="display:block;overflow-wrap:anywhere;font-size:#{loginBean.arabicFontSize};"
                                       value="#{commentViewBean.arabicSelectedText}" />
                     </p:column>
                 </p:row>
@@ -128,7 +128,7 @@
             <p:textEditor id="editor" value="#{commentViewBean.commentText}"
                           disabled="#{commentViewBean.selectedComment eq null or loginBean.role eq 'reader'}"
                           readonly="#{commentViewBean.selectedComment eq null or loginBean.role eq 'reader'}"
-                          secure="true" style="width:600px;max-width:100%;" height="200"/>
+                          secure="true" styleClass="g2a-comment-editor" style="width:600px;max-width:100%;" height="200"/>
 
             <h:panelGrid columns="6" style="margin-top:10px"
                          rendered="#{loginBean.role ne 'reader'}">

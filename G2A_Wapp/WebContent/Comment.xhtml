@@ -13,6 +13,7 @@
 		<f:event listener="#{loginBean.verifyUseLogin}" type="preRenderView"/>
 	</f:metadata>
 	<ui:composition template="templates/fourRegionsLayout.xhtml">
+		<ui:param name="layoutStyleClass" value="g2a-comments-layout" />
 		<ui:define name="metadata">
 			<f:metadata>
 				<f:event type="preRenderView"

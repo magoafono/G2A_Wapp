@@ -5,7 +5,7 @@ import it.cnr.ilc.g2a.model.view.SelectedTextBoundaries;
 public class Comment {
 
 	
-	private final int SNIPPET_LENGTH = 15;
+	private final int SNIPPET_LENGTH = 120;
 	
 	private String type;
 	private String commentId;
@@ -166,9 +166,12 @@ public class Comment {
 	public String getSnippet(){
 		
 		String snippet = getCommentText();
-		snippet = snippet.replaceAll("\\<.+?\\>", "");
-		if(snippet.length() > getSNIPPET_LENGTH()){
-			snippet = snippet.substring(0, getSNIPPET_LENGTH()) + "...";
+		if (snippet == null) {
+			return "";
+		}
+		snippet = snippet.replaceAll("(?s)<[^>]*>", "").replaceAll("\\s+", " ").trim();
+		if (snippet.codePointCount(0, snippet.length()) > getSNIPPET_LENGTH()) {
+			snippet = snippet.substring(0, snippet.offsetByCodePoints(0, getSNIPPET_LENGTH())) + "...";
 		}
 		
 		return  snippet;
