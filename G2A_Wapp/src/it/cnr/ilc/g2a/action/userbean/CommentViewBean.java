@@ -497,10 +497,9 @@ public class CommentViewBean implements Serializable {
 		return  repositoryBean.getPericopeTextById(pericopeId, Consts.ARABIC);
 	}
 
-	public void handleRowSelection (SelectEvent event) {
+	public void handleRowSelection (SelectEvent<LinkViewEntity> event) {
 
-		Object item = event.getObject();
-		setSelectedViewLink((LinkViewEntity) item);
+		setSelectedViewLink(event.getObject());
 		resetForm();
 	}	
 }

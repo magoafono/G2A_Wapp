@@ -15,7 +15,7 @@ import javax.faces.bean.SessionScoped;
 import it.cnr.ilc.g2a.action.management.RepositoryBean;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.primefaces.context.RequestContext;
+import org.primefaces.PrimeFaces;
 
 @ManagedBean
 @SessionScoped
@@ -119,7 +119,7 @@ public class PlotinoReport implements Serializable {
         LOG.info("call draw() height=(" + canvasHeight + ")");
        // System.err.println("canvasHeight " + canvasHeight);
         LOG.info("call draw() width=(" + canvasWidth + ")");
-        RequestContext.getCurrentInstance().execute("drawGraph(" + canvasHeight + "," + canvasWidth + " );");
+        PrimeFaces.current().executeScript("drawGraph(" + canvasHeight + "," + canvasWidth + " );");
     }
 
 }

@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.faces.context.FacesContext;
 
 import org.apache.commons.codec.binary.Base64;
-import org.primefaces.context.RequestContext;
+import org.primefaces.PrimeFaces;
 
 public abstract class BaseController implements Serializable {
 	private static final long serialVersionUID = -1L;
@@ -21,9 +21,8 @@ public abstract class BaseController implements Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 		Map<String, String> map = context.getExternalContext().getRequestParameterMap();
 		String description = map.get("description");
-		RequestContext rcontext = RequestContext.getCurrentInstance();
 		String taggedDescription = autoTag(description);
-		rcontext.addCallbackParam("autotagResults", new String(Base64.encodeBase64(taggedDescription.getBytes())));
+		PrimeFaces.current().ajax().addCallbackParam("autotagResults", new String(Base64.encodeBase64(taggedDescription.getBytes())));
 	}
 
 	/**

@@ -13,37 +13,37 @@
 				ajax="false"
 				styleClass="#{selected eq 'home' ? 'g2a-menu-selected':'ui-state-inactive'}" />
 
-			<p:menuitem value="Pericopes by Greek" url="ViewByGreek.xhtml"
+			<p:menuitem value="Pericopes by Greek" outcome="/ViewByGreek"
 				rendered="#{loginBean.loggedIn}"
 				styleClass="#{selected eq 'orderbygreek' ? 'g2a-menu-selected' : 'ui-state-inactive'}" />
 			<p:menuitem value="Pericopes by Arabic"
 				rendered="#{loginBean.loggedIn}"
 				update="parallelViewFormId"
 				styleClass="#{selected eq 'orderbyarabic' ? 'g2a-menu-selected' : 'ui-state-inactive'}"
-				url="ViewByArabic.xhtml" />
+				outcome="/ViewByArabic" />
 
-			<p:menuitem value="Search" url="Search.xhtml"
+			<p:menuitem value="Search" outcome="/Search"
 				styleClass="#{selected eq 'search'? 'g2a-menu-selected':'ui-state-inactive'}"
 				rendered="#{loginBean.loggedIn}" />
 
-			<p:menuitem value="Comments Editor" url="Comment.xhtml"
+			<p:menuitem value="Comments Editor" outcome="/Comment"
 				rendered="#{loginBean.loggedIn}"
 				styleClass="#{selected eq 'comment'? 'g2a-menu-selected':'ui-state-inactive'}"
 				disabled="#{sharedBean.selectedLinkViewEntity eq null?true:''}" />
 
 			<p:menuitem value="Linguistic Analysis"
-				url="LinguisticAnalysis.xhtml"
+				outcome="/LinguisticAnalysis"
 				rendered="#{loginBean.loggedIn}"
 				styleClass="#{selected eq 'analysis'? 'g2a-menu-selected':'ui-state-inactive'}"
 				disabled="#{sharedBean.selectedLinkViewEntity eq null?true:''}" />
 
-			<p:menuitem value="Pericopes Manager" url="ManagePericopes.xhtml"
+			<p:menuitem value="Pericopes Manager" outcome="/ManagePericopes"
 				rendered="#{loginBean.loggedIn}"
 				styleClass="#{selected eq 'managepericopes'? 'g2a-menu-selected':'ui-state-inactive'}"
 				disabled="#{sharedBean.selectedLinkViewEntity eq null or loginBean.role eq 'reader'}" />
 
 			<p:menuitem value="Computational Lexicon"
-				url="ComputationalLexicon.xhtml"
+				outcome="/ComputationalLexicon"
 				rendered="#{loginBean.loggedIn}"
 				styleClass="#{selected eq 'lexicon'? 'g2a-menu-selected':'ui-state-inactive'}" />
 

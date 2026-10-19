@@ -7,9 +7,8 @@ import it.cnr.ilc.g2a.utils.Consts;
 import it.cnr.ilc.g2a.utils.Utils;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -464,18 +463,15 @@ public class SearchViewBean implements Serializable {
     }
 
     public void fileDownloadView() {
-        InputStream stream;
-        try {
-            if (null != getSearchResult()) {
-                //repositoryBean.getPericopeTextById(pericopeId, langId);
-                stream = new ByteArrayInputStream(resultViewEntity2CVS(getSearchResult()).getBytes("UTF-8"));
-                setDownloadableResult(new DefaultStreamedContent(stream, "text/csv", "results.csv"));
-            } else {
-                setDownloadableResult(null);
-            }
-        } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        if (null != getSearchResult()) {
+            final byte[] csv = resultViewEntity2CVS(getSearchResult()).getBytes(StandardCharsets.UTF_8);
+            setDownloadableResult(DefaultStreamedContent.builder()
+                    .name("results.csv")
+                    .contentType("text/csv")
+                    .stream(() -> new ByteArrayInputStream(csv))
+                    .build());
+        } else {
+            setDownloadableResult(null);
         }
     }
 
