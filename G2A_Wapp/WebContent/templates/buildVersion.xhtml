@@ -1,0 +1,7 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <h:outputText styleClass="g2a-build-version"
+                  value="v.#{msg['version']} · build #{msg['build.time']}"
+                  title="Commit #{msg['build.revision']} — metadati del WAR in esecuzione" />
+</ui:composition>

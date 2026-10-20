@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>G2A_Wapp</groupId>
     <artifactId>G2A_Wapp</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <packaging>war</packaging>
     <build>
         <finalName>${war-name}</finalName>
@@ -19,11 +19,19 @@
             </resource> 
             <resource>
                 <directory>src</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>it/cnr/ilc/g2a/resources/messages.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src</directory>
                 <filtering>false</filtering>
                 <excludes>
                     <exclude>**/*.java</exclude>
                     <exclude>main/resources/users.properties</exclude>
                     <exclude>main/resources/users_stub.properties</exclude>
+                    <exclude>it/cnr/ilc/g2a/resources/messages.properties</exclude>
                 </excludes>              
             </resource>
         </resources>
@@ -320,6 +328,10 @@
     </dependencies>
     <properties>
         <war-name>YOU_HAVE_TO_SET_A_PROFILE</war-name>
+        <!-- App version is above; every WAR also embeds its own immutable UTC build stamp. -->
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss 'UTC'</maven.build.timestamp.format>
+        <g2a.build.time>${maven.build.timestamp}</g2a.build.time>
+        <g2a.build.revision>unknown</g2a.build.revision>
     </properties>
     <profiles>
         <profile>
