@@ -36,8 +36,14 @@ public class LoginFilter implements Filter {
             }
         }
         if (PublicViewPolicy.isPublicRequest(path, req.getMethod())) {
-            if ("POST".equals(req.getMethod()) && ("/Home.xhtml".equals(path) || "/Login.xhtml".equals(path))
-                    && !LoginProtection.filterRequest(req, res)) return;
+            if ("POST".equals(req.getMethod()) && ("/Home.xhtml".equals(path) || "/Login.xhtml".equals(path))) {
+                HttpSession existing = req.getSession(false);
+                Object caller = existing == null ? null : existing.getAttribute("loginBean");
+                // Do not throttle logout/navigation of an established session.
+                // Every doLogin still passes the authoritative KDF gate below JSF.
+                boolean authenticated = caller instanceof LoginBean && ((LoginBean) caller).isLoggedIn();
+                if (!authenticated && !LoginProtection.filterRequest(req, res)) return;
+            }
             chain.doFilter(request, response);
             return;
         }
