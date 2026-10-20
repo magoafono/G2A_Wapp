@@ -65,6 +65,9 @@
         <listener-class>it.cnr.ilc.g2a.utils.ProtobufSecurityListener</listener-class>
     </listener>
     <listener>
+        <listener-class>it.cnr.ilc.g2a.utils.DatabaseConfigurationListener</listener-class>
+    </listener>
+    <listener>
         <listener-class>it.cnr.ilc.g2a.utils.CredentialPolicyListener</listener-class>
     </listener>
     <listener>

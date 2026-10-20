@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>G2A_Wapp</groupId>
     <artifactId>G2A_Wapp</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <packaging>war</packaging>
     <build>
         <finalName>${war-name}</finalName>
@@ -14,7 +14,7 @@
                 <filtering>true</filtering>
                 <targetPath>main/resources</targetPath>
                 <includes>
-                    <include>**/config.properties</include>
+                    <include>application.properties</include>
                 </includes>
             </resource> 
             <resource>
@@ -31,6 +31,8 @@
                     <exclude>**/*.java</exclude>
                     <exclude>main/resources/users.properties</exclude>
                     <exclude>main/resources/users_stub.properties</exclude>
+                    <exclude>main/resources/config*.properties</exclude>
+                    <exclude>main/resources/application.properties</exclude>
                     <exclude>it/cnr/ilc/g2a/resources/messages.properties</exclude>
                 </excludes>              
             </resource>
@@ -52,7 +54,7 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <warName>${war-name}</warName>
                     <!-- Login identities are external per-context files, never WAR resources. -->
-                    <packagingExcludes>WEB-INF/classes/main/resources/users*.properties</packagingExcludes>
+                    <packagingExcludes>WEB-INF/classes/main/resources/users*.properties,WEB-INF/classes/main/resources/config*.properties</packagingExcludes>
                     <!-- Necessari per il filtering del file context.xml -->
                     <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
                     <containerConfigXML>WebContent/META-INF/context.xml</containerConfigXML>

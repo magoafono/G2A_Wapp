@@ -21,11 +21,7 @@
                 <base-name>it.cnr.ilc.g2a.resources.configRisala</base-name>
                 <var>configRisala</var>
         </resource-bundle>-->
-        <resource-bundle>
-            <!--            <base-name>it.cnr.ilc.g2a.resources.config</base-name>-->
-            <base-name>main.resources.config</base-name>
-            <var>config</var>
-        </resource-bundle>
+        <!-- DB configuration is private external state, never an EL resource bundle. -->
         <resource-bundle>
             <base-name>it.cnr.ilc.g2a.resources.messages</base-name>
             <var>msg</var>
