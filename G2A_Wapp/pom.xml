@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>G2A_Wapp</groupId>
     <artifactId>G2A_Wapp</artifactId>
-    <version>1.2.6</version>
+    <version>1.2.7</version>
     <packaging>war</packaging>
     <build>
         <finalName>${war-name}</finalName>
@@ -170,6 +170,13 @@
             <artifactId>serializer</artifactId>
         </dependency>
 
+        <!-- The maintained Java 8+ provider replaces eXist's legacy jdk15on artifact. -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk18on</artifactId>
+            <version>1.86</version>
+        </dependency>
+
         <!-- Required by p:textEditor: keep server-side HTML sanitization enabled. -->
         <dependency>
             <groupId>com.googlecode.owasp-java-html-sanitizer</groupId>
@@ -240,6 +247,11 @@
                 <exclusion>
                     <groupId>org.ow2.asm</groupId>
                     <artifactId>asm</artifactId>
+                </exclusion>
+                <!-- Do not ship a second legacy BC provider beside bcprov-jdk18on. -->
+                <exclusion>
+                    <groupId>org.bouncycastle</groupId>
+                    <artifactId>bcprov-jdk15on</artifactId>
                 </exclusion>
                 <!-- Only embedded eXist journal/JournalReader use this XXHash/native bundle. -->
                 <exclusion>
