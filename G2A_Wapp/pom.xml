@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>G2A_Wapp</groupId>
     <artifactId>G2A_Wapp</artifactId>
-    <version>1.2.5</version>
+    <version>1.2.6</version>
     <packaging>war</packaging>
     <build>
         <finalName>${war-name}</finalName>
@@ -81,6 +81,17 @@
     </repositories>
     <dependencyManagement>
         <dependencies>
+            <!-- Patch XSLTC and keep its separate serializer on the same release. -->
+            <dependency>
+                <groupId>xalan</groupId>
+                <artifactId>xalan</artifactId>
+                <version>${xalan.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>xalan</groupId>
+                <artifactId>serializer</artifactId>
+                <version>${xalan.version}</version>
+            </dependency>
             <!-- Keep Jackson modules aligned across eXist and Jena transitive paths. -->
             <dependency>
                 <groupId>com.fasterxml.jackson</groupId>
@@ -151,6 +162,12 @@
             <groupId>org.primefaces.extensions</groupId>
             <artifactId>primefaces-extensions</artifactId>
             <version>14.0.17</version>
+        </dependency>
+
+        <!-- Xalan 2.7.3's published minimal POM no longer brings this transitively. -->
+        <dependency>
+            <groupId>xalan</groupId>
+            <artifactId>serializer</artifactId>
         </dependency>
 
         <!-- Required by p:textEditor: keep server-side HTML sanitization enabled. -->
@@ -335,6 +352,7 @@
     </dependencies>
     <properties>
         <war-name>YOU_HAVE_TO_SET_A_PROFILE</war-name>
+        <xalan.version>2.7.3</xalan.version>
         <!-- App version is above; every WAR also embeds its own immutable UTC build stamp. -->
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss 'UTC'</maven.build.timestamp.format>
         <g2a.build.time>${maven.build.timestamp}</g2a.build.time>
