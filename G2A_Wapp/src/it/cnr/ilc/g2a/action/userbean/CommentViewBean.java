@@ -6,6 +6,7 @@ import it.cnr.ilc.g2a.model.text.RefPericopeText;
 import it.cnr.ilc.g2a.model.view.LinkViewEntity;
 import it.cnr.ilc.g2a.model.view.SelectedTextBoundaries;
 import it.cnr.ilc.g2a.utils.Consts;
+import it.cnr.ilc.g2a.utils.Authorization;
 import it.cnr.ilc.g2a.utils.Utils;
 
 import java.io.Serializable;
@@ -379,6 +380,7 @@ public class CommentViewBean implements Serializable {
 	}
 
 	public String newComment () {
+		Authorization.requireEditor();
 
 		Comment newComment = new Comment();
 		LinkViewEntity lve = getSelectedLinkViewEntity();
@@ -399,6 +401,7 @@ public class CommentViewBean implements Serializable {
 	}
 
 	public String deleteComment() {
+		Authorization.requireEditor();
 
 		Comment comment = getSelectedComment();
 		boolean success = repositoryBean.deleteComment(comment);
@@ -418,6 +421,7 @@ public class CommentViewBean implements Serializable {
 	}
 
 	public void submit() {
+		Authorization.requireEditor();
 
 		Comment commentToSubmit = getSelectedComment();
 		commentToSubmit.setCommentText(getCommentText());

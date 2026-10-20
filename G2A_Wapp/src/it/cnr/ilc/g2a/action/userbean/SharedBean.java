@@ -5,6 +5,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import it.cnr.ilc.g2a.model.view.LinkViewEntity;
+import it.cnr.ilc.g2a.utils.PublicViewPolicy;
 
 @ManagedBean(name="sharedBean")
 @SessionScoped
@@ -81,14 +82,14 @@ public class SharedBean {
 	 * @return the selectedMenuItem
 	 */
 	public String getSelectedMenuItem() {
-		return selectedMenuItem;
+		return PublicViewPolicy.homeSection(selectedMenuItem);
 	}
 
 	/**
 	 * @param selectedMenuItem the selectedMenuItem to set
 	 */
 	public void setSelectedMenuItem(String selectedMenuItem) {
-		this.selectedMenuItem = selectedMenuItem;
+		this.selectedMenuItem = PublicViewPolicy.homeSection(selectedMenuItem);
 	}
 
 	/**

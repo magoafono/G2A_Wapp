@@ -11,6 +11,7 @@ import it.cnr.ilc.g2a.model.view.LinkViewEntity;
 import it.cnr.ilc.g2a.model.view.ResultViewEntity;
 import it.cnr.ilc.g2a.model.view.TokenViewEntity;
 import it.cnr.ilc.g2a.utils.Consts;
+import it.cnr.ilc.g2a.utils.Authorization;
 import it.cnr.ilc.g2a.utils.Utils;
 
 import java.util.ArrayList;
@@ -101,11 +102,13 @@ public class RepositoryBean {
     }
 
     public boolean saveComment(Comment comment) {
+        Authorization.requireEditor();
 
         return em.saveComment(comment);
     }
 
     public boolean deleteComment(Comment comment) {
+        Authorization.requireEditor();
 
         return em.deleteComment(comment);
     }
@@ -131,24 +134,28 @@ public class RepositoryBean {
     }
 
     public void addGreekClick(List<String> tokensId, String focusedPericopeId, List<String> listOfPericopesId) {
+        Authorization.requireEditor();
 
         em.handlePericope(tokensId, focusedPericopeId, listOfPericopesId, Consts.ADDTOPERICOPE, Consts.GREEK);
         em.saveModifiedGreekPericopes(focusedPericopeId, listOfPericopesId);
     }
 
     public void removeGreekClick(List<String> tokensId, String focusedPericopeId, List<String> listOfPericopesId) {
+        Authorization.requireEditor();
 
         em.handlePericope(tokensId, focusedPericopeId, listOfPericopesId, Consts.REMFROMPERICOPE, Consts.GREEK);
         em.saveGreekPericopes();
     }
 
     public void shiftGreekClick(List<String> tokensId, String focusedPericopeId, List<String> listOfPericopesId) {
+        Authorization.requireEditor();
 
         //	em.handlePericope (tokensId, focusedPericopeId, listOfPericopesId, Consts.SHIFTTOPERICOPE, Consts.GREEK);
         //em.saveGreekPericopes();
     }
 
     public void addArabicClick(List<String> tokensId, String focusedPericopeId, List<String> listOfPericopesId) {
+        Authorization.requireEditor();
 
         em.handlePericope(tokensId, focusedPericopeId, listOfPericopesId, Consts.ADDTOPERICOPE, Consts.ARABIC);
         em.saveModifiedArabicPericopes(focusedPericopeId, listOfPericopesId);
@@ -156,22 +163,26 @@ public class RepositoryBean {
     }
 
     public void removeArabicClick(List<String> tokensId, String focusedPericopeId, List<String> listOfPericopesId) {
+        Authorization.requireEditor();
 
         em.handlePericope(tokensId, focusedPericopeId, listOfPericopesId, Consts.REMFROMPERICOPE, Consts.ARABIC);
         em.saveArabicPericopes();
     }
 
     public void shiftArabicClick(List<String> tokensId, String focusedPericopeId, List<String> listOfPericopesId) {
+        Authorization.requireEditor();
 
         em.handlePericope(tokensId, focusedPericopeId, listOfPericopesId, Consts.SHIFTTOPERICOPE, Consts.ARABIC);
         em.saveArabicPericopes();
     }
 
     public void updateAfterGreekPericopeModification(List<Integer> clickedTokenIndex, String pericopeId) {
+        Authorization.requireEditor();
         em.updateAfterGreekPericopeModification(clickedTokenIndex, pericopeId);
     }
 
     public void updateAfterArabicPericopeModification(List<Integer> clickedTokenIndex, String pericopeId) {
+        Authorization.requireEditor();
         em.updateAfterArabicPericopeModification(clickedTokenIndex, pericopeId);
     }
 

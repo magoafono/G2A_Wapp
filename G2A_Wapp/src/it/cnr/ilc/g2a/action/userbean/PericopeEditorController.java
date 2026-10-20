@@ -6,6 +6,7 @@ import it.cnr.ilc.g2a.model.Link;
 import it.cnr.ilc.g2a.model.text.RefPericopeText;
 import it.cnr.ilc.g2a.model.view.TokenViewEntity;
 import it.cnr.ilc.g2a.utils.Consts;
+import it.cnr.ilc.g2a.utils.Authorization;
 import it.cnr.ilc.g2a.utils.Utils;
 
 import java.io.Serializable;
@@ -451,6 +452,7 @@ public class PericopeEditorController implements Serializable{
 	/* Azioni dei bottoni */
 
 	public void addGreekClick() {
+		Authorization.requireEditor();
 
 		List<String> clickedTokenId = getSelectedTokenViewId(Consts.GREEK);
 		List<String> clickedPericopeId = getSelectedPericopeId(getSelectedGreekPericopeId(), Consts.GREEK);
@@ -462,6 +464,7 @@ public class PericopeEditorController implements Serializable{
 	}
 
 	public void removeGreekClick() {
+		Authorization.requireEditor();
 		List<String> clickedTokenId = getSelectedTokenViewId(Consts.GREEK);
 		List<String> clickedPericopeId = getSelectedPericopeId(null, Consts.GREEK);
 		List<Integer> clickedTokenIndex = getSelectedTokenViewIndex(Consts.GREEK);
@@ -472,6 +475,7 @@ public class PericopeEditorController implements Serializable{
 	}
 
 	public void shiftGreekClick() {
+		Authorization.requireEditor();
 
 		List<String> clickedTokenId = getSelectedTokenViewId(Consts.GREEK);
 		List<String> clickedPericopeId = getSelectedPericopeId(getSelectedGreekPericopeId(), Consts.GREEK);
@@ -486,6 +490,7 @@ public class PericopeEditorController implements Serializable{
 
 
 	public void addArabicClick() {
+		Authorization.requireEditor();
 
 		List<String> clickedTokenId = getSelectedTokenViewId(Consts.ARABIC);
 		List<String> clickedPericopeId = getSelectedPericopeId(getSelectedArabicPericopeId(), Consts.ARABIC);
@@ -499,6 +504,7 @@ public class PericopeEditorController implements Serializable{
 	}
 
 	public void removeArabicClick() {
+		Authorization.requireEditor();
 		List<String> clickedTokenId = getSelectedTokenViewId(Consts.ARABIC);
 		List<String> clickedPericopeId = getSelectedPericopeId(null, Consts.ARABIC);
 		List<Integer> clickedTokenIndex = getSelectedTokenViewIndex(Consts.ARABIC);
@@ -509,6 +515,7 @@ public class PericopeEditorController implements Serializable{
 	}
 
 	public void shiftArabicClick() {
+		Authorization.requireEditor();
 
 	}
 

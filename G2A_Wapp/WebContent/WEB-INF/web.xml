@@ -9,13 +9,18 @@
         <filter-name>CustomCharacterEncodingFilter</filter-name>
         <filter-class>it.cnr.ilc.g2a.utils.CustomCharacterEncodingFilter</filter-class>
     </filter>
-    <filter-mapping>
-        <filter-name>LoginFilter</filter-name>
-        <url-pattern>/secured/*</url-pattern>
-    </filter-mapping>
+    <!-- Decode parameters as UTF-8 before any authentication/public-page checks. -->
     <filter-mapping>
         <filter-name>CustomCharacterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     <welcome-file-list>
         <welcome-file>secured/Welcome.xhtml</welcome-file>
