@@ -36,6 +36,8 @@ public class LoginFilter implements Filter {
             }
         }
         if (PublicViewPolicy.isPublicRequest(path, req.getMethod())) {
+            if ("POST".equals(req.getMethod()) && ("/Home.xhtml".equals(path) || "/Login.xhtml".equals(path))
+                    && !LoginProtection.filterRequest(req, res)) return;
             chain.doFilter(request, response);
             return;
         }

@@ -15,6 +15,8 @@ import org.apache.logging.log4j.Logger;
 import it.cnr.ilc.g2a.utils.Consts;
 import it.cnr.ilc.g2a.utils.Utils;
 import it.cnr.ilc.g2a.utils.CredentialStore;
+import it.cnr.ilc.g2a.utils.LoginProtection;
+import it.cnr.ilc.g2a.utils.LoginRateLimiter;
 import java.util.Arrays;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -63,8 +65,21 @@ public class LoginBean implements Serializable {
         try {
             HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
             String ipAddress = request.getRemoteAddr();
-            logger.info("Login request from ip {}", ipAddress);
-            String matchedRole = CredentialStore.authenticate(request.getContextPath(), submittedUser, submittedPassword);
+            String matchedRole;
+            try (LoginRateLimiter.Permit permit = LoginProtection.begin(request)) {
+                if (!permit.isAllowed()) {
+                    ExternalContext external = FacesContext.getCurrentInstance().getExternalContext();
+                    external.setResponseStatus(429);
+                    external.setResponseHeader("Retry-After", Integer.toString(permit.getRetrySeconds()));
+                    external.setResponseHeader("Cache-Control", "no-store");
+                    FacesContext.getCurrentInstance().addMessage("errorMsg", new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                            "Too many login attempts. Try again later.", ""));
+                    return "error";
+                }
+                logger.info("Login request from ip {}", ipAddress);
+                matchedRole = CredentialStore.authenticate(request.getContextPath(), submittedUser, submittedPassword);
+                if (matchedRole == null) permit.recordFailure();
+            }
             if (matchedRole != null) {
                 // Retain JSF/session state but invalidate the pre-login identifier.
                 // If rotation fails, do not establish an authenticated principal.
