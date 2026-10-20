@@ -17,6 +17,7 @@ import it.cnr.ilc.g2a.utils.Utils;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.event.ComponentSystemEvent;
@@ -38,9 +39,9 @@ public class LoginBean implements Serializable {
     private static final Logger logger = LogManager.getLogger("LoginBean");
 
     private String username;
-    private String password;
-    private String role;
-    private boolean loggedIn = false;
+    private transient String password;
+    private volatile String role;
+    private volatile boolean loggedIn = false;
     private String arabicFontSize = Consts.ARABIC_FONT_SIZE;
     private String greekFontSize = Consts.GREEK_FONT_SIZE;
 
@@ -56,41 +57,48 @@ public class LoginBean implements Serializable {
      */
     public String doLogin() throws IOException {
 
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        InputStream input = classLoader.getResourceAsStream("main/resources/users.properties");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        String ipAddress = request.getRemoteAddr();
-        logger.info("Login request from ip {}", ipAddress);
-
+        // Always verify this attempt, even if the same session was already authenticated.
+        loggedIn = false;
+        role = null;
         try {
-            while (reader.ready() && !loggedIn) {
-                String line = reader.readLine();
-                String dbUsername = line.split(":")[0];
-                String dbPassword = line.split(":")[1];
-                String dbRole = line.split(":")[2];
-
-                if (dbUsername.equals(username) && dbPassword.equals(password)) {
-                    loggedIn = true;
-                    setRole(dbRole);
-                } else {
-                    loggedIn = false;
+            HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            String ipAddress = request.getRemoteAddr();
+            logger.info("Login request from ip {}", ipAddress);
+            ClassLoader loader = Thread.currentThread().getContextClassLoader();
+            InputStream input = loader.getResourceAsStream("main/resources/users.properties");
+            if (input == null) throw new IOException("Credentials resource unavailable");
+            String matchedRole = null;
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    if (line.trim().isEmpty() || line.trim().startsWith("#")) continue;
+                    String[] fields = line.split(":", -1);
+                    if (fields.length != 3) continue; // Never log malformed records/credentials.
+                    if (fields[0].equals(username) && fields[1].equals(password)
+                            && ("reader".equals(fields[2]) || "editor".equals(fields[2]) || "admin".equals(fields[2]))) {
+                        matchedRole = fields[2];
+                        break;
+                    }
                 }
             }
-            reader.close();
-            input.close();
-            if (loggedIn) {
-                logger.info("User '" + username + "' logged in from ip " + ipAddress);
+            if (matchedRole != null) {
+                // Retain JSF/session state but invalidate the pre-login identifier.
+                // If rotation fails, do not establish an authenticated principal.
+                request.getSession(true);
+                request.changeSessionId();
+                role = matchedRole;
+                loggedIn = true;
+                logger.info("User '{}' logged in from ip {}", logUsername(), ipAddress);
                 return navigationBean.redirectToWelcome();
-            } else {
-                FacesContext.getCurrentInstance().addMessage("errorMsg", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: User/Password not found", ""));
-                logger.error("User " + username + " not found!");
-                return "error";
             }
-        } catch (IOException ex) {
-            logger.error(ex.getMessage());
+        } catch (IOException unavailable) {
+            logger.error("Credentials source unavailable");
+        } finally {
+            password = null;
         }
-        return "";
+        FacesContext.getCurrentInstance().addMessage("errorMsg", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: User/Password not found", ""));
+        logger.error("User '{}' not found", logUsername());
+        return "error";
     }
 
     /**
@@ -101,11 +109,18 @@ public class LoginBean implements Serializable {
     public String doLogout() {
         // Set the paremeter indicating that user is logged in to false
         loggedIn = false;
+        role = null;
+        password = null;
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        logger.info("User '" + username + "' logged out");
+        logger.info("User '{}' logged out", logUsername());
 
         Utils.addInfoMessageToContext("Logout done", "loginMessage");
         return navigationBean.toLogin();
+    }
+
+    private String logUsername() {
+        if (username == null) return "<empty>";
+        return username.substring(0, Math.min(username.length(), 128)).replaceAll("[\\p{Cntrl}\\p{Cf}]", "_");
     }
 
     public void verifyUseLogin(ComponentSystemEvent event) {
