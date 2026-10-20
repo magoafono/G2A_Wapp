@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>G2A_Wapp</groupId>
     <artifactId>G2A_Wapp</artifactId>
-    <version>1.2.4</version>
+    <version>1.2.5</version>
     <packaging>war</packaging>
     <build>
         <finalName>${war-name}</finalName>
@@ -223,6 +223,11 @@
                 <exclusion>
                     <groupId>org.ow2.asm</groupId>
                     <artifactId>asm</artifactId>
+                </exclusion>
+                <!-- Only embedded eXist journal/JournalReader use this XXHash/native bundle. -->
+                <exclusion>
+                    <groupId>org.lz4</groupId>
+                    <artifactId>lz4-java</artifactId>
                 </exclusion>
                 <!-- Remote XML-RPC client only: do not bundle eXist server/CLI/test stacks. -->
                 <exclusion>
