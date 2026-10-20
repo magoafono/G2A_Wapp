@@ -22,6 +22,8 @@
                 <filtering>false</filtering>
                 <excludes>
                     <exclude>**/*.java</exclude>
+                    <exclude>main/resources/users.properties</exclude>
+                    <exclude>main/resources/users_stub.properties</exclude>
                 </excludes>              
             </resource>
         </resources>
@@ -41,6 +43,8 @@
                     <warSourceDirectory>WebContent</warSourceDirectory>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <warName>${war-name}</warName>
+                    <!-- Login identities are external per-context files, never WAR resources. -->
+                    <packagingExcludes>WEB-INF/classes/main/resources/users*.properties</packagingExcludes>
                     <!-- Necessari per il filtering del file context.xml -->
                     <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
                     <containerConfigXML>WebContent/META-INF/context.xml</containerConfigXML>

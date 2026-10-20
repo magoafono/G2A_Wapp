@@ -14,10 +14,8 @@ import org.apache.logging.log4j.Logger;
 
 import it.cnr.ilc.g2a.utils.Consts;
 import it.cnr.ilc.g2a.utils.Utils;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
+import it.cnr.ilc.g2a.utils.CredentialStore;
+import java.util.Arrays;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.event.ComponentSystemEvent;
@@ -60,27 +58,13 @@ public class LoginBean implements Serializable {
         // Always verify this attempt, even if the same session was already authenticated.
         loggedIn = false;
         role = null;
+        char[] submittedPassword = password == null ? null : password.toCharArray();
+        String submittedUser = username;
         try {
             HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
             String ipAddress = request.getRemoteAddr();
             logger.info("Login request from ip {}", ipAddress);
-            ClassLoader loader = Thread.currentThread().getContextClassLoader();
-            InputStream input = loader.getResourceAsStream("main/resources/users.properties");
-            if (input == null) throw new IOException("Credentials resource unavailable");
-            String matchedRole = null;
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    if (line.trim().isEmpty() || line.trim().startsWith("#")) continue;
-                    String[] fields = line.split(":", -1);
-                    if (fields.length != 3) continue; // Never log malformed records/credentials.
-                    if (fields[0].equals(username) && fields[1].equals(password)
-                            && ("reader".equals(fields[2]) || "editor".equals(fields[2]) || "admin".equals(fields[2]))) {
-                        matchedRole = fields[2];
-                        break;
-                    }
-                }
-            }
+            String matchedRole = CredentialStore.authenticate(request.getContextPath(), submittedUser, submittedPassword);
             if (matchedRole != null) {
                 // Retain JSF/session state but invalidate the pre-login identifier.
                 // If rotation fails, do not establish an authenticated principal.
@@ -94,6 +78,7 @@ public class LoginBean implements Serializable {
         } catch (IOException unavailable) {
             logger.error("Credentials source unavailable");
         } finally {
+            if (submittedPassword != null) Arrays.fill(submittedPassword, '\u0000');
             password = null;
         }
         FacesContext.getCurrentInstance().addMessage("errorMsg", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: User/Password not found", ""));
