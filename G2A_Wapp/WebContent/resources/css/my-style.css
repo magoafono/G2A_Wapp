@@ -155,9 +155,17 @@ div.perica {
 
 /* Footer (tfoot) compatto come l'header (riga): prima era molto più alto.
    Login e i pannelli "Greek Search"/"Arabic Search". */
-#loginForm tfoot td,
-#gr_form tfoot td {
+#loginForm tfoot td {
     padding: 5px 16px !important;
+}
+
+/* Header (thead) dei pannelli Greek/Arabic Search: meno spazio attorno
+   alle scritte (titolo e nomi colonne). */
+#gr_form thead td {
+    padding: 6px 12px !important;
+}
+#gr_form tfoot td {
+    padding: 2px 16px !important;
 }
 
 a:hover.link_nodecor {
