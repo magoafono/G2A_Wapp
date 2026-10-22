@@ -187,14 +187,22 @@ div.perica {
     box-sizing: border-box;
 }
 .resultFooter {
+    position: relative;
     display: flex !important;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     width: 100%;
 }
+/* Conteggio centrato nella riga del footer, Download a destra. */
 .resultFooter .resultCount {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     font-weight: bold;
     color: #ffffff;
+}
+.resultFooter .ui-button {
+    margin-left: auto;
 }
 
 a:hover.link_nodecor {
