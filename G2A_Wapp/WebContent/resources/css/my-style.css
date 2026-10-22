@@ -153,8 +153,10 @@ div.perica {
     margin: 20px auto;
 }
 
-/* Footer (tfoot) del login compatto come l'header: era molto più alto. */
-#loginForm tfoot td {
+/* Footer (tfoot) compatto come l'header (riga): prima era molto più alto.
+   Login e i pannelli "Greek Search"/"Arabic Search". */
+#loginForm tfoot td,
+#gr_form tfoot td {
     padding: 5px 16px !important;
 }
 
