@@ -1,8 +1,4 @@
 /* Overwrite primefaces css */
-.ui-widget, .ui-widget .ui-widget {
-    font-size: 0.96em; /* !important;*/
-}
-
 .ui-growl {
     top: 100px;
     left: 50%;
@@ -40,15 +36,6 @@
 #lu_south {
     top: 250px !important;
     height: auto !important;
-}
-
-/* Dimensione del testo dei Selectmenu delle POS */
-.ui-selectonemenu-panel .ui-selectonemenu-list-item {
-    font-size: 0.9em;
-}
-
-.ui-selectonemenu-panel .ui-selectonemenu-item-group {
-    font-size: 0.9em;
 }
 
 /* Per togliere l'header dalla tabella delle sottoanalisi dell'arabo, 
@@ -291,44 +278,28 @@ html, body {
     /* Distacco uniforme tra le regioni incorniciate (north/center/south). */
     gap: 6px;
 }
-/* Cornice delle regioni: nel PF4 ogni p:layoutUnit aveva
-   ui-widget-content + ui-corner-all (bordo #aaaaaa, radius 4px).
-   La conversione flex l'aveva persa; ripristinata identica. */
+/* Le cornici/colori delle regioni li definisce il tema (classi ui-widget-*). */
 .g2a-north {
     flex: 0 0 auto;
-    border: 1px solid #aaaaaa;
-    border-radius: 4px;
     box-sizing: border-box;
-    padding: 3px;
 }
-/* Nell'originale p:layoutUnit l'header era una fascia arrotondata
-   (bordo #2c4359, radius 4px) inserita con un po' di spazio dal bordo unit. */
 .g2a-north .g2a-unit-header {
     padding: 6px;
     font-weight: bold;
-    border: 1px solid #2c4359;
-    border-radius: 4px;
 }
 .g2a-north .g2a-unit-content {
     padding: 5px 8px;
-    /* La cornice e' sul contenitore (#northLayoutUnit); il contenuto interno
-       non deve aggiungere un secondo bordo, come nel p:layoutUnit originale. */
-    border: none;
 }
 .g2a-center {
     flex: 1 1 auto;
     overflow: auto;
     padding: 6px;
-    border: 1px solid #aaaaaa;
-    border-radius: 4px;
     box-sizing: border-box;
 }
 .g2a-south {
     flex: 0 0 auto;
     height: 80px;
     overflow: hidden;
-    border: 1px solid #aaaaaa;
-    border-radius: 4px;
     box-sizing: border-box;
 }
 
@@ -351,12 +322,10 @@ html, body {
 .g2a-layout-four .g2a-center {
     min-width: 0;
     min-height: 0;
-    border: 1px solid #aaaaaa;
 }
 .g2a-layout-four .g2a-south {
     flex: 0 0 80px;
     box-sizing: border-box;
-    border: 1px solid #aaaaaa;
     padding: 6px;
 }
 
@@ -393,18 +362,12 @@ html, body {
 #commentlistform .g2a-comment-preview { min-width: 0; overflow-wrap: anywhere; }
 #commentlistform .g2a-comment-link:hover,
 #commentlistform .g2a-comment-link-selected { background: #eef3f6; }
-#commentlistform .g2a-comment-link-selected { box-shadow: inset 3px 0 #db4865; }
-#commentlistform .g2a-comment-link:focus-visible { outline: 2px solid #db4865; }
+#commentlistform .g2a-comment-link-selected { box-shadow: inset 3px 0 var(--primary-color, #db4865); }
+#commentlistform .g2a-comment-link:focus-visible { outline: 2px solid var(--primary-color, #db4865); }
 
 /* CLEditor usava un iframe: Quill eredita invece colore e font dal tema.
    Ripristina il testo base Arial 10pt nero, senza sovrascrivere la formattazione
    esplicita dei singoli span (grassetto, corsivo, colori, greco/arabo). */
-/* TextEditor PF14 usa questi token anche per stroke/fill SVG e menu Quill.
-   hot-sneaks non li definisce: bridge locale, senza cambiare il tema globale. */
-#commentEditorForm .g2a-comment-editor {
-    --text-color: #222222;
-    --surface-a: #ffffff;
-}
 #commentEditorForm .g2a-comment-editor .ql-editor {
     font-family: Arial, Verdana, sans-serif;
     font-size: 10pt;
@@ -430,59 +393,8 @@ html, body {
    copia). */
 #parallelViewFormId .ui-outputpanel { pointer-events: none; }
 #parallelViewFormId .ui-outputpanel span { pointer-events: auto; }
-
-/* Evidenziazione riga selezionata: il tema usa un giallo acceso con texture a
-   puntini. Sostituito con il giallo di hover (#ccd232) in tinta unita, senza
-   la righettatura diagonale, solo nelle viste Pericopes by... . */
-#parallelViewFormId .ui-datatable .ui-state-highlight {
-    background: #ccd232;
-    color: #333333;
-}
-/* Bordi della riga selezionata uguali a quelli normali: in modello collapsed
-   il bordo alto verrebbe comunque dal grigio della riga sopra, dando una
-   cornice disomogenea. L'evidenza resta il fondo giallo. */
-#parallelViewFormId .ui-datatable .ui-state-highlight td {
-    border-color: #aaaaaa;
-}
-/* Separatore verticale delle colonne nell'header: il tema usa un azzurro
-   chiaro (quasi invisibile sullo sfondo tratteggiato), diverso dal grigio
-   delle celle. Uniformato al grigio del corpo per una linea continua. */
-#parallelViewFormId .ui-datatable thead th {
-    border-color: #aaaaaa;
-}
-/* Il contenitore dell'header ha sfondo navy #35414f, le celle azzurro
-   #93c3cd: alla giunzione fra colonne il navy trapela per 1px, sembrando
-   una riga scura disallineata dal bordo grigio del corpo. */
-#parallelViewFormId .ui-datatable-scrollable-header {
-    background: #93c3cd;
-}
-
-/* Risultati di ricerca: stessi ritocchi di selezione/evidenza delle viste
-   Pericopes by... . */
 #searchResultFormId .ui-outputpanel { pointer-events: none; }
 #searchResultFormId .ui-outputpanel span { pointer-events: auto; }
-#searchResultFormId .ui-datatable .ui-state-highlight {
-    background: #ccd232;
-    color: #333333;
-}
-#searchResultFormId .ui-datatable .ui-state-highlight td {
-    border-color: #aaaaaa;
-}
-#searchResultFormId .ui-datatable thead th {
-    border-color: #aaaaaa;
-}
-#searchResultFormId .ui-datatable-scrollable-header {
-    background: #93c3cd;
-}
-
-
-/* Hover riga: piu' chiaro del giallo selezionato (#ccd232) e senza la
-   texture diagonale del tema, cosi' selezione e hover restano distinti. */
-#parallelViewFormId .ui-datatable tbody tr.ui-state-hover,
-#searchResultFormId .ui-datatable tbody tr.ui-state-hover {
-    background: #dee27a;
-    color: #333333;
-}
 
 /* Sotto-layout della ricerca (ex global_layout: lu_center / lu_south) */
 .g2a-sublayout {
@@ -507,16 +419,14 @@ html, body {
 #gr_form\:search_pg { margin: 0 auto; }
 
 /* ===================================================================== */
-/* Voce di menu SELEZIONATA: classe custom. In PF 6.2 il widget menubar  */
-/* rimuove 'ui-state-active' dai menuitem al mouseleave, perdendo         */
-/* l'evidenziazione. Usiamo una classe nostra (non gestita da PF) e       */
-/* replichiamo il colore attivo del tema hot-sneaks (rgb 219,72,101).     */
+/* Voce di menu SELEZIONATA (classe custom: PF non mantiene              */
+/* ui-state-active sul menuitem). Usa l'accento del tema.                 */
 /* ===================================================================== */
 #menuForm .ui-menuitem-link.g2a-menu-selected,
 #menuForm .ui-menuitem-link.g2a-menu-selected:hover,
 #menuForm .ui-menuitem-link.g2a-menu-selected.ui-state-hover {
-    background: rgb(219, 72, 101) !important;
-    color: #ffffff !important;
+    background: var(--primary-color, #db4865) !important;
+    color: var(--primary-color-text, #ffffff) !important;
     border-color: transparent !important;
 }
 
