@@ -522,3 +522,47 @@ html, body {
 
 /* Le regole del layout report Plotino (.g2a-report-*) sono in ontoView.css,
    che e' il foglio di stile caricato da onto/graphicalView.xhtml. */
+
+/* ===================================================================== */
+/* Tema moderno (nova-colored) senza lo sprite jQuery UI: le vecchie     */
+/* classi ui-icon-* usate nel markup vengono mappate sulle PrimeIcons,   */
+/* cosi' le icone esistenti continuano a vedersi.                        */
+/* ===================================================================== */
+.ui-icon {
+    font-family: 'primeicons' !important;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1em;
+    width: auto;
+    height: auto;
+    text-indent: 0;
+    overflow: visible;
+    background: none !important;
+    line-height: 1;
+    display: inline-block;
+}
+.ui-icon-search::before { content: "\e908"; }
+.ui-icon-document::before { content: "\e958"; }
+.ui-icon-help::before { content: "\e959"; }
+.ui-icon-star::before { content: "\e937"; }
+.ui-icon-circle-arrow-w::before { content: "\e91a"; }
+.ui-icon-circle-arrow-e::before { content: "\e91b"; }
+.ui-icon-check::before { content: "\e909"; }
+.ui-icon-refresh::before,
+.ui-icon-arrowrefresh-1-w::before { content: "\e938"; }
+.ui-icon-newwin::before,
+.ui-icon-extlink::before { content: "\e93c"; }
+.ui-icon-disk::before { content: "\e95b"; }
+.ui-icon-close::before { content: "\e90b"; }
+.ui-icon-circle-plus::before,
+.ui-icon-plus::before { content: "\e90d"; }
+.ui-icon-circle-minus::before { content: "\e910"; }
+.ui-icon-circle-check::before { content: "\e90a"; }
+.ui-icon-print::before { content: "\e94b"; }
+.ui-icon-video::before { content: "\e962"; }
+.ui-icon-person::before { content: "\e939"; }
+.ui-icon-image::before { content: "\e972"; }
+.ui-icon-folder-open::before { content: "\e964"; }
+.ui-icon-folder-collapsed::before { content: "\e963"; }
+.ui-icon-circle-close::before { content: "\e90c"; }
+.ui-icon-arrowthick-1-s::before { content: "\e956"; }
