@@ -178,14 +178,16 @@
 
 	<script type="text/javascript">
 		//<![CDATA[
-	// Massimizza l'altezza delle tabelle di analisi (greco e arabo): la cella
-	// della riga e' alta quanto la tabella piu' alta, quindi quella piu' corta
-	// lasciava spazio inutilizzato in verticale. Porta il corpo scrollabile di
-	// ogni tabella a riempire la cella.
+	// Adatta l'altezza delle tabelle di analisi (greco e arabo) allo spazio
+	// disponibile nella regione centrale: riempie tutta l'altezza utile
+	// (allineando greco e arabo) e, se lo schermo e' basso, si accorcia per
+	// non far comparire lo scroll verticale di pagina.
 	function g2aFitAnalysis() {
 		try {
+			var center = document.getElementById('centerLayoutUnit');
 			var row = document.getElementById('rowResult');
-			if (!row) { return; }
+			var pg = document.getElementById('analyses_pg');
+			if (!center || !row || !pg) { return; }
 			var cells = Array.prototype.slice.call(row.querySelectorAll('td'));
 			var maxTotal = 0;
 			cells.forEach(function(cell) {
@@ -193,17 +195,26 @@
 				if (dt) { maxTotal = Math.max(maxTotal, dt.offsetHeight); }
 			});
 			if (maxTotal <= 0) { return; }
+			var ccs = getComputedStyle(center);
+			var centerInner = center.clientHeight - (parseFloat(ccs.paddingTop) || 0) - (parseFloat(ccs.paddingBottom) || 0);
+			var pcs = getComputedStyle(pg);
+			var pgMargins = (parseFloat(pcs.marginTop) || 0) + (parseFloat(pcs.marginBottom) || 0);
+			// altezza di tutto il resto (header, pericope, switch, padding) esclusa
+			// la tabella piu' alta.
+			var pgOther = pg.offsetHeight - maxTotal;
+			var target = centerInner - pgOther - pgMargins;
+			if (target < 160) { target = 160; }
 			cells.forEach(function(cell) {
 				var dt = cell.querySelector('.ui-datatable');
 				if (!dt) { return; }
 				var body = dt.querySelector('.ui-datatable-scrollable-body');
 				if (!body) { return; }
 				var fixed = dt.offsetHeight - body.offsetHeight;
-				var target = maxTotal - fixed;
-				if (target < 120) { target = 120; }
-				target = Math.round(target) + 'px';
-				body.style.height = target;
-				body.style.maxHeight = target;
+				var h = target - fixed;
+				if (h < 120) { h = 120; }
+				h = Math.round(h) + 'px';
+				body.style.height = h;
+				body.style.maxHeight = h;
 			});
 		} catch (e) {}
 	}
