@@ -168,6 +168,16 @@ div.perica {
     padding: 2px 16px !important;
 }
 
+/* Footer dei risultati di ricerca: conteggio a sinistra, Download a destra. */
+.resultFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.resultFooter .resultCount {
+    font-weight: bold;
+}
+
 a:hover.link_nodecor {
     background-color: #555555;
     color: white;

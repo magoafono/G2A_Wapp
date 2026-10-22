@@ -294,10 +294,6 @@
                              rendered="#{not empty searchViewBean.searchResult}"
                              value="#{searchViewBean.searchResult}" selectionMode="single"
                              rowKey="#{not empty alink.linkId ? alink.linkId : alink.hashCode()}">
-                    <f:facet name="header">
-                        <h:outputText
-                            value="Results (#{fn:length(searchViewBean.searchResult)})" />
-                    </f:facet>
                     <p:ajax event="rowSelect" update=":menuForm" />
 
                     <p:column sortBy="#{alink.grPericopeId}" width="8%"
@@ -341,12 +337,16 @@
                     </p:column>
 
                     <f:facet name="footer">
-                        <p:commandButton id="download_btn" icon="ui-icon-arrowthick-1-s"
-                                         action="#{searchViewBean.fileDownloadView()}" ajax="false"
-                                         value="Download Results"
-                                         rendered="#{searchViewBean.downloadableResult != null}">
-                            <p:fileDownload value="#{searchViewBean.downloadableResult}" />
-                        </p:commandButton>
+                        <div class="resultFooter">
+                            <h:outputText styleClass="resultCount"
+                                          value="Results (#{fn:length(searchViewBean.searchResult)})" />
+                            <p:commandButton id="download_btn" icon="ui-icon-arrowthick-1-s"
+                                             action="#{searchViewBean.fileDownloadView()}" ajax="false"
+                                             value="Download Results"
+                                             rendered="#{searchViewBean.downloadableResult != null}">
+                                <p:fileDownload value="#{searchViewBean.downloadableResult}" />
+                            </p:commandButton>
+                        </div>
                     </f:facet>
                 </p:dataTable>
 
