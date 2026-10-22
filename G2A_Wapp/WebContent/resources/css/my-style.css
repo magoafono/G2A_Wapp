@@ -36,6 +36,8 @@
 #lu_south {
     top: 250px !important;
     height: auto !important;
+    /* piccolo gap tra il box di input della ricerca e il box risultati */
+    padding-top: 8px;
 }
 
 /* Per togliere l'header dalla tabella delle sottoanalisi dell'arabo, 

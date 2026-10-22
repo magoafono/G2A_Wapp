@@ -396,6 +396,24 @@
                 body.style.maxHeight = h;
             } catch (e) {}
         }
+        // Vincola il contenitore dei risultati (#lu_south, non sostituito
+        // dall'AJAX) alla stessa larghezza del form di ricerca (centrato e
+        // scalato con zoom). Cosi' la DataTable nasce gia' alla larghezza giusta
+        // e i due box combaciano, senza resize via JS che sballa l'header.
+        function g2aAlignResults() {
+            try {
+                var el = document.getElementById('gr_form:search_pg');
+                var lu = document.getElementById('lu_south');
+                if (!el || !lu) { return; }
+                var pad = Math.round(el.getBoundingClientRect().left - lu.getBoundingClientRect().left);
+                if (pad < 0) { pad = 0; }
+                if (lu.__g2aPad !== pad) {
+                    lu.__g2aPad = pad;
+                    lu.style.paddingLeft = pad + 'px';
+                    lu.style.paddingRight = pad + 'px';
+                }
+            } catch (e) {}
+        }
         function g2aFitSearch() {
             var el = document.getElementById('gr_form:search_pg');
             if (!el) return;
@@ -404,7 +422,9 @@
             var avail = document.documentElement.clientWidth - 24;
             var s = (natural > 0) ? Math.min(1, avail / natural) : 1;
             el.style.zoom = (s > 0 ? s : 1);
-            // Dopo lo zoom le altezze cambiano: riadatta subito i risultati.
+            // Allinea i risultati alla larghezza del form, poi riadatta le altezze
+            // (dopo lo zoom cambiano).
+            g2aAlignResults();
             g2aFitSearchResults();
         }
         function g2aFixResultTextSelection() {
