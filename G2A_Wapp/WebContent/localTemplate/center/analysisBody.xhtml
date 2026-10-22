@@ -94,7 +94,7 @@
 							</c:if>
 
 							<c:if test="#{analysisViewBean.viewArabic}">
-								<p:column headerText="إِعْرَاب" styleClass="arabic" style="font-size:#{loginBean.arabicFontSize}" >
+								<p:column headerText="إِعْرَاب" styleClass="arabic" style="text-align:right;font-size:#{loginBean.arabicFontSize}" >
 									<p:dataTable var="arabicSubAnalysis"
 										styleClass="hide-column-names"
 										value="#{arabicAnalysis.subanalysis}">
