@@ -168,14 +168,24 @@ div.perica {
     padding: 2px 16px !important;
 }
 
-/* Footer dei risultati di ricerca: conteggio a sinistra, Download a destra. */
+/* Footer dei risultati di ricerca: blu come l'header, conteggio a sinistra,
+   Download a destra. */
+#searchResultFormId .ui-datatable-footer,
+#searchResultFormId .ui-datatable-scrollable-footer {
+    background: #1e88e5 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+    border-color: #1e88e5 !important;
+}
 .resultFooter {
-    display: flex;
+    display: flex !important;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 .resultFooter .resultCount {
     font-weight: bold;
+    color: #ffffff;
 }
 
 a:hover.link_nodecor {
