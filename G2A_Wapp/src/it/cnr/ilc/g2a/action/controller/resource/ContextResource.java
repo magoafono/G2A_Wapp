@@ -93,6 +93,10 @@ public class ContextResource {
 	 * @param fileName nome del file xml memorizzato nel db oggetto della modifica
 	 * @return
 	 */
+	public boolean xqupdate(java.util.Map<String, String> replacements, String dbName, String fileName) {
+		return resourceType.xqupdate(replacements, dbName, fileName);
+	}
+
 	public boolean xqupdate(String id, String xmlString, String dbName, String fileName) {
 		// TODO Auto-generated method stub
 		return resourceType.xqupdate(id, xmlString, dbName, fileName);

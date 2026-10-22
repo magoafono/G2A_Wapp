@@ -576,6 +576,24 @@ public class EntityManager {
      * @param listOfPericopesId ids delle pericopi coivolte nella pericope
      * (solitamente dalle quali ho tolto tokens)
      */
+    public synchronized void addAndSavePericopes(List<String> tokenIds, String targetId,
+            List<String> sourceIds, int language) {
+        if (language != Consts.GREEK && language != Consts.ARABIC) {
+            throw new IllegalArgumentException("Unsupported pericope language");
+        }
+        HashMap<String, PericopeText> originals = language == Consts.GREEK ? getGreekPericopes() : getArabicPericopes();
+        java.util.LinkedHashMap<String, PericopeText> planned = PericopeTransfer.plan(tokenIds, targetId,
+                sourceIds, originals, language == Consts.GREEK ? getGreekTokens() : getArabicTokens());
+        updateModifiedPericopes(new ArrayList<String>(planned.keySet()), new ArrayList<PericopeText>(planned.values()),
+                language == Consts.GREEK ? getGreekWorkName() : getArabicWorkName(),
+                language == Consts.GREEK ? getGreekCr() : getArabicCr(),
+                getDbName() + (language == Consts.GREEK ? getGreekCollectionPath() : getArabicCollectionPath()), "pericopes.xml");
+        // Commit the in-memory memberships only after the complete DB update was
+        // acknowledged. On transport errors the commit status is unknown: propagate
+        // the failure, do not retry or overwrite stored data with an old snapshot.
+        for (String id : planned.keySet()) originals.get(id).setValue(planned.get(id).getValue());
+    }
+
     public void saveModifiedGreekPericopes(String focusedPericopeId, List<String> listOfPericopesId) {
         //TODO 
         //List<PericopeText> lor, String work, ContextResource cr, String collection, String filename
@@ -1346,12 +1364,22 @@ public class EntityManager {
         PericopeTextContentBehaviour pcb = new PericopeTextContentBehaviour();
         cc.setContentType(pcb);
 
-        PericopeText pt = null;
+        if (pericopesId == null || ptlist == null || pericopesId.size() != ptlist.size()) {
+            throw new IllegalArgumentException("Mismatched pericope replacements");
+        }
+        java.util.Map<String, String> replacements = new java.util.LinkedHashMap<String, String>();
         for (int i = 0; i < ptlist.size(); i++) {
-            pt = ptlist.get(i);
+            PericopeText pt = ptlist.get(i);
+            String id = pericopesId.get(i);
+            if (pt == null || id == null || !id.equals(pt.getId()) || replacements.containsKey(id)) {
+                throw new IllegalArgumentException("Invalid pericope replacement identity");
+            }
             cc.referenceToString(pt);
-            //id della pericope da sostituire , XML con cui sostituire , nome della collezione, nome del file XML
-            cr.xqupdate(pericopesId.get(i), cc.getXmlString(), collection, filename);
+            replacements.put(id, cc.getXmlString());
+        }
+        // Persist source(s) and destination together, never one RPC per pericope.
+        if (!cr.xqupdate(replacements, collection, filename)) {
+            throw new IllegalStateException("Pericope update was not acknowledged");
         }
     }
 

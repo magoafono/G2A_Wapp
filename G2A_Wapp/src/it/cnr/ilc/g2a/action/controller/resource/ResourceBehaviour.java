@@ -25,5 +25,9 @@ public interface ResourceBehaviour {
 	public boolean remove(String dbName, XMLResource xr);
 
 	public boolean xqupdate(String id, String xmlString, String dbName, String fileName);
+
+	default boolean xqupdate(java.util.Map<String, String> replacements, String dbName, String fileName) {
+		throw new UnsupportedOperationException("Batch XML updates not supported by this resource");
+	}
 	
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -62,26 +63,33 @@ public class XPathUtils {
         ExistDBConnector dbconn = ExistDBConnector.getInstance();
         ArrayList<AnalysisBean> analyses = null;
         ArrayList<String> tokensId = dbconn.searchTokensInPericopeById(collection, pericopeId);
-        //int i = 0;
+        if (null == tokensId || tokensId.isEmpty()) {
+            return analyses;
+        }
+        // Mappe batch: una query per lookup invece di ~3 per token (N+1).
+        Map<String, String> linkMap = dbconn.searchLinkAnalysisByTokenIds(collection, tokensId);
+        Map<String, String> valueMap = dbconn.searchTokenValueByTokenIds(collection, tokensId);
+        List<String> analysisIds = new ArrayList<String>();
         for (String id : tokensId) {
-            String analysisId = dbconn.searchLinkAnalysisByTokenId(collection, id);
-            //String analysisId = "380";
-            ArrayList<String> analysis = dbconn.searchAnalysisById(collection, analysisId);
-            //System.err.println(i++ + " analysis: " + analysis);
-
+            String aid = linkMap.get(id);
+            if (null != aid) {
+                analysisIds.add(aid);
+            }
+        }
+        Map<String, List<String>> analysisMap = dbconn.searchAnalysisValuesByAnalysisIds(collection, analysisIds);
+        for (String id : tokensId) {
+            String analysisId = linkMap.get(id);
+            List<String> analysis = (null == analysisId) ? null : analysisMap.get(analysisId);
             if (null != analysis) {
                 if (analyses == null) {
                     analyses = new ArrayList<AnalysisBean>();
                 }
                 AnalysisBean ab = new AnalysisBean();
-
-                //ab.setForma(analysis.get(0));
-                ab.setForma(dbconn.searchTokenValueByTokenId(collection, id));
+                ab.setForma(valueMap.get(id));
                 ab.setPos(analysis.get(1));
                 ab.setLemma(analysis.get(2));
                 analyses.add(ab);
             }
-
         }
 
         return analyses;
@@ -93,6 +101,19 @@ public class XPathUtils {
         ArrayList<AnalysisBean> analyses = null;
         ArrayList<String> tokensId = dbconn.searchTokensInPericopeById(collection, pericopeId);
         log.debug("pericopeId " + pericopeId);
+        if (null == tokensId || tokensId.isEmpty()) {
+            return analyses;
+        }
+        // Mappe batch: una query per lookup invece di ~2 per token (N+1).
+        Map<String, String> linkMap = dbconn.searchLinkAnalysisByTokenIds(collection, tokensId);
+        List<String> analysisIds = new ArrayList<String>();
+        for (String id : tokensId) {
+            String aid = linkMap.get(id);
+            if (null != aid) {
+                analysisIds.add(aid);
+            }
+        }
+        Map<String, String> xmlMap = dbconn.searchAnalysisXmlByAnalysisIds(collection, analysisIds);
 
         Pattern sequencePattern = Pattern.compile("<xm:sequence xmlns:xm=\"(.+?)\" id=\"(?<id>.+?)\" classname=\"(.+?)\">");
         Pattern elementPattern = Pattern.compile("<xm:element id=\"(?<id>.+?)\" classname=\"(.+?)\">(?<params>.+?)</xm:element>");
@@ -101,10 +122,8 @@ public class XPathUtils {
         HashMap<String, String> parameters = new HashMap<String, String>();
         //int i = 0;
         for (String id : tokensId) {
-            String analysisId = dbconn.searchLinkAnalysisByTokenId(collection, id);
-            //String analysisId = "380";
-
-            String analysis = dbconn.searchAnalysisAttibutesById(collection, analysisId);
+            String analysisId = linkMap.get(id);
+            String analysis = (null == analysisId) ? null : xmlMap.get(analysisId);
 
             if (null != analysis) {
                 if (analyses == null) {
@@ -189,12 +208,11 @@ public class XPathUtils {
                 throw new LanguageUnknownException("Unknonw language " + lang);
         }
 
-        if (null != analysisIds) {
-
-            for (String analysisId : analysisIds) {
-                if (null != analysisId) {
-                    tokenIds.addAll(dbconn.searchTokenIdByAnalysisId(dbName + collection, analysisId));
-                }
+        if (null != analysisIds && !analysisIds.isEmpty()) {
+            // Una sola query per tutti gli analysis id (prima: N query).
+            List<String> batch = dbconn.searchTokenIdsByAnalysisIds(dbName + collection, analysisIds);
+            if (null != batch) {
+                tokenIds.addAll(batch);
             }
         }
 
@@ -318,16 +336,10 @@ public class XPathUtils {
         }
 
         if (null != tokenIds) {
-            pericopeIds = new ArrayList<String>();
-            for (String tokenId : tokenIds) {
-                String tempId = dbconn.searchPericopeIdByTokenId(dbName + collection, tokenId);
-                if (null != tempId) {
-                    pericopeIds.add(tempId);
-                } else {
-                    log.warn("No pericope found for token with id " + tokenId);
-                }
-                //profiler.stop().print(); //non importa perche' e' veloce
-            }
+            // Una sola query per tutti i token id (prima: N query, il collo
+            // di bottiglia principale).
+            List<String> batch = dbconn.searchPericopeIdsByTokenIds(dbName + collection, tokenIds);
+            pericopeIds = (null == batch) ? new ArrayList<String>() : batch;
         }
         Set<String> s = new HashSet<String>(pericopeIds);
         log.debug("====> simpleSearchPericopeIdsByTokenIds(): reduction: " + pericopeIds.size() + " " + s.size());
@@ -351,14 +363,10 @@ public class XPathUtils {
         List<String> linkIds = null;
         String res = null;
         if (null != pericopeIds) {
-            linkIds = new ArrayList<String>();
-            for (String pericopeId : pericopeIds) {
-                if (log.isDebugEnabled()) {
-                    profiler.start(pericopeId);
-                }
-                if (null != (res = dbconn.searchLinkIdByPericopeIdAndLang(dbName + getLinkCollectionPath(), pericopeId, Utils.lang2String(lang)))) {
-                    linkIds.add(res);
-                }
+            // Una sola query per tutte le pericopi (prima: N query).
+            linkIds = dbconn.searchLinkIdsByPericopeIds(dbName + getLinkCollectionPath(), pericopeIds, Utils.lang2String(lang));
+            if (null == linkIds) {
+                linkIds = new ArrayList<String>();
             }
         }
         if (log.isDebugEnabled()) {

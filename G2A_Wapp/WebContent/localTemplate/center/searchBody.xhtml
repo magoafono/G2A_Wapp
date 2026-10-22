@@ -6,7 +6,7 @@
                 xmlns:fn="http://java.sun.com/jsp/jstl/functions"
                 xmlns:p="http://primefaces.org/ui">
     <div id="global_layout" class="g2a-sublayout">
-        <div id="lu_center" class="g2a-sub-center" style='min-height: 250px;'>
+        <div id="lu_center" class="g2a-sub-center">
             <h:form id="gr_form" >
                 <p:panelGrid layout="tabular" columns="0" id="search_pg" style="margin: 0 auto;border:none;">
                     <p:row>
@@ -288,6 +288,8 @@
         <div id="lu_south" class="g2a-sub-south ui-widget-content">
             <h:form id="searchResultFormId" >
                 <p:dataTable id="results_dt" var="alink" scrollable="true" 
+                             scrollHeight="300"
+                             widgetVar="resultsTable"
                              selection="#{parallelViewBean.selectedResultViewEntity}"
                              rendered="#{not empty searchViewBean.searchResult}"
                              value="#{searchViewBean.searchResult}" selectionMode="single"
@@ -298,13 +300,12 @@
                     </f:facet>
                     <p:ajax event="rowSelect" update=":menuForm" />
 
-                    <p:column sortBy="#{alink.grPericopeId}" width="5%"
-                              headerText="Greek Pericope Info">
-                        <h:outputText value="#{alink.grPericopeInfo}" styleClass="latin" />
+                    <p:column sortBy="#{alink.grPericopeId}" width="8%"
+                              headerText="Greek Ref">
+                        <h:outputText value="#{alink.grPericopeInfo}" />
                     </p:column>
 
-                    <p:column style="white-space:normal" headerText="Greek Pericope"
-                              styleClass="latin">
+                    <p:column style="white-space:normal" headerText="Greek Pericope">
                         <p:outputPanel layout="block" styleClass="greek"
                                        style="padding-right:0px;font-size:#{loginBean.greekFontSize}">
                             <ui:repeat value="#{alink.greekTVE}" var="gr">
@@ -319,8 +320,7 @@
                             </ui:repeat>
                         </p:outputPanel>
                     </p:column>
-                    <p:column style="white-space:normal" headerText="Arabic Pericope"
-                              styleClass="latin">
+                    <p:column style="white-space:normal" headerText="Arabic Pericope">
                         <p:outputPanel layout="block" styleClass="arabic"
                                        style="padding-right:0px;font-size:#{loginBean.arabicFontSize}">
                             <ui:repeat value="#{alink.arabicTVE}" var="ar">
@@ -336,8 +336,8 @@
                         </p:outputPanel>
                     </p:column>
                     <p:column sortBy="#{alink.arPericopeId}"
-                              headerText="Arabic Pericope Info" width="5%">
-                        <h:outputText value="#{alink.arPericopeInfo}" styleClass="latin" />
+                              headerText="Arabic Ref" width="10%">
+                        <h:outputText value="#{alink.arPericopeInfo}" />
                     </p:column>
 
                     <f:facet name="footer">
@@ -366,6 +366,36 @@
          load, resize e dopo ogni richiesta AJAX. -->
     <script type="text/javascript">
         //<![CDATA[
+        // Adatta l'altezza del corpo dei risultati allo spazio di #lu_south:
+        // scorre solo il result set e l'header resta fisso. Va chiamata DOPO lo
+        // zoom del form, altrimenti misura un'altezza non ancora assestata.
+        function g2aFitSearchResults() {
+            try {
+                var lu = document.getElementById('lu_south');
+                var dt = document.querySelector('#searchResultFormId .ui-datatable');
+                if (!lu || !dt) { return; }
+                var body = dt.querySelector('.ui-datatable-scrollable-body');
+                if (!body) { return; }
+                var cs = getComputedStyle(lu);
+                var padBottom = parseFloat(cs.paddingBottom) || 0;
+                var borderBottom = parseFloat(cs.borderBottomWidth) || 0;
+                var lr = lu.getBoundingClientRect();
+                var dr = dt.getBoundingClientRect();
+                var contentBottom = lr.bottom - borderBottom - padBottom;
+                var fixed = 0;
+                ['.ui-datatable-header', '.ui-datatable-scrollable-header',
+                 '.ui-datatable-scrollable-footer', '.ui-datatable-footer',
+                 '.ui-paginator-top', '.ui-paginator-bottom'].forEach(function(sel) {
+                    var e = dt.querySelector(sel);
+                    if (e) { fixed += e.offsetHeight; }
+                });
+                var h = contentBottom - dr.top - fixed;
+                if (h < 120) { h = 120; }
+                h = Math.round(h) + 'px';
+                body.style.height = h;
+                body.style.maxHeight = h;
+            } catch (e) {}
+        }
         function g2aFitSearch() {
             var el = document.getElementById('gr_form:search_pg');
             if (!el) return;
@@ -374,12 +404,24 @@
             var avail = document.documentElement.clientWidth - 24;
             var s = (natural > 0) ? Math.min(1, avail / natural) : 1;
             el.style.zoom = (s > 0 ? s : 1);
+            // Dopo lo zoom le altezze cambiano: riadatta subito i risultati.
+            g2aFitSearchResults();
         }
-        window.addEventListener('resize', g2aFitSearch);
-        window.addEventListener('load', function () { setTimeout(g2aFitSearch, 50); });
-        if (document.readyState !== 'loading') { setTimeout(g2aFitSearch, 50); }
-        else { document.addEventListener('DOMContentLoaded', function () { setTimeout(g2aFitSearch, 50); }); }
-        if (window.jQuery) { jQuery(document).on('pfAjaxComplete', function () { setTimeout(g2aFitSearch, 50); }); }
+        function g2aFixResultTextSelection() {
+            try { if (window.PrimeFaces && PF('resultsTable')) { PF('resultsTable').cfg.disabledTextSelection = false; } } catch (e) {}
+        }
+        // PF puo' ridimensionare dopo di noi: ripetiamo il fit tra qualche ms.
+        function g2aReflowResults() {
+            g2aFitSearch();
+            setTimeout(g2aFitSearchResults, 60);
+            setTimeout(g2aFitSearchResults, 300);
+        }
+        window.addEventListener('resize', g2aReflowResults);
+        window.addEventListener('load', function () { setTimeout(g2aFitSearch, 50); g2aFitSearchResults(); });
+        if (document.readyState !== 'loading') { setTimeout(g2aFitSearch, 50); g2aFitSearchResults(); }
+        else { document.addEventListener('DOMContentLoaded', function () { setTimeout(g2aFitSearch, 50); g2aFitSearchResults(); }); }
+        if (window.jQuery) { jQuery(document).on('pfAjaxComplete', function () { setTimeout(g2aFitSearch, 50); g2aFixResultTextSelection(); setTimeout(g2aFitSearchResults, 80); }); }
+        g2aFixResultTextSelection();
         //]]>
     </script>
 

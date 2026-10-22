@@ -75,6 +75,11 @@ public class XMLResourceBehaviour implements ResourceBehaviour {
 	}
 
 	@Override
+	public boolean xqupdate(java.util.Map<String, String> replacements, String dbName, String fileName) {
+		return handler.xqupdate(replacements, dbName, fileName);
+	}
+
+	@Override
 	public boolean xqupdate(String id, String xmlString, String dbName, String fileName) {
 
 		return handler.xqupdate(id, xmlString, dbName, fileName);

@@ -118,17 +118,10 @@ function setHeight() {
     var heightGraphRow = heightCenter - 260; // - heightToRemove;
     //console.log("setHeight() graphRow " + heightGraphRow);
 
-    //ridimensionamento della tabella dei risultati in Search
-    // console.log((document.getElementById('searchResultFormId:results_dt').childNodes[2]).style.height = heightGraphRow - 120);
-    if (document.getElementById('searchResultFormId:results_dt')) {
-        //console.log((document.getElementById('searchResultFormId:results_dt')));
-        $(document.getElementById('searchResultFormId:results_dt').childNodes[2]).height(heightGraphRow - 120);
-    }
-
-    if (document.getElementById('parallelViewFormId:dataTableId') &&
-            document.getElementById('parallelViewFormId:dataTableId').childNodes) {
-        $(document.getElementById('parallelViewFormId:dataTableId').childNodes[2]).height(heightCenter - 120);
-    }
+    // Le tabelle dei risultati (Search) e delle pericopi ricevono l'altezza
+    // del corpo dai rispettivi fit responsive (searchBody.xhtml e
+    // parallelView.xhtml), che tengono conto di header/footer e del resize.
+    // Non ridimensionarle qui: andrebbe in conflitto e lascerebbe spazio vuoto.
 
     if (document.getElementById('tabViewId:reportViewForm:graphRow')) {
         $(document.getElementById('tabViewId:reportViewForm:graphRow')).css('height', heightGraphRow);

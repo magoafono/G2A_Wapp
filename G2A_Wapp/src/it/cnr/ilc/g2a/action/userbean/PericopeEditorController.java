@@ -18,6 +18,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -449,10 +451,19 @@ public class PericopeEditorController implements Serializable{
 	}
 
 
+	private void warnEmptySelection() {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+				FacesMessage.SEVERITY_WARN, "Selezionare almeno un token.", null));
+	}
+
 	/* Azioni dei bottoni */
 
 	public void addGreekClick() {
 		Authorization.requireEditor();
+		if (selectedGreekTokenView == null || selectedGreekTokenView.isEmpty()) {
+			warnEmptySelection();
+			return;
+		}
 
 		List<String> clickedTokenId = getSelectedTokenViewId(Consts.GREEK);
 		List<String> clickedPericopeId = getSelectedPericopeId(getSelectedGreekPericopeId(), Consts.GREEK);
@@ -491,6 +502,10 @@ public class PericopeEditorController implements Serializable{
 
 	public void addArabicClick() {
 		Authorization.requireEditor();
+		if (selectedArabicTokenView == null || selectedArabicTokenView.isEmpty()) {
+			warnEmptySelection();
+			return;
+		}
 
 		List<String> clickedTokenId = getSelectedTokenViewId(Consts.ARABIC);
 		List<String> clickedPericopeId = getSelectedPericopeId(getSelectedArabicPericopeId(), Consts.ARABIC);

@@ -49,6 +49,7 @@
 
  -->
 			<p:ajax event="rowSelect" update=":menuForm" immediate="true"/>
+			<p:ajax event="contextMenu" update=":menuForm" />
 			
 
 			<!-- 
@@ -84,7 +85,7 @@
 				</p:outputPanel>
 			</p:column>
 
-			<p:column width="47%" headerText="Arabic Pericope"
+			<p:column width="42%" headerText="Arabic Pericope"
 				style="white-space:pre">
 				<f:facet name="header">
 					<h:outputText value="Arabic Pericope" style="margin-right:20px" />
@@ -109,7 +110,7 @@
 				</p:outputPanel>
 			</p:column>
 			<!--p:column headerText="Arabic Ref" width="6%" filterBy="#{link.arabicPericopeInfo}" filterMatchMode="contains"-->
-			<p:column headerText="Arabic Ref" width="6%">
+			<p:column headerText="Arabic Ref" width="10%">
 				<h:outputText value="#{link.arabicPericopeInfo}" styleClass=""
 					rendered="#{link.arabicPericopeHidden == 'false'}" />
 			</p:column>
@@ -119,6 +120,17 @@
 			</p:column>
 
 		</p:dataTable>
+
+		<!-- Menu contestuale (tasto destro) sulla riga selezionata. -->
+		<p:contextMenu for=":parallelViewFormId:dataTableId" targetWidgetVar="dataTable" selectionMode="single" widgetVar="pericopeContextMenu">
+			<p:menuitem value="Comment Editor" outcome="/Comment"
+				rendered="#{loginBean.loggedIn}" />
+			<p:menuitem value="Linguistic Analysis" outcome="/LinguisticAnalysis"
+				rendered="#{loginBean.loggedIn}" />
+			<p:menuitem value="Pericopes Manager" outcome="/ManagePericopes"
+				rendered="#{loginBean.loggedIn}"
+				disabled="#{loginBean.role eq 'reader'}" />
+		</p:contextMenu>
 	</h:form>
 	<!--
 	<script type="text/javascript">
@@ -142,10 +154,46 @@
 	<script type="text/javascript">
 	
 		//<![CDATA[
+	// Adatta l'altezza dell'area scrollabile della datatable allo spazio
+	// verticale realmente disponibile nell'area centrale, invece del
+	// scrollHeight fisso (che su schermi alti lasciava un vuoto sotto la
+	// tabella prima del footer). Non tocca larghezze ne' i due paginator.
+	function g2aFitParallelTable() {
+		try {
+			var center = document.getElementById('centerLayoutUnit');
+			var dt = document.querySelector('#parallelViewFormId .ui-datatable');
+			if (!center || !dt) { return; }
+			var body = dt.querySelector('.ui-datatable-scrollable-body');
+			if (!body) { return; }
+			var cs = getComputedStyle(center);
+			var padBottom = parseFloat(cs.paddingBottom) || 0;
+			var borderBottom = parseFloat(cs.borderBottomWidth) || 0;
+			var cr = center.getBoundingClientRect();
+			var dr = dt.getBoundingClientRect();
+			var contentBottom = cr.bottom - borderBottom - padBottom;
+			var fixed = 0;
+			['.ui-paginator-top', '.ui-datatable-scrollable-header',
+			  '.ui-datatable-scrollable-footer', '.ui-paginator-bottom'].forEach(function(sel) {
+				var e = dt.querySelector(sel);
+				if (e) { fixed += e.offsetHeight; }
+			});
+			var h = contentBottom - dr.top - fixed;
+			if (h < 120) { h = 120; }
+			h = Math.round(h) + 'px';
+			// PF imposta inline anche max-height (scrollHeight): va override,
+			// altrimenti l'altezza calcolata resta limitata al valore fisso.
+			body.style.height = h;
+			body.style.maxHeight = h;
+		} catch (e) { /* nessun blocco della pagina per un errore di misura */ }
+	}
 	$(document).ready(function() {
          	//$('#dataTableId').getPaginator().setPage(#{parallelViewBean.paginatorPage});
  			//scroll to selected row
             PF('dataTable').getPaginator().setPage(#{parallelViewBean.paginatorPage});
+			// DataTable PF14 non espone disabledTextSelection nella taglib: il
+			// widget la forza a true. La disattiviamo per conservare la selezione
+			// del testo (copia) senza perdere il click di selezione riga.
+			PF('dataTable').cfg.disabledTextSelection = false;
    			setTimeout(function() { 
  				//workaround per chrome che non sempre riesce a posizionarsi sulla riga evidenziata
            	$('.ui-datatable-scrollable-body').scrollTo(".ui-state-highlight", 200, {over:{top:-0.5}});
@@ -155,6 +203,12 @@
 //  	 			}
   			}, 500);
 		}); 
+		$(document).ready(function() { g2aFitParallelTable(); });
+		$(window).on('resize', function() { g2aFitParallelTable(); });
+		$(document).on('pfAjaxComplete', function() {
+			g2aFitParallelTable();
+			if (PF('dataTable')) { PF('dataTable').cfg.disabledTextSelection = false; }
+		});
       //]]>
 	</script>
 

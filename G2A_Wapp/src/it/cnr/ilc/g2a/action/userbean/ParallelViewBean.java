@@ -46,7 +46,7 @@ public class ParallelViewBean implements Serializable {
 
     private ResultViewEntity selectedResultViewEntity = null;
     private int paginatorPage = 0;
-    private int rowsPerPage = 5;
+    private int rowsPerPage = 20;
     private int rowOffset = 0;
 
     /**

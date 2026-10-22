@@ -160,13 +160,20 @@ public  class XMLHandler  {
 		return connector.remove (dbName, xr);
 	}
 	
+	public boolean xqupdate(java.util.Map<String, String> replacements, String dbName, String fileName) {
+		if (!"pericopes.xml".equals(fileName)) {
+			throw new IllegalArgumentException("Unexpected pericope document");
+		}
+		ExistDBConnector.getInstance().updatePericopes(dbName, replacements);
+		return true;
+	}
+
 	public boolean xqupdate(String id, String xmlString, String dbName, String fileName) {
 		
 		ExistDBConnector connector = ExistDBConnector.getInstance();
 		
 		connector.updatePericopeById (dbName, id, xmlString);
-		
-		return false;
+		return true;
 		
 	}
 	

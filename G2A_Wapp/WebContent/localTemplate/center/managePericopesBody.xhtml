@@ -14,6 +14,7 @@
 	<!-- h:form id="pericopesTextForm" -->
 	<h:outputScript name="selection.js" library="js"></h:outputScript>
 	<div align="center">
+		<p:messages id="pericopeMessages" showDetail="false" />
 		<p:panelGrid layout="tabular" columns="0" style="width:100%;">
 			<f:facet name="header">
 				<p:row>
@@ -91,8 +92,8 @@
 						<p:commandButton id="greekAddClick" value="ADD"
 							styleClass="latinText" partialSubmit="true" process="@this"
 							actionListener="#{pericopeEditorController.addGreekClick}"
-							update=":greekPericopesTextForm:greekPanel :greekButtons"
-							disabled="#{pericopeEditorController.selectedGreekTokenView eq null}" />
+							update=":greekPericopesTextForm:greekPanel :greekButtons :pericopeMessages"
+							disabled="#{empty pericopeEditorController.selectedGreekTokenView}" />
 
 						<!-- p:commandButton id="greekRemoveClick" value="REMOVE"
 						styleClass="latinText" partialSubmit="true" process="@this"
@@ -110,8 +111,8 @@
 						<p:commandButton id="arabicAddClick" value="ADD"
 							styleClass="latinText" partialSubmit="true" process="@this"
 							actionListener="#{pericopeEditorController.addArabicClick}"
-							update=":arabicPericopesTextForm:arabicPanel"
-							disabled="#{pericopeEditorController.selectedArabicTokenView eq null}" />
+							update=":arabicPericopesTextForm:arabicPanel :arabicButtons :pericopeMessages"
+							disabled="#{empty pericopeEditorController.selectedArabicTokenView}" />
 
 						<!--p:commandButton id="arabicRemoveClick" value="REMOVE"
 						styleClass="latinText" partialSubmit="true" process="@this"

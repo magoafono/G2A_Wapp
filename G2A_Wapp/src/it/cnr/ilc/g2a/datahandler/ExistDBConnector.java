@@ -12,8 +12,12 @@ import it.cnr.ilc.g2a.utils.Utils;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Collections;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -479,20 +483,24 @@ public class ExistDBConnector {
     }
 
     public ArrayList<String> updatePericopeById(String URI, String pericopeId, String node) {
-        log.debug("URI=(" + URI + "), pericopeId=(" + pericopeId + "), node=(" + node + ")");
+        updatePericopes(URI, Collections.singletonMap(pericopeId, node));
+        return new ArrayList<String>();
+    }
 
-        ArrayList<String> ret = null;
-        if (null != pericopeId) {
-            String doc = "doc('pericopes.xml')";
-            String path = "/xm:sequence/xm:sequence";
-            String id = "[@id='" + pericopeId + "']";
-            String query = "update replace " + doc + path + id + " with " + node;
-            log.debug("query: " + query);
-            ret = xqRunWithMultipleResults(URI, query);
-            //se non ci sono risultati ret e' una string vuota
+    public void updatePericopes(String URI, Map<String, String> replacements) {
+        // Fresh collection/service: external variables cannot leak across users
+        // or concurrent requests through the legacy connection cache.
+        try (Collection collection = getNewCollection(URI)) {
+            if (collection == null) {
+                throw new IllegalStateException("Pericope collection unavailable");
+            }
+            XQueryService service = (XQueryService) collection.getService("XQueryService", "1.0");
+            PericopeUpdates.execute(service, replacements);
+        } catch (XMLDBException ex) {
+            // Preserve the original failure, never return null or retry an update
+            // with an uncertain acknowledgement. No payload in the public message.
+            throw new IllegalStateException("Pericope update failed; reload stored state before retrying", ex);
         }
-
-        return ret;
     }
 
     //////// Search in ANALYSIS.XML
@@ -936,6 +944,199 @@ public class ExistDBConnector {
         }
         return ret;
 
+    }
+
+    // ------------------------------------------------------------------
+    // Batch search: una sola query per molti id, passati come variabile
+    // esterna (nessuna concatenazione). La semantica dei percorsi per-id e'
+    // conservata: per token->pericope e pericope->link si tengono solo gli id
+    // con UNA corrispondenza (come xqRunWithSingleResult nel percorso per-id).
+    // Collection/service nuovi ad ogni chiamata: le variabili non possono
+    // trapelare tra richieste concorrenti attraverso la cache condivisa.
+    // ------------------------------------------------------------------
+    public ArrayList<String> searchTokenIdsByAnalysisIds(String URI, List<String> analysisIds) {
+        if (null == analysisIds || analysisIds.isEmpty()) {
+            return new ArrayList<String>();
+        }
+        String query
+                = "declare variable $g2aIds as xs:string external;\n"
+                + "for $e in doc('linkAnalysis.xml')//xm:element[xm:param[@name='analysisRef'][@value = tokenize($g2aIds, ',')]]\n"
+                + "return string($e/xm:param[@name='tokenRef']/@value)";
+        return xqRunWithVarsMultipleResults(URI, query, Collections.singletonMap("g2aIds", String.join(",", analysisIds)));
+    }
+
+    public ArrayList<String> searchPericopeIdsByTokenIds(String URI, List<String> tokenIds) {
+        if (null == tokenIds || tokenIds.isEmpty()) {
+            return new ArrayList<String>();
+        }
+        String query
+                = "declare variable $g2aIds as xs:string external;\n"
+                + "let $wanted := map:merge(for $i in distinct-values(tokenize($g2aIds, ',')) return map:entry($i, true()))\n"
+                + "for $e in doc('pericopes.xml')//xm:element[..[@classname='pericope']]\n"
+                + "where map:contains($wanted, string($e/@ref))\n"
+                + "group by $ref := string($e/@ref)\n"
+                + "where count($e) = 1\n"
+                + "return string($e/../@id)";
+        return xqRunWithVarsMultipleResults(URI, query, Collections.singletonMap("g2aIds", String.join(",", tokenIds)));
+    }
+
+    public ArrayList<String> searchLinkIdsByPericopeIds(String URI, List<String> pericopeIds, String lang) {
+        if (null == pericopeIds || pericopeIds.isEmpty()) {
+            return new ArrayList<String>();
+        }
+        String query
+                = "declare variable $g2aIds as xs:string external;\n"
+                + "declare variable $g2aLang as xs:string external;\n"
+                + "let $wanted := map:merge(for $i in distinct-values(tokenize($g2aIds, ',')) return map:entry($i, true()))\n"
+                + "for $e in doc('links.xml')//xm:element[@classname='refPericope'][@extended = $g2aLang]\n"
+                + "where map:contains($wanted, string($e/@ref))\n"
+                + "group by $ref := string($e/@ref)\n"
+                + "where count($e) = 1\n"
+                + "return string($e/../@id)";
+        Map<String, String> vars = new HashMap<String, String>();
+        vars.put("g2aIds", String.join(",", pericopeIds));
+        vars.put("g2aLang", lang);
+        return xqRunWithVarsMultipleResults(URI, query, vars);
+    }
+
+    // ---- Batch per la Linguistic Analysis: costruiscono mappe con una sola
+    // query, cosi' i loop per-token restano in memoria. La semantica per-id e'
+    // conservata (single-match dove il percorso originale usava
+    // xqRunWithSingleResult). Separatori: codepoint 1 (campo) e 2 (lista).
+
+    private static List<String> nz(List<String> l) {
+        return null == l ? Collections.<String>emptyList() : l;
+    }
+
+    public Map<String, String> searchLinkAnalysisByTokenIds(String URI, List<String> tokenIds) {
+        Map<String, String> map = new HashMap<String, String>();
+        if (null == tokenIds || tokenIds.isEmpty()) {
+            return map;
+        }
+        String query
+                = "declare variable $g2aIds as xs:string external;\n"
+                + "for $p in doc('linkAnalysis.xml')//xm:param[@name='tokenRef'][@value = tokenize($g2aIds, ',')]\n"
+                + "let $a := $p/../xm:param[@name='analysisRef']/@value\n"
+                + "where count($a) = 1\n"
+                + "return concat(string($p/@value), codepoints-to-string(9), string($a))";
+        Set<String> ambiguous = new HashSet<String>();
+        for (String line : nz(xqRunWithVarsMultipleResults(URI, query, Collections.singletonMap("g2aIds", String.join(",", tokenIds))))) {
+            String[] kv = line.split("\t", 2);
+            if (kv.length != 2 || ambiguous.contains(kv[0])) {
+                continue;
+            }
+            if (map.containsKey(kv[0])) {
+                map.remove(kv[0]);
+                ambiguous.add(kv[0]);
+            } else {
+                map.put(kv[0], kv[1]);
+            }
+        }
+        return map;
+    }
+
+    public Map<String, String> searchTokenValueByTokenIds(String URI, List<String> tokenIds) {
+        Map<String, String> map = new HashMap<String, String>();
+        if (null == tokenIds || tokenIds.isEmpty()) {
+            return map;
+        }
+        String query
+                = "declare variable $g2aIds as xs:string external;\n"
+                + "for $e in doc('tokens.xml')//xm:element[@id = tokenize($g2aIds, ',')]\n"
+                + "let $v := $e/xm:param[@name='string']/@value\n"
+                + "where count($v) = 1\n"
+                + "return concat(string($e/@id), codepoints-to-string(9), string($v))";
+        for (String line : nz(xqRunWithVarsMultipleResults(URI, query, Collections.singletonMap("g2aIds", String.join(",", tokenIds))))) {
+            String[] kv = line.split("\t", 2);
+            if (kv.length == 2) {
+                map.put(kv[0], kv[1]);
+            }
+        }
+        return map;
+    }
+
+    public Map<String, List<String>> searchAnalysisValuesByAnalysisIds(String URI, List<String> analysisIds) {
+        Map<String, List<String>> map = new HashMap<String, List<String>>();
+        if (null == analysisIds || analysisIds.isEmpty()) {
+            return map;
+        }
+        String query
+                = "declare variable $g2aIds as xs:string external;\n"
+                + "for $e in doc('morphoDB.xml')//xm:element[@id = tokenize($g2aIds, ',')]\n"
+                + "let $params := $e/xm:param/@value\n"
+                + "where exists($params)\n"
+                + "return concat(string($e/@id), codepoints-to-string(9), string-join($params, codepoints-to-string(10)))";
+        for (String line : nz(xqRunWithVarsMultipleResults(URI, query, Collections.singletonMap("g2aIds", String.join(",", analysisIds))))) {
+            String[] kv = line.split("\t", 2);
+            if (kv.length == 2) {
+                map.put(kv[0], java.util.Arrays.asList(kv[1].split("\n", -1)));
+            }
+        }
+        return map;
+    }
+
+    public Map<String, String> searchAnalysisXmlByAnalysisIds(String URI, List<String> analysisIds) {
+        Map<String, String> map = new HashMap<String, String>();
+        if (null == analysisIds || analysisIds.isEmpty()) {
+            return map;
+        }
+        String query
+                = "declare variable $g2aIds as xs:string external;\n"
+                + "for $s in doc('morphoDB.xml')//xm:sequence[@id = tokenize($g2aIds, ',')]\n"
+                + "return concat(string($s/@id), codepoints-to-string(9), serialize($s))";
+        Set<String> ambiguous = new HashSet<String>();
+        for (String line : nz(xqRunWithVarsMultipleResults(URI, query, Collections.singletonMap("g2aIds", String.join(",", analysisIds))))) {
+            String[] kv = line.split("\t", 2);
+            if (kv.length != 2 || ambiguous.contains(kv[0])) {
+                continue;
+            }
+            if (map.containsKey(kv[0])) {
+                map.remove(kv[0]);
+                ambiguous.add(kv[0]);
+            } else {
+                map.put(kv[0], kv[1]);
+            }
+        }
+        return map;
+    }
+
+    private ArrayList<String> xqRunWithVarsMultipleResults(String URI, String xquery, Map<String, String> vars) {
+        log.debug("URI=(" + URI + "), xquery=(" + xquery + ")");
+        ArrayList<String> ret = null;
+        try (Collection collection = getNewCollection(URI)) {
+            if (collection == null) {
+                throw new IllegalStateException("Collection unavailable: " + URI);
+            }
+            XQueryService service = (XQueryService) collection.getService("XQueryService", "1.0");
+            service.setNamespace("xm", "http://ilc.cnr.it/gtoa/Model/xmlmapping");
+            service.setProperty("indent", "no");
+            for (Map.Entry<String, String> e : vars.entrySet()) {
+                service.declareVariable(e.getKey(), e.getValue());
+            }
+            ResourceSet result = service.query(xquery);
+            if (result == null) {
+                return null;
+            }
+            ResourceIterator i = result.getIterator();
+            if (i.hasMoreResources()) {
+                ret = new ArrayList<String>();
+                while (i.hasMoreResources()) {
+                    Resource res = i.nextResource();
+                    try {
+                        ret.add((String) res.getContent());
+                    } finally {
+                        try {
+                            ((EXistResource) res).freeResources();
+                        } catch (XMLDBException xe) {
+                            xe.printStackTrace();
+                        }
+                    }
+                }
+            }
+        } catch (XMLDBException e) {
+            log.error(e);
+        }
+        return ret;
     }
 
     private XQueryService xqGetService(String dbName) {

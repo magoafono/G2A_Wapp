@@ -377,6 +377,19 @@ public class Utils {
 	 * @param pericopes tutte le pericopi di un testo
 	 */
 	public static void updateTokenViewList(List<TokenViewEntity> listOfGreekTokenView, List<Integer> clickedTokenIndex, String pericopeId, HashMap<String, PericopeText> pericopes) {
+		if (clickedTokenIndex == null || clickedTokenIndex.isEmpty()) {
+			return;
+		}
+		if (listOfGreekTokenView == null || listOfGreekTokenView.isEmpty()
+				|| pericopes == null || pericopes.get(pericopeId) == null) {
+			throw new IllegalArgumentException("Missing token view or destination pericope");
+		}
+		// Validate the complete selection before modifying any view entity.
+		for (Integer index : clickedTokenIndex) {
+			if (index == null || index < 0 || index >= listOfGreekTokenView.size()) {
+				throw new IllegalArgumentException("Token view index outside current view");
+			}
+		}
 
 		/*
 		 * Calcolo il massimo e il minimo indice; serve per poter individuare il colore delle pericope a cui ho aggiunto i token specificati clickedTokenIndex
@@ -392,7 +405,9 @@ public class Utils {
 		 * Calcolo i tve precedente e successivo ai token che sono oggetto dello spostamento
 		 */
 		TokenViewEntity tvePrec = listOfGreekTokenView.get(min>0 ? min-1 : 0);
-		TokenViewEntity tveSucc = listOfGreekTokenView.get(max<listOfGreekTokenView.size()? max+1 : 0);
+		// Preserve the existing index-zero fallback, but use it at the last
+		// VALID index rather than attempting get(size) after the DB save.
+		TokenViewEntity tveSucc = listOfGreekTokenView.get(max < listOfGreekTokenView.size() - 1 ? max + 1 : 0);
 
 		for (Integer index : clickedTokenIndex) {
 
