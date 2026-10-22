@@ -476,3 +476,33 @@ html, body {
 .ui-icon-folder-collapsed::before { content: "\e963"; }
 .ui-icon-circle-close::before { content: "\e90c"; }
 .ui-icon-arrowthick-1-s::before { content: "\e956"; }
+
+/* ===================================================================== */
+/* Ritocchi nova-colored                                                 */
+/* ===================================================================== */
+/* Testo bianco sulla voce di menu selezionata (sfondo azzurro del tema). */
+#menuForm .ui-menuitem-link.g2a-menu-selected,
+#menuForm .ui-menuitem-link.g2a-menu-selected:hover,
+#menuForm .ui-menuitem-link.g2a-menu-selected.ui-state-hover,
+#menuForm .ui-menuitem-link.g2a-menu-selected .ui-menuitem-text {
+    color: #ffffff !important;
+}
+
+/* Intestazioni tabelle: azzurro leggero coerente col menu. */
+.ui-datatable thead th {
+    background: #e3f2fd !important;
+    color: #1b3a57 !important;
+    border-color: #cfe3f7 !important;
+}
+
+/* Evidenza riga selezionata: tinta tenue invece del pieno saturo. */
+#parallelViewFormId .ui-datatable .ui-state-highlight,
+#searchResultFormId .ui-datatable .ui-state-highlight {
+    background: #f7dbe4 !important;
+    color: #333333 !important;
+    border-color: #e6b9c6 !important;
+}
+#parallelViewFormId .ui-datatable .ui-state-highlight td,
+#searchResultFormId .ui-datatable .ui-state-highlight td {
+    color: #333333 !important;
+}
