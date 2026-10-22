@@ -150,7 +150,12 @@ div.perica {
 }
 
 .panelGridCenter {
-    margin: 50px auto;
+    margin: 20px auto;
+}
+
+/* Footer (tfoot) del login compatto come l'header: era molto più alto. */
+#loginForm tfoot td {
+    padding: 5px 16px !important;
 }
 
 a:hover.link_nodecor {

@@ -167,33 +167,6 @@
     </p:accordionPanel>
 
     <c:if test="#{!loginBean.loggedIn}">
-        <h:form id="guestLogin" >
-            <p:panelGrid layout="tabular" columns="0" styleClass="tableNoBorder panelGridCenter">
-                <p:row>
-                    <p:column style="text-align:center">
-                        <h:outputText style="font-weight:bold;font-size:1.2em"
-                                      value="No account is needed to browse the G2A Web App website and use G2A Web App reading functions." />
-                    </p:column>
-                </p:row>
-                <p:row>
-                    <p:column style="text-align:center">
-                        <h:outputText style="font-style: italic;"
-                                      value="ILC and Greek into Arabic provide free access (read only) to G2A Web Application." />
-                    </p:column>
-                </p:row>
-                <p:row>
-                    <p:column style="text-align:center">
-                        <p:commandButton id="freeAccessBtn" value="Free Access" 
-                                         action="#{loginBean.doLogin}"> 
-                            <f:setPropertyActionListener target="#{loginBean.username}"
-                                                         value="guest" />
-                            <f:setPropertyActionListener target="#{loginBean.password}"
-                                                         value="guest" />
-                        </p:commandButton>
-                    </p:column>
-                </p:row>
-            </p:panelGrid>
-        </h:form>
         <h:form id="loginForm">
             <!-- p:growl id="loginMessage" autoUpdate="true" /-->
             <p:panelGrid layout="tabular" columns="0" styleClass="panelGridCenter">
@@ -231,6 +204,33 @@
                         </p:column>
                     </p:row>
                 </f:facet>
+            </p:panelGrid>
+        </h:form>
+        <h:form id="guestLogin" >
+            <p:panelGrid layout="tabular" columns="0" styleClass="tableNoBorder panelGridCenter">
+                <p:row>
+                    <p:column style="text-align:center">
+                        <h:outputText style="font-weight:bold;font-size:1.2em"
+                                      value="No account is needed to browse the G2A Web App website and use G2A Web App reading functions." />
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column style="text-align:center">
+                        <h:outputText style="font-style: italic;"
+                                      value="ILC and Greek into Arabic provide free access (read only) to G2A Web Application." />
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column style="text-align:center">
+                        <p:commandButton id="freeAccessBtn" value="Free Access" 
+                                         action="#{loginBean.doLogin}"> 
+                            <f:setPropertyActionListener target="#{loginBean.username}"
+                                                         value="guest" />
+                            <f:setPropertyActionListener target="#{loginBean.password}"
+                                                         value="guest" />
+                        </p:commandButton>
+                    </p:column>
+                </p:row>
             </p:panelGrid>
         </h:form>
     </c:if>
