@@ -558,3 +558,28 @@ html, body {
     color: #ffffff !important;
     border-color: #1e88e5 !important;
 }
+
+/* Menubar: voci e opzioni (utente/Logout) sulla stessa riga, centrate
+   verticalmente. Con nova-colored le opzioni andavano a capo. */
+#menuForm .ui-menubar {
+    position: relative;
+    font-size: 0.9em;
+}
+#menuForm .ui-menubar .ui-menu-list {
+    padding-right: 300px;
+}
+#menuForm .ui-menubar .ui-menuitem-link {
+    padding: 4px 8px !important;
+}
+/* Utente/Logout a destra, centrati verticalmente nel menubar qualunque sia
+   l'altezza (il tema li mandava a capo sotto le voci, non centrati). */
+#menuForm .ui-menubar .ui-menubar-options {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    float: none;
+}
