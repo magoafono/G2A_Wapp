@@ -6,7 +6,8 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <h:outputStylesheet library="css" name="my-style.css" />
+        <link rel="stylesheet" type="text/css"
+              href="#{request.contextPath}/javax.faces.resource/my-style.css.xhtml?ln=css&amp;v=#{msg['build.revision']}" />
         <h:outputScript name="jquery/jquery.js" library="primefaces" />
         <h:outputScript name="jquery/jquery-plugins.js" library="primefaces" />
         <title><ui:insert name="title">Default title</ui:insert></title>
