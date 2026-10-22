@@ -80,7 +80,7 @@
 								</p:column>
 							</c:if>
 							<c:if test="#{analysisViewBean.viewArabic}">
-								<p:column headerText="وَحْدَة مُعْجَمِيّة" width="10%"
+								<p:column headerText="وَحْدَة مُعْجَمِيّة" width="17%"
 									styleClass="arabic" style="text-align:right;font-size:#{loginBean.arabicFontSize}">
 									<h:outputText value="#{arabicAnalysis.lemma}" style="font-size:#{loginBean.arabicFontSize}"
 										styleClass="arabic" />
@@ -130,7 +130,7 @@
 								</p:column>
 							</c:if>
 							<c:if test="#{analysisViewBean.viewArabic}">
-								<p:column headerText="كَلِمَة" width="20%" styleClass="arabic"
+								<p:column headerText="كَلِمَة" width="14%" styleClass="arabic"
 									style="text-align: right;font-size:#{loginBean.arabicFontSize}">
 									<h:outputText value="#{arabicAnalysis.forma}" style="font-size:#{loginBean.arabicFontSize}"
 										styleClass="arabic" />
