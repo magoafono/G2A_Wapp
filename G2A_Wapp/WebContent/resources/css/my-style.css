@@ -317,7 +317,25 @@ html, body {
     box-sizing: border-box;
     min-width: 0;
     overflow: auto;
-    padding: 3px;
+    padding: 6px;
+    /* Cornice/sfondo per non farla "galleggiare" sul bianco. */
+    border: 1px solid #cfe3f7;
+    border-radius: 6px;
+    background: #f7fbff;
+}
+/* Hover sulle voci del menu di sinistra (il tema non lo rende visibile). */
+.g2a-west .sidemenu_column:hover,
+.g2a-west .sidemenu_column.ui-state-hover {
+    background: #e3f2fd !important;
+}
+.g2a-west .sidemenu_column .sidemenu_link {
+    display: block;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+.g2a-west .sidemenu_column:hover .sidemenu_link,
+.g2a-west .sidemenu_column.ui-state-hover .sidemenu_link {
+    color: #0d47a1 !important;
 }
 .g2a-layout-four .g2a-center {
     min-width: 0;
