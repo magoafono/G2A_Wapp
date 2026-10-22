@@ -28,7 +28,7 @@
 
 		<p:dataTable id="dataTableId" var="link" scrollable="true"
 			scrollHeight="600" value="#{parallelViewBean.getLinks(lang)}"
-			paginator="true" resizableColumns="true"
+			paginator="true" paginatorPosition="bottom" resizableColumns="true"
 			rows="#{parallelViewBean.rowsPerPage}" widgetVar="dataTable"
 			pageLinks="20"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"

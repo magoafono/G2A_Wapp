@@ -284,7 +284,7 @@ html, body {
     box-sizing: border-box;
 }
 .g2a-north .g2a-unit-header {
-    padding: 6px;
+    padding: 11px 12px;
     font-weight: bold;
 }
 .g2a-north .g2a-unit-content {
@@ -498,11 +498,14 @@ html, body {
     border: none !important;
 }
 
-/* Intestazioni tabelle: azzurro leggero coerente col menu. */
+/* Intestazioni tabelle: stesso blu della voce di menu selezionata. */
 .ui-datatable thead th {
-    background: #e3f2fd !important;
-    color: #1b3a57 !important;
-    border-color: #cfe3f7 !important;
+    background: #1e88e5 !important;
+    color: #ffffff !important;
+    border-color: #1976d2 !important;
+}
+.ui-datatable thead th .ui-column-title {
+    color: #ffffff !important;
 }
 
 /* Evidenza riga selezionata: azzurro tenue invece del rosa. */
