@@ -295,6 +295,7 @@
                              value="#{searchViewBean.searchResult}" selectionMode="single"
                              rowKey="#{not empty alink.linkId ? alink.linkId : alink.hashCode()}">
                     <p:ajax event="rowSelect" update=":menuForm" />
+                    <p:ajax event="contextMenu" update=":menuForm" />
 
                     <p:column sortBy="#{alink.grPericopeId}" width="8%"
                               headerText="Greek Ref">
@@ -350,6 +351,18 @@
                     </f:facet>
                 </p:dataTable>
 
+                <!-- Menu contestuale (tasto destro) sulla riga risultato. -->
+                <p:contextMenu for=":searchResultFormId:results_dt"
+                               targetWidgetVar="resultsTable" selectionMode="single"
+                               widgetVar="resultsContextMenu">
+                    <p:menuitem value="Comment Editor" outcome="/Comment"
+                                rendered="#{loginBean.loggedIn}" />
+                    <p:menuitem value="Linguistic Analysis" outcome="/LinguisticAnalysis"
+                                rendered="#{loginBean.loggedIn}" />
+                    <p:menuitem value="Pericopes Manager" outcome="/ManagePericopes"
+                                rendered="#{loginBean.loggedIn}"
+                                disabled="#{loginBean.role eq 'reader'}" />
+                </p:contextMenu>
 
             </h:form>
         </div>

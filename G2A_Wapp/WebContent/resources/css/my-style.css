@@ -179,6 +179,13 @@ div.perica {
     color: #ffffff !important;
     border-color: #1e88e5 !important;
 }
+
+/* Cornice continua attorno al box risultati: con poche righe il corpo
+   scrollabile restava "aperto" a sinistra/destra/sotto. */
+#searchResultFormId .ui-datatable {
+    border: 1px solid #c8c8c8;
+    box-sizing: border-box;
+}
 .resultFooter {
     display: flex !important;
     justify-content: space-between;
