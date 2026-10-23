@@ -6,7 +6,7 @@
                 xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 
-    <h1 align="center">Kitāb Uṯūlūǧiyā (Theologia Aristotelis)</h1>
+    <h1 class="g2a-collection-title">Kitāb Uṯūlūǧiyā (Theologia Aristotelis)</h1>
 
     <p:accordionPanel>
         <p:tab title="Description">
@@ -167,6 +167,7 @@
     </p:accordionPanel>
 
     <c:if test="#{!loginBean.loggedIn}">
+        <div class="g2a-login-card">
         <h:form id="loginForm">
             <!-- p:growl id="loginMessage" autoUpdate="true" /-->
             <p:panelGrid layout="tabular" columns="0" styleClass="panelGridCenter">
@@ -206,18 +207,13 @@
                 </f:facet>
             </p:panelGrid>
         </h:form>
+        </div>
         <h:form id="guestLogin" >
             <p:panelGrid layout="tabular" columns="0" styleClass="tableNoBorder panelGridCenter">
                 <p:row>
                     <p:column style="text-align:center">
-                        <h:outputText style="font-weight:bold;font-size:1.2em"
-                                      value="No account is needed to browse the G2A Web App website and use G2A Web App reading functions." />
-                    </p:column>
-                </p:row>
-                <p:row>
-                    <p:column style="text-align:center">
-                        <h:outputText style="font-style: italic;"
-                                      value="ILC and Greek into Arabic provide free access (read only) to G2A Web Application." />
+                        <h:outputText style="font-weight:bold;font-size:1.1em"
+                                      value="Browse and read the G2A Web App without an account." />
                     </p:column>
                 </p:row>
                 <p:row>
