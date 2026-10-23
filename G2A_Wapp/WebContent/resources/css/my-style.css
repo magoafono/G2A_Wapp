@@ -376,14 +376,23 @@ html, body {
 }
 /* Menu laterale: ogni sezione (Collections/Help/Code) come mini hero-card,
    coerente con la card centrale (barra blu + bordo + ombra). */
-.g2a-west .ui-panelgrid {
-    width: 100% !important;
-    border: 1px solid #cfe3f7 !important;
+/* Wrapper <div> per ogni sezione: clippa l'header blu alla curva della card
+   (come la hero). Una <table> da sola non ci riuscirebbe. */
+.g2a-side-card {
+    border: 1px solid #cfe3f7;
     border-radius: 8px;
     overflow: hidden;
     background: #ffffff;
     box-shadow: 0 2px 8px rgba(21, 101, 192, .08);
-    margin: 0 0 12px 0 !important;
+    margin: 0 0 12px 0;
+}
+.g2a-west .ui-panelgrid {
+    width: 100% !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    margin: 0 !important;
 }
 .g2a-west .ui-panelgrid thead th,
 .g2a-west .ui-panelgrid thead td {
@@ -394,13 +403,6 @@ html, body {
     text-align: center;
     border: 0 !important;
     padding: 10px 12px !important;
-    /* Segue la curva della card: le <table> non clippano l'header. */
-    border-top-left-radius: 8px !important;
-    border-top-right-radius: 8px !important;
-}
-.g2a-west .ui-panelgrid tbody tr:last-child td.ui-panelgrid-cell {
-    border-bottom-left-radius: 8px !important;
-    border-bottom-right-radius: 8px !important;
 }
 .g2a-west .ui-panelgrid tbody td.ui-panelgrid-cell {
     border: 0 !important;
