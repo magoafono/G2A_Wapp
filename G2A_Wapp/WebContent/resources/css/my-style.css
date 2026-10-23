@@ -693,7 +693,9 @@ html, body {
     font-size: 0.9em;
 }
 #menuForm .ui-menubar .ui-menu-list {
-    padding-right: 300px;
+    /* Spazio riservato a username/Logout a destra (le opzioni sono ~168px):
+       meno padding = meno spazio vuoto e piu' voci per riga. */
+    padding-right: 180px;
 }
 #menuForm .ui-menubar .ui-menuitem-link {
     padding: 4px 8px !important;
