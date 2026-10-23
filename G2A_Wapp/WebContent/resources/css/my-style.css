@@ -722,7 +722,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(24px, 3.6vw, 64px);
+    gap: clamp(48px, 8vw, 180px);
     flex-wrap: wrap;
     margin-top: 0;
     padding: clamp(18px, 2.2vw, 36px) clamp(18px, 4vw, 72px);
