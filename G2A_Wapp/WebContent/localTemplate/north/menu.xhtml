@@ -53,8 +53,6 @@
 					rendered="#{loginBean.role=='admin'?'true':'false'}"
 					disabled="#{loginBean.loggedIn?'false':'true'}" onclick=""
 					icon="ui-icon-person" />
-				<h:outputText value="Logged in as "
-					rendered="#{loginBean.loggedIn?'true':'false'}" />
 				<h:outputText value="#{loginBean.username}" styleClass="login-font"
 					rendered="#{loginBean.loggedIn?'true':'false'}"  style="margin-right: 20px;"/>
 				<p:commandButton type="submit" value="Logout"
