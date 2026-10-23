@@ -397,6 +397,17 @@ html, body {
     box-shadow: none !important;
     margin: 0 !important;
 }
+/* Footer dei pannelli di ricerca: barra celeste come il login, cosi' i
+   pulsanti (blu) risaltano. */
+#gr_form .g2a-card .ui-panelgrid tfoot,
+#gr_form .g2a-card .ui-panelgrid tfoot td {
+    background: #f7fbff !important;
+    background-image: none !important;
+    border: 0 !important;
+    border-top: 1px solid #e3f2fd !important;
+    color: #1e88e5 !important;
+}
+
 /* La tabella contenitore dei 3 pannelli non deve mostrare cornice né divisori:
    le cornici sono le card. Card allineate in alto. */
 #gr_form\:search_pg,

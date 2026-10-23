@@ -98,26 +98,14 @@
                                         </p:selectOneMenu>
                                     </p:column>
                                 </p:row>
-                                <p:row>
+                                <p:row rendered="#{searchViewBean.grRows ge 2}">
                                     <p:column colspan="3" style="text-align:center;">
-                                        <h:panelGroup rendered="#{searchViewBean.grRows ge 2}"
-                                                      style="margin-right:16px;white-space:nowrap;">
-                                            <h:outputText value="Combine rows: " />
-                                            <p:selectOneMenu id="gr_operator" effect="none"
-                                                             value="#{searchViewBean.grSb.op}" style="text-align:left;">
-                                                <f:selectItem itemLabel="And" itemValue="and" />
-                                                <f:selectItem itemLabel="Or" itemValue="or" />
-                                            </p:selectOneMenu>
-                                        </h:panelGroup>
-                                        <p:commandButton value="+ Add row" rendered="#{searchViewBean.grRows lt 3}"
-                                                         process="greek_search_parameters_pg"
-                                                         update="greek_search_parameters_pg"
-                                                         action="#{searchViewBean.addGrRow}" />
-                                        <p:commandButton value="&#8722; Remove row" rendered="#{searchViewBean.grRows gt 1}"
-                                                         style="margin-left:6px;"
-                                                         process="greek_search_parameters_pg"
-                                                         update="greek_search_parameters_pg"
-                                                         action="#{searchViewBean.removeGrRow}" />
+                                        <h:outputText value="Combine rows: " />
+                                        <p:selectOneMenu id="gr_operator" effect="none"
+                                                         value="#{searchViewBean.grSb.op}" style="text-align:left;">
+                                            <f:selectItem itemLabel="And" itemValue="and" />
+                                            <f:selectItem itemLabel="Or" itemValue="or" />
+                                        </p:selectOneMenu>
                                     </p:column>
                                 </p:row>
                                 <f:facet name="footer">
@@ -125,12 +113,22 @@
                                         <p:column colspan="3" style="text-align:center;">
                                             <p:commandButton id="gr_search_btn" icon="ui-icon-search"
                                                              update=":searchResultFormId" value="Search"
-                                                             style="margin-right:20px;"
+                                                             style="margin-right:12px;"
                                                              onstart="PF('ajaxWaitDialog').show();" partialSubmit="true"
                                                              oncomplete="PF('ajaxWaitDialog').hide();"
                                                              action="#{searchViewBean.grSubmit}">
                                             </p:commandButton>
-                                            <p:commandButton value="Clear Form"
+                                            <p:commandButton value="Add" rendered="#{searchViewBean.grRows lt 3}"
+                                                             style="margin-right:8px;"
+                                                             process="greek_search_parameters_pg"
+                                                             update="greek_search_parameters_pg"
+                                                             action="#{searchViewBean.addGrRow}" />
+                                            <p:commandButton value="Del" rendered="#{searchViewBean.grRows gt 1}"
+                                                             style="margin-right:8px;"
+                                                             process="greek_search_parameters_pg"
+                                                             update="greek_search_parameters_pg"
+                                                             action="#{searchViewBean.removeGrRow}" />
+                                            <p:commandButton value="Clear"
                                                              update="greek_search_parameters_pg" process="@this"
                                                              action="#{searchViewBean.reset}">
                                             </p:commandButton>
@@ -260,26 +258,14 @@
                                         </p:selectOneMenu>
                                     </p:column>
                                 </p:row>
-                                <p:row>
+                                <p:row rendered="#{searchViewBean.arRows ge 2}">
                                     <p:column colspan="3" style="text-align:center;">
-                                        <h:panelGroup rendered="#{searchViewBean.arRows ge 2}"
-                                                      style="margin-right:16px;white-space:nowrap;">
-                                            <h:outputText value="Combine rows: " />
-                                            <p:selectOneMenu id="ar_operator" effect="none"
-                                                             value="#{searchViewBean.arSb.op}" style="text-align:left;">
-                                                <f:selectItem itemLabel="And" itemValue="and" />
-                                                <f:selectItem itemLabel="Or" itemValue="or" />
-                                            </p:selectOneMenu>
-                                        </h:panelGroup>
-                                        <p:commandButton value="+ Add row" rendered="#{searchViewBean.arRows lt 3}"
-                                                         process="arabic_search_parameters_pg"
-                                                         update="arabic_search_parameters_pg"
-                                                         action="#{searchViewBean.addArRow}" />
-                                        <p:commandButton value="&#8722; Remove row" rendered="#{searchViewBean.arRows gt 1}"
-                                                         style="margin-left:6px;"
-                                                         process="arabic_search_parameters_pg"
-                                                         update="arabic_search_parameters_pg"
-                                                         action="#{searchViewBean.removeArRow}" />
+                                        <h:outputText value="Combine rows: " />
+                                        <p:selectOneMenu id="ar_operator" effect="none"
+                                                         value="#{searchViewBean.arSb.op}" style="text-align:left;">
+                                            <f:selectItem itemLabel="And" itemValue="and" />
+                                            <f:selectItem itemLabel="Or" itemValue="or" />
+                                        </p:selectOneMenu>
                                     </p:column>
                                 </p:row>
                                 <f:facet name="footer">
@@ -287,12 +273,22 @@
                                         <p:column colspan="3" style="text-align:center;">
                                             <p:commandButton id="ar_search_btn" icon="ui-icon-search"
                                                              ajax="true" update=":searchResultFormId" value="Search"
-                                                             style="margin-right:20px;"
+                                                             style="margin-right:12px;"
                                                              onstart="PF('ajaxWaitDialog').show();" partialSubmit="true"
                                                              oncomplete="PF('ajaxWaitDialog').hide();" type="submit"
                                                              action="#{searchViewBean.arSubmit}">
                                             </p:commandButton>
-                                            <p:commandButton value="Clear Form"
+                                            <p:commandButton value="Add" rendered="#{searchViewBean.arRows lt 3}"
+                                                             style="margin-right:8px;"
+                                                             process="arabic_search_parameters_pg"
+                                                             update="arabic_search_parameters_pg"
+                                                             action="#{searchViewBean.addArRow}" />
+                                            <p:commandButton value="Del" rendered="#{searchViewBean.arRows gt 1}"
+                                                             style="margin-right:8px;"
+                                                             process="arabic_search_parameters_pg"
+                                                             update="arabic_search_parameters_pg"
+                                                             action="#{searchViewBean.removeArRow}" />
+                                            <p:commandButton value="Clear"
                                                              update="arabic_search_parameters_pg" process="@this"
                                                              action="#{searchViewBean.reset}">
                                             </p:commandButton>
