@@ -556,7 +556,12 @@ html, body {
 /* viewport viene rimpicciolito in blocco (g2aFitSearch).                 */
 /* Centratura orizzontale del form.                                      */
 /* ===================================================================== */
-#gr_form\:search_pg { margin: 0 auto; }
+#gr_form\:search_pg {
+    margin: 0 auto;
+    /* Usa lo spazio orizzontale disponibile; su schermi stretti il
+       min-content resta piu' largo del contenitore e lo zoom riduce. */
+    width: 100%;
+}
 
 /* ===================================================================== */
 /* Voce di menu SELEZIONATA (classe custom: PF non mantiene              */
