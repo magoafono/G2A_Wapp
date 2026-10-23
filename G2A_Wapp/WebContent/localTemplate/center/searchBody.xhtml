@@ -11,17 +11,18 @@
                 <p:panelGrid layout="tabular" columns="0" id="search_pg" style="margin: 0 auto;border:none;">
                     <p:row>
                         <p:column>
+                            <!-- GREEK -->
+                            <div class="g2a-card">
                             <p:panelGrid layout="tabular" columns="0" id="greek_search_parameters_pg"
                                          style="margin: 0 auto;border:none;">
                                 <f:facet name="header">
                                     <p:row>
-                                        <p:column colspan="4" style="text-align: center">Greek Search</p:column>
+                                        <p:column colspan="3" style="text-align: center">Greek Search</p:column>
                                     </p:row>
                                     <p:row>
                                         <p:column style="text-align: center">Type</p:column>
                                         <p:column style="text-align: center">Word</p:column>
                                         <p:column style="text-align: center">Pos</p:column>
-                                        <p:column style="text-align: center">Operator</p:column>
                                     </p:row>
 
                                 </f:facet>
@@ -39,7 +40,6 @@
                                         <p:inputText id="gr_word_1" styleClass="greek" size="10" placeholder="Insert word ..."
                                                      value="#{searchViewBean.grSb.word[0]}"
                                                      style="font-size:#{loginBean.greekFontSize}" />
-                                        <!--p:keyboard id="gr_word_1" value="#{searchViewBean.grSb.word[0]}" showMode="button"  layout="greek" /-->
                                     </p:column>
                                     <p:column style="text-align:center;">
                                         <p:selectOneMenu id="gr_pos_1" effect="none"
@@ -49,16 +49,8 @@
                                                            itemLabel="#{pos.left}" itemValue="#{pos.right}" />
                                         </p:selectOneMenu>
                                     </p:column>
-                                    <p:column rowspan="3" style="text-align:center;">
-                                        <p:selectOneMenu id="gr_operator" effect="none"
-                                                         value="#{searchViewBean.grSb.op}" style="text-align:left;">
-                                            <f:selectItem itemLabel="And" itemValue="and" />
-                                            <f:selectItem itemLabel="Or" itemValue="or" />
-                                            <!--f:selectItem itemLabel="Distance" itemValue="distance" /-->
-                                        </p:selectOneMenu>
-                                    </p:column>
                                 </p:row>
-                                <p:row id="gr_parameter_row_2">
+                                <p:row id="gr_parameter_row_2" rendered="#{searchViewBean.grRows ge 2}">
                                     <p:column headerText="Type" style="text-align:center;">
                                         <p:selectOneMenu effect="none" id="gr_type_2"
                                                          value="#{searchViewBean.grSb.type[1]}"
@@ -81,9 +73,8 @@
                                                            itemLabel="#{pos.left}" itemValue="#{pos.right}" />
                                         </p:selectOneMenu>
                                     </p:column>
-
                                 </p:row>
-                                <p:row id="gr_parameter_row_3">
+                                <p:row id="gr_parameter_row_3" rendered="#{searchViewBean.grRows ge 3}">
                                     <p:column headerText="Type" style="text-align:center;">
                                         <p:selectOneMenu effect="none" id="gr_type_3"
                                                          value="#{searchViewBean.grSb.type[2]}"
@@ -107,28 +98,51 @@
                                         </p:selectOneMenu>
                                     </p:column>
                                 </p:row>
+                                <p:row>
+                                    <p:column colspan="3" style="text-align:center;">
+                                        <h:panelGroup rendered="#{searchViewBean.grRows ge 2}"
+                                                      style="margin-right:16px;white-space:nowrap;">
+                                            <h:outputText value="Combine rows: " />
+                                            <p:selectOneMenu id="gr_operator" effect="none"
+                                                             value="#{searchViewBean.grSb.op}" style="text-align:left;">
+                                                <f:selectItem itemLabel="And" itemValue="and" />
+                                                <f:selectItem itemLabel="Or" itemValue="or" />
+                                            </p:selectOneMenu>
+                                        </h:panelGroup>
+                                        <p:commandButton value="+ Add row" rendered="#{searchViewBean.grRows lt 3}"
+                                                         process="greek_search_parameters_pg"
+                                                         update="greek_search_parameters_pg"
+                                                         action="#{searchViewBean.addGrRow}" />
+                                        <p:commandButton value="&#8722; Remove row" rendered="#{searchViewBean.grRows gt 1}"
+                                                         style="margin-left:6px;"
+                                                         process="greek_search_parameters_pg"
+                                                         update="greek_search_parameters_pg"
+                                                         action="#{searchViewBean.removeGrRow}" />
+                                    </p:column>
+                                </p:row>
                                 <f:facet name="footer">
                                     <p:row>
-                                        <p:column colspan="2" style="text-align:center;">
+                                        <p:column colspan="3" style="text-align:center;">
                                             <p:commandButton id="gr_search_btn" icon="ui-icon-search"
                                                              update=":searchResultFormId" value="Search"
+                                                             style="margin-right:20px;"
                                                              onstart="PF('ajaxWaitDialog').show();" partialSubmit="true"
                                                              oncomplete="PF('ajaxWaitDialog').hide();"
                                                              action="#{searchViewBean.grSubmit}">
                                             </p:commandButton>
-                                        </p:column>
-                                        <p:column colspan="2" style="text-align:center;">
                                             <p:commandButton value="Clear Form"
                                                              update="greek_search_parameters_pg" process="@this"
-                                                             style="margin-right:20px;" action="#{searchViewBean.reset}">
+                                                             action="#{searchViewBean.reset}">
                                             </p:commandButton>
                                         </p:column>
                                     </p:row>
                                 </f:facet>
                             </p:panelGrid>
+                            </div>
                         </p:column>
                         <!-- COMBINED SEARCH -->
                         <p:column>
+                            <div class="g2a-card">
                             <p:panelGrid layout="tabular" columns="0" style="margin: 0 auto;">
                                 <f:facet name="header">
                                     <p:row>
@@ -155,22 +169,22 @@
                                     </p:column>
                                 </p:row>
                             </p:panelGrid>
+                            </div>
                         </p:column>
 
                         <!-- ARABIC -->
                         <p:column>
-                            <!--p:layoutUnit position="east" resizable="true" size="50%"-->
+                            <div class="g2a-card">
                             <p:panelGrid layout="tabular" columns="0" id="arabic_search_parameters_pg"
                                          style="margin: 0 auto;border:none;">
                                 <f:facet name="header">
                                     <p:row>
-                                        <p:column colspan="4" style="text-align: center">Arabic Search</p:column>
+                                        <p:column colspan="3" style="text-align: center">Arabic Search</p:column>
                                     </p:row>
                                     <p:row>
                                         <p:column style="text-align: center">Type</p:column>
                                         <p:column style="text-align: center">Word</p:column>
                                         <p:column style="text-align: center">Pos</p:column>
-                                        <p:column style="text-align: center">Operator</p:column>
                                     </p:row>
 
                                 </f:facet>
@@ -197,16 +211,8 @@
                                                            itemLabel="#{pos.left}" itemValue="#{pos.right}" />
                                         </p:selectOneMenu>
                                     </p:column>
-                                    <p:column rowspan="3" style="text-align:center;">
-                                        <p:selectOneMenu id="ar_operator" effect="none"
-                                                         value="#{searchViewBean.arSb.op}" style="text-align:left;">
-                                            <f:selectItem itemLabel="And" itemValue="and" />
-                                            <f:selectItem itemLabel="Or" itemValue="or" />
-                                            <!-- f:selectItem itemLabel="Distance" itemValue="distance" /-->
-                                        </p:selectOneMenu>
-                                    </p:column>
                                 </p:row>
-                                <p:row id="ar_parameter_row_2">
+                                <p:row id="ar_parameter_row_2" rendered="#{searchViewBean.arRows ge 2}">
                                     <p:column headerText="Type" style="text-align:center;">
                                         <p:selectOneMenu effect="none" id="ar_type_2"
                                                          value="#{searchViewBean.arSb.type[1]}"
@@ -217,7 +223,7 @@
                                         </p:selectOneMenu>
                                     </p:column>
                                     <p:column style="text-align:center;">
-                                        <p:inputText id="ar_word_2" styleClass="arabic" size="10" placeholder="#{searchViewBean.arSb.word[1]}"
+                                        <p:inputText id="ar_word_2" styleClass="arabic" size="10" placeholder="Insert word ..."
                                                      value="#{searchViewBean.arSb.word[1]}"
                                                      style="font-size:#{loginBean.arabicFontSize}" />
                                     </p:column>
@@ -229,9 +235,8 @@
                                                            itemLabel="#{pos.left}" itemValue="#{pos.right}" />
                                         </p:selectOneMenu>
                                     </p:column>
-
                                 </p:row>
-                                <p:row id="ar_parameter_row_3">
+                                <p:row id="ar_parameter_row_3" rendered="#{searchViewBean.arRows ge 3}">
                                     <p:column headerText="Type" style="text-align:center;">
                                         <p:selectOneMenu effect="none" id="ar_type_3"
                                                          value="#{searchViewBean.arSb.type[2]}"
@@ -242,7 +247,7 @@
                                         </p:selectOneMenu>
                                     </p:column>
                                     <p:column style="text-align:center;">
-                                        <p:inputText id="ar_word_3" styleClass="arabic" size="10" placeholder="#{searchViewBean.arSb.word[2]}"
+                                        <p:inputText id="ar_word_3" styleClass="arabic" size="10" placeholder="Insert word ..."
                                                      value="#{searchViewBean.arSb.word[2]}"
                                                      style="font-size:#{loginBean.arabicFontSize}" />
                                     </p:column>
@@ -255,28 +260,48 @@
                                         </p:selectOneMenu>
                                     </p:column>
                                 </p:row>
+                                <p:row>
+                                    <p:column colspan="3" style="text-align:center;">
+                                        <h:panelGroup rendered="#{searchViewBean.arRows ge 2}"
+                                                      style="margin-right:16px;white-space:nowrap;">
+                                            <h:outputText value="Combine rows: " />
+                                            <p:selectOneMenu id="ar_operator" effect="none"
+                                                             value="#{searchViewBean.arSb.op}" style="text-align:left;">
+                                                <f:selectItem itemLabel="And" itemValue="and" />
+                                                <f:selectItem itemLabel="Or" itemValue="or" />
+                                            </p:selectOneMenu>
+                                        </h:panelGroup>
+                                        <p:commandButton value="+ Add row" rendered="#{searchViewBean.arRows lt 3}"
+                                                         process="arabic_search_parameters_pg"
+                                                         update="arabic_search_parameters_pg"
+                                                         action="#{searchViewBean.addArRow}" />
+                                        <p:commandButton value="&#8722; Remove row" rendered="#{searchViewBean.arRows gt 1}"
+                                                         style="margin-left:6px;"
+                                                         process="arabic_search_parameters_pg"
+                                                         update="arabic_search_parameters_pg"
+                                                         action="#{searchViewBean.removeArRow}" />
+                                    </p:column>
+                                </p:row>
                                 <f:facet name="footer">
                                     <p:row>
-                                        <p:column colspan="2" style="text-align:center;">
+                                        <p:column colspan="3" style="text-align:center;">
                                             <p:commandButton id="ar_search_btn" icon="ui-icon-search"
                                                              ajax="true" update=":searchResultFormId" value="Search"
+                                                             style="margin-right:20px;"
                                                              onstart="PF('ajaxWaitDialog').show();" partialSubmit="true"
                                                              oncomplete="PF('ajaxWaitDialog').hide();" type="submit"
                                                              action="#{searchViewBean.arSubmit}">
                                             </p:commandButton>
-                                        </p:column>
-                                        <p:column colspan="2" style="text-align:center;">
                                             <p:commandButton value="Clear Form"
                                                              update="arabic_search_parameters_pg" process="@this"
-                                                             style="margin-right:20px;" action="#{searchViewBean.reset}">
+                                                             action="#{searchViewBean.reset}">
                                             </p:commandButton>
                                         </p:column>
                                     </p:row>
                                 </f:facet>
                             </p:panelGrid>
+                            </div>
                         </p:column>
-                    </p:row>
-                    <p:row>
                     </p:row>
                 </p:panelGrid>
             </h:form>

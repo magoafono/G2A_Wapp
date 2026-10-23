@@ -378,13 +378,32 @@ html, body {
    coerente con la card centrale (barra blu + bordo + ombra). */
 /* Wrapper <div> per ogni sezione: clippa l'header blu alla curva della card
    (come la hero). Una <table> da sola non ci riuscirebbe. */
-.g2a-side-card {
+.g2a-side-card,
+.g2a-card {
     border: 1px solid #cfe3f7;
     border-radius: 8px;
     overflow: hidden;
     background: #ffffff;
     box-shadow: 0 2px 8px rgba(21, 101, 192, .08);
     margin: 0 0 12px 0;
+}
+/* Card dei pannelli di ricerca: il panelGrid riempie la card e non ha bordo
+   proprio (la cornice e' del div, che clippa l'header alla curva). */
+#gr_form .g2a-card .ui-panelgrid {
+    width: 100% !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+}
+/* La tabella contenitore dei 3 pannelli non deve mostrare cornice né divisori:
+   le cornici sono le card. Card allineate in alto. */
+#gr_form\:search_pg,
+#gr_form\:search_pg > tbody > tr > td {
+    border: 0 !important;
+    background: transparent !important;
+    vertical-align: top;
 }
 .g2a-west .ui-panelgrid {
     width: 100% !important;

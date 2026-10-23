@@ -282,7 +282,7 @@ public class RepositoryBean {
                 //lolorve.add(em.simpleSearchLinksByTokens(parameters.getWord().get(i), parameters.getType().get(i), parameters.getPos().get(i), lang));
                 ArrayList<String> itemName = new ArrayList<String>();
                 ArrayList<String> itemValue = new ArrayList<String>();
-                if (!"".equals(parameters.getWord().get(i))) {
+                if (null != parameters.getWord().get(i) && !"".equals(parameters.getWord().get(i))) {
                     itemName.add(parameters.getType().get(i));
                     itemValue.add(parameters.getWord().get(i).toLowerCase());
                     if (null != parameters.getPos().get(i)) { //lo confronto col null perche' nella interfaccia e' un oneselect

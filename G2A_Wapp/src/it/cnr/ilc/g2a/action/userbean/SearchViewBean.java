@@ -50,6 +50,10 @@ public class SearchViewBean implements Serializable {
 
     private String combinedOperation = null;
 
+    // Numero di righe di input visibili (1..3) per lingua
+    private int grRows = 1;
+    private int arRows = 1;
+
     private List<Pair> grItemType;
     private List<Pair> arItemType;
 
@@ -345,10 +349,73 @@ public class SearchViewBean implements Serializable {
 
     }
 
+    public int getGrRows() {
+        return grRows;
+    }
+
+    public void setGrRows(int grRows) {
+        this.grRows = grRows;
+    }
+
+    public int getArRows() {
+        return arRows;
+    }
+
+    public void setArRows(int arRows) {
+        this.arRows = arRows;
+    }
+
+    /** Aggiunge una riga di input per il greco (max 3). */
+    public void addGrRow() {
+        if (grRows < 3) {
+            grRows++;
+            defaultOperator(grSb);
+        }
+    }
+
+    public void removeGrRow() {
+        if (grRows > 1) {
+            clearRow(grSb, grRows - 1);
+            grRows--;
+        }
+    }
+
+    /** Aggiunge una riga di input per l'arabo (max 3). */
+    public void addArRow() {
+        if (arRows < 3) {
+            arRows++;
+            defaultOperator(arSb);
+        }
+    }
+
+    public void removeArRow() {
+        if (arRows > 1) {
+            clearRow(arSb, arRows - 1);
+            arRows--;
+        }
+    }
+
+    // Con piu' di una riga serve un operatore valido (default And), altrimenti
+    // la ricerca considererebbe solo la prima riga.
+    private void defaultOperator(SearchBean sb) {
+        if (null == sb.getOp()) {
+            sb.setOp("and");
+        }
+    }
+
+    // Svuota la riga non piu' visibile, per non ricercare valori vecchi.
+    private void clearRow(SearchBean sb, int idx) {
+        sb.getWord().set(idx, "");
+        sb.getType().set(idx, null);
+        sb.getPos().set(idx, null);
+    }
+
     public void reset() {
 
         setGrSb(new SearchBean());
         setArSb(new SearchBean());
+        grRows = 1;
+        arRows = 1;
     }
 
     /**
