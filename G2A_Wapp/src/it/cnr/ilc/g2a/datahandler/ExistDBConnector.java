@@ -805,15 +805,15 @@ public class ExistDBConnector {
                 }
                 if (restriction.length() == 0) {
                     if (lang == Consts.ARABIC && "forma".equals(name)) {
-                        restriction.append("[@name='" + name + "'][contains(@value,'" + value + "')]"); //meglio prima name e poi value
+                        restriction.append("[@name='" + name + "'][contains(@value,'" + xqEsc(value) + "')]"); //meglio prima name e poi value
                     } else {
-                        restriction.append("[@name='" + name + "'][@value = '" + value + "']");
+                        restriction.append("[@name='" + name + "'][@value = '" + xqEsc(value) + "']");
                     }
                 } else {
                     if (lang == Consts.ARABIC && "forma".equals(name)) {
-                        restriction.append("/../xm:param[@name='" + name + "'][contains(@value,'" + value + "']");
+                        restriction.append("/../xm:param[@name='" + name + "'][contains(@value,'" + xqEsc(value) + "')]");
                     } else {
-                        restriction.append("/../xm:param[@name='" + name + "'][@value = '" + value + "']");
+                        restriction.append("/../xm:param[@name='" + name + "'][@value = '" + xqEsc(value) + "']");
                     }
                 }
             }
@@ -831,6 +831,12 @@ public class ExistDBConnector {
 
     }
 
+    // Escaping per i literal stringa XQuery: raddoppia l'apostrofo (in
+    // Buckwalter la hamza diventa ' e rompeva la query).
+    private static String xqEsc(String s) {
+        return (null == s) ? s : s.replace("'", "''");
+    }
+
     public ArrayList<String> searchTokenIdByForma(String URI, String forma, int lang) {
         log.debug("URI=(" + URI + "), forma=(" + forma + "), lang=(" + lang + ")");
 
@@ -842,9 +848,9 @@ public class ExistDBConnector {
             StringBuilder restriction = new StringBuilder();
 
             if (lang == Consts.ARABIC) {
-                restriction.append("[@name='string'][contains(@value,'" + forma + "')]"); //meglio prima name e poi value
+                restriction.append("[@name='string'][contains(@value,'" + xqEsc(forma) + "')]"); //meglio prima name e poi value
             } else {
-                restriction.append("[@name='string'][@value = '" + forma + "']");
+                restriction.append("[@name='string'][@value = '" + xqEsc(forma) + "']");
             }
 
             path.append(restriction.toString());

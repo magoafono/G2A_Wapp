@@ -319,6 +319,8 @@ public class SearchViewBean implements Serializable {
         } catch (Exception e) {
             log.fatal("Greek parameter: " + grSb.toString());
             e.printStackTrace();
+            // Non lasciare i risultati precedenti: meglio nessun risultato.
+            setSearchResult(null);
         }
 
     }
@@ -332,6 +334,7 @@ public class SearchViewBean implements Serializable {
         } catch (Exception e) {
             log.fatal("Arabic parameter: " + arSb.toString());
             e.printStackTrace();
+            setSearchResult(null);
         }
 
     }
@@ -345,6 +348,7 @@ public class SearchViewBean implements Serializable {
         } catch (Exception e) {
             log.fatal("Greek parameter: " + grSb.toString() + ", Arabic parameter: " + arSb.toString());
             e.printStackTrace();
+            setSearchResult(null);
         }
 
     }
