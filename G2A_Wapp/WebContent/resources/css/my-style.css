@@ -356,7 +356,7 @@ html, body {
 }
 
 /* Quattro regioni (Home / Comment): sidebar e contenuto restano affiancati. */
-.g2a-layout-four { gap: 6px; }
+.g2a-layout-four { gap: 4px; }
 .g2a-layout-four .g2a-north { margin-bottom: 0; }
 .g2a-body-row {
     display: flex;
@@ -369,9 +369,8 @@ html, body {
     box-sizing: border-box;
     min-width: 0;
     overflow: auto;
-    /* Stesso inset-top della hero centrale (padding del centro + wrap):
-       niente "scalino" tra sidebar e card. */
-    padding: calc(6px + clamp(8px, 1.2vw, 20px)) 6px 6px 6px;
+    /* Stesso inset-top della hero centrale: niente "scalino". */
+    padding: clamp(2px, 0.6vw, 10px) 6px 6px 6px;
     border: 0;
     background: transparent;
 }
@@ -394,8 +393,14 @@ html, body {
     font-weight: 700;
     text-align: center;
     border: 0 !important;
-    border-radius: 0 !important;
     padding: 10px 12px !important;
+    /* Segue la curva della card: le <table> non clippano l'header. */
+    border-top-left-radius: 8px !important;
+    border-top-right-radius: 8px !important;
+}
+.g2a-west .ui-panelgrid tbody tr:last-child td.ui-panelgrid-cell {
+    border-bottom-left-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
 }
 .g2a-west .ui-panelgrid tbody td.ui-panelgrid-cell {
     border: 0 !important;
@@ -424,6 +429,7 @@ html, body {
 .g2a-layout-four .g2a-center {
     min-width: 0;
     min-height: 0;
+    padding-top: 0;
 }
 .g2a-layout-four .g2a-south {
     flex: 0 0 80px;
@@ -683,7 +689,7 @@ html, body {
     display: flex;
     align-items: stretch;
     justify-content: center;
-    padding: clamp(8px, 1.2vw, 20px);
+    padding: clamp(2px, 0.6vw, 10px);
 }
 .g2a-hero-card {
     width: 100%;
