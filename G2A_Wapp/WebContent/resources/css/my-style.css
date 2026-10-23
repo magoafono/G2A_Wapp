@@ -369,11 +369,43 @@ html, body {
     box-sizing: border-box;
     min-width: 0;
     overflow: auto;
-    padding: 6px;
-    /* Cornice/sfondo per non farla "galleggiare" sul bianco. */
-    border: 1px solid #cfe3f7;
-    border-radius: 6px;
-    background: #f7fbff;
+    /* Stesso inset-top della hero centrale (padding del centro + wrap):
+       niente "scalino" tra sidebar e card. */
+    padding: calc(6px + clamp(8px, 1.2vw, 20px)) 6px 6px 6px;
+    border: 0;
+    background: transparent;
+}
+/* Menu laterale: ogni sezione (Collections/Help/Code) come mini hero-card,
+   coerente con la card centrale (barra blu + bordo + ombra). */
+.g2a-west .ui-panelgrid {
+    width: 100% !important;
+    border: 1px solid #cfe3f7 !important;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(21, 101, 192, .08);
+    margin: 0 0 12px 0 !important;
+}
+.g2a-west .ui-panelgrid thead th,
+.g2a-west .ui-panelgrid thead td {
+    background: #1e88e5 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+    font-weight: 700;
+    text-align: center;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 10px 12px !important;
+}
+.g2a-west .ui-panelgrid tbody td.ui-panelgrid-cell {
+    border: 0 !important;
+    background: #ffffff;
+    padding: 0 !important;
+}
+.g2a-west .sidemenu_column {
+    background: #ffffff !important;
+    border: 0 !important;
+    border-radius: 0 !important;
 }
 /* Hover sulle voci del menu di sinistra (il tema non lo rende visibile). */
 .g2a-west .sidemenu_column:hover,
@@ -382,8 +414,8 @@ html, body {
 }
 .g2a-west .sidemenu_column .sidemenu_link {
     display: block;
-    padding: 2px 4px;
-    border-radius: 4px;
+    padding: 8px 12px;
+    border-radius: 0;
 }
 .g2a-west .sidemenu_column:hover .sidemenu_link,
 .g2a-west .sidemenu_column.ui-state-hover .sidemenu_link {
