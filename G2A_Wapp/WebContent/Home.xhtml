@@ -13,6 +13,8 @@
 		<f:viewParam name="centerPage" value="#{sharedBean.selectedMenuItem}" />
 	</f:metadata>
 	<ui:composition template="templates/fourRegionsLayout.xhtml">
+		<ui:param name="hideFooter"
+			value="#{sharedBean.selectedMenuItem eq 'homeBody'}" />
 		<ui:define name="title">
 			The GA Application
 		</ui:define>
@@ -27,7 +29,8 @@
 		</ui:define>
 
 		<ui:define name="body">
-			<h:panelGroup id="bodyBlock" layout="block">
+			<h:panelGroup id="bodyBlock" layout="block"
+				styleClass="#{sharedBean.selectedMenuItem eq 'homeBody' ? 'g2a-home-block' : ''}">
 				<ui:include
 					src="localTemplate/center/#{sharedBean.selectedMenuItem}.xhtml" />
 				<!--ui:include

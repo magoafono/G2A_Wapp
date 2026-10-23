@@ -635,3 +635,82 @@ html, body {
     gap: 6px;
     float: none;
 }
+
+/* ===================================================================== */
+/* Home: hero card (stile A1a), centrata; footer nascosto solo in home.   */
+/* ===================================================================== */
+.g2a-hidden { display: none !important; }
+
+.g2a-home-block {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.g2a-hero-wrap {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+.g2a-hero-card {
+    width: 100%;
+    max-width: 900px;
+    background: #ffffff;
+    border: 1px solid #cfe3f7;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(21, 101, 192, .10);
+}
+.g2a-hero-bar {
+    background: #1e88e5;
+    color: #ffffff;
+    text-align: center;
+    font-weight: 700;
+    padding: 12px 16px;
+    font-size: 15px;
+}
+.g2a-hero-body {
+    padding: 34px 32px 30px;
+    text-align: center;
+    background: linear-gradient(#ffffff, #f7fbff);
+}
+.g2a-hero-title {
+    margin: 0;
+    font-size: 34px;
+    font-weight: 700;
+    color: #1565c0;
+    letter-spacing: .3px;
+}
+.g2a-hero-sub {
+    margin: 8px 0 0;
+    font-size: 20px;
+    font-style: italic;
+    color: #1e88e5;
+}
+.g2a-hero-rule {
+    height: 2px;
+    width: 64%;
+    background: #e3f2fd;
+    border: 0;
+    margin: 22px auto;
+}
+.g2a-hero-app {
+    margin: 0;
+    font-size: 12.5px;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    color: #607d8b;
+}
+.g2a-hero-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 46px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+}
+.g2a-hero-logos a { display: block; line-height: 0; }
+.g2a-logo-ilc { height: 60px; }
+.g2a-logo-cnr { height: 46px; }
+.g2a-logo-erc { height: 60px; }
