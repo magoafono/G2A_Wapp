@@ -323,7 +323,7 @@
                         <h:outputText value="#{alink.grPericopeInfo}" />
                     </p:column>
 
-                    <p:column style="white-space:normal" headerText="Greek Pericope">
+                    <p:column width="41%" style="white-space:normal" headerText="Greek Pericope">
                         <p:outputPanel layout="block" styleClass="greek"
                                        style="padding-right:0px;font-size:#{loginBean.greekFontSize}">
                             <ui:repeat value="#{alink.greekTVE}" var="gr">
@@ -338,7 +338,7 @@
                             </ui:repeat>
                         </p:outputPanel>
                     </p:column>
-                    <p:column style="white-space:normal" headerText="Arabic Pericope">
+                    <p:column width="41%" style="white-space:normal" headerText="Arabic Pericope">
                         <p:outputPanel layout="block" styleClass="arabic"
                                        style="padding-right:0px;font-size:#{loginBean.arabicFontSize}">
                             <ui:repeat value="#{alink.arabicTVE}" var="ar">
