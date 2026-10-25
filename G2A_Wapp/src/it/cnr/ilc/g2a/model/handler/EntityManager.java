@@ -1483,6 +1483,9 @@ public class EntityManager {
 					}*/
                     ResultViewEntity rve = new ResultViewEntity();
                     rve.setLinkId(linkId);
+                    // Conteggio commenti dalla mappa gia' in memoria (nessuna nuova query).
+                    List<Comment> linkComments = (null != getCommentsByLink()) ? getCommentsByLink().get(linkId) : null;
+                    rve.setNoOfCOmments(String.valueOf(null != linkComments ? linkComments.size() : 0));
                     if (null != arlotve) {
                         rve.setArabicTVE(arlotve);
                         rve.setArPericopeId(arPericopeId);

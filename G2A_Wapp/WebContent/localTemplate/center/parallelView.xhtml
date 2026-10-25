@@ -60,7 +60,7 @@
 					rendered="#{link.greekPericopeHidden == 'false'}" />
 			</p:column>
 
-			<p:column width="35%" style="white-space:pre">
+			<p:column width="36%" style="white-space:pre">
 				<f:facet name="header">
 					<h:outputText value="Greek Pericope" style="margin-right:20px" />
 					<p:commandButton type="submit" immediate="true"
@@ -115,8 +115,8 @@
 					rendered="#{link.arabicPericopeHidden == 'false'}" />
 			</p:column>
 
-			<p:column headerText="Comments" width="5%">
-				<h:outputText value="#{link.noOfComments}" styleClass="" />
+			<p:column headerText="Comms" width="4%" style="text-align:center">
+				<h:outputText value="#{link.noOfComments}" />
 			</p:column>
 
 		</p:dataTable>
