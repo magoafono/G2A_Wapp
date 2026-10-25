@@ -10,7 +10,11 @@ import it.cnr.ilc.g2a.model.view.LinkViewEntity;
 import it.cnr.ilc.g2a.model.view.ResultViewEntity;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -45,9 +49,15 @@ public class ParallelViewBean implements Serializable {
     private List<LinkViewEntity> filteredPericopes;
 
     private ResultViewEntity selectedResultViewEntity = null;
-    private int paginatorPage = 0;
     private int rowsPerPage = 20;
     private int rowOffset = 0;
+    // Pagina del paginatore PER LINGUA: le viste greca e araba sono indipendenti.
+    private final Map<String, Integer> paginatorPages = new HashMap<String, Integer>();
+    // Lingue gia' posizionate dopo l'ultima selezione da ricerca.
+    private final Set<String> positionedLangs = new HashSet<String>();
+    // Ultima lingua resa (per associare gli eventi "page" alla vista giusta).
+    private String currentLang = null;
+    private boolean scrollToSelected = false;
 
     /**
      * @return the selectedResultViewEntity
@@ -67,7 +77,43 @@ public class ParallelViewBean implements Serializable {
         //TODO fare la conversione
         if (null != selectedResultViewEntity) {
             setSelectedViewLink(repositoryBean.getLinkViewEntity(selectedResultViewEntity.getLinkId()));
+            scrollToSelected = true;
+            positionedLangs.clear(); // entrambe le viste torneranno a posizionarsi
         }
+    }
+
+    /**
+     * Pagina iniziale del paginatore della vista pericopi. Se si arriva da una
+     * selezione nei risultati di ricerca, la calcola una sola volta dalla posizione
+     * del link scelto nella lista ordinata per {@code lang}; altrimenti lascia
+     * l'ultima pagina usata dall'utente.
+     */
+    public int consumeInitialPage(String lang) {
+        currentLang = lang;
+        // Posiziona questa lingua una sola volta dopo una selezione da ricerca.
+        if (scrollToSelected && !positionedLangs.contains(lang)) {
+            LinkViewEntity selected = getSelectedViewLink();
+            if (null != selected && null != selected.getLink()) {
+                String selectedId = selected.getLink().getId();
+                List<LinkViewEntity> links = repositoryBean.getLinks(lang);
+                if (null != links) {
+                    for (int i = 0; i < links.size(); i++) {
+                        LinkViewEntity lve = links.get(i);
+                        if (null != lve && null != lve.getLink() && selectedId.equals(lve.getLink().getId())) {
+                            paginatorPages.put(lang, i / Math.max(1, rowsPerPage));
+                            break;
+                        }
+                    }
+                }
+            }
+            positionedLangs.add(lang);
+        }
+        return pageFor(lang);
+    }
+
+    private int pageFor(String lang) {
+        Integer page = paginatorPages.get(lang);
+        return null != page ? page : 0;
     }
 
     /**
@@ -91,15 +137,16 @@ public class ParallelViewBean implements Serializable {
      * @return the paginatorPage
      */
     public int getPaginatorPage() {
-        return paginatorPage;
+        return null != currentLang ? pageFor(currentLang) : 0;
     }
 
     /**
-     * @param paginatorPage the paginatorPage to set
+     * Evento pagina del paginatore: aggiorna la pagina della lingua in vista.
      */
     public void setPaginatorPage(PageEvent pe) {
-
-        this.paginatorPage = pe.getPage();
+        if (null != currentLang) {
+            paginatorPages.put(currentLang, pe.getPage());
+        }
     }
 
     /**

@@ -20,7 +20,10 @@
         <div class="g2a-layout">
 
             <div id="northLayoutUnit" class="g2a-north ui-widget">
-                <div class="g2a-unit-header ui-widget-header">Greek into Arabic Web Application <ui:include src="/templates/buildVersion.xhtml" /></div>
+                <div class="g2a-unit-header ui-widget-header">
+                    <span class="g2a-unit-title">Greek into Arabic Web Application<ui:fragment rendered="#{loginBean.loggedIn}"> &#8212; #{collectionBean.label}</ui:fragment></span>
+                    <span class="g2a-build-version-wrap"><ui:include src="/templates/buildVersion.xhtml" /></span>
+                </div>
                 <div class="g2a-unit-content ui-widget-content">
                     <ui:insert name="header">CL:Header</ui:insert>
                 </div>

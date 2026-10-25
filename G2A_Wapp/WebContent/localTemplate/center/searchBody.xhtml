@@ -17,12 +17,13 @@
                                          style="margin: 0 auto;border:none;">
                                 <f:facet name="header">
                                     <p:row>
-                                        <p:column colspan="3" style="text-align: center">Greek Search</p:column>
+                                        <p:column colspan="4" style="text-align: center">Greek Search</p:column>
                                     </p:row>
                                     <p:row>
                                         <p:column style="text-align: center">Type</p:column>
                                         <p:column style="text-align: center">Word</p:column>
                                         <p:column style="text-align: center">Pos</p:column>
+                                        <p:column style="text-align: center"></p:column>
                                     </p:row>
 
                                 </f:facet>
@@ -49,6 +50,13 @@
                                                            itemLabel="#{pos.left}" itemValue="#{pos.right}" />
                                         </p:selectOneMenu>
                                     </p:column>
+                                    <p:column style="text-align:center;width:1%">
+                                        <p:commandButton icon="ui-icon-circle-minus" title="Remove this row"
+                                                         disabled="#{searchViewBean.grRows lt 2}"
+                                                         process="greek_search_parameters_pg"
+                                                         update="greek_search_parameters_pg"
+                                                         action="#{searchViewBean.removeGrRowAt(0)}" />
+                                    </p:column>
                                 </p:row>
                                 <p:row id="gr_parameter_row_2" rendered="#{searchViewBean.grRows ge 2}">
                                     <p:column headerText="Type" style="text-align:center;">
@@ -72,6 +80,13 @@
                                             <f:selectItems value="#{searchViewBean.grItemPos}" var="pos"
                                                            itemLabel="#{pos.left}" itemValue="#{pos.right}" />
                                         </p:selectOneMenu>
+                                    </p:column>
+                                    <p:column style="text-align:center;width:1%">
+                                        <p:commandButton icon="ui-icon-circle-minus" title="Remove this row"
+                                                         rendered="#{searchViewBean.grRows ge 2}"
+                                                         process="greek_search_parameters_pg"
+                                                         update="greek_search_parameters_pg"
+                                                         action="#{searchViewBean.removeGrRowAt(1)}" />
                                     </p:column>
                                 </p:row>
                                 <p:row id="gr_parameter_row_3" rendered="#{searchViewBean.grRows ge 3}">
@@ -97,9 +112,16 @@
                                                            itemLabel="#{pos.left}" itemValue="#{pos.right}" />
                                         </p:selectOneMenu>
                                     </p:column>
+                                    <p:column style="text-align:center;width:1%">
+                                        <p:commandButton icon="ui-icon-circle-minus" title="Remove this row"
+                                                         rendered="#{searchViewBean.grRows ge 2}"
+                                                         process="greek_search_parameters_pg"
+                                                         update="greek_search_parameters_pg"
+                                                         action="#{searchViewBean.removeGrRowAt(2)}" />
+                                    </p:column>
                                 </p:row>
                                 <p:row rendered="#{searchViewBean.grRows ge 2}">
-                                    <p:column colspan="3" style="text-align:center;">
+                                    <p:column colspan="4" style="text-align:center;">
                                         <h:outputText value="Combine rows: " />
                                         <p:selectOneMenu id="gr_operator" effect="none"
                                                          value="#{searchViewBean.grSb.op}" style="text-align:left;">
@@ -110,7 +132,7 @@
                                 </p:row>
                                 <f:facet name="footer">
                                     <p:row>
-                                        <p:column colspan="3" style="text-align:center;">
+                                        <p:column colspan="4" style="text-align:center;">
                                             <p:commandButton id="gr_search_btn" icon="ui-icon-search"
                                                              update=":searchResultFormId" value="Search"
                                                              style="margin-right:12px;"
@@ -123,11 +145,6 @@
                                                              process="greek_search_parameters_pg"
                                                              update="greek_search_parameters_pg"
                                                              action="#{searchViewBean.addGrRow}" />
-                                            <p:commandButton value="Del" rendered="#{searchViewBean.grRows gt 1}"
-                                                             style="margin-right:8px;"
-                                                             process="greek_search_parameters_pg"
-                                                             update="greek_search_parameters_pg"
-                                                             action="#{searchViewBean.removeGrRow}" />
                                             <p:commandButton value="Clear"
                                                              update="greek_search_parameters_pg" process="@this"
                                                              action="#{searchViewBean.reset}">
@@ -177,12 +194,13 @@
                                          style="margin: 0 auto;border:none;">
                                 <f:facet name="header">
                                     <p:row>
-                                        <p:column colspan="3" style="text-align: center">Arabic Search</p:column>
+                                        <p:column colspan="4" style="text-align: center">Arabic Search</p:column>
                                     </p:row>
                                     <p:row>
                                         <p:column style="text-align: center">Type</p:column>
                                         <p:column style="text-align: center">Word</p:column>
                                         <p:column style="text-align: center">Pos</p:column>
+                                        <p:column style="text-align: center"></p:column>
                                     </p:row>
 
                                 </f:facet>
@@ -209,6 +227,13 @@
                                                            itemLabel="#{pos.left}" itemValue="#{pos.right}" />
                                         </p:selectOneMenu>
                                     </p:column>
+                                    <p:column style="text-align:center;width:1%">
+                                        <p:commandButton icon="ui-icon-circle-minus" title="Remove this row"
+                                                         disabled="#{searchViewBean.arRows lt 2}"
+                                                         process="arabic_search_parameters_pg"
+                                                         update="arabic_search_parameters_pg"
+                                                         action="#{searchViewBean.removeArRowAt(0)}" />
+                                    </p:column>
                                 </p:row>
                                 <p:row id="ar_parameter_row_2" rendered="#{searchViewBean.arRows ge 2}">
                                     <p:column headerText="Type" style="text-align:center;">
@@ -232,6 +257,13 @@
                                             <f:selectItems value="#{searchViewBean.arItemPos}" var="pos"
                                                            itemLabel="#{pos.left}" itemValue="#{pos.right}" />
                                         </p:selectOneMenu>
+                                    </p:column>
+                                    <p:column style="text-align:center;width:1%">
+                                        <p:commandButton icon="ui-icon-circle-minus" title="Remove this row"
+                                                         rendered="#{searchViewBean.arRows ge 2}"
+                                                         process="arabic_search_parameters_pg"
+                                                         update="arabic_search_parameters_pg"
+                                                         action="#{searchViewBean.removeArRowAt(1)}" />
                                     </p:column>
                                 </p:row>
                                 <p:row id="ar_parameter_row_3" rendered="#{searchViewBean.arRows ge 3}">
@@ -257,9 +289,16 @@
                                                            itemLabel="#{pos.left}" itemValue="#{pos.right}" />
                                         </p:selectOneMenu>
                                     </p:column>
+                                    <p:column style="text-align:center;width:1%">
+                                        <p:commandButton icon="ui-icon-circle-minus" title="Remove this row"
+                                                         rendered="#{searchViewBean.arRows ge 2}"
+                                                         process="arabic_search_parameters_pg"
+                                                         update="arabic_search_parameters_pg"
+                                                         action="#{searchViewBean.removeArRowAt(2)}" />
+                                    </p:column>
                                 </p:row>
                                 <p:row rendered="#{searchViewBean.arRows ge 2}">
-                                    <p:column colspan="3" style="text-align:center;">
+                                    <p:column colspan="4" style="text-align:center;">
                                         <h:outputText value="Combine rows: " />
                                         <p:selectOneMenu id="ar_operator" effect="none"
                                                          value="#{searchViewBean.arSb.op}" style="text-align:left;">
@@ -270,7 +309,7 @@
                                 </p:row>
                                 <f:facet name="footer">
                                     <p:row>
-                                        <p:column colspan="3" style="text-align:center;">
+                                        <p:column colspan="4" style="text-align:center;">
                                             <p:commandButton id="ar_search_btn" icon="ui-icon-search"
                                                              ajax="true" update=":searchResultFormId" value="Search"
                                                              style="margin-right:12px;"
@@ -283,11 +322,6 @@
                                                              process="arabic_search_parameters_pg"
                                                              update="arabic_search_parameters_pg"
                                                              action="#{searchViewBean.addArRow}" />
-                                            <p:commandButton value="Del" rendered="#{searchViewBean.arRows gt 1}"
-                                                             style="margin-right:8px;"
-                                                             process="arabic_search_parameters_pg"
-                                                             update="arabic_search_parameters_pg"
-                                                             action="#{searchViewBean.removeArRow}" />
                                             <p:commandButton value="Clear"
                                                              update="arabic_search_parameters_pg" process="@this"
                                                              action="#{searchViewBean.reset}">
@@ -467,6 +501,22 @@
         function g2aFixResultTextSelection() {
             try { if (window.PrimeFaces && PF('resultsTable')) { PF('resultsTable').cfg.disabledTextSelection = false; } } catch (e) {}
         }
+        // Riporta in vista la riga selezionata nel result set: serve quando si
+        // rientra in Search con un elenco lungo (la selezione resta, lo scroll no).
+        function g2aScrollToSelectedResult() {
+            try {
+                var dt = document.querySelector('#searchResultFormId .ui-datatable');
+                if (!dt) { return; }
+                var body = dt.querySelector('.ui-datatable-scrollable-body');
+                if (!body) { return; }
+                var sel = body.querySelector('tbody tr.ui-state-highlight');
+                if (!sel) { return; }
+                var br = body.getBoundingClientRect();
+                var rr = sel.getBoundingClientRect();
+                if (rr.top < br.top) { body.scrollTop += (rr.top - br.top); }
+                else if (rr.bottom > br.bottom) { body.scrollTop += (rr.bottom - br.bottom); }
+            } catch (e) {}
+        }
         // PF puo' ridimensionare dopo di noi: ripetiamo il fit tra qualche ms.
         function g2aReflowResults() {
             g2aFitSearch();
@@ -474,10 +524,10 @@
             setTimeout(g2aFitSearchResults, 300);
         }
         window.addEventListener('resize', g2aReflowResults);
-        window.addEventListener('load', function () { setTimeout(g2aFitSearch, 50); g2aFitSearchResults(); });
-        if (document.readyState !== 'loading') { setTimeout(g2aFitSearch, 50); g2aFitSearchResults(); }
-        else { document.addEventListener('DOMContentLoaded', function () { setTimeout(g2aFitSearch, 50); g2aFitSearchResults(); }); }
-        if (window.jQuery) { jQuery(document).on('pfAjaxComplete', function () { setTimeout(g2aFitSearch, 50); g2aFixResultTextSelection(); setTimeout(g2aFitSearchResults, 80); }); }
+        window.addEventListener('load', function () { setTimeout(g2aFitSearch, 50); g2aFitSearchResults(); setTimeout(g2aScrollToSelectedResult, 200); });
+        if (document.readyState !== 'loading') { setTimeout(g2aFitSearch, 50); g2aFitSearchResults(); setTimeout(g2aScrollToSelectedResult, 200); }
+        else { document.addEventListener('DOMContentLoaded', function () { setTimeout(g2aFitSearch, 50); g2aFitSearchResults(); setTimeout(g2aScrollToSelectedResult, 200); }); }
+        if (window.jQuery) { jQuery(document).on('pfAjaxComplete', function () { setTimeout(g2aFitSearch, 50); g2aFixResultTextSelection(); setTimeout(g2aFitSearchResults, 80); setTimeout(g2aScrollToSelectedResult, 150); }); }
         g2aFixResultTextSelection();
         //]]>
     </script>

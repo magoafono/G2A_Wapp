@@ -338,6 +338,21 @@ html, body {
 .g2a-north .g2a-unit-header {
     padding: 11px 12px;
     font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+}
+.g2a-north .g2a-unit-header .g2a-unit-title {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.g2a-north .g2a-unit-header .g2a-build-version-wrap {
+    font-weight: 400;
+    opacity: .9;
+    white-space: nowrap;
 }
 .g2a-north .g2a-unit-content {
     padding: 5px 8px;

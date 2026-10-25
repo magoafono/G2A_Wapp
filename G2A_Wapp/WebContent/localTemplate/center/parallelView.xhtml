@@ -189,7 +189,7 @@
 	$(document).ready(function() {
          	//$('#dataTableId').getPaginator().setPage(#{parallelViewBean.paginatorPage});
  			//scroll to selected row
-            PF('dataTable').getPaginator().setPage(#{parallelViewBean.paginatorPage});
+            PF('dataTable').getPaginator().setPage(#{parallelViewBean.consumeInitialPage(lang)});
 			// DataTable PF14 non espone disabledTextSelection nella taglib: il
 			// widget la forza a true. La disattiviamo per conservare la selezione
 			// del testo (copia) senza perdere il click di selezione riga.

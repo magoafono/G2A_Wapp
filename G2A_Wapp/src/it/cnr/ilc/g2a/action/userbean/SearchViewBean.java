@@ -377,11 +377,13 @@ public class SearchViewBean implements Serializable {
         }
     }
 
-    public void removeGrRow() {
-        if (grRows > 1) {
-            clearRow(grSb, grRows - 1);
+    /** Rimuove la riga greca indicata (0-based) e fa scorrere le successive. */
+    public String removeGrRowAt(int index) {
+        if (grRows > 1 && index >= 0 && index < grRows) {
+            shiftRowUp(grSb, index, grRows);
             grRows--;
         }
+        return null;
     }
 
     /** Aggiunge una riga di input per l'arabo (max 3). */
@@ -392,11 +394,24 @@ public class SearchViewBean implements Serializable {
         }
     }
 
-    public void removeArRow() {
-        if (arRows > 1) {
-            clearRow(arSb, arRows - 1);
+    /** Rimuove la riga araba indicata (0-based) e fa scorrere le successive. */
+    public String removeArRowAt(int index) {
+        if (arRows > 1 && index >= 0 && index < arRows) {
+            shiftRowUp(arSb, index, arRows);
             arRows--;
         }
+        return null;
+    }
+
+    // Fa scorrere verso l'alto le righe da index in poi e svuota l'ultima
+    // (liste a dimensione fissa: si usa set, non remove).
+    private void shiftRowUp(SearchBean sb, int index, int rows) {
+        for (int i = index; i < rows - 1; i++) {
+            sb.getWord().set(i, sb.getWord().get(i + 1));
+            sb.getType().set(i, sb.getType().get(i + 1));
+            sb.getPos().set(i, sb.getPos().get(i + 1));
+        }
+        clearRow(sb, rows - 1);
     }
 
     // Con piu' di una riga serve un operatore valido (default And), altrimenti
