@@ -4,6 +4,7 @@ package it.cnr.ilc.g2a.action.userbean;
 import it.cnr.ilc.g2a.action.management.RepositoryBean;
 import it.cnr.ilc.g2a.model.Link;
 import it.cnr.ilc.g2a.model.text.RefPericopeText;
+import it.cnr.ilc.g2a.model.view.LinkViewEntity;
 import it.cnr.ilc.g2a.model.view.TokenViewEntity;
 import it.cnr.ilc.g2a.utils.Consts;
 import it.cnr.ilc.g2a.utils.Authorization;
@@ -106,6 +107,10 @@ public class PericopeEditorController implements Serializable{
 		 */
 
 		List<TokenViewEntity> lotve = new ArrayList<TokenViewEntity>();
+		// Se la pericope araba manca (ref nascosto) non va mostrata/modificata.
+		if (isArabicPericopeHidden()) {
+			return lotve;
+		}
 		String selectedPericopeId = getSelectedArabicPericopeId();
 		/*
 		 * es. di range di una pericope 02202.02203
@@ -170,6 +175,10 @@ public class PericopeEditorController implements Serializable{
 
 
 		List<TokenViewEntity> lotve = new ArrayList<TokenViewEntity>();
+		// Se la pericope greca manca (ref nascosto) non va mostrata/modificata.
+		if (isGreekPericopeHidden()) {
+			return lotve;
+		}
 		String selectedPericopeId = getSelectedGreekPericopeId().substring( 0, 5);
 		
 		int pericopeLoc = Integer.parseInt(selectedPericopeId);
@@ -320,6 +329,18 @@ public class PericopeEditorController implements Serializable{
 	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	/** True se la coppia selezionata non ha la pericope greca (ref nascosto). */
+	public boolean isGreekPericopeHidden() {
+		LinkViewEntity selectedLink = parallelViewBean.getSelectedViewLink();
+		return null == selectedLink || selectedLink.isGreekPericopeHidden();
+	}
+
+	/** True se la coppia selezionata non ha la pericope araba (ref nascosto). */
+	public boolean isArabicPericopeHidden() {
+		LinkViewEntity selectedLink = parallelViewBean.getSelectedViewLink();
+		return null == selectedLink || selectedLink.isArabicPericopeHidden();
 	}
 
 	public String getSelectedGreekPericopeId() {

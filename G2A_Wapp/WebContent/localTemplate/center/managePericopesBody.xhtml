@@ -18,16 +18,19 @@
 		<p:panelGrid layout="tabular" columns="0" style="width:100%;">
 			<f:facet name="header">
 				<p:row>
-					<p:column style="width:40%;">Greek pericope #{pericopeEditorController.parallelViewBean.selectedViewLink.greekPericopeInfo}
+					<p:column style="width:#{pericopeEditorController.arabicPericopeHidden ? '100%' : '40%'};"
+						rendered="#{!pericopeEditorController.greekPericopeHidden}">Greek pericope #{pericopeEditorController.parallelViewBean.selectedViewLink.greekPericopeInfo}
 					</p:column>
-					<p:column style="width:60%;">Arabic pericope #{pericopeEditorController.parallelViewBean.selectedViewLink.arabicPericopeInfo}
+					<p:column style="width:#{pericopeEditorController.greekPericopeHidden ? '100%' : '60%'};"
+						rendered="#{!pericopeEditorController.arabicPericopeHidden}">Arabic pericope #{pericopeEditorController.parallelViewBean.selectedViewLink.arabicPericopeInfo}
 					</p:column>
 				</p:row>
 			</f:facet>
 
 			<!-- pericopatore greco -->
 			<p:row>
-				<p:column style="height:50%; width:40%;">
+				<p:column style="height:50%; width:#{pericopeEditorController.arabicPericopeHidden ? '100%' : '40%'};"
+					rendered="#{!pericopeEditorController.greekPericopeHidden}">
 					<h:form id="greekPericopesTextForm">
 						<p:scrollPanel id="greekPanel" 
 							style="height:600px" styleClass="greek"
@@ -56,7 +59,8 @@
 						</p:scrollPanel>
 					</h:form>
 				</p:column>
-				<p:column >
+				<p:column style="width:#{pericopeEditorController.greekPericopeHidden ? '100%' : '60%'};"
+					rendered="#{!pericopeEditorController.arabicPericopeHidden}">
 					<!-- pericopatore arabo -->
 					<h:form id="arabicPericopesTextForm">
 						<p:scrollPanel mode="native"  style="height:600px"
@@ -88,7 +92,8 @@
 
 			<f:facet name="footer">
 				<p:row>
-					<p:column id="greekButtons" style="text-align:center;width:50%">
+					<p:column id="greekButtons" style="text-align:center;width:#{pericopeEditorController.arabicPericopeHidden ? '100%' : '50%'}"
+						rendered="#{!pericopeEditorController.greekPericopeHidden}">
 						<p:commandButton id="greekAddClick" value="ADD"
 							styleClass="latinText" partialSubmit="true" process="@this"
 							actionListener="#{pericopeEditorController.addGreekClick}"
@@ -107,7 +112,8 @@
 						update=":greekPericopesTextForm:greekPanel :greekButtons"
 						disabled="true" /-->
 					</p:column>
-					<p:column id="arabicButtons" style="text-align:center;width:50%">
+					<p:column id="arabicButtons" style="text-align:center;width:#{pericopeEditorController.greekPericopeHidden ? '100%' : '50%'}"
+						rendered="#{!pericopeEditorController.arabicPericopeHidden}">
 						<p:commandButton id="arabicAddClick" value="ADD"
 							styleClass="latinText" partialSubmit="true" process="@this"
 							actionListener="#{pericopeEditorController.addArabicClick}"
@@ -139,8 +145,10 @@
 	<script>
 		$ = jQuery;
 		$(document).ready(function() {
-			document.getElementsByClassName('bk_grfocused')[0].focus();
-			document.getElementsByClassName('bk_arfocused')[0].focus();
+			var gFocused = document.getElementsByClassName('bk_grfocused')[0];
+			var aFocused = document.getElementsByClassName('bk_arfocused')[0];
+			if (gFocused) { gFocused.focus(); }
+			if (aFocused) { aFocused.focus(); }
 		});
 	</script>
 
