@@ -48,7 +48,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.4.0</version>
+                <version>3.5.1</version>
                 <configuration>
                     <warSourceDirectory>WebContent</warSourceDirectory>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
