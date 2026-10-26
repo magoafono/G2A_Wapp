@@ -33,7 +33,7 @@
 			pageLinks="20"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="5,10,20,50,100,500"
-			rowKey="chiave_#{link.greekPericopeId}"
+			rowKey="chiave_#{link.link.id}"
 			selection="#{parallelViewBean.selectedViewLink}"
 			selectionMode="single">
 
@@ -48,7 +48,7 @@
 					selectionMode="single">
 
  -->
-			<p:ajax event="rowSelect" update=":menuForm" immediate="true"/>
+			<p:ajax event="rowSelect" listener="#{parallelViewBean.onRowSelect}" update=":menuForm" immediate="true"/>
 			<p:ajax event="contextMenu" update=":menuForm" />
 			
 

@@ -130,7 +130,22 @@ public class ParallelViewBean implements Serializable {
         if (getSelectedViewLink() == null || !selectedViewLink.getLink().getId().equals(getSelectedViewLink().getLink().getId())) {
             sharedBean.setSelectedLinkViewEntity(selectedViewLink);
             sharedBean.setLoadNewAnalysis(true);
+            // Sincronizza le due viste "Pericopes by": la coppia corrente (la stessa
+            // in entrambi gli ordinamenti) va riposizionata/evidenziata anche
+            // nell'altra lingua. Search resta invariata (ha il proprio stato).
+            scrollToSelected = true;
+            positionedLangs.clear();
         }
+    }
+
+    /**
+     * Ri-arma il posizionamento a ogni click di riga, anche sulla coppia gia'
+     * selezionata: cosi' ri-selezionare in una lingua fa ritrovare la stessa
+     * coppia nell'altra. La paginazione manuale NON ri-arma (sfogliare resta libero).
+     */
+    public void onRowSelect() {
+        scrollToSelected = true;
+        positionedLangs.clear();
     }
 
     /**
